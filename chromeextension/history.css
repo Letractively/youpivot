@@ -1,0 +1,81 @@
+html { height: 100%; }
+body { height: 100%; margin: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 13px; overflow: hidden; background-color: #EEEEEE; }
+a:link { color: #202080; text-decoration: none; }
+a:visited { color: #60609F; text-decoration: none; }
+a:active { color: #60609F; text-decoration: none; }
+a:hover { color: #666699; text-decoration: none; }
+a.app:link { color: #919191; text-decoration: none; }
+a.app:visited { color: #919191; text-decoration: none; }
+a.app:active { color: #919191; text-decoration: none; }
+a.app:hover { color: #888888; text-decoration: none; }
+.hidden { display: none; }	
+.left { float: left; }
+.right { float: right; }
+
+.active { cursor: default; }
+a.active:link { color: #3870AD; }
+a.active:hover { color: #3870AD; }
+a.active:visited { color: #3870AD; }
+a.active:active { color: #3870AD; }
+
+#wrap { height: 100%; width: 1000px; vertical-align: top; border-spacing: 0px; border-collapse: collapse; border-right: 1px solid #C6C6C6; -webkit-box-shadow: -10px 0px 50px #AAA; }
+#wrap td { padding: 0px; }
+
+/*** left sidebar ***/
+#sidebarTitle { text-align: right; font-size: 20px; color: #53627D; padding: 0.76em 0px; }
+#leftSidebar { 	width: 250px; height: 100%; padding: 0px 15px; color: #919191;
+				-webkit-border-end: 1px solid #C6C9CE;
+				-webkit-user-select: none; cursor: default;
+				background: -webkit-gradient(linear, left top, left bottom, from(rgba(234, 238, 243, 0)), to(#EAEEF3)), -webkit-gradient(linear, left top, right top, from(#EAEEF3), color-stop(0.97, #EAEEF3), to(#D3D7DB)); 
+			 }
+.sidebarGroup { margin: 20px 0px; }
+.sidebarLabel { font-weight: bold; color: #000000; }
+#searchBox { width: 100%; box-sizing: border-box; }
+	/*** dropdowns ***/
+	.dropdownWrap { position: relative; display: inline-block; }
+	.dropdownBtn { display: none; }
+	.dropdownItem { display: block; padding: 2px; font-weight: normal; }
+	.dropdown { position: absolute; display: none; 
+				background-color: #EEEEEE; padding: 0px 5px; 
+				margin-left: -10px; border: 1px solid #666666; 
+			  }
+	/*** datePickers ***/
+	#datePickers { min-height: 20px; margin: 10px 0px; }
+	/*** content Filters ***/
+	#contentFilters { padding-top: 5px; }
+
+.favicon { width: 16px; height: 16px; margin: 0px 3px; }
+/*** end left sidebar ***/
+
+/*** contents ***/
+#mainCell { height: 100%; width: 100%; vertical-align: top; }
+#content { height: 100%; background-color: #FFFFFF; }
+.applicationIcon { width: 16px; height: 16px; margin: 0px 5px; }
+.term { color: #555555; }
+	/*** graph date ***/
+	#graphDate { padding: 10px 10px 5px 10px; color: #919191; }
+	#graphDate div { display: inline-block; }
+	#graphDate .right { margin-right: 16px; }
+	#collapseGraph { float: right; width: 14px; height: 14px;
+					 background: url("images/hide.png"); opacity: 0.8; }
+	#collapseGraph:hover { opacity: 1; }
+	/*** visualgraphs ***/
+	#visualgraphs { width: 100%; -webkit-user-select: none; cursor: default; }
+	#topgraph { width: 100%; height: 45px;
+				background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFF), to(#F4F6F9) );
+			  }
+	#steamgraph { width: 100%; height: 200px; overflow: hidden; }
+	#steamgraph svg { -webkit-transform-origin: left; -webkit-transform: scaleX(0.1); }
+	/*** end visualgraphs ***/
+	/*** text contents ***/
+	#textContent { padding: 10px; }
+	.contentHeader { font-weight: bold; }
+	#applications { text-align: left; height: 16px; margin-bottom: 16px; }
+	.itemColor { width: 5px; padding: 0px; }
+	.itemIcon { width: 16px; height: 16px; margin: 0px 5px; vertical-align: middle; }
+		/*** items table ***/
+		#items { margin: 5px; border-spacing: 10px 5px; }
+		#items td { height: 20px; }
+		#items tr { margin: 10px 0px; }
+	/*** end text contents ***/
+/*** end contents ***/
