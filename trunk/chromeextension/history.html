@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>YouPivot</title>
+		<link rel="stylesheet" type="text/css" href="history.css" />
+	</head>
+	<body>
+		<table id="wrap">
+			<tr><td id="leftCell">
+				<div id="leftSidebar">
+					<div id="sidebarTitle">History</div>
+					<div class="sidebarGroup">
+						<input type="text" id="searchBox" /><br />
+						<div id="datePickers">
+							<div id="moreDateBtnWrap" class="dropdownWrap">
+								<a id="moreDateBtn" class="app dropdownBtn" href="#">more</a>
+								<div id="moreDates" class="dropdown"></div>
+							</div>
+						</div>
+					</div>
+					<div class="sidebarGroup">
+						<div class="sidebarLabel">Content</div>
+						<div id="contentFilters"></div>
+					</div>
+					<div class="sidebarGroup">
+						<div class="sidebarLabel">Sort</div>
+						<div id="sortItems">
+							<div id="moreSorterBtnWrap" class="dropdownWrap">
+								<a href="#" id="moreSorterBtn" class="app dropdownBtn">more</a>
+								<div id="moreSorters" class="dropdown"></div>
+							</div>
+						</div>
+					</div>
+					<div class="sidebarGroup">
+						<div class="sidebarLabel">Terms</div>
+						<div id="terms"></div>
+					</div>
+				</div>
+			</div>
+			</td><td id="mainCell">
+				<div id="content">
+					<div id="visualgraphs">
+						<div id="topgraph"><!--24-hour map--></div>
+						<div id="graphDate">
+							<div id="collapseGraph"></div>
+							<div class="left">4:19pm</div><div class="right">6:19pm</div>
+						</div>
+						<div id="steamgraph">Loading....<!--Steam graph--></div>
+					</div>
+					<div id="applications"></div>
+					<div id="textContent">
+						<div id="contentDate" class="contentHeader">Tuesday, September 21, 2010</div>
+						<table id="items">
+						</table>
+					</div>
+				</div>
+			</td></tr>
+		</table>
+	</body>
+</html>
+<script type="text/javascript" src="include/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="include/protovis-d3.2.js"></script>
+<script type="text/javascript" src="js/iconfactory.js"></script>
+<script type="text/javascript" src="js/pref.js"></script>
+<script type="text/javascript" src="js/graph.js"></script>
+<script type="text/javascript" src="js/items.js"></script>
+<script type="text/javascript" src="js/terms.js"></script>
+<script type="text/javascript" src="js/domains.js"></script>
+<script type="text/javascript" src="js/horizontallist.js"></script>
+<script type="text/javascript" src="js/datepicker.js"></script>
+<script type="text/javascript" src="js/sort.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src="history.js"></script>
