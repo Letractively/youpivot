@@ -1,9 +1,60 @@
 var GraphManager = {};
 
 (function(){
-	var master = GraphManager;
+	var m = GraphManager;
 
-	master.drawTopGraph = function(){
+	var startTime = new Date().getTime();
+	var endTime = new Date().getTime()+1*60*60*1000;
+	var dataArray = new Array();
+
+	$(function(){
+		loadTime();
+	});
+
+	m.setTime = function(st, et){
+		startTime = st;
+		endTime = et;
+		loadTime();
+	}
+
+	m.addLayer = function(color, arr){
+		dataArray[dataArray.length] = {data: arr, color: color};
+	}
+
+	function loadTime(){
+		$("#graphDate .left").text(formatTime(startTime));
+		$("#graphDate .right").text(formatTime(endTime));
+	}
+
+	function formatTime(time){
+		var date = new Date(time);
+		var string = date.toLocaleTimeString();
+		return string;
+	}
+
+	//deprecated
+	var maxArrLength = 758;
+	function scaleArray(arr, st){
+		var nArr = new Array();
+		var n = (startTime-st)/114000;
+		for(var i=0; i<n; i++){
+			nArr.shift();
+		}
+		n *= -1;
+		for(var i=0; i<n; i++){
+			nArr[i] = 0;
+		}
+		for(var i=0; i<arr.length; i++){
+			if(nArr.length>maxArrLength){
+				console.log("exceeds max length");
+				break;
+			}
+			nArr[nArr.length] = arr[i];
+		}
+		return arr;
+	}
+
+	m.drawTopGraph = function(){
 		//generate test data
 		var data = pv.range(0, 50, .1).map(function(x) {
 			return {x: x, y: Math.abs(Math.sin(x/2), 2)/2+Math.random()};
@@ -91,13 +142,10 @@ var GraphManager = {};
 	}
 
 	var max, width, height;
-	var n = 20, m=400, data = layers(n,m);
+	var data = dataArray;
 	
-	function drawSection(offset, cap){
-		if(cap===undefined) cap = 1; //show all if cap not defined
-		cap = cap*(m-1);
-		offset = offset*(m-1);
-		var x = pv.Scale.linear(offset, cap+offset).range(0, width),
+	function drawSection(){
+		var x = pv.Scale.linear(0, 758).range(0, width),
 			y = pv.Scale.linear(0, max+1).range(0, height);
 		var panel = new pv.Panel()
 			.canvas("steamgraph")
@@ -109,7 +157,7 @@ var GraphManager = {};
 			.order("inside-out")
 			.offset("silohouette")
 			.x(function(d, p){ return x(this.index) })
-			.y(function(d, p){ return pv.Scale.linear(0, max+1).range(0, height)(d); })
+			.y(y)
 			.layer.add(pv.Area)
 			.def("active", false)
 			.fillStyle(function(d, p){ var a = (this.active()) ? 1 : 0.8; return pv.color(p.color).alpha(a);})
@@ -121,9 +169,9 @@ var GraphManager = {};
 		panel.render();
 	}
 
-	master.drawSteamGraph = function(){
+	m.drawSteamGraph = function(){
 		var sgbox = $("#steamgraph");
-		sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big
+		sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big - translating CSS 100% width to pixels for the system
 		width = sgbox.width()*10;
 		height = sgbox.height()-20;
 		max = getMaxFromSteam(data);
@@ -131,6 +179,7 @@ var GraphManager = {};
 	}
 
 	function getMaxFromSteam(data){
+		if(data.length==0) return 0;
 		var length = data[0].data.length;
 		var max = 0;
 		for(var j=0; j<length; j++){

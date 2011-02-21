@@ -1,28 +1,14 @@
 var TableManager = {};
 
 (function(){
-	var master = TableManager;
-	/*** public methods ***/
+	var m = TableManager;
 
-	master.addItem = function(date, name, color, url, favUrl){
-		var item = $("<tr></tr>");
-		item.append($("<td class='itemDate'></td>").text(formatDate(date)));
-		item.append($("<td class='itemColor'></td>").css("background-color", color));
-		item.append($("<td class='itemName'></td>").text(name));
-		$("#items").append(item);
-		var icon = IconFactory.createIcon(favUrl, name);
-		item.find(".itemName").prepend(icon.addClass("itemIcon"));
+	m.addItem = function(date, name, color, url, favUrl){
+		var obj = {date: date, name: name, color: color, url: url, favUrl: favUrl};
+		$("#textContent").addItem(obj);
 	}
 
-	master.clearItems = function(){
-		$("#items").html("");
-	}
-
-	/*** private methods ***/
-
-	function formatDate(date){
-		var d = new Date(date);
-		var string = d.toLocaleTimeString();
-		return string;
+	m.clearItems = function(){
+		$("#textContent").html("");
 	}
 })()

@@ -2,6 +2,18 @@ var ItemManager = {};
 
 (function(){
 	var m = ItemManager;
+	var list = new Array();
+
+	m.getItems = function(){
+		var output = new Array();
+		for(var i in list){
+			var items = list[i].items;
+			for(var j in items){
+				output[output.length] = items[j];
+			}
+		}
+		return output;
+	}
 
 	m.addDomains = function(domains){
 		for(var i in domains){
@@ -10,6 +22,7 @@ var ItemManager = {};
 	}
 
 	m.addDomain = function(domain){
+		list[list.length] = domain;
 		var color = domain.color;
 		var favUrl = domain.favUrl;
 		var name = domain.name;
@@ -18,6 +31,27 @@ var ItemManager = {};
 			addItem(items[i], domain);
 		}
 		addApplicationIcon(favUrl, name);
+		GraphManager.addLayer(color, getDomainImportance(domain.items));
+	}
+
+	function getDomainImportance(items){
+		var output = new Array();
+		for(var j=0; j<758; j++){
+			var value = 0;
+			var populated = false;
+			for(var i in items){
+				if(items[i].importance[j]!=undefined){
+					value += items[i].importance[j];
+					populated = true;
+				}
+			}
+			if(populated){
+				output[j] = value;
+			}else{
+				break;
+			}
+		}
+		return output;
 	}
 
 	function addItem(item, domain){
