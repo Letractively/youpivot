@@ -8,6 +8,7 @@ a.app:link { color: #919191; text-decoration: none; }
 a.app:visited { color: #919191; text-decoration: none; }
 a.app:active { color: #919191; text-decoration: none; }
 a.app:hover { color: #888888; text-decoration: none; }
+.app { -webkit-user-select: none; }
 .hidden { display: none; }	
 .left { float: left; }
 .right { float: right; }
@@ -74,8 +75,11 @@ a.active:active { color: #3870AD; }
 	.itemColor { width: 5px; padding: 0px; }
 	.itemIcon { width: 16px; height: 16px; margin: 0px 5px; vertical-align: middle; }
 		/*** items table ***/
-		#items { margin: 5px; border-spacing: 10px 5px; }
-		#items td { height: 20px; }
-		#items tr { margin: 10px 0px; }
+		.itemTable { width: 100%; margin: 5px; border-spacing: 0px 5px; padding-right: 5px; cursor: default; -webkit-user-select: none; }
+		.itemTable tr { margin: 10px 0px; }
+		.itemTable td { width: 0px; height: 20px; padding: 0px 2px; }
+		.itemTable .itemName { width: 100%; padding: 0px 5px; }
+		.itemTable .itemDate { padding: 0px 8px; }
+		.itemTable a { color: #000000; display: block; }
 	/*** end text contents ***/
 /*** end contents ***/
