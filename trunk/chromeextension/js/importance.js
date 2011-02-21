@@ -1,3 +1,5 @@
+//deprecated
+
 var ImportanceManager = {};
 
 (function(){
@@ -20,44 +22,57 @@ var ImportanceManager = {};
 		var site = getSite(tabId);
 		console.log("site:", site);
 		var value = site.getPoints();
-		console.log(value);
+		console.log("importance:",value);
 		return value;
+	}
+
+	function registerOpenTabs(){
+		chrome.windows.getAll({populate: true}, function(windows){
+			for(var i in windows){
+				for(var j in windows[i].tabs){
+					var tab = windows[i].tabs[j];
+					var site = new _SitePoints();
+					addToSites(tab.id, site);
+				}
+			}
+		});
 	}
 
 	$(function(){
 		startTimer();
+		registerOpenTabs();
 	});
 
 	/***********************************************************************************/
 
-function windowFocusChanged(windowId) {
-	distributePoints(false);
-}
+	function windowFocusChanged(windowId) {
+		distributePoints(false);
+	}
 
-function tabNavigated(tabId, changeInfo, tab) {
-	var site = new _SitePoints;
-	site.addPoints_openedPage();
-	addToSites(tabId, site);
-}
-function tabMoved(tabId, moveInfo) {
-	distributePoints(false);
-}
-function tabRemoved(tabId) {
-	distributePoints(false);
-}
-function tabSelectionChanged(tabId, selectInfo) {
-	distributePoints(false);
-}
+	function tabNavigated(tabId, changeInfo, tab) {
+		var site = new _SitePoints;
+		site.addPoints_openedPage();
+		addToSites(tabId, site);
+	}
+	function tabMoved(tabId, moveInfo) {
+		distributePoints(false);
+	}
+	function tabRemoved(tabId) {
+		distributePoints(false);
+	}
+	function tabSelectionChanged(tabId, selectInfo) {
+		distributePoints(false);
+	}
 
-/*
- * WIRE UP LISTENERS
- */
-chrome.tabs.onUpdated.addListener(tabNavigated);
-chrome.tabs.onMoved.addListener(tabMoved);
-chrome.tabs.onRemoved.addListener(tabRemoved);
-chrome.tabs.onSelectionChanged.addListener(tabSelectionChanged);
+	/*
+	 * WIRE UP LISTENERS
+	 */
+	chrome.tabs.onUpdated.addListener(tabNavigated);
+	chrome.tabs.onMoved.addListener(tabMoved);
+	chrome.tabs.onRemoved.addListener(tabRemoved);
+	chrome.tabs.onSelectionChanged.addListener(tabSelectionChanged);
 
-chrome.windows.onFocusChanged.addListener(windowFocusChanged);
+	chrome.windows.onFocusChanged.addListener(windowFocusChanged);
 
 	/***********************************************************************************/
 
