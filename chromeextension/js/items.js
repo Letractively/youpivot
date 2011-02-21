@@ -1,28 +1,39 @@
 var ItemManager = {};
 
 (function(){
-	var master = ItemManager;
-	/*** public methods ***/
+	var m = ItemManager;
 
-	master.addItem = function(id, date, name, color, url){
-		$("#items").append("<tr id='item_"+id+"'></tr>");
-		var item = $("#item_"+id);
-		item.append($("<td class='itemDate'></td>").text(formatDate(date)));
-		item.append($("<td class='itemColor'></td>").css("background-color", color));
-		item.append($("<td class='itemName'></td>").text(name));
-		var icon = IconFactory.createFavicon(url, url);
-		item.find(".itemName").prepend(icon.addClass("itemIcon"));
+	m.addDomains = function(domains){
+		for(var i in domains){
+			m.addDomain(domains[i]);
+		}
 	}
 
-	master.clearItems = function(){
-		$("#items").html("");
+	m.addDomain = function(domain){
+		var color = domain.color;
+		var favUrl = domain.favUrl;
+		var name = domain.name;
+		var items = domain.items;
+		for(var i in items){
+			addItem(items[i], domain);
+		}
+		addApplicationIcon(favUrl, name);
 	}
 
-	/*** private methods ***/
-
-	function formatDate(date){
-		var d = new Date(date);
-		var string = d.toLocaleTimeString();
-		return string;
+	function addItem(item, domain){
+		var title = item.title;
+		var url = item.url;
+		var keywords = item.keywords;
+		var importance = item.importance;
+		var events = item.events;
+		var startTime = item.startTime;
+		TermManager.addTerms(keywords);
+		TableManager.addItem(startTime, title, domain.color, url, domain.favUrl);
+		console.log("additem", item);
 	}
-})()
+})();
+
+function addApplicationIcon(icon, name){
+	var img = IconFactory.createIcon(icon, name).addClass("applicationIcon");
+	$("#applications").append(img);
+}

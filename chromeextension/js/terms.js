@@ -1,20 +1,40 @@
 var TermManager = {};
 
 (function(){
-	var master = TermManager;
+	var m = TermManager;
 
 	var terms = new Array();
-	master.addTerm = function(text, rating){
-		terms[terms.length] = {text: text, rating: rating};
-		terms.sort(sortFunction);
-		master.displayTerms();
+	//add an array of terms
+	m.addTerms = function(texts){
+		for(var i in texts){
+			m.addTerm(texts[i]);
+		}
 	}
-	master.displayTerms = function(){
+	m.addTerm = function(text){
+		var index = getTermIndex(text);
+		if(index==-1){
+			terms[terms.length] = {text: text, rating: 1};
+		}else{
+			var term = terms[index];
+			terms[index] = {text: text, rating: term.rating+1};
+		}
+		terms.sort(sortFunction);
+		m.displayTerms();
+	}
+	m.displayTerms = function(){
 		$("#terms").html("");
 		for(var i in terms){
 			if(i>17) break;
 			displayTerm(terms[i].text, i);
 		}
+	}
+	function getTermIndex(term){
+		for(var i in terms){
+			if(terms[i].text == term){
+				return i;
+			}
+		}
+		return -1;
 	}
 	//return an exponentially decaying number (0-1)
 	function decay(num, rate){
@@ -31,7 +51,8 @@ var TermManager = {};
 		return b.rating-a.rating;
 	}
 
-	master.clearTerms = function(){
-		$("#terms").html("");
+	m.clearTerms = function(){
+		terms = new Array();
+		m.displayTerms();
 	}
 })();

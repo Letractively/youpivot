@@ -1,52 +1,102 @@
 var Monitor = {};
 
 (function(){
-	var cur = Monitor.current = {};
-	var arc = Monitor.archive = new Array();
+	var m = Monitor;
+	var arr = m.tabs = {};
+	var timerId = -1;
 
-	var selected = false;
+	//constants
+	var updateInterval = 114*1000;
 
 	$(function(){
 		registerOpenTabs();
-		updatePositions();
+		updateFocus();
+		startTimer();
 
-		chrome.tabs.onCreated.addListener(function(tab){
-			//console.log("tab created");
-			addToCurrent(tab.id, createItemFromTab(tab), false);
-		});
 		chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
-			//console.log("tab removed");
 			tabRemoved(tabId);
-			updatePositions();
 		});
 		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-			//console.log("tab updated");
-			moveToArchive(tabId);
-			addToCurrent(tabId, createItemFromTab(tab), true);
+			if(tab.status=="complete"){
+				tabUpdated(tab);
+			}
 		});
 		chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo){
-			//console.log("tab selection changed");
-			changeSelection(tabId);
+			updateFocus();
 		});
-		chrome.windows.onCreated.addListener(function(window){
-			//console.log("window created");
+		chrome.tabs.onMoved.addListener(function(tabId, moveInfo){
+			updateFocus();
+		});
+		chrome.tabs.onDetached.addListener(function(tabId, detachInfo){
+			updateFocus();
 		});
 		chrome.windows.onFocusChanged.addListener(function(windowId){
-			if(windowId == chrome.windows.WINDOW_ID_NONE){
-				//console.log("no focused window");
-			   return;
-			}
-			//console.log("window focus changed");
-			chrome.tabs.getSelected(windowId, function(tab){
-				if(tab!=null){
-					changeSelection(tab.id);
-				}
-			});
+			updateFocus();
 		});
 	});
 
+	function startTimer(){
+		timerId = setTimeout(function(){ uploadUpdateInfo(); }, updateInterval);
+	}
+
+	/*** Server calls ***/
 	function tabRemoved(tabId){
-		console.log("tab removed");
+		//console.log("tab removed");
+		if(arr[tabId]){
+			uploadRemoveInfo(tabId);
+			removeFromTabs(tabId);
+		}
+	}
+
+	//note: Site redirection using JavaScript will cause an update
+	function tabUpdated(tab){
+		//console.log("tab updated");
+		if(arr[tab.id]){
+			uploadRemoveInfo(tab.id);
+			removeFromTabs(tab.id);
+		}
+		if(urlValid(tab.url)){
+			addToTabs(tab.id, createItemFromTab(tab));
+			uploadOpenInfo(tab.id);
+		}
+	}
+
+	function uploadRemoveInfo(tabId){
+		console.log("remove", tabId);
+		var info = arr[tabId].getInfo();
+		console.log(info);
+	}
+
+	function uploadOpenInfo(tabId){
+		console.log("open", tabId);
+		var info = arr[tabId].getInfo();
+		console.log(info);
+	}
+
+	//send updated info about all tabs to server, every 114 seconds
+	function uploadUpdateInfo(){
+		console.log("update tab");
+		var batch = [];
+		for(var i in arr){
+			var info = arr[i].getInfo();
+			batch[batch.length] = info;
+		}
+		uploadBatch(batch);
+		startTimer();
+	}
+
+	function uploadBatch(batch){
+		console.log(batch);
+	}
+	/*** end server calls ***/
+
+	//check if the URL is valid for logging
+	function urlValid(url){
+		if(url.indexOf("chrome")===0){
+			return false;
+		}
+		if(url.indexOf("about")===0) return false;
+		return true;
 	}
 
 	function registerOpenTabs(){
@@ -54,69 +104,83 @@ var Monitor = {};
 			for(var i in windows){
 				for(var j in windows[i].tabs){
 					var tab = windows[i].tabs[j];
-					addToCurrent(tab.id, createItemFromTab(tab), false);
-					if(tab.selected && windows[i].focused){
-						changeSelection(tab.id);
+					if(urlValid(tab.url)){
+						addToTabs(tab.id, createItemFromTab(tab));
 					}
 				}
 			}
 		});
 	}
 
-	Monitor.getSelectedId = function(){
+	m.getSelectedId = function(){
 		return selected;
 	}
 
-	Monitor.getTabById = function(id){
-		var output = cur[id];
-		output.importance = ImportanceManager.getImportance(id);
+	//change name to getInfo?
+	m.getTabById = function(id){
+		var output = arr[id].getInfo();
 		return output;
 	}
 
-	function addToCurrent(id, createObj, update){
-		cur[id] = createTabInfo(createObj);
-		if(update) updatePositions();
+	function addToTabs(id, createObj){
+		arr[id] = createTabInfo(createObj);
 	}
 
-	function changeSelection(newId){
-		//console.log("Selection", newId);
-		if(selected==newId) return;
-		if(selected && cur[selected]){ //make sure the selected is not being removed
-			cur[selected].setFocus(false);
-		}
-		cur[newId].setFocus(true);
-		selected = newId;
-		updatePositions();
+	function removeFromTabs(id){
+		if(arr[id]) delete arr[id];
 	}
 
-	function updatePositions(){
-		if(!cur[selected]){
-			//console.log("no selected tab");
-			return;
-		}
-		for(var i in cur){
-			cur[i].setSelection({index: cur[selected].index, window: cur[selected].window});
-		}
+	function updateFocus(){
+		//console.log("updateFocus");
+		chrome.windows.getAll({populate: true}, function(windows){
+			for(var i in windows){
+				var wFocus = windows[i].focused;
+				for(var j in windows[i].tabs){
+					var tab = windows[i].tabs[j];
+					var tFocus = tab.selected;
+					if(arr[tab.id]){
+						arr[tab.id].setFocus(tFocus, wFocus);
+					}
+				}
+			}
+		});
 	}
 
-	//deprecated
-	function moveToArchive(id){
-		cur[id].die();
-		arc[arc.length] = cur[id];
-		delete cur[id];
+	function getFavUrl(tab){
+		if(tab.favIconUrl){
+			return tab.favIconUrl;
+		}
+		//use Google S2 if favicon URL is not defined
+		var domain = tab.url.split("://")[1];
+		domain = domain.replace("www.", "");
+		domain = domain.split("/")[0];
+		var favIconUrl = "http://www.google.com/s2/favicons?domain="+domain;
+		return favIconUrl;
+	}
+
+	//poor man's keyword generator
+	//FIXME doesn't work for non-english alphabets
+	function getKeywords(title){
+		title = title.replace(/[^a-zA-Z0-9]/g, " ").replace(/\s+/g, " ");
+		var output = title.split(" ");
+		for(var i in output){
+			if(output[i].length==0)
+				output.splice(i, 1);
+		}
+		return output;
 	}
 
 	function createItemFromTab(tab){
-		var cObj = {title: tab.title, url: tab.url, focus: tab.selected, index: tab.index, wind: tab.windowId};
+		var cObj = {
+			title: tab.title, 
+			url: tab.url, 
+			favUrl: getFavUrl(tab), 
+			index: tab.index, 
+			win: tab.windowId,
+			keywords: getKeywords(tab.title), 
+			parentTab: -1,
+			parentWindow: -1
+		};
 		return cObj;
-	}
-
-	//get the tab distance from the selected tab
-	Monitor.getTabDistance = function(id){
-		return cur[selected].index - cur[id].index;
-	}
-
-	Monitor.debug = function(){
-		return {current: cur, archive: arc};
 	}
 })();
