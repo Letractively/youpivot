@@ -1,32 +1,23 @@
 //document.ready is too early. CSS width is not calculated yet
 $(window).load(function(){ 
-	ItemManager.addItem(0, new Date().getTime(), "Google", "#FF0000", "http://www.google.com/");
-	ItemManager.addItem(1, new Date().getTime()+180000, "Apple", "#0000FF", "http://www.apple.com/");
-	addApplicationIcon("http://www.google.com/favicon.ico");
-	addApplicationIcon("http://www.google.com/favicon.ico");
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("Hahaha", 20);
-	TermManager.addTerm("LOL", 55);
-	TermManager.addTerm("LOL", 55);
-	TermManager.addTerm("LOL", 55);
-	TermManager.addTerm("LOL", 55);
-	TermManager.addTerm("LOL", 55);
-	TermManager.addTerm("LOL", 55);
 	DomainManager.addDomain("http://www.google.com/");
 	DomainManager.addDomain("http://www.google.com/");
+	ItemManager.addDomain({
+		color: "#FF0000", 
+		favUrl: "http://www.google.com/favicon.ico", 
+		name: "google.com", 
+		items: [{title: "Google", url: "http://www.google.com/", keywords: ["Google", "rocks"], startTime: new Date().getTime(), importance: [], events: []}, 
+			{title: "Google Docs", url: "http://docs.google.com/", keywords: ["Google", "docs"], startTime: new Date().getTime(), importance: [], events: []}
+		]
+	});
+	ItemManager.addDomain({
+		color: "#0000FF", 
+		favUrl: "http://www.apple.com/favicon.ico", 
+		name: "apple.com", 
+		items: [{title: "Apple", url: "http://www.apple.com/", keywords: ["Apple", "rocks", "magical"], startTime: new Date().getTime()-60000, importance: [], events: []}, 
+			{title: "Apple - Mac", url: "http://www.apple.com/mac", keywords: ["Apple", "mac", "magical", "revolutionary"], startTime: new Date().getTime()-120000, importance: [], events: []}
+		]
+	});
 
 	console.log("window", $(window).width());
 	if($(window).width()==0){
@@ -35,20 +26,6 @@ $(window).load(function(){
 	}else{
 		drawGraphs();
 	}
-
-	//resize the graphs when the window is resized. Not stable. 
-	
-	baseWidth = $("#visualgraphs").width();
-	var timeout;
-	/*$(window).resize(function(e){
-		$("#visualgraphs").width(10);
-		var newWidth = $("#visualgraphs").parent().width();
-		$("#visualgraphs").width(newWidth);
-		var scale = newWidth/baseWidth;
-		$("#visualgraphs").css("-webkit-transform", "scaleX("+scale+")");
-		clearTimeout(timeout);
-		timeout = setTimeout("drawMaps("+newWidth+")", 200);
-	});*/
 });
 
 function drawGraphs(){
@@ -62,9 +39,4 @@ function drawMaps(newWidth){
 	baseWidth = newWidth;
 	$("#visualgraphs").css("-webkit-transform", "scaleX(1)");
 	drawGraphs();
-}
-
-function addApplicationIcon(icon){
-	var img = IconFactory.createIcon(icon).addClass("applicationIcon");
-	$("#applications").append(img);
 }
