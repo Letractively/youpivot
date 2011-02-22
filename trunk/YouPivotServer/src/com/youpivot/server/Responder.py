@@ -43,10 +43,7 @@ class Responder(object):
     
     #Evil person prevention
     def isValidDeveloper(self, args):
-        if args['developerid'] in developersdb:
-            return True
-        else:
-            return False
+        return args['developerid'] in developersdb
     
     #Check to make sure no necessary terms were left out
     def hasRequiredTerms(self, args):
@@ -57,10 +54,7 @@ class Responder(object):
     
     #Check to make sure the user exists
     def userExists(self, args):
-        if args['userid'] in usersdb:
-            return True
-        else:
-            return False
+        return args['userid'] in usersdb
     
     #Create the document in the events database
     def createDoc(self, args):
