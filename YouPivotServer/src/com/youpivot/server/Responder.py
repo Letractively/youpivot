@@ -9,7 +9,7 @@ import couchdb
 
 from uuid import uuid4
 
-MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'shorttitle', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
+MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
 DB_SERVER_URL = 'http://admin:youpivot@127.0.0.1:5984/'
 
 #Connect to the Couch Server and db's
