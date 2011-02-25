@@ -1,7 +1,5 @@
 //document.ready is too early. CSS width is not calculated yet
 $(window).load(function(){ 
-	DomainManager.addDomain("http://www.google.com/");
-	DomainManager.addDomain("http://www.google.com/");
 	ItemManager.addDomain({
 		color: "#FF0000", 
 		favUrl: "http://www.google.com/favicon.ico", 
@@ -33,9 +31,9 @@ function drawGraphs(){
 }
 
 //function to redraw the graphs. Used with onresize
-function drawMaps(newWidth){
+/*function drawMaps(newWidth){
 	$("#steamgraph").width(newWidth);
 	baseWidth = newWidth;
 	$("#visualgraphs").css("-webkit-transform", "scaleX(1)");
 	drawGraphs();
-}
+}*/

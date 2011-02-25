@@ -45,6 +45,9 @@ var TermManager = {};
 		var term = $("<div class='term'></div>").text(text);
 		term.css("font-size", 20*decay(order, 0.05)+"px");
 		term.css("opacity", decay(order, 0.15));
+		term.click(function(){
+			FilterManager.addFilter("name", text);
+		});
 		$("#terms").append(term);
 	}
 	function sortFunction(a, b){

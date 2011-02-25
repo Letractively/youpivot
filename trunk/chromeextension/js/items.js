@@ -62,8 +62,7 @@ var ItemManager = {};
 		var events = item.events;
 		var startTime = item.startTime;
 		TermManager.addTerms(keywords);
-		TableManager.addItem(startTime, title, domain.color, url, domain.favUrl);
+		TableManager.addItem(startTime, title, domain.color, url, domain.favUrl, item);
 		GraphManager.addLayer(domain.color, importance);
-		console.log("additem", item);
 	}
 })();
