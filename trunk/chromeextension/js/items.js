@@ -30,10 +30,10 @@ var ItemManager = {};
 		for(var i in items){
 			addItem(items[i], domain);
 		}
-		addApplicationIcon(favUrl, name);
-		GraphManager.addLayer(color, getDomainImportance(domain.items));
+		DomainManager.addDomain(favUrl, name);
 	}
 
+	// deprecated
 	function getDomainImportance(items){
 		var output = new Array();
 		for(var j=0; j<758; j++){
@@ -63,11 +63,7 @@ var ItemManager = {};
 		var startTime = item.startTime;
 		TermManager.addTerms(keywords);
 		TableManager.addItem(startTime, title, domain.color, url, domain.favUrl);
+		GraphManager.addLayer(domain.color, importance);
 		console.log("additem", item);
 	}
 })();
-
-function addApplicationIcon(icon, name){
-	var img = IconFactory.createIcon(icon, name).addClass("applicationIcon");
-	$("#applications").append(img);
-}
