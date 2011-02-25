@@ -6,21 +6,29 @@
 			favUrl=obj.favUrl, name=obj.name;
 
 		var item = $("<tr></tr>");
-		item.append($("<td class='itemDate'></td>").text(formatTime(date)));
-		item.append($("<td class='itemColor'></td>").css("background-color", color));
+		item.append($("<td class='itemLeft'></td>")
+			.append($("<button class='pivotBtn'>Pivot</button>").click(PivotManager.pivot))
+			.append($("<div class='itemDate'></div>").text(Helper.formatTime(date, 12)))
+		);
+		item.append($("<td class='itemColor'></td>").css("background-color", Helper.createLighterColor(color, 1)));
 		item.append($("<td class='itemName'></td>").append($("<a href='"+url+"' target='_blank'></a>").text(name)));
 		var icon = IconFactory.createIcon(favUrl, name);
 		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
 		item.mouseover(function(){
-			$(this).css("background-color", createLighterColor(color));
+			$(this).addClass("hover");
+			$(this).css("background-color", Helper.createLighterColor(color, 2));
+			$(".itemColor", this).css("background-color", color);
+			showPivotButton($(this));
 		});
 		item.mouseout(function(){
+			$(this).removeClass("hover");
 			$(this).css("background-color", "transparent");
+			$(".itemColor", this).css("background-color", Helper.createLighterColor(color, 1));
+			hidePivotButton($(this));
 		});
 
 		var response = getTable(this, date);
 		var table = response.table;
-		console.log("response", response, response.table);
 		if(!table){
 			table = createTable(this, date, response.nextTable);
 		}
@@ -29,8 +37,17 @@
 		return this;
 	}
 
+	function showPivotButton(obj){
+		$(".itemDate", obj).hide();
+		$(".pivotBtn", obj).show();
+	}
+	function hidePivotButton(obj){
+		$(".itemDate", obj).show();
+		$(".pivotBtn", obj).hide();
+	}
+
 	function createTable(obj, date, nextTable){
-		var header = $("<div class='contentHeader'></div>").text(formatDate(date));
+		var header = $("<div class='contentHeader'></div>").text(Helper.formatDate(date));
 		if(nextTable)
 			nextTable.prev().before(header);
 		else
@@ -40,7 +57,6 @@
 
 		var dates = obj.data("dates");
 		if(!dates) dates = [];
-		console.log("table", table);
 		dates[dates.length] = {date: date, table: table};
 		obj.data("dates", dates);
 		return table;
@@ -54,7 +70,6 @@
 		var dates = obj.data("dates");
 		if(!dates) dates = [];
 		dates.sort(sortDates);
-		console.log("dates", dates);
 		for(var i in dates){
 			if(compareDates(dates[i].date, date) == 0){
 				return {table: dates[i].table};
@@ -80,30 +95,4 @@
 		return (date1.getFullYear() > date2.getFullYear()) ? 1 : -1;
 	}
 
-	function formatDate(date){
-		var d = new Date(date);
-		var string = d.toLocaleDateString();
-		return string;
-	}
-
-	function formatTime(date){
-		var d = new Date(date);
-		var string = d.toLocaleTimeString();
-		return string;
-	}
-
-	function createLighterColor(color){
-		var r = parseInt(color.substr(1,2),16);
-		var g = parseInt(color.substr(3,2),16);
-		var b = parseInt(color.substr(5,2),16);
-		var cb = (r+g+b)/3; var db = 300-cb;
-		r+=db; g+=db; b+=db;
-		if(r>255) r = 255;
-		if(g>255) g = 255;
-		if(b>255) b = 255;
-		return "#"+pad(r.toString(16))+pad(g.toString(16))+pad(b.toString(16));
-	}
-	function pad(string){
-		return (string.length>=2) ? string : "0"+string;
-	}
 })(jQuery);

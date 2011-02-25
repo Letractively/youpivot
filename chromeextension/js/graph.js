@@ -22,14 +22,8 @@ var GraphManager = {};
 	}
 
 	function loadTime(){
-		$("#graphDate .left").text(formatTime(startTime));
-		$("#graphDate .right").text(formatTime(endTime));
-	}
-
-	function formatTime(time){
-		var date = new Date(time);
-		var string = date.toLocaleTimeString();
-		return string;
+		$("#graphDate .left").text(Helper.formatTime(startTime, 12));
+		$("#graphDate .right").text(Helper.formatTime(endTime, 12));
 	}
 
 	//deprecated
@@ -56,30 +50,29 @@ var GraphManager = {};
 
 	m.drawTopGraph = function(){
 		//generate test data
-		var data = pv.range(0, 50, .1).map(function(x) {
+		var data = pv.range(0, 100, .1).map(function(x) {
 			return {x: x, y: Math.abs(Math.sin(x/2), 2)/2+Math.random()};
 		});
 
-		var box = $("#topgraph");
+		var box = $("#topGraph");
 
-		var w = box.width(),
+		var w = 680,
 			h = box.height(),
-			x = pv.Scale.linear(0, 50).range(0, w),
+			x = pv.Scale.linear(0, 100).range(0, w),
 			y = pv.Scale.linear(0, 2).range(0, h);
 
 		var vis = new pv.Panel()
-			.canvas("topgraph")
+			.canvas("topGraph")
 			.width(w)
 			.height(h);
 
 		vis.add(pv.Bar)
 			.data(data)
-			.bottom(1)
+			.bottom(0)
 			.left(function(d){ return x(d.x)})
-			.width(2)
+			.width(w/1000)
 			.height(function(d){ return y(d.y); })
-			.def("active", false)
-			.fillStyle(function(d){ return this.active() ? "rgba(0, 0, 0, 255)" : "rgba(200, 200, 200, 190)"; })
+			.fillStyle("rgb(176,196,222)")
 			//.strokeStyle("rgba(200, 200, 200, 100)")
 			.lineWidth(0);
 
@@ -161,7 +154,6 @@ var GraphManager = {};
 			.layer.add(pv.Area)
 			.def("active", false)
 			.fillStyle(function(d, p){ var a = (this.active()) ? 1 : 0.8; return pv.color(p.color).alpha(a);})
-			.strokeStyle(function(){return this.fillStyle().alpha(1)})
 			.lineWidth(2)
 			.event("mouseover", function(d, p){ this.active(true); return this; })
 			.event("mouseout", function(d){ this.active(false); return this; })
@@ -190,28 +182,5 @@ var GraphManager = {};
 			if(sum>max) max = sum;
 		}
 		return max;
-	}
-
-	function rand(cap){ return Math.floor(Math.random()*cap); }
-
-	/*** test data generator ***/
-	/* Inspired by Lee Byron's test data generator. */
-	function layers(n, m){
-	  function bump(a) {
-		var x = 1 / (.1 + Math.random()),
-			y = 2 * Math.random() - .5,
-			z = 10 / (.1 + Math.random());
-		for (var i = 0; i < m; i++) {
-		  var w = (i / m - y) * z;
-		  a[i] += x * Math.exp(-w * w);
-		}
-	  }
-	  return pv.range(n).map(function() {
-		  var a = [], i;
-		  for (i = 0; i < m; i++) a[i] = 0;
-		  for (i = 0; i < 5; i++) bump(a);
-		  var color = "rgb("+rand(256)+", "+rand(256)+", "+rand(256)+")";
-		  return {data: a, color: color};
-		});
 	}
 })();

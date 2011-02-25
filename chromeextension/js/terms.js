@@ -19,9 +19,9 @@ var TermManager = {};
 			terms[index] = {text: text, rating: term.rating+1};
 		}
 		terms.sort(sortFunction);
-		m.displayTerms();
+		m.display();
 	}
-	m.displayTerms = function(){
+	m.display = function(){
 		$("#terms").html("");
 		for(var i in terms){
 			if(i>17) break;
