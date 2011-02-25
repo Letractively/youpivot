@@ -1,5 +1,5 @@
 html { height: 100%; }
-body { height: 100%; margin: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 13px; overflow: hidden; background-color: #EEEEEE; }
+body { height: 100%; margin: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 13px; overflow-x: hidden; }
 a:link { color: #202080; text-decoration: none; }
 a:visited { color: #60609F; text-decoration: none; }
 a:active { color: #60609F; text-decoration: none; }
@@ -19,17 +19,15 @@ a.active:hover { color: #3870AD; }
 a.active:visited { color: #3870AD; }
 a.active:active { color: #3870AD; }
 
-#wrap { height: 100%; width: 1000px; vertical-align: top; border-spacing: 0px; border-collapse: collapse; border-right: 1px solid #C6C6C6; -webkit-box-shadow: -10px 0px 50px #AAA; }
-#wrap td { padding: 0px; }
-
 /*** left sidebar ***/
-#sidebarTitle { text-align: right; font-size: 20px; color: #53627D; padding: 0.76em 0px; }
-#leftSidebar { 	width: 250px; height: 100%; padding: 0px 15px; color: #919191;
+#sidebarTitle { text-align: right; font-size: 20px; color: #53627D; padding: 0.76em 0px; } 
+#leftSidebar {  position: fixed; float: left; padding: 0px 15px; color: #919191; z-index: 999;
+				width: 280px; height: 100%; box-sizing: border-box;
 				-webkit-border-end: 1px solid #C6C9CE;
 				-webkit-user-select: none; cursor: default;
 				background: -webkit-gradient(linear, left top, left bottom, from(rgba(234, 238, 243, 0)), to(#EAEEF3)), -webkit-gradient(linear, left top, right top, from(#EAEEF3), color-stop(0.97, #EAEEF3), to(#D3D7DB)); 
-			 }
-.sidebarGroup { margin: 20px 0px; }
+			 } 
+.sidebarGroup { margin: 1em 0px; }
 .sidebarLabel { font-weight: bold; color: #000000; }
 #searchBox { width: 100%; box-sizing: border-box; }
 	/*** dropdowns ***/
@@ -48,38 +46,54 @@ a.active:active { color: #3870AD; }
 .favicon { width: 16px; height: 16px; margin: 0px 3px; }
 /*** end left sidebar ***/
 
+/*** graph date ***/
+#graphDate { width: 680px; padding: 20px 0px 5px 0px; color: #919191; }
+#graphDate div { display: inline-block; }
+#graphDate .right { margin-right: 16px; }
+#collapseGraph { float: right; width: 14px; height: 14px;
+				 background: url("images/hide.png"); opacity: 0.8; }
+#collapseGraph:hover { opacity: 1; }
+/*** visualGraphs ***/
+#visualGraphs { position: fixed; width: 100%; -webkit-user-select: none; cursor: default; 
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0.95, rgba(255, 255, 255, 1)), to(rgba(255, 255, 255, 0))); }
+
+#visualGraphsContent { margin-left: 280px; padding-left: 10px; }
+			
+#topBackground { position: absolute; width: 100%; height: 45px; z-index: 0;
+	border-bottom: 1px solid #E5E8EB;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFF), to(#F4F6F9) ); }
+#topGraph { width: 100%; height: 45px; position: relative; z-index: 9; }
+#topGraphDate { width: 100%; height: 20px;
+   				padding-top: 11px; position: absolute; z-index: 8; 
+				font-size: 8pt; font-style: italic; color: #919191; }
+#steamGraph { width: 100%; height: 185px; overflow: hidden; }
+#steamGraph svg { -webkit-transform-origin: left; -webkit-transform: scaleX(0.1); }
+/*** end visualGraphs ***/
+
 /*** contents ***/
-#mainCell { height: 100%; width: 100%; vertical-align: top; }
-#content { height: 100%; background-color: #FFFFFF; }
+#content { margin-left: 280px; width: 100%; height: 100%; background-color: #FFFFFF; padding-left: 10px; }
 .applicationIcon { width: 16px; height: 16px; margin: 0px 5px; }
 .term { color: #555555; }
-	/*** graph date ***/
-	#graphDate { padding: 10px 10px 5px 10px; color: #919191; }
-	#graphDate div { display: inline-block; }
-	#graphDate .right { margin-right: 16px; }
-	#collapseGraph { float: right; width: 14px; height: 14px;
-					 background: url("images/hide.png"); opacity: 0.8; }
-	#collapseGraph:hover { opacity: 1; }
-	/*** visualgraphs ***/
-	#visualgraphs { width: 100%; -webkit-user-select: none; cursor: default; }
-	#topgraph { width: 100%; height: 45px;
-				background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFF), to(#F4F6F9) );
-			  }
-	#steamgraph { width: 100%; height: 200px; overflow: hidden; }
-	#steamgraph svg { -webkit-transform-origin: left; -webkit-transform: scaleX(0.1); }
-	/*** end visualgraphs ***/
+.term:hover { color: #333333; opacity: 1 !important; }
+	/*** filters ***/
+	#filtersWrap { display: none; }
+	.filterLabel { display: inline-block; padding: 5px; cursor: default; }
+
 	/*** text contents ***/
-	#textContent { padding: 10px; }
+	#textContent { padding: 10px 0px; }
 	.contentHeader { font-weight: bold; }
-	#applications { text-align: left; height: 16px; margin-bottom: 16px; }
-	.itemColor { width: 5px; padding: 0px; }
-	.itemIcon { width: 16px; height: 16px; margin: 0px 5px; vertical-align: middle; }
+	#events { text-align: left; height: 16px; margin-bottom: 16px; }
 		/*** items table ***/
-		.itemTable { width: 100%; margin: 5px; border-spacing: 0px 5px; padding-right: 5px; cursor: default; -webkit-user-select: none; }
-		.itemTable tr { margin: 10px 0px; }
-		.itemTable td { width: 0px; height: 20px; padding: 0px 2px; }
+		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; empty-cells: show; }
+		.itemTable tr { height: 26px; }
+		.itemTable td { height: 26px; padding: 0px 2px; }
 		.itemTable .itemName { width: 100%; padding: 0px 5px; }
-		.itemTable .itemDate { padding: 0px 8px; }
-		.itemTable a { color: #000000; display: block; }
+		.itemTable .itemDate { color: #919194; width: 60px; text-align: center; }
+		.itemTable .itemLeft { padding: 0px 8px; width: 70px; height: 100%; }
+		.itemTable a { color: #000000; display: block; cursor: default; }
+		.pivotBtn { width: 60px; display: none; }
+
+		.itemColor { width: 0px; padding: 0px 3px 0px 0px !important; }
+		.itemIcon { width: 16px; height: 16px; margin: 0px 5px; vertical-align: middle; }
 	/*** end text contents ***/
 /*** end contents ***/

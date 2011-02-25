@@ -1,7 +1,7 @@
 // A jQuery extension for containing search results and items table
 
 (function($){
-	$.fn.addItem = function(obj, options){
+	$.fn.addItem = function(obj, tableItem){
 		var date=obj.date, url=obj.url, color=obj.color,
 			favUrl=obj.favUrl, name=obj.name;
 
@@ -12,6 +12,7 @@
 		);
 		item.append($("<td class='itemColor'></td>").css("background-color", Helper.createLighterColor(color, 1)));
 		item.append($("<td class='itemName'></td>").append($("<a href='"+url+"' target='_blank'></a>").text(name)));
+		item.data("item", tableItem);
 		var icon = IconFactory.createIcon(favUrl, name);
 		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
 		item.mouseover(function(){

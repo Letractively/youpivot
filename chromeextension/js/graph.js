@@ -6,15 +6,19 @@ var GraphManager = {};
 	var startTime = new Date().getTime();
 	var endTime = new Date().getTime()+1*60*60*1000;
 	var dataArray = new Array();
+	var topGraph;
+	var steamGraph;
 
 	$(function(){
 		loadTime();
+		loadDate();
 	});
 
 	m.setTime = function(st, et){
 		startTime = st;
 		endTime = et;
 		loadTime();
+		loadDate();
 	}
 
 	m.addLayer = function(color, arr){
@@ -24,6 +28,11 @@ var GraphManager = {};
 	function loadTime(){
 		$("#graphDate .left").text(Helper.formatTime(startTime, 12));
 		$("#graphDate .right").text(Helper.formatTime(endTime, 12));
+	}
+
+	function loadDate(){
+		var string = Helper.formatDate(startTime);
+		$("#topGraphDate").text(string);
 	}
 
 	//deprecated
@@ -48,6 +57,10 @@ var GraphManager = {};
 		return arr;
 	}
 
+	m.renderTopGraph = function(){
+		topGraph.render();
+	}
+
 	m.drawTopGraph = function(){
 		//generate test data
 		var data = pv.range(0, 100, .1).map(function(x) {
@@ -61,12 +74,12 @@ var GraphManager = {};
 			x = pv.Scale.linear(0, 100).range(0, w),
 			y = pv.Scale.linear(0, 2).range(0, h);
 
-		var vis = new pv.Panel()
+		topGraph = new pv.Panel()
 			.canvas("topGraph")
 			.width(w)
 			.height(h);
 
-		vis.add(pv.Bar)
+		topGraph.add(pv.Bar)
 			.data(data)
 			.bottom(0)
 			.left(function(d){ return x(d.x)})
@@ -79,7 +92,7 @@ var GraphManager = {};
 
 		var dragged = false;
 		var hilight = {x: 200, dx: 100};
-		vis.add(pv.Panel)
+		topGraph.add(pv.Panel)
 			.data([hilight])
 			.cursor("crosshair")
 			.events("all")
@@ -121,7 +134,7 @@ var GraphManager = {};
 				}
 			})
 
-		vis.render();
+		topGraph.render();
 
 	}
 
@@ -131,20 +144,33 @@ var GraphManager = {};
 
 	function scaleToSection(offset, cap){
 		xScale = 0.1/cap; //0.1 is the smallest value coz the graph is rendered at 10x width
-		$("#steamgraph svg").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
+		$("#steamGraph svg").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
 	}
 
-	var max, width, height;
-	var data = dataArray;
-	
 	function drawSection(){
+		
+	}
+
+	m.renderSteamGraph = function(){
+		steamGraph.render();
+	}
+
+	var width;
+	m.drawSteamGraph = function(){
+		var data = dataArray;
+		var sgbox = $("#steamGraph");
+		sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big - translating CSS 100% width to pixels for the system
+		width = sgbox.width()*10;
+		var height = sgbox.height()-20;
+		var max = getMaxFromSteam(data);
+		
 		var x = pv.Scale.linear(0, 758).range(0, width),
 			y = pv.Scale.linear(0, max+1).range(0, height);
-		var panel = new pv.Panel()
-			.canvas("steamgraph")
+		steamGraph = new pv.Panel()
+			.canvas("steamGraph")
 			.width(width)
 			.height(height)
-		panel.add(pv.Layout.Stack)
+		steamGraph.add(pv.Layout.Stack)
 			.layers(data)
 			.values(function(d){ return data[this.index].data; })
 			.order("inside-out")
@@ -158,16 +184,7 @@ var GraphManager = {};
 			.event("mouseover", function(d, p){ this.active(true); return this; })
 			.event("mouseout", function(d){ this.active(false); return this; })
 			.event("click", function(d){ alert("You clicked me!\nMy color is "+this.fillStyle().color); });
-		panel.render();
-	}
-
-	m.drawSteamGraph = function(){
-		var sgbox = $("#steamgraph");
-		sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big - translating CSS 100% width to pixels for the system
-		width = sgbox.width()*10;
-		height = sgbox.height()-20;
-		max = getMaxFromSteam(data);
-		drawSection(0, 1);
+		steamGraph.render();
 	}
 
 	function getMaxFromSteam(data){
