@@ -11,6 +11,11 @@
 /*  "chrome_url_overrides" : {
     "history": "history.html"
   },*/
+  "browser_action": {
+    "default_icon": "images/icon_48.png",
+    "default_title": "Add a TimeMark for YouPivot",
+    "default_popup": "popup.html"
+  },
   "permissions": [
     "tabs",
 	"history",
