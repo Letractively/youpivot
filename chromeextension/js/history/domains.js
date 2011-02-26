@@ -37,6 +37,10 @@ var DomainManager = {};
 		var img = IconFactory.createIcon(icon, title);
 		img.css("opacity", decay(order, 0.15));
 		$("#contentFilters").append(img.addClass("favicon"));
+		img.click(function(){
+			var label = "<img class='favicon' src='"+$(this).attr("src")+"' />";
+			FilterManager.addFilter("domain", title, label);
+		});
 	}
 
 	//return an exponentially decaying number (0-1)

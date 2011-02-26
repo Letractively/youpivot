@@ -21,8 +21,31 @@ var GraphManager = {};
 		loadDate();
 	}
 
-	m.addLayer = function(color, arr){
-		dataArray[dataArray.length] = {data: arr, color: color};
+	m.addLayer = function(color, arr, id){
+		dataArray[dataArray.length] = {data: arr, color: color, id: id, active: false};
+	}
+
+	m.highlightLayer = function(id){
+		var index = getLayerIndex(id);
+		if(!index) return;
+		dataArray[index].active = true;
+		steamGraph.render();
+	}
+
+	m.lowlightLayer = function(id){
+		var index = getLayerIndex(id);
+		if(!index) return;
+		dataArray[index].active = false;
+		steamGraph.render();
+	}
+
+	function getLayerIndex(id){
+		for(var i in dataArray){
+			if(dataArray[i].id === id){
+				return i;
+			}
+		}
+		return false;
 	}
 
 	function loadTime(){
@@ -147,10 +170,6 @@ var GraphManager = {};
 		$("#steamGraph svg").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
 	}
 
-	function drawSection(){
-		
-	}
-
 	m.renderSteamGraph = function(){
 		steamGraph.render();
 	}
@@ -165,7 +184,7 @@ var GraphManager = {};
 		var max = getMaxFromSteam(data);
 		
 		var x = pv.Scale.linear(0, 758).range(0, width),
-			y = pv.Scale.linear(0, max+1).range(0, height);
+			y = pv.Scale.linear(0, max*1.1).range(0, height);
 		steamGraph = new pv.Panel()
 			.canvas("steamGraph")
 			.width(width)
@@ -179,12 +198,21 @@ var GraphManager = {};
 			.y(y)
 			.layer.add(pv.Area)
 			.def("active", false)
-			.fillStyle(function(d, p){ var a = (this.active()) ? 1 : 0.8; return pv.color(p.color).alpha(a);})
+			.fillStyle(function(d, p){ 
+				return (p.active) ? p.color : Helper.createLighterColor(p.color, 1); })
 			.lineWidth(2)
-			.event("mouseover", function(d, p){ this.active(true); return this; })
-			.event("mouseout", function(d){ this.active(false); return this; })
-			.event("click", function(d){ alert("You clicked me!\nMy color is "+this.fillStyle().color); });
+			.event("mouseover", function(d, p){ highlightItem(p.id); p.active = true; return this; })
+			.event("mouseout", function(d, p){ lowlightItem(p.id); p.active = false; return this; })
+			.event("click", function(d){ console.log("ouch!"); });
 		steamGraph.render();
+	}
+
+	function highlightItem(id){
+		$("#item_"+id).itemTable("highlight");
+	}
+
+	function lowlightItem(id){
+		$("#item_"+id).itemTable("lowlight");
 	}
 
 	function getMaxFromSteam(data){

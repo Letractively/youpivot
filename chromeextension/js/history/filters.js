@@ -4,12 +4,12 @@ var FilterManager = {};
 	var m = FilterManager;
 	var filters = new Array();
 
-	m.addFilter = function(type, value){
+	m.addFilter = function(type, value, label){
 		if(getFilterIndex(type, value)!==false){
 			console.log("Filter already exists");
 			return false;
 		}
-		addFilterLabel(type, value);
+		addFilterLabel(type, value, label);
 		var index = filters.length;
 		filters[index] = {type: type, value: value};
 		m.filter();
@@ -28,9 +28,15 @@ var FilterManager = {};
 	}
 
 	m.filter = function(){
-		console.log(filters);
-		$(".itemTable tr").show();
-		$(".itemTable").prev().show();
+		if(filters.length==0){
+			//show all items
+			$(".itemTable tr").each(function(){
+				showRow($(this));
+			});
+			return;
+		}
+		$(".itemTable tr").hide();
+		$(".itemTable").prev().hide();
 		for(var i in filters){
 			applyFilter(filters[i].type, filters[i].value);
 		}
@@ -41,29 +47,32 @@ var FilterManager = {};
 			case "name":
 				filterName(value);
 				break;
+			case "domain":
+				filterDomain(value);
+				break;
 		}
 	}
 
 	function filterName(value){
 		$(".itemTable tr").each(function(){
 			var item = $(this).data("item");
-			if(!matchKeywords(value, item.keywords)){
-				hideRow($(this));
+			if(matchKeywords(value, item.keywords)){
+				showRow($(this));
 			}
 		});
 	}
-	function hideRow(obj){
-		obj.hide();
-		var somethingShown = false;
-		obj.siblings().each(function(){
-			console.log($(this).css("display"));
-			if($(this).css("display") != "none"){
-				somethingShown = true;
+	function filterDomain(domain){
+		$(".itemTable tr").each(function(){
+			var item = $(this).data("item");
+			if(item.domain.name == domain){
+				showRow($(this));
 			}
+			console.log(item);
 		});
-		if(!somethingShown){
-			obj.parent().parent().prev().hide();
-		}
+	}
+	function showRow(obj){
+		obj.show();
+		obj.parent().parent().prev().show(); // hide the date label
 	}
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){
@@ -82,21 +91,14 @@ var FilterManager = {};
 		}
 		return false;
 	}
-	
-	function getLabel(type, value){
-		switch(type){
-			case "name":
-				return value;
-				break;
-		}
-	}
-	function addFilterLabel(type, value){
+
+	function addFilterLabel(type, value, lbl){
 		var label = $("<div class='filterLabel app'></div>");
 		label.click(function(){
 			m.removeFilter(type, value);
 			removeFilterLabel($(this));
 		});
-		label.html(getLabel(type, value));
+		label.html(lbl);
 		$("#filtersWrap").show();
 		$("#filters").append(label);
 	}

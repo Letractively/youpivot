@@ -1,11 +1,30 @@
 // A jQuery extension for containing search results and items table
 
 (function($){
-	$.fn.addItem = function(obj, tableItem){
-		var date=obj.date, url=obj.url, color=obj.color,
+	$.fn.itemTable = function(action, obj, tableItem){
+		switch(action){
+			case "addItem":
+				return addItem(obj, tableItem, this);
+				break;
+			case "highlight":
+				highlight(this, true);
+				break;
+			case "lowlight":
+				lowlight(this, true);
+				break;
+			default: 
+				throw "Action "+action+" is not defined";
+				break;
+		}
+
+		return this;
+	}
+
+	function addItem(obj, tableItem, wrap){
+		var id=obj.id, date=obj.date, url=obj.url, color=obj.color,
 			favUrl=obj.favUrl, name=obj.name;
 
-		var item = $("<tr></tr>");
+		var item = $("<tr id='item_"+id+"'></tr>");
 		item.append($("<td class='itemLeft'></td>")
 			.append($("<button class='pivotBtn'>Pivot</button>").click(PivotManager.pivot))
 			.append($("<div class='itemDate'></div>").text(Helper.formatTime(date, 12)))
@@ -16,26 +35,40 @@
 		var icon = IconFactory.createIcon(favUrl, name);
 		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
 		item.mouseover(function(){
-			$(this).addClass("hover");
-			$(this).css("background-color", Helper.createLighterColor(color, 2));
-			$(".itemColor", this).css("background-color", color);
+			highlight($(this), false);
 			showPivotButton($(this));
 		});
 		item.mouseout(function(){
-			$(this).removeClass("hover");
-			$(this).css("background-color", "transparent");
-			$(".itemColor", this).css("background-color", Helper.createLighterColor(color, 1));
+			lowlight($(this), false);
 			hidePivotButton($(this));
 		});
 
-		var response = getTable(this, date);
+		var response = getTable(wrap, date);
 		var table = response.table;
 		if(!table){
-			table = createTable(this, date, response.nextTable);
+			table = createTable(wrap, date, response.nextTable);
 		}
 		table.append(item);
+		return item;
+	}
 
-		return this;
+	function highlight(obj, persistent){
+		if(persistent){
+			obj.addClass("highlight");
+		}
+		obj.addClass("hover");
+		var color = obj.data("item").domain.color;
+		obj.css("background-color", Helper.createLighterColor(color, 2));
+		$(".itemColor", obj).css("background-color", color);
+	}
+
+	function lowlight(obj, clearPersistent){
+		if(obj.hasClass("highlight") && !clearPersistent) return;
+		obj.removeClass("highlight");
+		obj.removeClass("hover");
+		var color = obj.data("item").domain.color;
+		obj.css("background-color", "transparent");
+		$(".itemColor", obj).css("background-color", Helper.createLighterColor(color, 1));
 	}
 
 	function showPivotButton(obj){

@@ -3,8 +3,9 @@ var ItemManager = {};
 (function(){
 	var m = ItemManager;
 	var list = new Array();
+	var counter = 0;
 
-	m.getItems = function(){
+	/*m.getItems = function(){
 		var output = new Array();
 		for(var i in list){
 			var items = list[i].items;
@@ -13,7 +14,7 @@ var ItemManager = {};
 			}
 		}
 		return output;
-	}
+	}*/
 
 	m.addDomains = function(domains){
 		for(var i in domains){
@@ -28,30 +29,10 @@ var ItemManager = {};
 		var name = domain.name;
 		var items = domain.items;
 		for(var i in items){
+			items[i].id = counter++;
 			addItem(items[i], domain);
 		}
 		DomainManager.addDomain(favUrl, name);
-	}
-
-	// deprecated
-	function getDomainImportance(items){
-		var output = new Array();
-		for(var j=0; j<758; j++){
-			var value = 0;
-			var populated = false;
-			for(var i in items){
-				if(items[i].importance[j]!=undefined){
-					value += items[i].importance[j];
-					populated = true;
-				}
-			}
-			if(populated){
-				output[j] = value;
-			}else{
-				break;
-			}
-		}
-		return output;
 	}
 
 	function addItem(item, domain){
@@ -61,8 +42,11 @@ var ItemManager = {};
 		var importance = item.importance;
 		var events = item.events;
 		var startTime = item.startTime;
+		var id = item.id;
+		delete domain["items"]; //prevent recursive data structure
+		item.domain = domain;
 		TermManager.addTerms(keywords);
-		TableManager.addItem(startTime, title, domain.color, url, domain.favUrl, item);
-		GraphManager.addLayer(domain.color, importance);
+		TableManager.addItem(id, startTime, title, domain.color, url, domain.favUrl, item);
+		GraphManager.addLayer(domain.color, importance, id);
 	}
 })();

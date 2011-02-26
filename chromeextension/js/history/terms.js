@@ -46,7 +46,7 @@ var TermManager = {};
 		term.css("font-size", 20*decay(order, 0.05)+"px");
 		term.css("opacity", decay(order, 0.15));
 		term.click(function(){
-			FilterManager.addFilter("name", text);
+			FilterManager.addFilter("name", text, text);
 		});
 		$("#terms").append(term);
 	}
