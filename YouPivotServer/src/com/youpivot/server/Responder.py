@@ -13,7 +13,7 @@ from time import gmtime
 
 MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
 MANDATORY_GET_TERMS = ['pivottime', 'userid']
-DB_SERVER_URL = 'http://admin:youpivot@localhost:5984/'
+DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
 
 #Connect to the Couch Server and db's
