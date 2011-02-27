@@ -3,18 +3,27 @@ var GraphManager = {};
 (function(){
 	var m = GraphManager;
 
-	var startTime = new Date().getTime();
-	var endTime = new Date().getTime()+1*60*60*1000;
+	var startTime = new Date().getTime()-24*60*60*1000;
+	var endTime = new Date().getTime();
 	var dataArray = new Array();
 	var topGraph;
 	var steamGraph;
 
 	$(function(){
-		loadTime();
+		loadTime(0, 1);
 		loadDate();
 	});
 
+	m.getStartTime = function(){
+		return startTime;
+	}
+
+	m.getEndTime = function(){
+		return endTime;
+	}
+
 	m.setTime = function(st, et){
+		throw "Debug me first";
 		startTime = st;
 		endTime = et;
 		loadTime();
@@ -22,20 +31,24 @@ var GraphManager = {};
 	}
 
 	m.addLayer = function(color, arr, id){
-		dataArray[dataArray.length] = {data: arr, color: color, id: id, active: false};
+		dataArray[dataArray.length] = {data: arr, color: color, id: id, active: false, highlight: false};
 	}
 
-	m.highlightLayer = function(id){
+	m.highlightLayer = function(id, persistent){
 		var index = getLayerIndex(id);
 		if(!index) return;
 		dataArray[index].active = true;
+		if(persistent) dataArray[index].highlight = true;
 		steamGraph.render();
 	}
 
-	m.lowlightLayer = function(id){
+	m.lowlightLayer = function(id, clearPersistent){
 		var index = getLayerIndex(id);
 		if(!index) return;
-		dataArray[index].active = false;
+		if(clearPersistent || !dataArray[index].highlight){
+			dataArray[index].active = false;
+			dataArray[index].highlight = false;
+		}
 		steamGraph.render();
 	}
 
@@ -48,9 +61,10 @@ var GraphManager = {};
 		return false;
 	}
 
-	function loadTime(){
-		$("#graphDate .left").text(Helper.formatTime(startTime, 12));
-		$("#graphDate .right").text(Helper.formatTime(endTime, 12));
+	function loadTime(offset, scale){
+		var w = endTime-startTime;
+		$("#graphDate .left").text(Helper.formatTime(offset*w + startTime, 12));
+		$("#graphDate .right").text(Helper.formatTime((offset+scale)*w + startTime, 12));
 	}
 
 	function loadDate(){
@@ -168,6 +182,10 @@ var GraphManager = {};
 	function scaleToSection(offset, cap){
 		xScale = 0.1/cap; //0.1 is the smallest value coz the graph is rendered at 10x width
 		$("#steamGraph svg").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
+		$("#events").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
+		$(".eventIcon").css("-webkit-transform", "scaleX("+1/xScale+")");
+		//reload the time label on top of the steamGraph
+		loadTime(offset, cap);
 	}
 
 	m.renderSteamGraph = function(){
@@ -180,7 +198,7 @@ var GraphManager = {};
 		var sgbox = $("#steamGraph");
 		sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big - translating CSS 100% width to pixels for the system
 		width = sgbox.width()*10;
-		var height = sgbox.height()-20;
+		var height = sgbox.height();
 		var max = getMaxFromSteam(data);
 		
 		var x = pv.Scale.linear(0, 758).range(0, width),
@@ -199,20 +217,27 @@ var GraphManager = {};
 			.layer.add(pv.Area)
 			.def("active", false)
 			.fillStyle(function(d, p){ 
-				return (p.active) ? p.color : Helper.createLighterColor(p.color, 1); })
+				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, 1); })
 			.lineWidth(2)
-			.event("mouseover", function(d, p){ highlightItem(p.id); p.active = true; return this; })
-			.event("mouseout", function(d, p){ lowlightItem(p.id); p.active = false; return this; })
-			.event("click", function(d){ console.log("ouch!"); });
+			.event("mouseover", function(d, p){ highlightItem(p.id, false); p.active = true; return this; })
+			.event("mouseout", function(d, p){ lowlightItem(p.id, false); p.active = false; return this; })
+			.event("click", function(d, p){ p.highlight = !p.highlight; toggleItemHighlight(p.id, p.highlight); return this; });
 		steamGraph.render();
 	}
 
-	function highlightItem(id){
-		$("#item_"+id).itemTable("highlight");
+	function highlightItem(id, persistent){
+		HighlightManager.highlightDomain(id, persistent);
 	}
 
-	function lowlightItem(id){
-		$("#item_"+id).itemTable("lowlight");
+	function lowlightItem(id, clearPersistent){
+		HighlightManager.lowlightDomain(id, clearPersistent);
+	}
+
+	function toggleItemHighlight(id, toggle){
+		if(toggle)
+			highlightItem(id, true);
+		else
+			lowlightItem(id, true);
 	}
 
 	function getMaxFromSteam(data){

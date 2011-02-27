@@ -16,6 +16,14 @@ $(window).load(function(){
 			{title: "Apple - Mac", url: "http://www.apple.com/mac", keywords: ["Apple", "mac", "magical", "revolutionary"], startTime: new Date().getTime()-120000, importance: [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0], events: []}
 		]
 	});
+	ItemManager.addDomain({
+		color: "#000000",
+		favUrl: "images/hide.png",
+		name: "Crap",
+		items: [{title: "Hide", url: "", keywords: ["Crap"], startTime: new Date().getTime(), events: []}, 
+		{title: "Holy Crap", url: "", keywords: ["Holy", "Crap"], startTime: new Date().getTime()-22*60*60000, events: []}
+			]
+	});
 
 	if($(window).width()==0){
 		//to fix that weird CSS bug in webkit where the width is occasionally rendered wrongly at first

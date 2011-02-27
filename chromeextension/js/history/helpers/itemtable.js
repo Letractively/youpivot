@@ -7,10 +7,11 @@
 				return addItem(obj, tableItem, this);
 				break;
 			case "highlight":
-				highlight(this, true);
+				var level = getOptions(obj, "level", 2);
+				highlight(this, level);
 				break;
 			case "lowlight":
-				lowlight(this, true);
+				lowlight(this);
 				break;
 			default: 
 				throw "Action "+action+" is not defined";
@@ -18,6 +19,13 @@
 		}
 
 		return this;
+	}
+
+	function getOptions(options, label, defaultValue){
+		if(!options || options[label] == undefined){
+			return defaultValue;
+		}
+		return options[label];
 	}
 
 	function addItem(obj, tableItem, wrap){
@@ -35,11 +43,11 @@
 		var icon = IconFactory.createIcon(favUrl, name);
 		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
 		item.mouseover(function(){
-			highlight($(this), false);
+			HighlightManager.highlightItem(id, false);
 			showPivotButton($(this));
 		});
 		item.mouseout(function(){
-			lowlight($(this), false);
+			HighlightManager.lowlightItem(id, false);
 			hidePivotButton($(this));
 		});
 
@@ -52,19 +60,14 @@
 		return item;
 	}
 
-	function highlight(obj, persistent){
-		if(persistent){
-			obj.addClass("highlight");
-		}
+	function highlight(obj, level){
 		obj.addClass("hover");
 		var color = obj.data("item").domain.color;
-		obj.css("background-color", Helper.createLighterColor(color, 2));
+		obj.css("background-color", Helper.createLighterColor(color, level));
 		$(".itemColor", obj).css("background-color", color);
 	}
 
-	function lowlight(obj, clearPersistent){
-		if(obj.hasClass("highlight") && !clearPersistent) return;
-		obj.removeClass("highlight");
+	function lowlight(obj){
 		obj.removeClass("hover");
 		var color = obj.data("item").domain.color;
 		obj.css("background-color", "transparent");

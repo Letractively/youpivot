@@ -8,15 +8,14 @@ var TableManager = {};
 		var obj = {id: id, date: date, name: name, color: color, url: url, favUrl: favUrl};
 		var row = $("#textContent").itemTable("addItem", obj, item);
 		row.mouseover(function(){
-			GraphManager.highlightLayer(id);
+			HighlightManager.highlightLayer(id, false);
 		});
 		row.mouseout(function(){
-			GraphManager.lowlightLayer(id);
+			HighlightManager.lowlightLayer(id, false);
 		});
 	}
 
 	m.clearItems = function(){
 		$("#textContent").html("");
 	}
-
 })();
