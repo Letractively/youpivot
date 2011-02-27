@@ -67,13 +67,19 @@ a.active:active { color: #3870AD; }
 #topGraphDate { width: 100%; height: 20px;
    				padding-top: 11px; position: absolute; z-index: 8; 
 				font-size: 8pt; font-style: italic; color: #919191; }
-#steamGraph { width: 100%; height: 185px; overflow: hidden; }
+#steamGraph { width: 680px; height: 150px; overflow: hidden; }
 #steamGraph svg { -webkit-transform-origin: left; -webkit-transform: scaleX(0.1); }
+#eventsWrap { width: 680px; height: 20px; overflow: hidden; margin-bottom: 16px; }
+#events { width: 6800px; height: 20px; position: relative;
+		  -webkit-transform-origin: left; -webkit-transform: scaleX(0.1); }
+.eventIcon { width: 16px; height: 16px; position: absolute; top: 0px; 
+		  -webkit-transform-origin: right; -webkit-transform: scaleX(10); 
+		  padding: 1px; border: 0px; }
+.eventIcon.active { border: 1px solid; padding: 0px; }
 /*** end visualGraphs ***/
 
 /*** contents ***/
 #content { margin-left: 280px; width: 100%; height: 100%; background-color: #FFFFFF; padding-left: 10px; }
-.applicationIcon { width: 16px; height: 16px; margin: 0px 5px; }
 .term { color: #555555; }
 .term:hover { color: #333333; opacity: 1 !important; }
 	/*** filters ***/
@@ -83,7 +89,6 @@ a.active:active { color: #3870AD; }
 	/*** text contents ***/
 	#textContent { padding: 10px 0px; }
 	.contentHeader { font-weight: bold; }
-	#events { text-align: left; height: 16px; margin-bottom: 16px; }
 		/*** items table ***/
 		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; empty-cells: show; }
 		.itemTable tr { height: 26px; }

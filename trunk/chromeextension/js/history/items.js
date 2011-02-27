@@ -47,6 +47,11 @@ var ItemManager = {};
 		item.domain = domain;
 		TermManager.addTerms(keywords);
 		TableManager.addItem(id, startTime, title, domain.color, url, domain.favUrl, item);
-		GraphManager.addLayer(domain.color, importance, id);
+		if(importance && importance.length>0){ 
+			//Is this the correct approach? Or should I check the time?
+			GraphManager.addLayer(domain.color, importance, id);
+		}else{
+			EventManager.add(startTime, domain.favUrl, domain.color, title, id);
+		}
 	}
 })();
