@@ -6,7 +6,6 @@ $(function(){
 			return;
 		}
 		TimeMarkManager.add(description);
-		window.close();
 	});
 	$("#cancelBtn").click(function(){
 		window.close();

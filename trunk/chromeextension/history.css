@@ -92,6 +92,7 @@ a.active:active { color: #3870AD; }
 		/*** items table ***/
 		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; empty-cells: show; }
 		.itemTable tr { height: 26px; }
+		.itemTable tr.out { display: none; }
 		.itemTable td { height: 26px; padding: 0px 2px; }
 		.itemTable .itemName { width: 100%; padding: 0px 5px; }
 		.itemTable .itemDate { color: #919194; width: 60px; text-align: center; }

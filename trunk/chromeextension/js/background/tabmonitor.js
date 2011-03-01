@@ -70,7 +70,31 @@ var Monitor = {};
 	function uploadOpenInfo(tabId){
 		console.log("open", tabId);
 		var info = arr[tabId].getInfo();
-		console.log(info);
+		var item = createOpenItem(info);
+		Connector.send("add", item, function(data){
+			if(data.toLowerCase()=="added stuff"){
+				console.log("upload successful");
+			}else{
+				alert("Error uploading open tab info: "+data);
+			}
+		});
+	}
+
+	function createOpenItem(info){
+		var obj = {};
+		obj.title = info.title;
+		obj.url = info.url;
+		obj.favicon = info.favUrl;
+		obj.keyword = info.keywords[0]; //FIXME upload all keywords
+		obj.starttime = Math.floor(new Date().getTime()/1000);
+		obj.endtime = Math.floor((new Date().getTime()+1000)/1000); //FIXME should be changed to 1
+		obj.eventtypename = "chrometab";
+		obj.importance = info.importance;
+		obj.tabindex = info.index;
+		obj.parenttab = info.parentTab;
+		obj.parentwindow = info.parentWindow;
+		obj.windowid = info.win;
+		return obj;
 	}
 
 	//send updated info about all tabs to server, every 114 seconds
@@ -88,6 +112,7 @@ var Monitor = {};
 	function uploadBatch(batch){
 		console.log(batch);
 	}
+
 	/*** end server calls ***/
 
 	//check if the URL is valid for logging

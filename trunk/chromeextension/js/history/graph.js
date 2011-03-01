@@ -10,7 +10,7 @@ var GraphManager = {};
 	var steamGraph;
 
 	$(function(){
-		loadTime(0, 1);
+		loadTime([startTime, endTime]);
 		loadDate();
 	});
 
@@ -30,8 +30,8 @@ var GraphManager = {};
 		loadDate();
 	}
 
-	m.addLayer = function(color, arr, id){
-		dataArray[dataArray.length] = {data: arr, color: color, id: id, active: false, highlight: false};
+	m.addLayer = function(color, arr, id, startTime){
+		dataArray[dataArray.length] = {data: createDataArray(startTime, arr), color: color, id: id, active: false, highlight: false};
 	}
 
 	m.highlightLayer = function(id, persistent){
@@ -61,37 +61,21 @@ var GraphManager = {};
 		return false;
 	}
 
-	function loadTime(offset, scale){
+	function getScaleTime(offset, scale){
 		var w = endTime-startTime;
-		$("#graphDate .left").text(Helper.formatTime(offset*w + startTime, 12));
-		$("#graphDate .right").text(Helper.formatTime((offset+scale)*w + startTime, 12));
+		var st = offset*w + startTime;
+		var et = (offset+scale)*w + startTime;
+		return [st, et];
+	}
+
+	function loadTime(time){
+		$("#graphDate .left").text(Helper.formatTime(time[0], 12));
+		$("#graphDate .right").text(Helper.formatTime(time[1], 12));
 	}
 
 	function loadDate(){
 		var string = Helper.formatDate(startTime);
 		$("#topGraphDate").text(string);
-	}
-
-	//deprecated
-	var maxArrLength = 758;
-	function scaleArray(arr, st){
-		var nArr = new Array();
-		var n = (startTime-st)/114000;
-		for(var i=0; i<n; i++){
-			nArr.shift();
-		}
-		n *= -1;
-		for(var i=0; i<n; i++){
-			nArr[i] = 0;
-		}
-		for(var i=0; i<arr.length; i++){
-			if(nArr.length>maxArrLength){
-				console.log("exceeds max length");
-				break;
-			}
-			nArr[nArr.length] = arr[i];
-		}
-		return arr;
 	}
 
 	m.renderTopGraph = function(){
@@ -185,7 +169,9 @@ var GraphManager = {};
 		$("#events").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
 		$(".eventIcon").css("-webkit-transform", "scaleX("+1/xScale+")");
 		//reload the time label on top of the steamGraph
-		loadTime(offset, cap);
+		var time = getScaleTime(offset, cap);
+		loadTime(time);
+		FilterManager.filterTime(time);
 	}
 
 	m.renderSteamGraph = function(){
@@ -238,6 +224,18 @@ var GraphManager = {};
 			highlightItem(id, true);
 		else
 			lowlightItem(id, true);
+	}
+
+	var maxArrLength = 758; // 758 = 86400 / 114
+	function createDataArray(itemStartTime, arr){
+		var output = [];
+		var offset = Math.floor((itemStartTime-startTime)/114000);
+		console.log(offset);
+		for(var i=0; i<maxArrLength; i++){
+			var index = i-offset;
+			output[i] = (index>=0 && index<arr.length) ? arr[index] : 0;
+		}
+		return output;
 	}
 
 	function getMaxFromSteam(data){
