@@ -64,6 +64,7 @@ var DomainManager = {};
 	}
 
 	m.clearDomains = function(){
+		domains = [];
 		$("#contentFilters").html("");
 	}
 })();

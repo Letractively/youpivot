@@ -18,10 +18,10 @@ var TermManager = {};
 			var term = terms[index];
 			terms[index] = {text: text, rating: term.rating+1};
 		}
-		terms.sort(sortFunction);
 		m.display();
 	}
 	m.display = function(){
+		terms.sort(sortFunction);
 		$("#terms").html("");
 		for(var i in terms){
 			if(i>17) break;
@@ -56,6 +56,6 @@ var TermManager = {};
 
 	m.clearTerms = function(){
 		terms = new Array();
-		m.displayTerms();
+		m.display();
 	}
 })();

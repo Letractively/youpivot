@@ -32,7 +32,6 @@ var ItemManager = {};
 			items[i].id = counter++;
 			addItem(items[i], domain);
 		}
-		DomainManager.addDomain(favUrl, name);
 	}
 
 	function addItem(item, domain){
@@ -47,9 +46,10 @@ var ItemManager = {};
 		item.domain = domain;
 		TermManager.addTerms(keywords);
 		TableManager.addItem(id, startTime, title, domain.color, url, domain.favUrl, item);
+		DomainManager.addDomain(domain.favUrl, domain.name);
 		if(importance && importance.length>0){ 
 			//Is this the correct approach? Or should I check the time?
-			GraphManager.addLayer(domain.color, importance, id);
+			GraphManager.addLayer(domain.color, importance, id, startTime);
 		}else{
 			EventManager.add(startTime, domain.favUrl, domain.color, title, id);
 		}

@@ -10,7 +10,7 @@ $(function(){
 				sendResponse(UserManager.getId());
 				break;
 			case "uploadInfo":
-				Connector.send(request.eventType, request.info);
+				Connector.send(request.eventType, request.info, request.callback);
 				break;
 			default:
 				console.log("Unknown internal request received");

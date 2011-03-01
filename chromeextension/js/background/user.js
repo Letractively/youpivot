@@ -14,6 +14,6 @@ $(function(){
 	}
 
 	m.login = function(){
-		userId = 8080;
+		userId = "e34c5ee0d846e882ae1014294b0020a0";
 	}
 })();

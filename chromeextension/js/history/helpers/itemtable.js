@@ -34,7 +34,10 @@
 
 		var item = $("<tr id='item_"+id+"'></tr>");
 		item.append($("<td class='itemLeft'></td>")
-			.append($("<button class='pivotBtn'>Pivot</button>").click(PivotManager.pivot))
+			.append($("<button class='pivotBtn'>Pivot</button>").click(function(){
+				//pivot around start time/end time or center?
+				PivotManager.pivot(date);
+			}))
 			.append($("<div class='itemDate'></div>").text(Helper.formatTime(date, 12)))
 		);
 		item.append($("<td class='itemColor'></td>").css("background-color", Helper.createLighterColor(color, 1)));

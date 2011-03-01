@@ -10,6 +10,7 @@ var EventManager = {};
 
 	function addIcon(offset, icon, color, name, id){
 		var img = IconFactory.createIcon(icon, name).addClass("eventIcon");
+		img.attr("id", "event_"+id);
 		img.css("left", offset);
 		img.css("border-color", color);
 		$("#events").append(img);
@@ -28,6 +29,18 @@ var EventManager = {};
 			var toggle = $(this).hasClass("highlight");
 			toggleItemHighlight(id, toggle);
 		});
+	}
+
+	m.highlight = function(id, persistent){
+		var item = $("#event_"+id);
+		if(persistent) item.addClass("highlight");
+		item.addClass("active");
+	}
+	m.lowlight = function(id, clearPersistent){
+		var item = $("#event_"+id);
+		if(clearPersistent || !item.hasClass("highlight")){
+			item.removeClass("active highlight");
+		}
 	}
 
 	function toggleItemHighlight(id, toggle){

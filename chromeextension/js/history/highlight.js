@@ -50,11 +50,21 @@ var HighlightManager = {};
 	}
 
 	m.highlightLayer = function(id, persistent){
-		GraphManager.highlightLayer(id, persistent);
+		var item = $("#item_"+id).data("item");
+		if(item.importance && item.importance.length!=0){
+			GraphManager.highlightLayer(id, persistent);
+		}else{
+			EventManager.highlight(id, persistent);
+		}
 	}
 
 	m.lowlightLayer = function(id, clearPersistent){
-		GraphManager.lowlightLayer(id, clearPersistent);
+		var item = $("#item_"+id).data("item");
+		if(item.importance && item.importance.length!=0){
+			GraphManager.lowlightLayer(id, clearPersistent);
+		}else{
+			EventManager.lowlight(id, clearPersistent);
+		}
 	}
 
 	function getList(obj){

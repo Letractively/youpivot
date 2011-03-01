@@ -27,15 +27,22 @@ var FilterManager = {};
 		m.filter();
 	}
 
+	m.clearFilters = function(){
+		filters = [];
+		m.filter();
+		$("#filters").html("");
+		$("#filtersWrap").hide();
+	}
+
 	m.filter = function(){
 		if(filters.length==0){
 			//show all items
-			$(".itemTable tr").each(function(){
+			$(".itemTable tr:not(.out)").each(function(){
 				showRow($(this));
 			});
 			return;
 		}
-		$(".itemTable tr").hide();
+		$(".itemTable tr:not(.out)").hide();
 		$(".itemTable").prev().hide();
 		for(var i in filters){
 			applyFilter(filters[i].type, filters[i].value);
@@ -54,7 +61,7 @@ var FilterManager = {};
 	}
 
 	function filterName(value){
-		$(".itemTable tr").each(function(){
+		$(".itemTable tr:not(.out)").each(function(){
 			var item = $(this).data("item");
 			if(matchKeywords(value, item.keywords)){
 				showRow($(this));
@@ -62,17 +69,40 @@ var FilterManager = {};
 		});
 	}
 	function filterDomain(domain){
-		$(".itemTable tr").each(function(){
+		$(".itemTable tr:not(.out)").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
 				showRow($(this));
 			}
-			console.log(item);
 		});
+	}
+	m.filterTime = function(time){
+		m.clearFilters();
+		var startTime = time[0];
+		var endTime = time[1];
+		//FIXME don't affect search results
+		$(".itemTable tr").addClass("out").hide();
+		$(".itemTable tr").each(function(){
+			var item = $(this).data("item");
+			if(item.endTime>=startTime && item.startTime<=endTime+1000){
+				showTimeRow($(this));
+			}
+		});
+		DomainManager.clearDomains();
+		TermManager.clearTerms();
+		$(".itemTable tr:not(.out)").each(function(){
+			var item = $(this).data("item");
+			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
+			TermManager.addTerms(item.keywords);
+		});
+	}
+	function showTimeRow(obj){
+		obj.removeClass("out");
+		showRow(obj);
 	}
 	function showRow(obj){
 		obj.show();
-		obj.parent().parent().prev().show(); // hide the date label
+		obj.parent().parent().prev().show(); // show the date label
 	}
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){
