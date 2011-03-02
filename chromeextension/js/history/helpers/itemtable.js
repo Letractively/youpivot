@@ -46,11 +46,11 @@
 		var icon = IconFactory.createIcon(favUrl, name);
 		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
 		item.mouseover(function(){
-			HighlightManager.highlightItem(id, false);
+			HighlightManager.highlightItem($(this), false);
 			showPivotButton($(this));
 		});
 		item.mouseout(function(){
-			HighlightManager.lowlightItem(id, false);
+			HighlightManager.lowlightItem($(this), false);
 			hidePivotButton($(this));
 		});
 

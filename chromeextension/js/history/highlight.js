@@ -34,12 +34,13 @@ var HighlightManager = {};
 		});
 	}
 
-	m.highlightItem = function(id, persistent){
-		$("#item_"+id).itemTable("highlight", {level: 2});
+	m.highlightItem = function(item, persistent){
+		item.itemTable("highlight", {level: 2});
+		//$("#item_"+id).itemTable("highlight", {level: 2});
 	}
 
-	m.lowlightItem = function(id, clearPersistent){
-		var item = $("#item_"+id);
+	m.lowlightItem = function(item, clearPersistent){
+		//var item = (typeof id == "object") ? id : $("#item_"+id);
 		if(clearPersistent){
 			removeFromList(item, 2);
 		}

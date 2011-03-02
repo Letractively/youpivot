@@ -39,7 +39,8 @@ var GraphManager = {};
 		if(!index) return;
 		dataArray[index].active = true;
 		if(persistent) dataArray[index].highlight = true;
-		steamGraph.render();
+		//update only the selected part (improve performance)
+		steamGraph.children[0].children[0].children[0].render();
 	}
 
 	m.lowlightLayer = function(id, clearPersistent){
@@ -49,7 +50,8 @@ var GraphManager = {};
 			dataArray[index].active = false;
 			dataArray[index].highlight = false;
 		}
-		steamGraph.render();
+		//update only the selected part (improve performance)
+		steamGraph.children[0].children[0].children[0].render();
 	}
 
 	function getLayerIndex(id){
@@ -201,11 +203,11 @@ var GraphManager = {};
 			.x(function(d, p){ return x(this.index) })
 			.y(y)
 			.layer.add(pv.Area)
-			.def("active", false)
+			//.def("active", false)
 			.fillStyle(function(d, p){ 
 				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, 1); })
 			.lineWidth(2)
-			.event("mouseover", function(d, p){ highlightItem(p.id, false); p.active = true; return this; })
+			.event("mouseover", function(d, p){ console.log("over", this); highlightItem(p.id, false); p.active = true; return this; })
 			.event("mouseout", function(d, p){ lowlightItem(p.id, false); p.active = false; return this; })
 			.event("click", function(d, p){ p.highlight = !p.highlight; toggleItemHighlight(p.id, p.highlight); return this; });
 		steamGraph.render();
@@ -230,7 +232,6 @@ var GraphManager = {};
 	function createDataArray(itemStartTime, arr){
 		var output = [];
 		var offset = Math.floor((itemStartTime-startTime)/114000);
-		console.log(offset);
 		for(var i=0; i<maxArrLength; i++){
 			var index = i-offset;
 			output[i] = (index>=0 && index<arr.length) ? arr[index] : 0;
