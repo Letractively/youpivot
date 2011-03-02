@@ -76,21 +76,31 @@ var FilterManager = {};
 			}
 		});
 	}
+	var lastTime;
 	m.filterTime = function(time){
+		if(typeof time == "undefined" && lastTime){
+			time = lastTime;
+		}else if(time){
+			lastTime = time;
+		}else{ 
+			console.log("Time is not defined. Filtering aborted. ");
+			return; 
+		}
 		m.clearFilters();
 		var startTime = time[0];
 		var endTime = time[1];
-		//FIXME don't affect search results
-		$(".itemTable tr").addClass("out").hide();
-		$(".itemTable tr").each(function(){
+		$("#textContent .contentHeader").hide();
+		$("#textContent .itemTable tr").addClass("out").hide();
+		$("#textContent .itemTable tr").each(function(){
 			var item = $(this).data("item");
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
 				showTimeRow($(this));
 			}
 		});
+		// reload the term and domain filters
 		DomainManager.clearDomains();
 		TermManager.clearTerms();
-		$(".itemTable tr:not(.out)").each(function(){
+		$("#textContent .itemTable tr:not(.out)").each(function(){
 			var item = $(this).data("item");
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			TermManager.addTerms(item.keywords);
@@ -102,7 +112,7 @@ var FilterManager = {};
 	}
 	function showRow(obj){
 		obj.show();
-		obj.parent().parent().prev().show(); // show the date label
+		obj.parent().parent().prev(".contentHeader").show(); // show the date label
 	}
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){
