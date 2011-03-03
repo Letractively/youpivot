@@ -42,7 +42,7 @@ var ItemManager = {};
 		var events = item.events;
 		var startTime = item.startTime;
 		var id = item.id;
-		delete domain["items"]; //prevent recursive data structure
+		//delete domain["items"]; //prevent recursive data structure
 		item.domain = domain;
 		TermManager.addTerms(keywords);
 		TableManager.addItem(id, startTime, title, domain.color, url, domain.favUrl, item);
