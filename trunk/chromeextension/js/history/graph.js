@@ -8,6 +8,7 @@ var GraphManager = {};
 	var dataArray = new Array();
 	var topGraph;
 	var steamGraph;
+	var elements = {};
 
 	$(function(){
 		loadTime([startTime, endTime]);
@@ -39,8 +40,9 @@ var GraphManager = {};
 		if(!index) return;
 		dataArray[index].active = true;
 		if(persistent) dataArray[index].highlight = true;
-		//update only the selected part (improve performance)
-		steamGraph.children[0].children[0].children[0].render();
+		//directly change the object in DOM rather than re-render to improve performance (significantly)
+		var color = dataArray[index].color;
+		elements[id].attr("fill", color);
 	}
 
 	m.lowlightLayer = function(id, clearPersistent){
@@ -49,9 +51,10 @@ var GraphManager = {};
 		if(clearPersistent || !dataArray[index].highlight){
 			dataArray[index].active = false;
 			dataArray[index].highlight = false;
+			//directly change the object in DOM rather than re-render to improve performance (significantly)
+			var color = Helper.createLighterColor(dataArray[index].color, 1);
+			elements[id].attr("fill", color);
 		}
-		//update only the selected part (improve performance)
-		steamGraph.children[0].children[0].children[0].render();
 	}
 
 	function getLayerIndex(id){
@@ -177,6 +180,7 @@ var GraphManager = {};
 	}
 
 	m.renderSteamGraph = function(){
+		console.log("re-rendering streamGraph");
 		steamGraph.render();
 	}
 
@@ -195,22 +199,36 @@ var GraphManager = {};
 			.canvas("steamGraph")
 			.width(width)
 			.height(height)
-		steamGraph.add(pv.Layout.Stack)
+		var stack = steamGraph.add(pv.Layout.Stack)
 			.layers(data)
 			.values(function(d){ return data[this.index].data; })
 			.order("inside-out")
 			.offset("silohouette")
-			.x(function(d, p){ return x(this.index) })
+			.x(function(d){ return x(this.index) })
 			.y(y)
 			.layer.add(pv.Area)
-			//.def("active", false)
+			.title(function(d, p){ return "layer-"+p.id; })
 			.fillStyle(function(d, p){ 
 				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, 1); })
 			.lineWidth(2)
-			.event("mouseover", function(d, p){ console.log("over", this); highlightItem(p.id, false); p.active = true; return this; })
+			.event("mouseover", function(d, p){
+			   	this.title("");
+				highlightItem(p.id, false); p.active = true; return this; })
 			.event("mouseout", function(d, p){ lowlightItem(p.id, false); p.active = false; return this; })
 			.event("click", function(d, p){ p.highlight = !p.highlight; toggleItemHighlight(p.id, p.highlight); return this; });
+
 		steamGraph.render();
+		saveElements();
+	}
+
+	function saveElements(){
+		console.log("rargh");
+		$('#steamGraph g>a').each(function(){
+			var title = $(this).attr("title");
+			title.match(/^layer-(\d+)$/);
+			var id = RegExp.$1;
+			elements[id] = $(this).find("path");
+		});
 	}
 
 	function highlightItem(id, persistent){

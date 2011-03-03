@@ -9,6 +9,7 @@ var Helper = {};
 	
 	var brightness = [1, 0.7, 0.9, 0.94]; //2 level brightness values
 	m.createLighterColor = function(color, level){
+		if(typeof level == "undefined") throw "Color level is not defined";
 		var r = parseInt(color.substr(1,2),16);
 		var g = parseInt(color.substr(3,2),16);
 		var b = parseInt(color.substr(5,2),16);

@@ -28,7 +28,8 @@ var SearchManager = {};
 
 	function toggleGraphs(enable){
 		$("#visualGraphs").css("pointer-events", (enable) ? "auto" : "none");
-		$("#visualGraphs").css("opacity", (enable) ? "1" : "0.4");
+		$("#visualGraphs>div").css("opacity", (enable) ? "1" : "0.4");
+		$("#topBackground").css("z-index", (enable) ? 0 : 10);
 	}
 
 	function antiSearch(){
