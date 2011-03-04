@@ -30,9 +30,11 @@ var SortManager = {};
 		sort(name);
 	}
 	function sort(name){
-		console.log("sorting "+name);
 		m.sortBy = name;
+		SearchManager.reloadResult();
 		TableManager.reload();
+		FilterManager.filterTime();
+		FilterManager.filter();
 	}
 	$(function(){
 		$("#sortItems").hList("loadArray", {items: sorts, callback: sort});

@@ -93,7 +93,7 @@ a.active:active { color: #3870AD; }
 	#textContent { padding: 10px 0px; }
 	.contentHeader { font-weight: bold; }
 		/*** items table ***/
-		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; empty-cells: show; border-collapse: collapse; }
+		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; border-collapse: collapse; }
 		.itemTable tr { height: 26px; display: block; /*to eliminate mouseleave events*/ }
 		.itemTable tr.out { display: none; }
 		.itemTable td { height: 26px; padding: 0px 2px; }

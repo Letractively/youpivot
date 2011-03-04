@@ -2,11 +2,13 @@ var SearchManager = {};
 
 (function(){
 	var m = SearchManager;
+	var result = [];
 
 	function search(needle){
 		if(needle==""){ antiSearch(); return; }
 		//Connector.send("search", {needle: needle});
-		showResults(debugSearch);
+		result = debugSearch; //assign search result to array
+		showResults(result);
 	}
 
 	function showResults(results){
@@ -14,7 +16,13 @@ var SearchManager = {};
 		TermManager.clearTerms();
 		DomainManager.clearDomains();
 		$("#textContent").hide();
-		$("#searchResults").html("").show().data("dates", []);
+		$("#searchResults").show();
+		SortManager.sortItems(result);
+		loadResults(results);
+	}
+
+	function loadResults(results){
+		$("#searchResults").html("");
 		for(var i in results){
 			var item = results[i];
 			TermManager.addTerms(item.keywords);
@@ -23,8 +31,13 @@ var SearchManager = {};
 		}
 	}
 
+	m.reloadResult = function(){
+		SortManager.sortItems(result);
+		loadResults(result);
+	}
+
 	function displayItem(id, item){
-		var obj = {id: id, date: item.startTime, name: item.title, color: item.domain.color, url: item.url, favUrl: item.domain.favUrl};
+		var obj = {id: id, date: item.startTime, name: item.title, color: item.domain.color, url: item.url, favUrl: item.domain.favUrl, domain: item.domain.name};
 		$("#searchResults").itemTable("addItem", obj, item);
 	}
 

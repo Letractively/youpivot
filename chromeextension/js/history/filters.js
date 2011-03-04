@@ -43,7 +43,7 @@ var FilterManager = {};
 			return;
 		}
 		$(".itemTable .item:not(.out)").hide();
-		$(".itemTable .contentHeader").hide();
+		$(".itemTable tr:has(.contentHeader)").hide();
 		for(var i in filters){
 			applyFilter(filters[i].type, filters[i].value);
 		}
@@ -89,7 +89,7 @@ var FilterManager = {};
 		m.clearFilters();
 		var startTime = time[0];
 		var endTime = time[1];
-		$("#textContent .contentHeader").hide();
+		$("#textContent tr:has(.contentHeader)").hide();
 		$("#textContent .itemTable .item").addClass("out").hide();
 		$("#textContent .itemTable .item").each(function(){
 			var item = $(this).data("item");
@@ -112,7 +112,8 @@ var FilterManager = {};
 	}
 	function showRow(obj){
 		obj.show();
-		var header = obj.prevUntil(":not(.item)").last().prev().find(".contentHeader");
+		var header = obj.prevUntil(":not(.item)").last().prev();
+		if(header.size()==0) header = obj.prev(); //if obj is the first item after the header
 		header.show(); // show the date label
 	}
 	function matchKeywords(needle, keywords){
