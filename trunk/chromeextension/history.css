@@ -61,7 +61,7 @@ a.active:active { color: #3870AD; }
 #visualGraphsContent { margin-left: 280px; padding-left: 10px; }
 			
 #topBackground { position: absolute; width: 100%; height: 45px; z-index: 0;
-	border-bottom: 1px solid #E5E8EB;
+	border-bottom: 1px solid #E5E8EB; pointer-events: all;
 	background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFF), to(#F4F6F9) ); }
 #topGraph { width: 100%; height: 45px; position: relative; z-index: 9; }
 #topGraphDate { width: 100%; height: 20px;
@@ -86,12 +86,15 @@ a.active:active { color: #3870AD; }
 	#filtersWrap { display: none; }
 	.filterLabel { display: inline-block; padding: 5px; cursor: default; height: 16px; vertical-align: top; line-height: 16px; }
 
+	/*** search results ***/
+	#searchResults { padding: 10px 0px; display: none; }
+	/*** end search results ***/
 	/*** text contents ***/
 	#textContent { padding: 10px 0px; }
 	.contentHeader { font-weight: bold; }
 		/*** items table ***/
-		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; empty-cells: show; }
-		.itemTable tr { height: 26px; }
+		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; empty-cells: show; border-collapse: collapse; }
+		.itemTable tr { height: 26px; display: block; /*to eliminate mouseleave events*/ }
 		.itemTable tr.out { display: none; }
 		.itemTable td { height: 26px; padding: 0px 2px; }
 		.itemTable .itemName { width: 100%; padding: 0px 5px; }

@@ -2,33 +2,25 @@ var DatePicker = {};
 
 (function(){
 	var m = DatePicker;
-	var dateValues = ["now", "today", "yesterday", ["more1", "more2"]];
+	var dateValues = ["now", "today", "yesterday", "more"];
 	var def = "now";
 
-	function pickDate(obj){
-		$("#datePickers .active").removeClass("active");
-		obj.addClass("active");
-		if(obj.parent().attr("id")=="moreDates")
-			$("#moreDateBtn").addClass("active");
-		$("#moreDates").hide();
-		console.log("Pick date", obj.html());
+	function pickDate(name){
+		if(name=="more"){
+			showCalender();
+		}
+		console.log("pickDate", name);
+	}
+	function showCalendar(){
+		console.log("M T W T F... too lazy to type it all");
 	}
 	m.pickDate = function(name){
-		pickDate(getBtn(name));
-	}
-	function getBtn(name){
-		var obj = false;
-		$("#datePickers a").each(function(){
-			if($(this).text()==name){
-				obj = $(this);
-				return;
-			}
-		});
-		return obj;
+		$("#datePickers").hList("select", {name: name});
+		pickDate(name);
 	}
 
 	$(function(){
-		m.list = new HorizontalList("Date", dateValues, pickDate);
+		$("#datePickers").hList("loadArray", {items: dateValues, callback: pickDate});
 		m.pickDate(def);
 	});
 

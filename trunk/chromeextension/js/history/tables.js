@@ -4,14 +4,23 @@ var TableManager = {};
 (function(){
 	var m = TableManager;
 
-	m.addItem = function(id, date, name, color, url, favUrl, item){
-		var obj = {id: id, date: date, name: name, color: color, url: url, favUrl: favUrl};
+	m.reload = function(){
+		m.clearItems();
+		var list = ItemManager.list;
+		SortManager.sortItems(list);
+		for(var i in list){
+			m.addItem(list[i]);
+		}
+	}
+
+	m.addItem = function(item){
+		var obj = {id: item.id, date: item.startTime, name: item.title, color: item.domain.color, url: item.url, favUrl: item.domain.favUrl, domain: item.domain.name};
 		var row = $("#textContent").itemTable("addItem", obj, item);
 		row.mouseenter(function(e){
-			HighlightManager.highlightLayer(id, false);
+			HighlightManager.highlightLayer(item.id, false);
 		});
 		row.mouseleave(function(e){
-			HighlightManager.lowlightLayer(id, false);
+			HighlightManager.lowlightLayer(item.id, false);
 		});
 	}
 

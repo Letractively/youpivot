@@ -37,13 +37,13 @@ var FilterManager = {};
 	m.filter = function(){
 		if(filters.length==0){
 			//show all items
-			$(".itemTable tr:not(.out)").each(function(){
+			$(".itemTable .item:not(.out)").each(function(){
 				showRow($(this));
 			});
 			return;
 		}
-		$(".itemTable tr:not(.out)").hide();
-		$(".itemTable").prev().hide();
+		$(".itemTable .item:not(.out)").hide();
+		$(".itemTable .contentHeader").hide();
 		for(var i in filters){
 			applyFilter(filters[i].type, filters[i].value);
 		}
@@ -61,7 +61,7 @@ var FilterManager = {};
 	}
 
 	function filterName(value){
-		$(".itemTable tr:not(.out)").each(function(){
+		$(".itemTable .item:not(.out)").each(function(){
 			var item = $(this).data("item");
 			if(matchKeywords(value, item.keywords)){
 				showRow($(this));
@@ -69,7 +69,7 @@ var FilterManager = {};
 		});
 	}
 	function filterDomain(domain){
-		$(".itemTable tr:not(.out)").each(function(){
+		$(".itemTable .item:not(.out)").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
 				showRow($(this));
@@ -90,8 +90,8 @@ var FilterManager = {};
 		var startTime = time[0];
 		var endTime = time[1];
 		$("#textContent .contentHeader").hide();
-		$("#textContent .itemTable tr").addClass("out").hide();
-		$("#textContent .itemTable tr").each(function(){
+		$("#textContent .itemTable .item").addClass("out").hide();
+		$("#textContent .itemTable .item").each(function(){
 			var item = $(this).data("item");
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
 				showTimeRow($(this));
@@ -100,7 +100,7 @@ var FilterManager = {};
 		// reload the term and domain filters
 		DomainManager.clearDomains();
 		TermManager.clearTerms();
-		$("#textContent .itemTable tr:not(.out)").each(function(){
+		$("#textContent .itemTable .item:not(.out)").each(function(){
 			var item = $(this).data("item");
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			TermManager.addTerms(item.keywords);
@@ -112,7 +112,8 @@ var FilterManager = {};
 	}
 	function showRow(obj){
 		obj.show();
-		obj.parent().parent().prev(".contentHeader").show(); // show the date label
+		var header = obj.prevUntil(":not(.item)").last().prev().find(".contentHeader");
+		header.show(); // show the date label
 	}
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){

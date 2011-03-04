@@ -2,34 +2,40 @@ var SortManager = {};
 
 (function(){
 	var m = SortManager;
+	m.sortBy = "chronological";
 
 	var sorts = ["chronological", "by type"];
 	var def = "chronological"; //default value;
-	function sort(obj){
-		if(!obj) return;
-		$("#sortItems .active").removeClass("active");
-		obj.addClass("active");
-		if(obj.parent().attr("id")=="moreSorters")
-			$("#moreSorterBtn").addClass("active");
-		$("#moreSorters").hide();
-		console.log("sort", obj.html());
+	m.getSortMethod = function(){
+		if(m.sortBy == "chronological") return "date";
+		if(m.sortBy == "by type") return "domain";
+		return m.sortBy;
+	}
+	m.sortItems = function(items){
+		items.sort(sortFunction);
+	}
+	function sortFunction(a, b){
+		if(m.sortBy == "chronological")
+			return a.startTime-b.startTime;
+		else if(m.sortBy == "by type")
+			return subtractStr(a.domain.name, b.domain.name);
+	}
+	function subtractStr(a, b){
+		if(a.toLowerCase()==b.toLowerCase()) return 0;
+		else return (a.toLowerCase()>b.toLowerCase()) ? 1 : -1;
 	}
 	//wrapper
 	m.sort = function(name){
-		sort(getBtn(name));
+		$("#sortItems").hList("select", {name: name});
+		sort(name);
 	}
-	function getBtn(name){
-		var obj = false;
-		$("#sortItems a").each(function(){
-			if($(this).text()==name){
-				obj = $(this);
-				return;
-			}
-		});
-		return obj;
+	function sort(name){
+		console.log("sorting "+name);
+		m.sortBy = name;
+		TableManager.reload();
 	}
 	$(function(){
-		m.list = new HorizontalList("Sorter", sorts, sort);
+		$("#sortItems").hList("loadArray", {items: sorts, callback: sort});
 		m.sort(def);
 	});
 })();
