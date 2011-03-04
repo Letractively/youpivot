@@ -222,7 +222,6 @@ var GraphManager = {};
 	}
 
 	function saveElements(){
-		console.log("rargh");
 		$('#steamGraph g>a').each(function(){
 			var title = $(this).attr("title");
 			title.match(/^layer-(\d+)$/);

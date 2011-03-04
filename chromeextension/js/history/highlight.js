@@ -5,7 +5,7 @@ var HighlightManager = {};
 
 	m.highlightDomain = function(id, persistent){
 		var domain = $("#item_"+id).data("item").domain.name;
-		$("#textContent tr").each(function(){
+		$("#textContent .item").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
 				var lvl = (item.id==id) ? 2 : 3;
@@ -19,7 +19,7 @@ var HighlightManager = {};
 
 	m.lowlightDomain = function(id, clearPersistent){
 		var domain = $("#item_"+id).data("item").domain.name;
-		$("#textContent tr").each(function(){
+		$("#textContent .item").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
 				var lvl = (item.id==id) ? 2 : 3;
