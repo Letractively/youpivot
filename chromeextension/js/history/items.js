@@ -12,6 +12,18 @@ var ItemManager = {};
 			addItem(id, items[i]);
 			m.list[id] = items[i];
 		}
+		DomainManager.display();
+		TermManager.display();
+	}
+
+	m.clear = function(){
+		counter = 0;
+		m.list = [];
+		TableManager.clearItems();
+		GraphManager.clear();
+		EventManager.clear();
+		DomainManager.clearDomains();
+		TermManager.clearTerms();
 	}
 
 	function addItem(id, item){

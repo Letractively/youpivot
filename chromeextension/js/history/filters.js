@@ -89,32 +89,48 @@ var FilterManager = {};
 		m.clearFilters();
 		var startTime = time[0];
 		var endTime = time[1];
-		$("#textContent tr:has(.contentHeader)").hide();
-		$("#textContent .itemTable .item").addClass("out").hide();
-		$("#textContent .itemTable .item").each(function(){
+		var tc = $("#textContent");
+		$("tr:has(.contentHeader)", tc).hide();
+		$(".itemTable .item", tc).addClass("out").hide()
+		.each(function(){
 			var item = $(this).data("item");
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
 				showTimeRow($(this));
+			}else{
+				//hideTimeRow($(this));
 			}
 		});
-		// reload the term and domain filters
-		DomainManager.clearDomains();
-		TermManager.clearTerms();
-		$("#textContent .itemTable .item:not(.out)").each(function(){
-			var item = $(this).data("item");
-			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
-			TermManager.addTerms(item.keywords);
-		});
+		TableManager.loadFilters();
 	}
 	function showTimeRow(obj){
-		obj.removeClass("out");
-		showRow(obj);
+		if(obj.is(":hidden")){
+			obj.removeClass("out");
+			showRow(obj);
+		}
+	}
+	function hideTimeRow(obj){
+		if(obj.is(":visible")){
+			obj.addClass("out");
+			hideRow(obj);
+		}
 	}
 	function showRow(obj){
-		obj.show();
-		var header = obj.prevUntil(":not(.item)").last().prev();
-		if(header.size()==0) header = obj.prev(); //if obj is the first item after the header
-		header.show(); // show the date label
+		if(obj.is(":hidden")){
+			obj.show();
+			var catId = obj.data("header");
+			var header = $("#header_"+catId).parent();
+			header.show(); // show the date label
+		}
+	}
+	function hideRow(obj){
+		if(obj.is(":visible")){
+			obj.hide();
+			if(obj.hasClass("headerRow") && obj.next().hasClass("headerRow")){
+				var catId = obj.data("header");
+				var header = $("#header_"+catId);
+				header.hide(); // show the date label
+			}
+		}
 	}
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){

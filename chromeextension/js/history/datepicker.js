@@ -5,18 +5,39 @@ var DatePicker = {};
 	var dateValues = ["now", "today", "yesterday", "more"];
 	var def = "now";
 
-	function pickDate(name){
-		if(name=="more"){
-			showCalender();
+	function pickDate(date){
+		if(date=="more"){
+			showCalendar();
+			return false;
 		}
-		console.log("pickDate", name);
+		if(typeof date == "string"){
+			date = translateDate(date);
+		}
+		console.log("pickDate", date);
+		return true;
+	}
+	function translateDate(name){
+		var d = new Date();
+		switch(name){
+			case "now":
+				return d;
+				break;
+			case "today":
+				return d;
+				break;
+			case "yesterday":
+				d.setDate(d.getDate()-1);
+				return d;
+				break;
+		}
 	}
 	function showCalendar(){
-		console.log("M T W T F... too lazy to type it all");
+		$("#calendar").slideToggle(100);
 	}
-	m.pickDate = function(name){
-		$("#datePickers").hList("select", {name: name});
-		pickDate(name);
+	m.pickDate = function(date){
+		var label = (typeof date == "string") ? date : "more";
+		$("#datePickers").hList("select", {name: label});
+		pickDate(date);
 	}
 
 	$(function(){

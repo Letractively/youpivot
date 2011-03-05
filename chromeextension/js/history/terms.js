@@ -18,7 +18,6 @@ var TermManager = {};
 			var term = terms[index];
 			terms[index] = {text: text, rating: term.rating+1};
 		}
-		m.display();
 	}
 	m.display = function(){
 		terms.sort(sortFunction);

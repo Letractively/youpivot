@@ -9,7 +9,6 @@ var DomainManager = {};
 			m.addDomain(input[i].url, input[i].name);
 		}
 	}
-
 	m.addDomain = function(url, name){
 		var index = getDomainIndex(url);
 		if(index==-1){
@@ -18,8 +17,7 @@ var DomainManager = {};
 			var domain = domains[index];
 			domains[index] = {url: url, name: name, rating: domain.rating+1};
 		}
-		domains.sort(sortFunction);
-		m.display();
+
 	}
 
 	function sortFunction(a, b){
@@ -27,6 +25,7 @@ var DomainManager = {};
 	}
 
 	m.display = function(){
+		domains.sort(sortFunction);
 		$("#contentFilters").html("");
 		for(var i in domains){
 			displayDomain(domains[i].url, domains[i].name, i);

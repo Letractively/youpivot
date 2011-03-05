@@ -13,12 +13,19 @@
 			case "lowlight":
 				lowlight(this);
 				break;
+			case "clear":
+				clear(this);
+				break;
 			default: 
 				throw "Action "+action+" is not defined";
 				break;
 		}
 
 		return this;
+	}
+
+	function clear(obj){
+		obj.html("");
 	}
 
 	function getOptions(options, label, defaultValue){
@@ -28,7 +35,18 @@
 		return options[label];
 	}
 
-	var lastAdded = "";
+	function findHeader(label, wrap){
+		var exist = false;
+		$(".contentHeader", wrap).each(function(){
+			if($(this).text()==label){
+			   exist = true;
+			   return;
+			}
+		});
+		return exist;
+	}
+
+	var catCounter = 0;
 	function addItem(obj, tableItem, wrap){
 		var id=obj.id, date=obj.date, url=obj.url, color=obj.color,
 			favUrl=obj.favUrl, name=obj.name;
@@ -44,12 +62,13 @@
 		if(sortBy=="date"){
 			label = Helper.formatDate(label);
 		}
-		if(lastAdded != label){
-			table.append(createHeader(label));
-			lastAdded = label;
+		if(!findHeader(label, wrap)){
+			table.append(createHeader(++catCounter, label));
 		}
+		var catId = catCounter;
 
 		var item = $("<tr class='item' id='item_"+id+"'></tr>");
+		item.data("header", catId);
 		item.append($("<td class='itemLeft'></td>")
 			.append($("<button class='pivotBtn'>Pivot</button>").click(function(){
 				//pivot around start time/end time or center?
@@ -98,9 +117,9 @@
 		$(".pivotBtn", obj).hide();
 	}
 
-	function createHeader(label){
-		var header = $("<tr></tr>").html(
-				$("<th class='contentHeader'></th>").text(label)
+	function createHeader(id, label){
+		var header = $("<tr class='headerRow'></tr>").html(
+				$("<th id='header_"+id+"' class='contentHeader'></th>").text(label)
 			);
 		return header;
 	}

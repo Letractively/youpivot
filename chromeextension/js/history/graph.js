@@ -23,16 +23,17 @@ var GraphManager = {};
 		return endTime;
 	}
 
-	m.setTime = function(st, et){
-		throw "Debug me first";
-		startTime = st;
-		endTime = et;
-		loadTime();
-		loadDate();
-	}
-
 	m.addLayer = function(color, arr, id, startTime){
 		dataArray[dataArray.length] = {data: createDataArray(startTime, arr), color: color, id: id, active: false, highlight: false};
+	}
+
+	m.clear = function(){
+		dataArray = [];
+	}
+
+	m.draw = function(){
+		m.drawTopGraph();
+		m.drawSteamGraph();
 	}
 
 	m.highlightLayer = function(id, persistent){
@@ -55,6 +56,11 @@ var GraphManager = {};
 			var color = Helper.createLighterColor(dataArray[index].color, 1);
 			elements[id].attr("fill", color);
 		}
+	}
+
+	m.draw = function(){
+		m.drawTopGraph();
+		m.drawSteamGraph();
 	}
 
 	function getLayerIndex(id){
