@@ -42,6 +42,9 @@ var EventManager = {};
 			item.removeClass("active highlight");
 		}
 	}
+	m.clear = function(){
+		$("#events").html("");
+	}
 
 	function toggleItemHighlight(id, toggle){
 		console.log("toggle");

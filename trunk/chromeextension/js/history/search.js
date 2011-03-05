@@ -29,6 +29,8 @@ var SearchManager = {};
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			displayItem(i, item);
 		}
+		TermManager.display();
+		DomainManager.display();
 	}
 
 	m.reloadResult = function(){
@@ -51,7 +53,7 @@ var SearchManager = {};
 		$("#searchResults").hide();
 		$("#textContent").show();
 		toggleGraphs(true);
-		FilterManager.filterTime();
+		TableManager.loadFilters();
 	}
 
 	var lastSearch = "";

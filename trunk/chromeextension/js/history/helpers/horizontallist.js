@@ -35,11 +35,13 @@
 		return item;
 	}
 	function clickEvent(obj, onclick){
-		if(!obj.parent().hasClass("dropdownWrap")){
-			selectObj(obj);
-		}
 		$(".dropdown").hide();
-		onclick(obj.text());
+		var highlight = onclick(obj.text());
+		if(highlight){
+			if(!obj.parent().hasClass("dropdownWrap")){
+				selectObj(obj);
+			}
+		}
 	}
 	function loadMore(obj, items, callback){
 		var drop = createDropdown();

@@ -16,7 +16,7 @@ var SortManager = {};
 	}
 	function sortFunction(a, b){
 		if(m.sortBy == "chronological")
-			return a.startTime-b.startTime;
+			return b.startTime-a.startTime;
 		else if(m.sortBy == "by type")
 			return subtractStr(a.domain.name, b.domain.name);
 	}
@@ -35,6 +35,7 @@ var SortManager = {};
 		TableManager.reload();
 		FilterManager.filterTime();
 		FilterManager.filter();
+		return true;
 	}
 	$(function(){
 		$("#sortItems").hList("loadArray", {items: sorts, callback: sort});

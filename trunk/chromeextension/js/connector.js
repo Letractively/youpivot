@@ -34,7 +34,7 @@ var Connector = {};
 		if(typeof callback == "function"){
 			callback(data);
 		}else{
-			chrome.extension.sendRequest({action: label, data: data});
+			chrome.extension.sendRequest({action: callback, data: data});
 		}
 	}
 

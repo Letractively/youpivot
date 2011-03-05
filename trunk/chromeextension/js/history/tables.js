@@ -13,6 +13,19 @@ var TableManager = {};
 		}
 	}
 
+	m.loadFilters = function(){
+		// load back filters from pivot view
+		DomainManager.clearDomains();
+		TermManager.clearTerms();
+		$("#textContent .itemTable .item:not(.out)").each(function(){
+			var item = $(this).data("item");
+			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
+			TermManager.addTerms(item.keywords);
+		});
+		DomainManager.display();
+		TermManager.display();
+	}
+
 	m.addItem = function(item){
 		var obj = {id: item.id, date: item.startTime, name: item.title, color: item.domain.color, url: item.url, favUrl: item.domain.favUrl, domain: item.domain.name};
 		var row = $("#textContent").itemTable("addItem", obj, item);
@@ -25,6 +38,6 @@ var TableManager = {};
 	}
 
 	m.clearItems = function(){
-		$("#textContent").html("");
+		$("#textContent").itemTable("clear");
 	}
 })();
