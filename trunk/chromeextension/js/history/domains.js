@@ -16,6 +16,7 @@ var DomainManager = {};
 		}else{
 			var domain = domains[index];
 			domains[index] = {url: url, name: name, rating: domain.rating+1};
+			if(domain.rating+1>best) best = domain.rating+1;
 		}
 
 	}
@@ -28,24 +29,19 @@ var DomainManager = {};
 		domains.sort(sortFunction);
 		$("#contentFilters").html("");
 		for(var i in domains){
-			displayDomain(domains[i].url, domains[i].name, i);
+			displayDomain(domains[i].url, domains[i].name, domains[i].rating);
 		}
 	}
 
-	function displayDomain(icon, title, order){
+	var best = 1; //dummy. To be overwritten before first call
+	function displayDomain(icon, title, rating){
 		var img = IconFactory.createIcon(icon, title);
-		img.css("opacity", decay(order, 0.15));
+		img.css("opacity", Helper.decay(rating, 1, best));
 		$("#contentFilters").append(img.addClass("favicon"));
 		img.click(function(){
 			var label = "<img class='favicon' src='"+$(this).attr("src")+"' />";
 			FilterManager.addFilter("domain", title, label);
 		});
-	}
-
-	//return an exponentially decaying number (0-1)
-	function decay(num, rate){
-		//exponential decay
-		return Math.pow(2, num*-rate);
 	}
 
 	function getDomainIndex(domain){
@@ -64,6 +60,7 @@ var DomainManager = {};
 
 	m.clearDomains = function(){
 		domains = [];
+		best = 1;
 		$("#contentFilters").html("");
 	}
 })();

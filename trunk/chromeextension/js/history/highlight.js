@@ -50,6 +50,16 @@ var HighlightManager = {};
 			item.itemTable("highlight", {level: getMinLevel(item)});
 	}
 
+	var scrollEvents = {};
+	m.scrollToItem = function(id, delay){
+		scrollEvents[id] = setTimeout(function(){
+			scrollToItem(id);
+		}, delay);
+	}
+	m.cancelScroll = function(id){
+		clearTimeout(scrollEvents[id]);
+	}
+
 	m.highlightLayer = function(id, persistent){
 		var item = $("#item_"+id).data("item");
 		if(item.importance && item.importance.length!=0){
@@ -66,6 +76,13 @@ var HighlightManager = {};
 		}else{
 			EventManager.lowlight(id, clearPersistent);
 		}
+	}
+
+	function scrollToItem(id){
+		var item = $("#item_"+id);
+		var top = item.offset().top;
+		var h = $("#graphShadow").height()+30;
+		$("body").animate({scrollTop:top-h}, 50);
 	}
 
 	function getList(obj){

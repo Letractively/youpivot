@@ -3,6 +3,13 @@ var Helper = {};
 (function(){
 	var m = Helper;
 
+	//return an exponentially decaying number (0,1]
+	m.decay = function(num, rate, best){
+		//exponential decay
+		return Math.log((num+1)/rate)/Math.log((best+1)/rate);
+		//+1 to prevent the value actually going to 0
+	}
+
 	function get12Hour(hour){
 		return {apm: (hour<12) ? "\u00a0AM":"\u00a0PM", hour: (hour%12)};
 	}

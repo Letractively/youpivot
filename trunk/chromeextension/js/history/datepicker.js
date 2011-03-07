@@ -14,6 +14,7 @@ var DatePicker = {};
 			date = translateDate(date);
 		}
 		console.log("pickDate", date);
+		PivotManager.pivot(date);
 		return true;
 	}
 	function translateDate(name){
@@ -23,13 +24,20 @@ var DatePicker = {};
 				return d;
 				break;
 			case "today":
-				return d;
+				return noonDay(d);
 				break;
 			case "yesterday":
 				d.setDate(d.getDate()-1);
-				return d;
+				return noonDay(d);
 				break;
 		}
+	}
+	function noonDay(d){
+		d.setHours(12);
+		d.setMinutes(0);
+		d.setSeconds(0);
+		d.setMilliseconds(0);
+		return d;
 	}
 	function showCalendar(){
 		$("#calendar").slideToggle(100);
