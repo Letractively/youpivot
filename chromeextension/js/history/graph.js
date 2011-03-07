@@ -218,10 +218,18 @@ var GraphManager = {};
 				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, 1); })
 			.lineWidth(2)
 			.event("mouseover", function(d, p){
-			   	this.title("");
-				highlightItem(p.id, false); p.active = true; return this; })
-			.event("mouseout", function(d, p){ lowlightItem(p.id, false); p.active = false; return this; })
-			.event("click", function(d, p){ p.highlight = !p.highlight; toggleItemHighlight(p.id, p.highlight); return this; });
+			   	this.title(""); //destroy the title used for DOM extraction
+				highlightItem(p.id, false); 
+				p.active = true; 
+				return this; })
+			.event("mouseout", function(d, p){ 
+				lowlightItem(p.id, false); 
+				p.active = false; 
+				return this; })
+			.event("click", function(d, p){ 
+			  	p.highlight = !p.highlight; 
+				toggleItemHighlight(p.id, p.highlight); 
+				return this; });
 
 		steamGraph.render();
 		saveElements();
@@ -238,9 +246,11 @@ var GraphManager = {};
 
 	function highlightItem(id, persistent){
 		HighlightManager.highlightDomain(id, persistent);
+		HighlightManager.scrollToItem(id, (persistent) ? 0 : 500);
 	}
 
 	function lowlightItem(id, clearPersistent){
+		HighlightManager.cancelScroll(id); 
 		HighlightManager.lowlightDomain(id, clearPersistent);
 	}
 

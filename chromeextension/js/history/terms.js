@@ -17,6 +17,7 @@ var TermManager = {};
 		}else{
 			var term = terms[index];
 			terms[index] = {text: text, rating: term.rating+1};
+			if(term.rating+1>best) best = term.rating+1;
 		}
 	}
 	m.display = function(){
@@ -24,7 +25,7 @@ var TermManager = {};
 		$("#terms").html("");
 		for(var i in terms){
 			if(i>17) break;
-			displayTerm(terms[i].text, i);
+			displayTerm(terms[i].text, terms[i].rating);
 		}
 	}
 	function getTermIndex(term){
@@ -35,15 +36,13 @@ var TermManager = {};
 		}
 		return -1;
 	}
-	//return an exponentially decaying number (0-1)
-	function decay(num, rate){
-		//exponential decay
-		return Math.pow(2, num*-rate);
-	}
-	function displayTerm(text, order){
+
+	var best = 1; //dummy. Should be overwritten before first call. 
+
+	function displayTerm(text, rating){
 		var term = $("<div class='term'></div>").text(text);
-		term.css("font-size", 20*decay(order, 0.05)+"px");
-		term.css("opacity", decay(order, 0.15));
+		term.css("font-size", 20*Helper.decay(rating, 1, best)+"px");
+		term.css("opacity", Helper.decay(rating, 1, best));
 		term.click(function(){
 			FilterManager.addFilter("name", text, text);
 		});
@@ -55,6 +54,7 @@ var TermManager = {};
 
 	m.clearTerms = function(){
 		terms = new Array();
+		best = 1;
 		m.display();
 	}
 })();
