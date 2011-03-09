@@ -7,12 +7,15 @@ Created on Feb 21, 2011
 import cherrypy
 import couchdb
 import urllib
+import time
 
 from uuid import uuid4
 from time import gmtime
 
+
 MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
 MANDATORY_GET_TERMS = ['pivottime', 'userid']
+MANDATORY_END_TERMS = ['eventid']
 DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
 
@@ -30,7 +33,7 @@ class Responder(object):
     @cherrypy.expose()
     def add(self, **args):
         #Check for valid developer ID
-        if not self.isValidDeveloper(args):
+        if not self.developerExists(args):
             return 'Invalid Developer'
         #Check to make sure we have the required fields
         if not self.hasRequiredAddTerms(args):
@@ -38,8 +41,7 @@ class Responder(object):
         #Check that the user exists
         if not self.userExists(args):
             return 'Bad User'
-        self.createDoc(args)
-        return 'Added stuff'
+        return self.createDoc(args)
     
     #Called when reading from the db
     @cherrypy.expose()
@@ -52,10 +54,35 @@ class Responder(object):
         
         return self.reply(args)
         
-    
+    @cherrypy.expose()
+    def end(self, **args):
+        #Check to make sure we have the required fields
+        if not self.hasRequiredEndTerms(args):
+            return 'Missing Fields'
+#        #Check that the user exists
+#        if not self.userExists(args):
+#            return 'Bad User'
+#        #Check for valid developer ID
+#        if not self.developerExists(args):
+#            return 'Invalid Developer'
+        #Check that the event is valid
+        if not self.eventExists(args):
+            return 'Bad Event ID'
+        self.endEvent(args)
+        return 'ended'
+        
+
     #Evil person prevention
-    def isValidDeveloper(self, args):
+    def developerExists(self, args):
         return args['developerid'] in developersdb
+    
+    #Check to make sure the user exists
+    def userExists(self, args):
+        return args['userid'] in usersdb
+    
+    #Check if an eventid is valid
+    def eventExists(self, args):
+        return args['eventid'] in eventsdb
     
     #Check to make sure no necessary terms were left out
     def hasRequiredAddTerms(self, args):
@@ -71,17 +98,21 @@ class Responder(object):
                 return False
         return True
     
-    #Check to make sure the user exists
-    def userExists(self, args):
-        return args['userid'] in usersdb
+    def hasRequiredEndTerms(self, args):
+        for mandatoryTerm in MANDATORY_END_TERMS:
+            if not mandatoryTerm in args:
+                return False
+        return True
     
     #Create the document in the events database
     def createDoc(self, args):
         doc = args
-        doc['_id'] = uuid4().hex
+        id = uuid4().hex
+        doc['_id'] = id
         doc['endtime'] = int(args['endtime'])
         doc['starttime'] = int(args['starttime'])
         eventsdb.save(doc)
+        return id
         
     def reply(self, args):
         time = int(args['pivottime'])
@@ -96,6 +127,10 @@ class Responder(object):
         content = response.read()
         return content
 
+    def endEvent(self, args):
+        doc = eventsdb[args['eventid']]
+        doc['endtime'] = time.time()
+        eventsdb.save(doc)
         
 #Start me up        
 cherrypy.quickstart(Responder())
