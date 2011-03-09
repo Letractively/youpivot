@@ -19,6 +19,9 @@ a.active:hover { color: #3870AD; }
 a.active:visited { color: #3870AD; }
 a.active:active { color: #3870AD; }
 
+.dim { opacity: 0.4; }
+.disabled { pointer-events: none; }
+
 /*** left sidebar ***/
 #sidebarTitle { text-align: right; font-size: 20px; color: #53627D; padding: 0.76em 0px; } 
 #leftSidebar {  position: fixed; float: left; padding: 0px 15px; color: #919191; z-index: 999;
@@ -50,10 +53,13 @@ a.active:active { color: #3870AD; }
 /*** end left sidebar ***/
 
 /*** graph date ***/
-#graphDate { width: 680px; padding: 20px 0px 5px 0px; color: #919191; }
-#graphDate div { display: inline-block; }
-#graphDate .right { margin-right: 16px; }
-#collapseGraph { float: right; width: 14px; height: 14px;
+#graphInfo { width: 680px; height: 20px; padding: 10px 0px 5px 0px; }
+#graphInfo div { display: inline-block; }
+#graphDate { width: 99%; color: #919191; }
+#startDate { width: 50%; }
+#endDate { width: 50%; text-align: right; }
+#collapseGraph { display: inline-block; position: absolute; 
+				 margin-left: 690px; width: 14px; height: 14px;
 				 background: url("images/hide.png"); opacity: 0.8; }
 #collapseGraph:hover { opacity: 1; }
 /*** visualGraphs ***/
@@ -82,20 +88,21 @@ a.active:active { color: #3870AD; }
 
 /*** contents ***/
 #content { margin-left: 280px; width: 100%; height: 100%; background-color: #FFFFFF; padding-left: 10px; }
-.term { color: #555555; }
-.term:hover { color: #333333; opacity: 1 !important; }
+.term { font-size: 0px; /* if not the div will have min height (webkit bug/behavior) */ }
+.termAnchor { color: #555555 !important; cursor: default; display: inline-block; min-width: 50%; }
+.termAnchor:hover { color: #333333 !important; opacity: 1 !important; }
 	/*** filters ***/
-	#filtersWrap { display: none; }
+	#filtersWrap { display: none; padding: 2px; }
 	.filterLabel { display: inline-block; padding: 5px; cursor: default; height: 16px; vertical-align: top; line-height: 16px; }
 
 	/*** search results ***/
 	#searchResults { padding: 10px 0px; display: none; -webkit-user-select: none; }
 	/*** end search results ***/
 	/*** text contents ***/
-	#textContent { padding: 10px 0px; -webkit-user-select: none; }
+	#textContent { padding-bottom: 10px; -webkit-user-select: none; }
 	.contentHeader { font-weight: bold; }
 		/*** items table ***/
-		.itemTable { width: 100%; margin: 5px; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; border-collapse: collapse; margin-bottom: 20px; }
+		.itemTable { width: 100%; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; border-collapse: collapse; margin-bottom: 20px; }
 		.itemTable tr { height: 26px; display: block; /*to eliminate mouseleave events*/ }
 		.itemTable tr.out { display: none; }
 		.itemTable td { height: 26px; padding: 0px 2px; }
