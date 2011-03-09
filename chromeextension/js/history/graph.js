@@ -5,26 +5,47 @@ var GraphManager = {};
 
 	var startTime = new Date().getTime()-24*60*60*1000;
 	var endTime = new Date().getTime();
-	var dataArray = new Array();
+	var dataArray = new Array(); //array of the data for the graph (importance values)
 	var topGraph;
 	var steamGraph;
-	var elements = {};
+	var elements = {}; //DOM objects of the streamGraph layers
+
+	var graphPos = {offset: 0, scale: 1}; // {offset, scale}
 
 	$(function(){
 		loadTime([startTime, endTime]);
 		loadDate();
 	});
+	$("#collapseGraph").click(function(){
+		toggleGraph();
+		return false;
+	});
+
+	m.getGraphPos = function(){
+		return graphPos;
+	}
+
+	function toggleGraph(){
+		var hiding = $("#graphDate").is(":visible");
+		$("#graphDate").toggle();
+		$("#eventsWrap").toggle();
+		$("#collapseGraph").animate({"rotate": (hiding) ? 180 : 0}, 150);
+		$("#graphShadow").animate({height: (hiding) ? 83 : 270}, 200);
+		$("#steamGraph").slideToggle(200, function(){
+			ShadowManager.refresh();
+		});
+	}
 
 	m.getStartTime = function(){
 		return startTime;
 	}
-
 	m.getEndTime = function(){
 		return endTime;
 	}
 
 	m.addLayer = function(color, arr, id, startTime){
-		dataArray[dataArray.length] = {data: createDataArray(startTime, arr), color: color, id: id, active: false, highlight: false};
+		var dat = createDataArray(startTime, arr);
+		dataArray[dataArray.length] = {data: dat, color: color, id: id, active: false, highlight: false};
 	}
 
 	m.clear = function(){
@@ -44,6 +65,8 @@ var GraphManager = {};
 		//directly change the object in DOM rather than re-render to improve performance (significantly)
 		var color = dataArray[index].color;
 		elements[id].attr("fill", color);
+
+		m.highlightTop(index);
 	}
 
 	m.lowlightLayer = function(id, clearPersistent){
@@ -55,12 +78,8 @@ var GraphManager = {};
 			//directly change the object in DOM rather than re-render to improve performance (significantly)
 			var color = Helper.createLighterColor(dataArray[index].color, 1);
 			elements[id].attr("fill", color);
+			m.highlightTop(-1);
 		}
-	}
-
-	m.draw = function(){
-		m.drawTopGraph();
-		m.drawSteamGraph();
 	}
 
 	function getLayerIndex(id){
@@ -93,38 +112,59 @@ var GraphManager = {};
 		topGraph.render();
 	}
 
+	function addImportance(index){
+		var output = 0;
+		for(var i in dataArray){
+			output += dataArray[i].data[index];
+		}
+		return output;
+	}
+
+	m.highlightTop = function(i){
+		var data = (i==-1) ? [] : dataArray[i].data;
+		topHighlight.children[0].data(data);
+		topHighlight.render();
+	}
+
+	var topHighlight;
 	m.drawTopGraph = function(){
-		//generate test data
-		var data = pv.range(0, 100, .1).map(function(x) {
-			return {x: x, y: Math.abs(Math.sin(x/2), 2)/2+Math.random()};
+		var data = pv.range(0, 758, 1).map(function(x) {
+			return {x: x, y: addImportance(x)};
 		});
 
 		var box = $("#topGraph");
 
+		var max = getMaxFromSteam(dataArray);
+
 		var w = 680,
 			h = box.height(),
-			x = pv.Scale.linear(0, 100).range(0, w),
-			y = pv.Scale.linear(0, 2).range(0, h);
+			x = pv.Scale.linear(0, 758).range(0, w),
+			y = pv.Scale.linear(0, max).range(0, h);
 
 		topGraph = new pv.Panel()
 			.canvas("topGraph")
 			.width(w)
 			.height(h);
 
-		topGraph.add(pv.Bar)
+		var core = topGraph.add(pv.Panel);
+		core.add(pv.Area)
 			.data(data)
 			.bottom(0)
-			.left(function(d){ return x(d.x)})
-			.width(w/1000)
+			.left(function(d){ return x(d.x); })
 			.height(function(d){ return y(d.y); })
 			.fillStyle("rgb(176,196,222)")
-			//.strokeStyle("rgba(200, 200, 200, 100)")
-			.lineWidth(0);
 
+		topHighlight = topGraph.add(pv.Panel);
+		topHighlight.add(pv.Area)
+			.data([])
+			.bottom(0)
+			.left(function(d){ return x(this.index); })
+			.height(function(d){ return y(d); })
+			.fillStyle("rgb(130,140,255)")
 
 		var dragged = false;
-		var hilight = {x: 200, dx: 100};
-		topGraph.add(pv.Panel)
+		var hilight = {x: (graphPos.offset*w), dx: (graphPos.scale*w)};
+		core.add(pv.Panel)
 			.data([hilight])
 			.cursor("crosshair")
 			.events("all")
@@ -144,12 +184,12 @@ var GraphManager = {};
 			})
 		.add(pv.Bar)
 			.left(function(d){ return d.x })
-			.top(1)
+			.top(0)
 			.width(function(d){ return d.dx})
-			.height(h-2)
+			.height(h)
 			.fillStyle("rgba(128, 128, 128, 0.15)")
-			.strokeStyle("rgba(128, 128, 128, 0.8)")
-			.lineWidth(1)
+			//.strokeStyle("rgba(128, 128, 128, 0.8)")
+			//.lineWidth(0)
 			.cursor("move")
 			.event("mousedown", pv.Behavior.drag())
 			.event("drag", function(d){ dragged = true; scaleToSection(d.x/w, d.dx/w); })
@@ -175,10 +215,11 @@ var GraphManager = {};
 	}
 
 	function scaleToSection(offset, cap){
+		graphPos = {offset: offset, scale: cap};
 		xScale = 0.1/cap; //0.1 is the smallest value coz the graph is rendered at 10x width
 		$("#steamGraph svg").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
 		$("#events").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width)+"px)");
-		$(".eventIcon").css("-webkit-transform", "scaleX("+1/xScale+")");
+		EventManager.scaleIcons(graphPos);
 		//reload the time label on top of the steamGraph
 		var time = getScaleTime(offset, cap);
 		loadTime(time);
@@ -247,11 +288,13 @@ var GraphManager = {};
 	function highlightItem(id, persistent){
 		HighlightManager.highlightDomain(id, persistent);
 		HighlightManager.scrollToItem(id, (persistent) ? 0 : 500);
+		m.highlightTop(getLayerIndex(id)); //highlight the corresponding sections of the topGraph
 	}
 
 	function lowlightItem(id, clearPersistent){
 		HighlightManager.cancelScroll(id); 
 		HighlightManager.lowlightDomain(id, clearPersistent);
+		m.highlightTop(-1); //cancel highlight on the topGraph
 	}
 
 	function toggleItemHighlight(id, toggle){

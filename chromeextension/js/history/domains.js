@@ -18,7 +18,7 @@ var DomainManager = {};
 			domains[index] = {url: url, name: name, rating: domain.rating+1};
 			if(domain.rating+1>best) best = domain.rating+1;
 		}
-
+		console.log("addDomain");
 	}
 
 	function sortFunction(a, b){
@@ -58,8 +58,15 @@ var DomainManager = {};
 		$("#contentFilters").append(img.addClass("favicon"));
 	}
 
-	m.clearDomains = function(){
-		domains = [];
+	m.clearDomains = function(retainOrder){
+		if(!retainOrder){
+			domains = [];
+		}else{
+			for(var i in domains){
+				domains[i].rating = 0;
+			}
+		}
+		console.log(domains);
 		best = 1;
 		$("#contentFilters").html("");
 	}

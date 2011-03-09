@@ -31,6 +31,7 @@ var SortManager = {};
 	}
 	function sort(name){
 		m.sortBy = name;
+		//if($("#searchResults").is(":visible"))
 		SearchManager.reloadResult();
 		TableManager.reload();
 		FilterManager.filterTime();
