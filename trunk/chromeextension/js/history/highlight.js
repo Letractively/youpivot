@@ -9,7 +9,7 @@ var HighlightManager = {};
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
 				var lvl = (item.id==id) ? 2 : 3;
-				$(this).itemTable("highlight", {level: lvl});
+				$(this).itemTable("highlight", {level: getMinLevel($(this), lvl)});
 				if(persistent){
 					addToList($(this), lvl);
 				}
@@ -79,10 +79,20 @@ var HighlightManager = {};
 	}
 
 	function scrollToItem(id){
+		var range = [$("#graphShadow").height()+30, $(window).height()-30];
 		var item = $("#item_"+id);
 		var top = item.offset().top;
-		var h = $("#graphShadow").height()+30;
-		$("body").animate({scrollTop:top-h}, 50);
+		var scrollTop = $("body").scrollTop();
+		console.log("scrollTop", scrollTop);
+		if(top-scrollTop<range[0]){
+			console.log("scroll down", top-scrollTop, range[0], range[1]);
+			var h = range[0];
+			$("body").animate({scrollTop:top-h}, 50);
+		}else if(top-scrollTop>range[1]){
+			console.log("scroll up", top-scrollTop, range[0], range[1]);
+			var h = range[1];
+			$("body").animate({scrollTop:top-h}, 50);
+		}
 	}
 
 	function getList(obj){
@@ -111,12 +121,14 @@ var HighlightManager = {};
 		obj.data("highlight", list);
 		return list;
 	}
-	function getMinLevel(obj){
+	function getMinLevel(obj, newLevel){
 		var list = getList(obj);
 		var min = 10;
 		for(var i in list){
 			if(list[i] < min && list[i]!=0) min = list[i];
 		}
+		if(!newLevel) newLevel = 0;
+		if(newLevel<min && newLevel!=0) min = newLevel;
 		return min;
 	}
 })();

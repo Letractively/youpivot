@@ -35,7 +35,7 @@
 		return item;
 	}
 	function clickEvent(obj, onclick){
-		$(".dropdown").hide();
+		$(document).click();
 		var highlight = onclick(obj.text());
 		if(highlight){
 			if(!obj.parent().hasClass("dropdownWrap")){

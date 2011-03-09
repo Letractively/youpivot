@@ -6,9 +6,13 @@ var ShadowManager = {};
 	m.setShadowHeight = function(h){
 		$("#graphShadow").height(h);
 	}
-	
-	$(function(){ //initialize
+
+	m.refresh = function(){
 		var h = $("#visualGraphs").outerHeight(true);
 		m.setShadowHeight(h);
+	}
+	
+	$(function(){ //initialize
+		m.refresh();
 	});
 })();

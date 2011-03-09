@@ -17,18 +17,28 @@ var EventManager = {};
 		img.mouseover(function(){
 			$(this).addClass("active");
 			HighlightManager.highlightDomain(id, false);
+			HighlightManager.scrollToItem(id, 500);
 		});
 		img.mouseout(function(){
 			if(!$(this).hasClass("highlight")){
 				$(this).removeClass("active");
 			}
 			HighlightManager.lowlightDomain(id, false);
+			HighlightManager.cancelScroll(id);
 		});
 		img.click(function(){
 			$(this).toggleClass("highlight");
 			var toggle = $(this).hasClass("highlight");
 			toggleItemHighlight(id, toggle);
+			HighlightManager.scrollToItem(id, 0);
 		});
+		m.scaleIcons();
+	}
+
+	m.scaleIcons = function(pos){
+		if(!pos) pos = GraphManager.getGraphPos();
+		var xScale = 0.1/pos.scale;
+		$(".eventIcon").css("-webkit-transform", "scaleX("+1/xScale+")");
 	}
 
 	m.highlight = function(id, persistent){

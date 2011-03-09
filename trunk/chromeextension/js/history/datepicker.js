@@ -7,14 +7,15 @@ var DatePicker = {};
 
 	function pickDate(date){
 		if(date=="more"){
-			showCalendar();
+			toggleCalendar();
 			return false;
 		}
 		if(typeof date == "string"){
 			date = translateDate(date);
 		}
-		console.log("pickDate", date);
+		date.setHours(12);
 		PivotManager.pivot(date);
+		$("#calendar").datepicker("setDate", date);
 		return true;
 	}
 	function translateDate(name){
@@ -39,14 +40,24 @@ var DatePicker = {};
 		d.setMilliseconds(0);
 		return d;
 	}
-	function showCalendar(){
-		$("#calendar").slideToggle(100);
-	}
 	m.pickDate = function(date){
 		var label = (typeof date == "string") ? date : "more";
 		$("#datePickers").hList("select", {name: label});
 		pickDate(date);
 	}
+	function toggleCalendar(){
+		if($("#calendar").is(":visible")){
+			$("#calendar").slideUp(100);
+		}else{
+			$("#calendar").slideDown(100);
+		}
+	}
+	function hideCalendar(){
+		$("#calendar").slideUp(100);
+	}
+	$(document).click(function(){
+		hideCalendar();
+	});
 
 	$(function(){
 		$("#datePickers").hList("loadArray", {items: dateValues, callback: pickDate});

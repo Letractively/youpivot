@@ -40,20 +40,29 @@ var TermManager = {};
 	var best = 1; //dummy. Should be overwritten before first call. 
 
 	function displayTerm(text, rating){
-		var term = $("<div class='term'></div>").text(text);
-		term.css("font-size", 20*Helper.decay(rating, 1, best)+"px");
-		term.css("opacity", Helper.decay(rating, 1, best));
-		term.click(function(){
+		var anchor = $("<a href='' class='termAnchor'></a>").text(text);
+		anchor.attr("href", "javascript: filter");
+		anchor.css("font-size", 20*Helper.decay(rating, 1, best)+"px");
+		anchor.css("opacity", Helper.decay(rating, 1, best));
+		anchor.click(function(){
 			FilterManager.addFilter("name", text, text);
+			return false;
 		});
+		var term = $("<div class='term'></div>").append(anchor);
 		$("#terms").append(term);
 	}
 	function sortFunction(a, b){
 		return b.rating-a.rating;
 	}
 
-	m.clearTerms = function(){
-		terms = new Array();
+	m.clearTerms = function(retainOrder){
+		if(!retainOrder){
+			terms = [];
+		}else{
+			for(var i in terms){
+				terms[i].rating = 0;
+			}
+		}
 		best = 1;
 		m.display();
 	}

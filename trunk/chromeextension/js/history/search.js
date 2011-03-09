@@ -18,11 +18,15 @@ var SearchManager = {};
 		$("#textContent").hide();
 		$("#searchResults").show();
 		SortManager.sortItems(result);
+		$("#datePickers").addClass("dim");
+		$("#datePickers a").addClass("disabled");
 		loadResults(results);
 	}
 
 	function loadResults(results){
 		$("#searchResults").html("");
+		TermManager.clearTerms(true);
+		DomainManager.clearDomains(true);
 		for(var i in results){
 			var item = results[i];
 			TermManager.addTerms(item.keywords);
@@ -52,6 +56,8 @@ var SearchManager = {};
 	function antiSearch(){
 		$("#searchResults").hide();
 		$("#textContent").show();
+		$("#datePickers").removeClass("dim");
+		$("#datePickers a").removeClass("disabled");
 		toggleGraphs(true);
 		TableManager.loadFilters();
 	}
