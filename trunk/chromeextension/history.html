@@ -31,9 +31,11 @@
 			<div id="visualGraphsContent">
 				<div id="topGraphDate"></div>
 				<div id="topGraph"><!--24-hour map--></div>
-				<div id="graphDate">
-					<div id="collapseGraph"></div>
-					<div class="left">00:00</div><div class="right">23:59</div>
+				<div id="graphInfo">
+					<a href="javascript:collapse-graph" id="collapseGraph"></a>
+					<div id="graphDate">
+						<div id="startDate">00:00</div><div id="endDate">23:59</div>
+					</div>
 				</div>
 				<div id="steamGraph">
 					Loading....<!--Steam graph-->
@@ -56,6 +58,7 @@
 </html>
 <script type="text/javascript" src="include/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="include/jui/jquery-ui-1.8.10.custom.min.js"></script>
+<script type="text/javascript" src="include/jquery_rotate.js"></script>
 <script type="text/javascript" src="include/protovis-d3.2.js"></script>
 <script type="text/javascript" src="js/pref.js"></script>
 <script type="text/javascript" src="js/connector.js"></script>
