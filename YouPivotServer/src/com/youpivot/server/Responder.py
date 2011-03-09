@@ -10,12 +10,13 @@ import urllib
 import time
 
 from uuid import uuid4
-from time import gmtime
 
 
 MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
 MANDATORY_GET_TERMS = ['pivottime', 'userid']
 MANDATORY_END_TERMS = ['eventid']
+MANDATORY_DELETE_TERMS = ['eventid']
+MANDATORY_ADD_IMP_VAL_TERMS = ['eventid', 'val'] 
 DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
 
@@ -70,7 +71,17 @@ class Responder(object):
             return 'Bad Event ID'
         self.endEvent(args)
         return 'ended'
-        
+     
+    #Delete a document   
+    @cherrypy.expose()
+    def delete(self, **args):
+        #Check to make sure we have the required fields
+        if not self.hasRequiredDeleteTerms(args):
+            return 'Missing Fields'
+        if not self.eventExists(args):
+            return 'Bad Event ID'
+        self.deleteEvent(args)
+        return 'deleted'
 
     #Evil person prevention
     def developerExists(self, args):
@@ -104,6 +115,12 @@ class Responder(object):
                 return False
         return True
     
+    def hasRequiredDeleteTerms(self, args):
+        for mandatoryTerm in MANDATORY_DELETE_TERMS:
+            if not mandatoryTerm in args:
+                return False
+        return True
+    
     #Create the document in the events database
     def createDoc(self, args):
         doc = args
@@ -117,8 +134,8 @@ class Responder(object):
     def reply(self, args):
         time = int(args['pivottime'])
         elevenHrs = 11 * 60 * 60
-        start = time - elevenHrs;
-        end = time + elevenHrs;
+        start = time - elevenHrs
+        end = time + elevenHrs
         url = DB_SERVER_URL + VIEW_LOCATION
         queryString = 'startkey=[' + str(start) + ',"'+ args['userid'] +'"]&endkey=[' + str(end) +',"'+ args['userid'] +'"]'
         url += queryString
@@ -131,6 +148,10 @@ class Responder(object):
         doc = eventsdb[args['eventid']]
         doc['endtime'] = time.time()
         eventsdb.save(doc)
+        
+    def deleteEvent(self, args):
+        doc = eventsdb[args['eventid']]
+        eventsdb.delete(doc)
         
 #Start me up        
 cherrypy.quickstart(Responder())
