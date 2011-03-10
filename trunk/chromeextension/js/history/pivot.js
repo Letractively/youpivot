@@ -4,6 +4,20 @@ var PivotManager = {};
 	var m = PivotManager;
 
 	m.pivot = function(time){
+		var range = GraphManager.getRange();
+		var midPoint = (range.start+range.end)/2;
+		if(Math.abs(time-midPoint)>(range.end-range.start)/2){
+			pivotServer(time);
+		}else{
+			moveToPoint(time);
+		}
+	}
+
+	function moveToPoint(time){
+		GraphManager.setSelection(time, time+3600);
+	}
+
+	function pivotServer(time){
 		time = Math.floor(time/1000);
 		Connector.send("get", {pivottime: time}, function(data){
 			var obj = JSON.parse(data);
