@@ -66,12 +66,11 @@ var EventManager = {};
 	}
 
 	function getOffset(time){
-		var startTime = GraphManager.getStartTime();
-		var endTime = GraphManager.getEndTime();
-		var offset = (time-startTime)/(endTime-startTime);
+		var range = GraphManager.getRange();
+		var offset = (time-range.start)/(range.end-range.start);
 		var w = $("#events").width();
 		offset *= w;
-		if(offset > w-16) offset = w-16;
+		if(offset > w-16 && offset < w+16) offset = w-16;
 		return offset;
 	}
 })();

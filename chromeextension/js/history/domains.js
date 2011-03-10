@@ -18,7 +18,6 @@ var DomainManager = {};
 			domains[index] = {url: url, name: name, rating: domain.rating+1};
 			if(domain.rating+1>best) best = domain.rating+1;
 		}
-		console.log("addDomain");
 	}
 
 	function sortFunction(a, b){
@@ -66,7 +65,6 @@ var DomainManager = {};
 				domains[i].rating = 0;
 			}
 		}
-		console.log(domains);
 		best = 1;
 		$("#contentFilters").html("");
 	}
