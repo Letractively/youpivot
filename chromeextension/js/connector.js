@@ -70,7 +70,11 @@ var Connector = {};
 	function createSendString(obj){
 		var arr = [];
 		for(var i in obj){
-			arr[arr.length] = i+"="+escape(obj[i]);
+			if(typeof obj[i] == "object"){
+				arr[arr.length] = i+"="+escape(JSON.stringify(obj[i]));
+			}else{
+				arr[arr.length] = i+"="+escape(obj[i]);
+			}
 		}
 		return arr.join("&");
 	}

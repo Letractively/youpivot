@@ -11,7 +11,10 @@ var Helper = {};
 	}
 
 	function get12Hour(hour){
-		return {apm: (hour<12) ? "\u00a0AM":"\u00a0PM", hour: (hour%12)};
+		var apm = (hour<12) ? "\u00a0AM":"\u00a0PM";
+		if(hour>12) hour -= 12;
+		else if(hour==0) hour = 12;
+		return {apm: apm, hour: hour};
 	}
 	
 	var brightness = [1, 0.7, 0.9, 0.94]; //2 level brightness values

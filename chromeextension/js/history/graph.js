@@ -3,8 +3,8 @@ var GraphManager = {};
 (function(){
 	var m = GraphManager;
 
-	var startTime = -2;
-	var endTime = -1;
+	var startTime = -86400000;
+	var endTime = 0;
 	var dataArray = new Array(); //array of the data for the graph (importance values)
 
 	var graphPos = {offset: 0, scale: 1}; // {offset, scale}
@@ -25,10 +25,17 @@ var GraphManager = {};
 	m.getRange = function(){
 		return {start: startTime, end: endTime};
 	}
+	m.setRange = function(times){
+		startTime = times[0];
+		endTime = times[1];
+		loadTime(times);
+		loadDate();
+		setSelection(0,1);
+	}
 
-	m.addLayer = function(color, arr, id, startTime){
+	m.addLayer = function(color, arr, id, startTime, domain){
 		var dat = createDataArray(startTime, arr);
-		dataArray[dataArray.length] = {data: dat, color: color, id: id, active: false, highlight: false};
+		dataArray[dataArray.length] = {data: dat, color: color, id: id, active: false, highlight: false, domain: domain};
 	}
 	m.clear = function(){
 		dataArray = [];
@@ -40,7 +47,8 @@ var GraphManager = {};
 	}
 
 	m.setSelection = function(startTime, endTime){
-		var scale = getTimeScale();
+		//TODO: check for out of range
+		var scale = getTimeScale(startTime, endTime);
 		TopGraph.setSelection(scale[0], scale[1]);
 		setSelection(scale[0], scale[1]);
 	}
@@ -61,6 +69,49 @@ var GraphManager = {};
 			}
 		}
 		return false;
+	}
+
+	m.highlightLayer = function(id, persistent){
+		var index = m.getDataIndex(id);
+		if(!index) return;
+		dataArray[index].active = true;
+		if(persistent) dataArray[index].highlight = true;
+
+		var color = dataArray[index].color;
+		StreamGraph.changeColor(id, color);
+		m.highlightTopGraph(index);
+	}
+
+	m.highlightTopGraph = function(index){
+		var arr = (index==-1) ? [] : accumulate(dataArray[index].domain);
+		TopGraph.highlight(arr);
+	}
+
+	function accumulate(domain){
+		var output = [];
+		for(var i in dataArray){
+			if(dataArray[i].domain==domain){
+				var d = dataArray[i].data
+				for(var j in d){
+					if(!output[j]) output[j] = 0;
+					output[j] += d[j];
+				}
+			}
+		}
+		return output;
+	}
+
+	m.lowlightLayer = function(id, clearPersistent){
+		var index = GraphManager.getDataIndex(id);
+		if(!index) return;
+		if(clearPersistent || !dataArray[index].highlight){
+			dataArray[index].active = false;
+			dataArray[index].highlight = false;
+
+			var color = Helper.createLighterColor(dataArray[index].color, 1);
+			StreamGraph.changeColor(id, color);
+			m.highlightTopGraph(-1);
+		}
 	}
 
 	//toggle the visibility of the graph
@@ -91,13 +142,17 @@ var GraphManager = {};
 	}
 
 	function loadTime(time){
-		$("#graphDate .left").text(Helper.formatTime(time[0], 12));
-		$("#graphDate .right").text(Helper.formatTime(time[1], 12));
+		$("#startDate").text(Helper.formatTime(time[0], 12));
+		$("#endDate").text(Helper.formatTime(time[1], 12));
 	}
 
 	function loadDate(){
 		var string = Helper.formatDate(startTime);
 		$("#topGraphDate").text(string);
+		var midnight = new Date(endTime);
+		midnight.setHours(0); midnight.setMinutes(0); midnight.setSeconds(0);
+		var scale = getTimeScale(midnight.getTime(), midnight.getTime()+1);
+		$("#topGraph").css("background-position", (scale[0]-0.5)*GraphManager.width);
 	}
 
 	function scale(num, max){

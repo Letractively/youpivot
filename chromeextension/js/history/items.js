@@ -26,6 +26,21 @@ var ItemManager = {};
 		TermManager.clearTerms();
 	}
 
+	/*m.getDomainItemsById = function(id){
+		var domain = m.list[id].domain.name;
+		m.getDomainItems(domain);
+	}
+
+	m.getDomainItems = function(domain){
+		var output = [];
+		for(var i in m.list){
+			if(m.list[i].domain.name == domain){
+				output[output.length] = m.list[i];
+			}
+		}
+		return output;
+	}*/
+
 	function addItem(id, item){
 		var domain = item.domain;
 		item.id = id;
@@ -34,7 +49,7 @@ var ItemManager = {};
 		DomainManager.addDomain(domain.favUrl, domain.name);
 		var importance = item.importance;
 		if(importance && importance.length>0){ 
-			GraphManager.addLayer(item.domain.color, item.importance, item.id, item.startTime);
+			GraphManager.addLayer(item.domain.color, item.importance, item.id, item.startTime, domain.name);
 		}else{
 			EventManager.add(item.startTime, domain.favUrl, domain.color, item.title, item.id);
 		}

@@ -1,11 +1,11 @@
 $(function(){
 	//initialize
-	setUseAlert(getOption("useAlerts"));
+	setUseAlert(PrefManager.getOption("useAlerts"));
 
 	/*** model: events ***/
 	$("#useAlerts").change(function(){
 		var value = $(this).attr("checked");
-		setOption("useAlerts", value);
+		PrefManager.setOption("useAlerts", value);
 	});
 	/*** end model: events ***/
 });

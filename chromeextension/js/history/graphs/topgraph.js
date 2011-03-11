@@ -3,23 +3,23 @@ var TopGraph = {};
 (function(){
 	var m = TopGraph;
 
-	var hPanel; //highlight panel from protovis
-	var sPanel; //selection panel
+	var hPanel; //highlight panel from protovis (the brighter color area when item hovered)
+	var sPanel; //selection panel (the grey overlay)
+
+	var defSelect = 28; //default selection width (when clicked)
 
 	m.render = function(){
 		m.obj.render();
 	}
 
-	m.highlight = function(i){
-		var data = (i==-1) ? [] : GraphManager.getData(i).data;
-		hPanel.children[0].data(data);
+	m.highlight = function(array){
+		hPanel.children[0].data(array);
 		hPanel.render();
 	}
 
 	m.setSelection = function(offset, cap){
-		var graphPos = GraphManager.getGraphPos();
-		var selection = {x: (graphPos.offset*GraphManager.width), dx: (graphPos.scale*GraphManager.width)};
-		sPanel.children[0].data = [selection];
+		var selection = {x: (offset*GraphManager.width), dx: (cap*GraphManager.width)};
+		sPanel.data([selection]);
 		sPanel.render();
 	}
 
@@ -69,10 +69,10 @@ var TopGraph = {};
 				if(dragged){
 				   dragged = false; 
 				}else{
-					d.x -= 50; 
+					d.x -= defSelect/2; 
 					if(d.x<0) d.x = 0;
-					if(d.x>w-100) d.x = w-100;
-					d.dx = 100;
+					if(d.x>w-defSelect) d.x = w-defSelect;
+					d.dx = defSelect;
 					GraphManager.setSelectionScale(d.x/w, d.dx/w);
 					return this; 
 				}
@@ -82,7 +82,7 @@ var TopGraph = {};
 			.top(0)
 			.width(function(d){ return d.dx})
 			.height(h)
-			.fillStyle("rgba(128, 128, 128, 0.15)")
+			.fillStyle("rgba(128, 128, 200, 0.15)")
 			//.strokeStyle("rgba(128, 128, 128, 0.8)")
 			//.lineWidth(0)
 			.cursor("move")
@@ -92,10 +92,10 @@ var TopGraph = {};
 				if(dragged){
 					dragged = false;
 				}else{
-					d.x = this.mouse().x-50;
+					d.x = this.mouse().x-defSelect/2;
 					if(d.x<0) d.x = 0;
-					if(d.x>w-100) d.x = w-100;
-					d.dx = 100;
+					if(d.x>w-defSelect) d.x = w-defSelect;
+					d.dx = defSelect;
 					GraphManager.setSelectionScale(d.x/w, d.dx/w);
 					return this;
 				}
