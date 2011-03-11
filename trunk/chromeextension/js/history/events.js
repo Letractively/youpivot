@@ -70,7 +70,8 @@ var EventManager = {};
 		var offset = (time-range.start)/(range.end-range.start);
 		var w = $("#events").width();
 		offset *= w;
-		if(offset > w-16 && offset < w+16) offset = w-16;
+		if(offset > w+25) offset = -20;
+		if(offset > w-16) offset = w-16;
 		return offset;
 	}
 })();

@@ -12,8 +12,9 @@ var DatePicker = {};
 		}
 		if(typeof date == "string"){
 			date = translateDate(date);
+		}else{
+			date.setHours(12);
 		}
-		date.setHours(12);
 		PivotManager.pivot(date);
 		$("#calendar").datepicker("setDate", date);
 		return true;

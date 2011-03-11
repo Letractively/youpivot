@@ -6,29 +6,9 @@ var StreamGraph = {};
 	var width;
 	var elements = {}; //DOM objects of the streamGraph layers
 
-	m.highlightLayer = function(id, persistent){
-		var index = GraphManager.getDataIndex(id);
-		if(!index) return;
-		dataArray[index].active = true;
-		if(persistent) dataArray[index].highlight = true;
+	m.changeColor = function(id, color){
 		//directly change the object in DOM rather than re-render to improve performance (significantly)
-		var color = dataArray[index].color;
 		elements[id].attr("fill", color);
-
-		m.highlightTop(index);
-	}
-
-	m.lowlightLayer = function(id, clearPersistent){
-		var index = GraphManager.getDataIndex(id);
-		if(!index) return;
-		if(clearPersistent || !dataArray[index].highlight){
-			dataArray[index].active = false;
-			dataArray[index].highlight = false;
-			//directly change the object in DOM rather than re-render to improve performance (significantly)
-			var color = Helper.createLighterColor(dataArray[index].color, 1);
-			elements[id].attr("fill", color);
-			m.highlightTop(-1);
-		}
 	}
 
 	m.render = function(){
@@ -39,15 +19,14 @@ var StreamGraph = {};
 	m.draw = function(data, max){
 		var sgbox = $("#steamGraph");
 		//sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big - translating CSS 100% width to pixels for the system
-		var width = GraphManager.width*10;
-		var height = sgbox.height();
-		
-		var x = pv.Scale.linear(0, 758).range(0, width),
-			y = pv.Scale.linear(0, max*1.1).range(0, height);
+		var w = GraphManager.width*10,
+			h = sgbox.height(),
+			x = pv.Scale.linear(0, 758).range(0, w),
+			y = pv.Scale.linear(0, max*1.1).range(0, h);
 		var streamGraph = new pv.Panel()
 			.canvas("steamGraph")
-			.width(width)
-			.height(height)
+			.width(w)
+			.height(h)
 			.add(pv.Layout.Stack)
 			.layers(data)
 			.values(function(d){ return data[this.index].data; })
@@ -95,13 +74,15 @@ var StreamGraph = {};
 	function highlightItem(id, persistent){
 		HighlightManager.highlightDomain(id, persistent);
 		HighlightManager.scrollToItem(id, (persistent) ? 0 : 500);
-		TopGraph.highlight(GraphManager.getDataIndex(id)); //highlight the corresponding sections of the topGraph
+		GraphManager.highlightTopGraph(GraphManager.getDataIndex(id));
+		//TopGraph.highlight(GraphManager.getDataIndex(id)); //highlight the corresponding sections of the topGraph
 	}
 
 	function lowlightItem(id, clearPersistent){
 		HighlightManager.cancelScroll(id); 
 		HighlightManager.lowlightDomain(id, clearPersistent);
-		TopGraph.highlight(-1); //cancel highlight on the topGraph
+		GraphManager.highlightTopGraph(-1);
+		//TopGraph.highlight(-1); //cancel highlight on the topGraph
 	}
 
 	function toggleItemHighlight(id, toggle){

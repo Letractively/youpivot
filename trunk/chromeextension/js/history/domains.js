@@ -10,7 +10,7 @@ var DomainManager = {};
 		}
 	}
 	m.addDomain = function(url, name){
-		var index = getDomainIndex(url);
+		var index = getDomainIndex(name);
 		if(index==-1){
 			domains[domains.length] = {url: url, name: name, rating: 1};
 		}else{
@@ -45,7 +45,7 @@ var DomainManager = {};
 
 	function getDomainIndex(domain){
 		for(var i in domains){
-			if(domains[i].url == domain){
+			if(domains[i].name == domain){
 				return i;
 			}
 		}

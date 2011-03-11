@@ -65,7 +65,7 @@
 		if(!findHeader(label, wrap)){
 			table.append(createHeader(++catCounter, label));
 		}
-		var catId = catCounter;
+		var catId = catCounter; //ID assigned to header of current item
 
 		var item = $("<tr class='item' id='item_"+id+"'></tr>");
 		item.data("header", catId);

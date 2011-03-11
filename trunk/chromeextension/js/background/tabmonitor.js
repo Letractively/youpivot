@@ -72,18 +72,21 @@ var Monitor = {};
 		var info = arr[tabId].getInfo();
 		var item = createOpenItem(info);
 		Connector.send("add", item, function(data){
-			if(data.toLowerCase()=="added stuff"){
+			if(data.length>0){
+				arr[tabId].eid = data;
 				console.log("upload successful");
 			}else{
 				alert("Error uploading open tab info: "+data);
 			}
 		});
 	}
-
+	
 	function createOpenItem(info){
 		var obj = {};
 		obj.title = info.title;
 		obj.url = info.url;
+		obj.domain = info.domain;
+		console.log("domain", info.domain);
 		obj.favicon = info.favUrl;
 		obj.keyword = info.keywords[0]; //FIXME upload all keywords
 		obj.starttime = Math.floor(new Date().getTime()/1000);
@@ -96,6 +99,7 @@ var Monitor = {};
 		obj.windowid = info.win;
 		return obj;
 	}
+
 
 	//send updated info about all tabs to server, every 114 seconds
 	function uploadUpdateInfo(){
@@ -176,9 +180,7 @@ var Monitor = {};
 			return tab.favIconUrl;
 		}
 		//use Google S2 if favicon URL is not defined
-		var domain = tab.url.split("://")[1];
-		domain = domain.replace("www.", "");
-		domain = domain.split("/")[0];
+		var domain = DomainExtractor.getName(tab.url);
 		var favIconUrl = "http://www.google.com/s2/favicons?domain="+domain;
 		return favIconUrl;
 	}
@@ -199,6 +201,7 @@ var Monitor = {};
 		var cObj = {
 			title: tab.title, 
 			url: tab.url, 
+			domain: DomainExtractor.getName(tab.url),
 			favUrl: getFavUrl(tab), 
 			index: tab.index, 
 			win: tab.windowId,

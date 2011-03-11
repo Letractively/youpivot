@@ -53,6 +53,7 @@ var SearchManager = {};
 		$("#topBackground").css("z-index", (enable) ? 0 : 10);
 	}
 
+	m.antiSearch = antiSearch;
 	function antiSearch(){
 		$("#searchResults").hide();
 		$("#textContent").show();
