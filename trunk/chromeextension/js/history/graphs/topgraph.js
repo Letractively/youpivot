@@ -12,8 +12,9 @@ var TopGraph = {};
 		m.obj.render();
 	}
 
-	m.highlight = function(array){
+	m.highlight = function(array, color){
 		hPanel.children[0].data(array);
+		hPanel.children[0].fillStyle(color);
 		hPanel.render();
 	}
 

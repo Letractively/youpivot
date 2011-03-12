@@ -2,11 +2,11 @@ var DatePicker = {};
 
 (function(){
 	var m = DatePicker;
-	var dateValues = ["now", "today", "yesterday", "more"];
+	var dateValues = ["now", "today", "yesterday", "more \u25be"];
 	var def = "now";
 
 	function pickDate(date){
-		if(date=="more"){
+		if(date.indexOf("more")==0){
 			toggleCalendar();
 			return false;
 		}
@@ -23,7 +23,8 @@ var DatePicker = {};
 		var d = new Date();
 		switch(name){
 			case "now":
-				return d;
+				//now is the end point instead of the center
+				return new Date(d.getTime()-43200000);
 				break;
 			case "today":
 				return noonDay(d);
@@ -56,7 +57,10 @@ var DatePicker = {};
 	function hideCalendar(){
 		$("#calendar").slideUp(100);
 	}
-	$(document).click(function(){
+	$("#calendar").click(function(e){
+		e.stopPropagation();
+	});
+	$(document).click(function(e){
 		hideCalendar();
 	});
 

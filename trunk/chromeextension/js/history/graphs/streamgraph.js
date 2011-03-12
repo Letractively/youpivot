@@ -30,28 +30,32 @@ var StreamGraph = {};
 			.add(pv.Layout.Stack)
 			.layers(data)
 			.values(function(d){ return data[this.index].data; })
-			.order("inside-out")
+			.order("reverse")
 			.offset("silohouette")
 			.x(function(d){ return x(this.index) })
 			.y(y)
 			.layer.add(pv.Area)
+			.interpolate("basis")
 			.title(function(d, p){ return "layer-"+p.id; })
 			.fillStyle(function(d, p){ 
-				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, 1); })
+				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, "high"); })
 			.lineWidth(2)
 			.event("mouseover", function(d, p){
 			   	this.title(""); //destroy the title used for DOM extraction
 				highlightItem(p.id, false); 
-				p.active = true; 
-				return this; })
+				//p.active = true; 
+				//return this; 
+				})
 			.event("mouseout", function(d, p){ 
 				lowlightItem(p.id, false); 
-				p.active = false; 
-				return this; })
+				//p.active = false; 
+				//return this; 
+				})
 			.event("click", function(d, p){ 
 			  	p.highlight = !p.highlight; 
 				toggleItemHighlight(p.id, p.highlight); 
-				return this; });
+				//return this; 
+			});
 
 		streamGraph.render();
 		m.obj = streamGraph;
@@ -68,20 +72,23 @@ var StreamGraph = {};
 			title.match(/^layer-(\d+)$/);
 			var id = RegExp.$1;
 			elements[id] = $(this).find("path");
+			$(this).removeAttr("title"); //duplicate with mouseover => this.title("") to save re-rendering
 		});
 	}
 
 	function highlightItem(id, persistent){
 		HighlightManager.highlightDomain(id, persistent);
+		HighlightManager.highlightLayer(id, persistent);
 		HighlightManager.scrollToItem(id, (persistent) ? 0 : 500);
-		GraphManager.highlightTopGraph(GraphManager.getDataIndex(id));
+		//GraphManager.highlightTopGraph(GraphManager.getDataIndex(id));
 		//TopGraph.highlight(GraphManager.getDataIndex(id)); //highlight the corresponding sections of the topGraph
 	}
 
 	function lowlightItem(id, clearPersistent){
 		HighlightManager.cancelScroll(id); 
 		HighlightManager.lowlightDomain(id, clearPersistent);
-		GraphManager.highlightTopGraph(-1);
+		HighlightManager.lowlightLayer(id, clearPersistent);
+		//GraphManager.highlightTopGraph(-1);
 		//TopGraph.highlight(-1); //cancel highlight on the topGraph
 	}
 

@@ -7,7 +7,7 @@
 				return addItem(obj, tableItem, this);
 				break;
 			case "highlight":
-				var level = getOptions(obj, "level", 2);
+				var level = getOptions(obj, "level", "highbg");
 				highlight(this, level);
 				break;
 			case "lowlight":
@@ -76,17 +76,17 @@
 			}))
 			.append($("<div class='itemDate'></div>").text(Helper.formatTime(date, 12)))
 		);
-		item.append($("<td class='itemColor'></td>").css("background-color", Helper.createLighterColor(color, 1)));
+		item.append($("<td class='itemColor'></td>").css("background-color", Helper.createLighterColor(color, "low")));
 		item.append($("<td class='itemName'></td>").append($("<a href='"+url+"' target='_blank'></a>").text(name)));
 		item.data("item", tableItem);
 		var icon = IconFactory.createIcon(favUrl, name);
 		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
 		item.mouseover(function(){
-			HighlightManager.highlightItem($(this), false);
+			HighlightManager.highlightDomain($(this).data("item").id, false);
 			showPivotButton($(this));
 		});
 		item.mouseout(function(){
-			HighlightManager.lowlightItem($(this), false);
+			HighlightManager.lowlightDomain($(this).data("item").id, false);
 			hidePivotButton($(this));
 		});
 
@@ -98,14 +98,14 @@
 		obj.addClass("hover");
 		var color = obj.data("item").domain.color;
 		obj.css("background-color", Helper.createLighterColor(color, level));
-		$(".itemColor", obj).css("background-color", color);
+		$(".itemColor", obj).css("background-color", (level=="highbg") ? color : Helper.createLighterColor(color, "med"));
 	}
 
 	function lowlight(obj){
 		obj.removeClass("hover");
 		var color = obj.data("item").domain.color;
 		obj.css("background-color", "transparent");
-		$(".itemColor", obj).css("background-color", Helper.createLighterColor(color, 1));
+		$(".itemColor", obj).css("background-color", Helper.createLighterColor(color, "low"));
 	}
 
 	function showPivotButton(obj){

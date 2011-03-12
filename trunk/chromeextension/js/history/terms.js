@@ -30,7 +30,7 @@ var TermManager = {};
 	}
 	function getTermIndex(term){
 		for(var i in terms){
-			if(terms[i].text == term){
+			if(terms[i].text.toLowerCase() == term.toLowerCase()){
 				return i;
 			}
 		}
