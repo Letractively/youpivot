@@ -134,7 +134,7 @@ var FilterManager = {};
 	}
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){
-			if(keywords[i].indexOf(needle)!=-1){
+			if(keywords[i].toLowerCase().indexOf(needle.toLowerCase())!=-1){
 				return true;
 			}
 		}

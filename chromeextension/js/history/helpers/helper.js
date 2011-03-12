@@ -17,19 +17,35 @@ var Helper = {};
 		return {apm: apm, hour: hour};
 	}
 	
-	var brightness = [1, 0.7, 0.9, 0.94]; //2 level brightness values
 	m.createLighterColor = function(color, level){
-		if(typeof level == "undefined") throw "Color level is not defined";
+		if(typeof level == "string"){
+			level = translateLevel(level);
+		}
+		if(typeof level == "undefined" || level>1 || level<0){
+			console.log("Invalid color level "+level);
+			return color;
+		}
 		var r = parseInt(color.substr(1,2),16);
 		var g = parseInt(color.substr(3,2),16);
 		var b = parseInt(color.substr(5,2),16);
 		var hsl = RGB.rgbToHsl(r, g, b);
-		hsl[2]  = brightness[level];
+		hsl[2] = level;
+		hsl[1] -= level*0.5;
+		if(hsl[1]<0) hsl[1] = 0;
 		var rgb = RGB.hslToRgb(hsl[0], hsl[1], hsl[2]);
 		return "#"+toCode(rgb[0])+toCode(rgb[1])+toCode(rgb[2]);
 
 		function toCode(num){
 			return m.padZero(Math.floor(num).toString(16), 2);
+		}
+		function translateLevel(string){
+			if(string=="highbg") return 0.9;
+			if(string=="lowbg") return 0.96;
+			if(string=="high") return 0.7;
+			if(string=="med") return 0.75;
+			if(string=="low") return 0.8;
+			console.log("Unknown color string "+string);
+			return -1;
 		}
 	}
 

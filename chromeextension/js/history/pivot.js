@@ -23,7 +23,7 @@ var PivotManager = {};
 			var obj = JSON.parse(data);
 			var arr = createItemsArray(obj);
 			console.log(arr);
-			GraphManager.setRange([time*1000-43200000, time*1000+43200000]); //FIXME load from server
+			GraphManager.setRange([time*1000-43200000, time*1000+43199999]); //FIXME load from server
 			ItemManager.clear();
 			ItemManager.addItems(arr);
 			GraphManager.draw();

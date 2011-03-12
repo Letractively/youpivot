@@ -4,7 +4,7 @@ var GraphManager = {};
 	var m = GraphManager;
 
 	var startTime = -86400000;
-	var endTime = 0;
+	var endTime = -1;
 	var dataArray = new Array(); //array of the data for the graph (importance values)
 
 	var graphPos = {offset: 0, scale: 1}; // {offset, scale}
@@ -79,12 +79,12 @@ var GraphManager = {};
 
 		var color = dataArray[index].color;
 		StreamGraph.changeColor(id, color);
-		m.highlightTopGraph(index);
+		m.highlightTopGraph(index, color);
 	}
 
-	m.highlightTopGraph = function(index){
+	m.highlightTopGraph = function(index, color){
 		var arr = (index==-1) ? [] : accumulate(dataArray[index].domain);
-		TopGraph.highlight(arr);
+		TopGraph.highlight(arr, color);
 	}
 
 	function accumulate(domain){
@@ -108,7 +108,7 @@ var GraphManager = {};
 			dataArray[index].active = false;
 			dataArray[index].highlight = false;
 
-			var color = Helper.createLighterColor(dataArray[index].color, 1);
+			var color = Helper.createLighterColor(dataArray[index].color, "high");
 			StreamGraph.changeColor(id, color);
 			m.highlightTopGraph(-1);
 		}
@@ -116,8 +116,9 @@ var GraphManager = {};
 
 	//toggle the visibility of the graph
 	function toggleGraph(){
-		var hiding = $("#graphDate").is(":visible");
-		$("#graphDate").toggle();
+		var hiding = $("#eventsWrap").is(":visible");
+		$("#graphDate div").width((hiding) ? "auto" : "50%");
+		$("#graphDate .dash").toggle();
 		$("#eventsWrap").toggle();
 		$("#collapseGraph").animate({"rotate": (hiding) ? 180 : 0}, 150);
 		$("#graphShadow").animate({height: (hiding) ? 83 : 270}, 200);

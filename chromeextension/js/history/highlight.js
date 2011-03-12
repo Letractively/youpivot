@@ -3,13 +3,14 @@ var HighlightManager = {};
 (function(){
 	var m = HighlightManager;
 
+	var lvls = ["highbg", "lowbg"];
 	m.highlightDomain = function(id, persistent){
 		var domain = $("#item_"+id).data("item").domain.name;
 		$("#textContent .item").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
-				var lvl = (item.id==id) ? 2 : 3;
-				$(this).itemTable("highlight", {level: getMinLevel($(this), lvl)});
+				var lvl = (item.id==id) ? 1 : 2;
+				$(this).itemTable("highlight", {level: lvls[getMinLevel($(this), lvl-1)]});
 				if(persistent){
 					addToList($(this), lvl);
 				}
@@ -22,20 +23,20 @@ var HighlightManager = {};
 		$("#textContent .item").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
-				var lvl = (item.id==id) ? 2 : 3;
+				var lvl = (item.id==id) ? 1 : 2;
 				if(clearPersistent){
 					removeFromList($(this), lvl);
 				}
 				if(getList($(this)).length===0)
 					$(this).itemTable("lowlight", {});
 				else
-					$(this).itemTable("highlight", {level: getMinLevel($(this))});
+					$(this).itemTable("highlight", {level: lvls[getMinLevel($(this))]});
 			}
 		});
 	}
 
 	m.highlightItem = function(item, persistent){
-		item.itemTable("highlight", {level: 2});
+		item.itemTable("highlight", {level: "highbg"});
 		//$("#item_"+id).itemTable("highlight", {level: 2});
 	}
 
@@ -47,7 +48,7 @@ var HighlightManager = {};
 		if(getList(item).length===0)
 			item.itemTable("lowlight", {});
 		else
-			item.itemTable("highlight", {level: getMinLevel(item)});
+			item.itemTable("highlight", {level: lvls[getMinLevel(item)]});
 	}
 
 	var scrollEvents = {};
@@ -79,17 +80,14 @@ var HighlightManager = {};
 	}
 
 	function scrollToItem(id){
-		var range = [$("#graphShadow").height()+30, $(window).height()-30];
+		var range = [$("#graphShadow").height()+30, $(window).height()-60];
 		var item = $("#item_"+id);
 		var top = item.offset().top;
 		var scrollTop = $("body").scrollTop();
-		console.log("scrollTop", scrollTop);
 		if(top-scrollTop<range[0]){
-			console.log("scroll down", top-scrollTop, range[0], range[1]);
 			var h = range[0];
 			$("body").animate({scrollTop:top-h}, 50);
 		}else if(top-scrollTop>range[1]){
-			console.log("scroll up", top-scrollTop, range[0], range[1]);
 			var h = range[1];
 			$("body").animate({scrollTop:top-h}, 50);
 		}
