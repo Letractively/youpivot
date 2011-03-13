@@ -7,7 +7,17 @@
 		<script type="text/javascript" src="popup.js"></script>
 	</head>
 	<body>
-		<label for="description">Please describe this moment</label><input type="text" id="description" />
-		<div><button id="saveBtn">Save</button><button id="cancelBtn">Cancel</button></div>
+		<div id="icon"><img src="images/timemark_big.png" /></div>
+		<form id="timemarkForm" method="get" action="#">
+			<div id="content">
+				<div id="title">Timemark</div>
+				<label for="description"></label>
+				<input type="text" id="description" placeholder="Please describe this moment" />
+				<div id="buttonsWrap">
+					<input type="submit" id="saveBtn" value="Save" />
+					<button id="cancelBtn">Cancel</button>
+				</div>
+			</div>
+		</form>
 	</body>
 </html>

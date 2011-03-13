@@ -1,1 +1,10 @@
-body { width: 250px; font-family: Arial, sans-serif; font-size: 14px; padding: 0px; margin: 3px; }
+body { width: 330px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; padding: 0px; margin: 2px; }
+form { margin: 0px; }
+
+#icon { position: absolute; margin: 0px 3px 3px 0px; }
+#icon img { width: 75px; height: 75px; }
+#content { padding: 0px 5px; margin-left: 80px; box-sizing: border-box; width: 250px; font-weight: bold; }
+#content label { font-size: 12px; color: #444444; }
+#title { font-size: 30px; color: #808FDC; }
+input#description { width: 100%; }
+#buttonsWrap { padding: 5px 2px; }

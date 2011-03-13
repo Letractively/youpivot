@@ -30,7 +30,7 @@ var Helper = {};
 		var b = parseInt(color.substr(5,2),16);
 		var hsl = RGB.rgbToHsl(r, g, b);
 		hsl[2] = level;
-		hsl[1] -= level*0.5;
+		hsl[1] -= level*0.3;
 		if(hsl[1]<0) hsl[1] = 0;
 		var rgb = RGB.hslToRgb(hsl[0], hsl[1], hsl[2]);
 		return "#"+toCode(rgb[0])+toCode(rgb[1])+toCode(rgb[2]);

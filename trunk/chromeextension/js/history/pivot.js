@@ -8,11 +8,10 @@ var PivotManager = {};
 		SearchManager.antiSearch();
 		var range = GraphManager.getRange();
 		var midPoint = (range.start+range.end)/2;
-		if(Math.abs(time.getTime()-midPoint)>(range.end-range.start)/4){
+		if(Math.abs(time-midPoint)>(range.end-range.start)/4){
 			pivotServer(time);
 		}else{
-			var t = time.getTime();
-			GraphManager.setSelection(t-(pivotInterval/2), t+(pivotInterval/2));
+			GraphManager.setSelection(time-(pivotInterval/2), time+(pivotInterval/2));
 		}
 	}
 

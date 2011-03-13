@@ -15,7 +15,7 @@ var DatePicker = {};
 		}else{
 			date.setHours(12);
 		}
-		PivotManager.pivot(date);
+		PivotManager.pivot(date.getTime());
 		$("#calendar").datepicker("setDate", date);
 		return true;
 	}

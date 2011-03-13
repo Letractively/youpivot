@@ -15,10 +15,12 @@ var SortManager = {};
 		items.sort(sortFunction);
 	}
 	function sortFunction(a, b){
-		if(m.sortBy == "chronological")
+		if(m.sortBy == "by type"){
+			var str = subtractStr(a.domain.name, b.domain.name);
+			if(str!=0) return str;
 			return b.startTime-a.startTime;
-		else if(m.sortBy == "by type")
-			return subtractStr(a.domain.name, b.domain.name);
+		}else if(m.sortBy == "chronological")
+			return b.startTime-a.startTime;
 	}
 	function subtractStr(a, b){
 		if(a.toLowerCase()==b.toLowerCase()) return 0;
@@ -31,8 +33,8 @@ var SortManager = {};
 	}
 	function sort(name){
 		m.sortBy = name;
-		//if($("#searchResults").is(":visible"))
-		SearchManager.reloadResult();
+		if($("#searchResults").is(":visible")) //need this because or else sometimes filters for search will be displayed instead
+			SearchManager.reloadResult();
 		TableManager.reload();
 		FilterManager.filterTime();
 		FilterManager.filter();
