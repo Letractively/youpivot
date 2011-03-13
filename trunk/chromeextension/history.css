@@ -104,12 +104,13 @@ a.active:active { color: #3870AD; }
 	/*** text contents ***/
 	#textContent { padding-bottom: 10px; -webkit-user-select: none; }
 	.contentHeader { font-weight: bold; }
+	.contentHeader img { vertical-align: middle; }
 		/*** items table ***/
 		.itemTable { width: 100%; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; border-collapse: collapse; margin-bottom: 20px; }
 		.itemTable tr { height: 26px; display: block; /*to eliminate mouseleave events*/ }
 		.itemTable tr.out { display: none; }
 		.itemTable td { height: 26px; padding: 0px 2px; }
-		.itemTable th { height: 26px; line-height: 26px; }
+		.itemTable th { height: 26px; }
 		.itemTable .itemName { width: 100%; padding: 0px 5px; }
 		.itemTable .itemDate { color: #919194; width: 60px; text-align: center; }
 		.itemTable .itemLeft { padding: 0px 8px; width: 70px; height: 100%; }
