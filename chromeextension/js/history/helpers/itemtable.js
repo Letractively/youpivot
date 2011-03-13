@@ -37,8 +37,9 @@
 
 	function findHeader(label, wrap){
 		var exist = false;
-		$(".contentHeader", wrap).each(function(){
-			if($(this).text()==label){
+		$($(".contentHeader", wrap).get().reverse()).each(function(){
+			console.log($(this).data("label"));
+			if($(this).data("label")==label){
 			   exist = true;
 			   return;
 			}
@@ -59,11 +60,15 @@
 		}
 
 		var label = obj[sortBy];
+		var html;
 		if(sortBy=="date"){
-			label = Helper.formatDate(label);
+			html = Helper.formatDate(label);
+		}else if(sortBy=="domain"){
+			html = "<img src='"+favUrl+"' class='favicon' />" + label;
 		}
 		if(!findHeader(label, wrap)){
-			table.append(createHeader(++catCounter, label));
+			var head = createHeader(++catCounter, label, html);
+			table.append(head);
 		}
 		var catId = catCounter; //ID assigned to header of current item
 
@@ -117,10 +122,9 @@
 		$(".pivotBtn", obj).hide();
 	}
 
-	function createHeader(id, label){
-		var header = $("<tr class='headerRow'></tr>").html(
-				$("<th id='header_"+id+"' class='contentHeader'></th>").text(label)
-			);
+	function createHeader(id, label, html){
+		var header = $("<tr class='headerRow'></tr><th id='header_"+id+"' class='contentHeader'>"+html+"</th>");
+		header.find(".contentHeader").data("label", label);
 		return header;
 	}
 
