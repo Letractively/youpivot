@@ -12,8 +12,8 @@
     "history": "history.html"
   },*/
   "browser_action": {
-    "default_icon": "images/icon_48.png",
-    "default_title": "Add a TimeMark for YouPivot",
+    "default_icon": "images/timemark_btn.png",
+    "default_title": "Add a TimeMark - YouPivot",
     "default_popup": "popup.html"
   },
   "permissions": [

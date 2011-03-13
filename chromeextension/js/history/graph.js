@@ -30,7 +30,8 @@ var GraphManager = {};
 		endTime = times[1];
 		loadTime(times);
 		loadDate();
-		setSelection(0,1);
+		TopGraph.setSelection(0, 1);
+		setSelectionScale(0,1);
 	}
 
 	m.addLayer = function(color, arr, id, startTime, domain){

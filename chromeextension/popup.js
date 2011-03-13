@@ -1,5 +1,5 @@
 $(function(){
-	$("#saveBtn").click(function(){
+	$("#timemarkForm").submit(function(){
 		var description = $("#description").val();
 		if(description==""){
 			alert("Please enter a description");
