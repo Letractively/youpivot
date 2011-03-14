@@ -14,9 +14,9 @@ from uuid import uuid4
 
 MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
 MANDATORY_GET_TERMS = ['pivottime', 'userid']
-MANDATORY_END_TERMS = ['eventid']
+MANDATORY_END_TERMS = ['eventid', 'endtime']
 MANDATORY_DELETE_TERMS = ['eventid']
-MANDATORY_ADD_IMP_VAL_TERMS = ['eventid', 'val'] 
+MANDATORY_UPDATE_TERMS = ['eventid', 'time', 'val'] 
 DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
 
@@ -82,6 +82,14 @@ class Responder(object):
             return 'Bad Event ID'
         self.deleteEvent(args)
         return 'deleted'
+    
+    @cherrypy.expose()
+    def update(self, **args):
+        #Check to make sure we have the required fields
+        if not self.hasRequiredUpdateTerms(args):
+            return 'Missing Fields'
+        self.addImpVal(args)
+        return 'updated'
 
     #Evil person prevention
     def developerExists(self, args):
@@ -121,6 +129,12 @@ class Responder(object):
                 return False
         return True
     
+    def hasRequiredUpdateTerms(self, args):
+        for mandatoryTerm in MANDATORY_UPDATE_TERMS:
+            if not mandatoryTerm in args:
+                return False
+        return True
+    
     #Create the document in the events database
     def createDoc(self, args):
         doc = args
@@ -128,6 +142,7 @@ class Responder(object):
         doc['_id'] = id
         doc['endtime'] = int(args['endtime'])
         doc['starttime'] = int(args['starttime'])
+        doc['importancevalues'] = {}
         eventsdb.save(doc)
         return id
         
@@ -146,12 +161,20 @@ class Responder(object):
 
     def endEvent(self, args):
         doc = eventsdb[args['eventid']]
-        doc['endtime'] = time.time()
+        doc['endtime'] = args['endtime']
         eventsdb.save(doc)
         
     def deleteEvent(self, args):
         doc = eventsdb[args['eventid']]
         eventsdb.delete(doc)
+        
+    def addImpVal(self, args):
+        doc = eventsdb[args['eventid']]
+        if not 'importancevalues' in doc:
+            doc['importancevalues'] = {} 
+        vals = doc['importancevalues']
+        vals[int(args['time'])] = int(args['val'])
+        eventsdb.save(doc) 
         
 #Start me up        
 cherrypy.quickstart(Responder())
