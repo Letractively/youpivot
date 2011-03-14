@@ -173,7 +173,7 @@ class Responder(object):
         if not 'importancevalues' in doc:
             doc['importancevalues'] = {} 
         vals = doc['importancevalues']
-        vals[int(args['time'])] = int(args['val'])
+        vals[int(args['time'])] = float(args['val'])
         eventsdb.save(doc) 
         
 #Start me up        
