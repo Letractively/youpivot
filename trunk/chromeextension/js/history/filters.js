@@ -108,30 +108,36 @@ var FilterManager = {};
 			showRow(obj);
 		}
 	}
-	function hideTimeRow(obj){
+	/*function hideTimeRow(obj){
 		if(obj.is(":visible")){
 			obj.addClass("out");
 			hideRow(obj);
 		}
-	}
+	}*/
 	function showRow(obj){
 		if(obj.is(":hidden")){
 			obj.show();
+			if(SortManager.getSortMethod()!="date"){
+				var prev = obj.prevAll(":visible").first();
+				if($(".itemDate>span", prev).text()!=$(".itemDate>span", obj).text()){
+					$(".itemDate>span", obj).removeClass("hidden");
+				}
+			}
 			var catId = obj.data("header");
 			var header = $("#header_"+catId).parent();
 			header.show(); // show the date label
 		}
 	}
-	function hideRow(obj){
+	/*function hideRow(obj){
 		if(obj.is(":visible")){
 			obj.hide();
 			if(obj.hasClass("headerRow") && obj.next().hasClass("headerRow")){
 				var catId = obj.data("header");
 				var header = $("#header_"+catId);
-				header.hide(); // show the date label
+				header.hide(); // hide the date label
 			}
 		}
-	}
+	}*/
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){
 			if(keywords[i].toLowerCase().indexOf(needle.toLowerCase())!=-1){

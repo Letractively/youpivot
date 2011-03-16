@@ -49,9 +49,13 @@ var Helper = {};
 		}
 	}
 
-	m.formatDate = function(date){
+	m.formatDate = function(date, format){
 		var d = new Date(date);
-		return d.toLocaleDateString();
+		if(!format){
+			return d.toLocaleDateString();
+		}else{
+			return d.format(format);
+		}
 	}
 
 	m.formatTime = function(date, f12_24){
@@ -158,3 +162,45 @@ var Helper = {};
 	}
 
 /*** End RGB Helper code ***/
+
+/*** Date formatter (PHP style) ***/
+	//usage: <Date object>.format(-format-);
+	var DateFormatter = {};
+
+	DateFormatter.format = function(d, form){
+		var fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		var fullWeeks = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		var shortWeeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+		var formats = {
+			//day of month
+			d: function(d){return Helper.padZero(d.getDate(),2);},
+			j: function(d){return d.getDate();},
+			//day of week
+			l: function(d){return fullWeeks[d.getDay()];},
+			D: function(d){return shortWeeks[d.getDay()];},
+			w: function(d){return d.getDay();},
+			//year
+			Y: function(d){return d.getFullYear();},
+			//month
+			F: function(d){return fullMonths[d.getMonth()];},
+			M: function(d){return shortMonths[d.getMonth()];},
+			n: function(d){return d.getMonth()+1; },
+			m: function(d){return Helper.padZero(d.getMonth+1,2);}
+		};
+
+		var namespace = "";
+		for(var i in formats){
+			namespace += i;
+		}
+
+		var regex = new RegExp("(["+namespace+"])", "g");
+		form = form.replace(regex, function(m){ return formats[m](d); });
+		return form;
+	};
+
+	Date.prototype.format = function(format){
+		return DateFormatter.format(this, format);
+	}
+
+/*** End Date formatter ***/

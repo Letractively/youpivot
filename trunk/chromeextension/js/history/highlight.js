@@ -4,13 +4,14 @@ var HighlightManager = {};
 	var m = HighlightManager;
 
 	var lvls = ["highbg", "lowbg"];
-	m.highlightDomain = function(id, persistent){
-		var domain = $("#item_"+id).data("item").domain.name;
-		$("#textContent .item").each(function(){
+	m.highlightDomain = function(id, persistent, parent){
+		if(!parent) parent = $("#textContent");
+		var domain = $("#item_"+id, parent).data("item").domain.name;
+		$(".item", parent).each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
 				var lvl = (item.id==id) ? 1 : 2;
-				$(this).itemTable("highlight", {level: lvls[getMinLevel($(this), lvl-1)]});
+				$(this).itemTable("highlight", {level: lvls[getMinLevel($(this), lvl)-1]});
 				if(persistent){
 					addToList($(this), lvl);
 				}
@@ -18,9 +19,10 @@ var HighlightManager = {};
 		});
 	}
 
-	m.lowlightDomain = function(id, clearPersistent){
-		var domain = $("#item_"+id).data("item").domain.name;
-		$("#textContent .item").each(function(){
+	m.lowlightDomain = function(id, clearPersistent, parent){
+		if(!parent) parent = $("#textContent");
+		var domain = $("#item_"+id, parent).data("item").domain.name;
+		$(".item", parent).each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
 				var lvl = (item.id==id) ? 1 : 2;
@@ -30,7 +32,7 @@ var HighlightManager = {};
 				if(getList($(this)).length===0)
 					$(this).itemTable("lowlight", {});
 				else
-					$(this).itemTable("highlight", {level: lvls[getMinLevel($(this))]});
+					$(this).itemTable("highlight", {level: lvls[getMinLevel($(this))-1]});
 			}
 		});
 	}

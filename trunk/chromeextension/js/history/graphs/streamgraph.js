@@ -17,14 +17,14 @@ var StreamGraph = {};
 	}
 
 	m.draw = function(data, max){
-		var sgbox = $("#steamGraph");
+		var sgbox = $("#streamGraph");
 		//sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big - translating CSS 100% width to pixels for the system
 		var w = GraphManager.width*10,
 			h = sgbox.height(),
 			x = pv.Scale.linear(0, 758).range(0, w),
 			y = pv.Scale.linear(0, max*1.1).range(0, h);
 		var streamGraph = new pv.Panel()
-			.canvas("steamGraph")
+			.canvas("streamGraph")
 			.width(w)
 			.height(h)
 			.add(pv.Layout.Stack)
@@ -35,7 +35,7 @@ var StreamGraph = {};
 			.x(function(d){ return x(this.index) })
 			.y(y)
 			.layer.add(pv.Area)
-			.interpolate("basis")
+			.interpolate("cardinal")
 			.title(function(d, p){ return "layer-"+p.id; })
 			.fillStyle(function(d, p){ 
 				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, "high"); })
@@ -63,11 +63,11 @@ var StreamGraph = {};
 	}
 
 	m.scale = function(scale, offset, width){
-		$("#steamGraph svg").css("-webkit-transform", "scaleX("+scale+") translateX("+(-offset*width)+"px)");
+		$("#streamGraph svg").css("-webkit-transform", "scaleX("+scale+") translateX("+(-offset*width)+"px)");
 	}
 
 	function saveElements(){
-		$('#steamGraph g>a').each(function(){
+		$('#streamGraph g>a').each(function(){
 			var title = $(this).attr("title");
 			title.match(/^layer-(\d+)$/);
 			var id = RegExp.$1;
@@ -77,7 +77,7 @@ var StreamGraph = {};
 	}
 
 	function highlightItem(id, persistent){
-		HighlightManager.highlightDomain(id, persistent);
+		HighlightManager.highlightDomain(id, persistent, $("#textContent"));
 		HighlightManager.highlightLayer(id, persistent);
 		HighlightManager.scrollToItem(id, (persistent) ? 0 : 500);
 		//GraphManager.highlightTopGraph(GraphManager.getDataIndex(id));
@@ -86,7 +86,7 @@ var StreamGraph = {};
 
 	function lowlightItem(id, clearPersistent){
 		HighlightManager.cancelScroll(id); 
-		HighlightManager.lowlightDomain(id, clearPersistent);
+		HighlightManager.lowlightDomain(id, clearPersistent, $("#textContent"));
 		HighlightManager.lowlightLayer(id, clearPersistent);
 		//GraphManager.highlightTopGraph(-1);
 		//TopGraph.highlight(-1); //cancel highlight on the topGraph
