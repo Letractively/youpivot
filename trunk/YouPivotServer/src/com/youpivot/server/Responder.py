@@ -16,7 +16,7 @@ MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'ur
 MANDATORY_GET_TERMS = ['pivottime', 'userid']
 MANDATORY_END_TERMS = ['eventid', 'endtime']
 MANDATORY_DELETE_TERMS = ['eventid']
-MANDATORY_UPDATE_TERMS = ['eventid', 'time', 'val'] 
+MANDATORY_UPDATE_TERMS = ['eventid'] 
 DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
 
@@ -42,7 +42,10 @@ class Responder(object):
         #Check that the user exists
         if not self.userExists(args):
             return 'Bad User'
-        return self.createDoc(args)
+        id = self.createDoc(args)
+        args['eventid'] = id
+        self.addImpVal(args)
+        return id
     
     #Called when reading from the db
     @cherrypy.expose()
@@ -60,13 +63,6 @@ class Responder(object):
         #Check to make sure we have the required fields
         if not self.hasRequiredEndTerms(args):
             return 'Missing Fields'
-#        #Check that the user exists
-#        if not self.userExists(args):
-#            return 'Bad User'
-#        #Check for valid developer ID
-#        if not self.developerExists(args):
-#            return 'Invalid Developer'
-        #Check that the event is valid
         if not self.eventExists(args):
             return 'Bad Event ID'
         self.endEvent(args)
@@ -173,7 +169,21 @@ class Responder(object):
         if not 'importancevalues' in doc:
             doc['importancevalues'] = {} 
         vals = doc['importancevalues']
-        vals[int(args['time'])] = float(args['val'])
+        
+        #Add importance values
+        done = False
+        counter = 0
+        while(not done):
+            timeKey = "time" + str(counter)
+            valKey = "val" + str(counter)
+            if timeKey in args and valKey in args:
+                vals[int(args[timeKey])] = float(args[valKey])
+                counter = counter + 1
+                del doc[timeKey]
+                del doc[valKey]
+            else:
+                done = True
+        
         eventsdb.save(doc) 
         
 #Start me up        
