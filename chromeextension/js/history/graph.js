@@ -19,6 +19,20 @@ var GraphManager = {};
 		return false;
 	});
 
+	$("#searchResults").bind("search", function(e, active){
+		if(active){
+			dimGraphs(false);
+		}else{
+			dimGraphs(true);
+		}
+	});
+
+	function dimGraphs(enable){
+		$("#visualGraphs").css("pointer-events", (enable) ? "auto" : "none");
+		$("#visualGraphs>div").css("opacity", (enable) ? "1" : "0.4");
+		$("#topBackground").css("z-index", (enable) ? 0 : 10);
+	}
+
 	m.getGraphPos = function(){
 		return graphPos;
 	}
@@ -31,7 +45,7 @@ var GraphManager = {};
 		loadTime(times);
 		loadDate();
 		TopGraph.setSelection(0, 1);
-		setSelectionScale(0,1);
+		setSelection(0,1);
 	}
 
 	m.addLayer = function(color, arr, id, startTime, domain){
@@ -123,7 +137,7 @@ var GraphManager = {};
 		$("#eventsWrap").toggle();
 		$("#collapseGraph").animate({"rotate": (hiding) ? 180 : 0}, 150);
 		$("#graphShadow").animate({height: (hiding) ? 83 : 270}, 200);
-		$("#steamGraph").slideToggle(200, function(){
+		$("#streamGraph").slideToggle(200, function(){
 			ShadowManager.refresh();
 		});
 	}
@@ -167,7 +181,7 @@ var GraphManager = {};
 		StreamGraph.scale(xScale, offset, m.width*10);
 		$("#events").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*m.width*10)+"px)");
 		EventManager.scaleIcons(graphPos);
-		//reload the time label on top of the steamGraph
+		//reload the time label on top of the streamGraph
 		var time = getScaleTime(offset, cap);
 		loadTime(time);
 		FilterManager.filterTime(time);

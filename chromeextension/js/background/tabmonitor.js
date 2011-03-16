@@ -74,7 +74,9 @@ var Monitor = {};
 		Connector.send("add", item, function(data){
 			if(data.length>0){
 				arr[tabId].eid = data;
-				console.log("upload successful");
+				console.log("upload successful, event id: "+data, arr[tabId].eid);
+				info.eid = data;
+				uploadUpdate(info);
 			}else{
 				alert("Error uploading open tab info: "+data);
 			}
@@ -92,7 +94,7 @@ var Monitor = {};
 		obj.starttime = Math.floor(new Date().getTime()/1000);
 		obj.endtime = Math.floor((new Date().getTime()+1000)/1000); //FIXME should be changed to 1
 		obj.eventtypename = "chrometab";
-		obj.importance = info.importance;
+		//obj.val = info.importance;
 		obj.tabindex = info.index;
 		obj.parenttab = info.parentTab;
 		obj.parentwindow = info.parentWindow;
@@ -104,17 +106,44 @@ var Monitor = {};
 	//send updated info about all tabs to server, every 114 seconds
 	function uploadUpdateInfo(){
 		console.log("update tab");
-		var batch = [];
+		//var batch = [];
 		for(var i in arr){
 			var info = arr[i].getInfo();
-			batch[batch.length] = info;
+			uploadUpdate(info);
+			//batch[batch.length] = info;
 		}
-		uploadBatch(batch);
+		//uploadBatch(batch);
 		startTimer();
 	}
 
+	function uploadUpdate(info){
+		var item = createUpdateItem(info);
+		Connector.send("update", item, function(data){
+			if(data.length>0){
+				console.log(data);
+				console.log("upload successful");
+			}else{
+				alert("Error uploading open tab info: "+data);
+			}
+		});
+	}
+
+	//function currently not in use
 	function uploadBatch(batch){
 		console.log(batch);
+	}
+
+	function createUpdateItem(info){
+		if(info.eid==-1){
+			console.log(info);
+			throw "ERROR: update item event id is not defined";
+			return false;
+		}
+		var obj = {};
+		obj.val = info.importance;
+		obj.time = Math.floor(new Date().getTime()/1000);
+		obj.eventid = info.eid;
+		return obj;
 	}
 
 	/*** end server calls ***/

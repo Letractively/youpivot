@@ -28,7 +28,7 @@ var TabInfo_discounts = [1, 1, 1.2, 1.6, 2.0, false];
 var TabInfo_maxImportance = 1.0;
 var TabInfo_minImportance = 0.01;
 
-var TabInfo_output = ["title", "url", "domain", "favUrl", "index", "win", "importance", "keywords", "parentTab", "parentWindow"];
+var TabInfo_output = ["title", "url", "domain", "favUrl", "index", "win", "importance", "keywords", "parentTab", "parentWindow", "eid"];
 
 //Object
 function TabInfo(t){

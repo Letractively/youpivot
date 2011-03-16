@@ -33,8 +33,7 @@ var SortManager = {};
 	}
 	function sort(name){
 		m.sortBy = name;
-		if($("#searchResults").is(":visible")) //need this because or else sometimes filters for search will be displayed instead
-			SearchManager.reloadResult();
+		SearchManager.reloadResult();
 		TableManager.reload();
 		FilterManager.filterTime();
 		FilterManager.filter();

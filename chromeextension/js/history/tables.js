@@ -40,4 +40,13 @@ var TableManager = {};
 	m.clearItems = function(){
 		$("#textContent").itemTable("clear");
 	}
+
+	$("#searchResults").bind("search", function(e, active){
+		if(active){
+			$("#textContent").hide();
+		}else{
+			$("#textContent").show();
+			m.loadFilters();
+		}
+	});
 })();

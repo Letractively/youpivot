@@ -38,7 +38,6 @@
 	function findHeader(label, wrap){
 		var exist = false;
 		$($(".contentHeader", wrap).get().reverse()).each(function(){
-			console.log($(this).data("label"));
 			if($(this).data("label")==label){
 			   exist = true;
 			   return;
@@ -48,6 +47,7 @@
 	}
 
 	var catCounter = 0;
+	var lastDateShown = "";
 	function addItem(obj, tableItem, wrap){
 		var id=obj.id, date=obj.date, url=obj.url, color=obj.color,
 			favUrl=obj.favUrl, name=obj.name;
@@ -62,7 +62,8 @@
 		var label = obj[sortBy];
 		var html;
 		if(sortBy=="date"){
-			html = Helper.formatDate(label);
+			label = Helper.formatDate(label);
+			html = label;
 		}else if(sortBy=="domain"){
 			html = "<img src='"+favUrl+"' class='favicon' />" + label;
 		}
@@ -74,12 +75,19 @@
 
 		var item = $("<tr class='item' id='item_"+id+"'></tr>");
 		item.data("header", catId);
+		item.append($("<td class='itemDate'></td>").html("<span class='hidden'>"+Helper.formatDate(date, "F j, Y")+"</span>"));
+		if(lastDateShown != Helper.formatDate(date)){
+			lastDateShown = Helper.formatDate(date);
+			if(sortBy!="date"){
+				$(".itemDate span", item).removeClass("hidden");
+			}
+		}
 		item.append($("<td class='itemLeft'></td>")
 			.append($("<button class='pivotBtn'>Pivot</button>").click(function(){
 				//pivot around start time/end time or center?
-				PivotManager.pivot(date);
+				PivotManager.pivot(date, false);
 			}))
-			.append($("<div class='itemDate'></div>").text(Helper.formatTime(date, 12)))
+			.append($("<div class='itemTime'></div>").text(Helper.formatTime(date, 12)))
 		);
 		item.append($("<td class='itemColor'></td>").css("background-color", Helper.createLighterColor(color, "low")));
 		item.append($("<td class='itemName'></td>").append($("<a href='"+url+"' target='_blank'></a>").text(name)));
@@ -87,11 +95,11 @@
 		var icon = IconFactory.createIcon(favUrl, name);
 		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
 		item.mouseover(function(){
-			HighlightManager.highlightDomain($(this).data("item").id, false);
+			HighlightManager.highlightDomain(id, false, wrap);
 			showPivotButton($(this));
 		});
 		item.mouseout(function(){
-			HighlightManager.lowlightDomain($(this).data("item").id, false);
+			HighlightManager.lowlightDomain(id, false, wrap);
 			hidePivotButton($(this));
 		});
 
@@ -114,16 +122,16 @@
 	}
 
 	function showPivotButton(obj){
-		$(".itemDate", obj).hide();
+		$(".itemTime", obj).hide();
 		$(".pivotBtn", obj).show();
 	}
 	function hidePivotButton(obj){
-		$(".itemDate", obj).show();
+		$(".itemTime", obj).show();
 		$(".pivotBtn", obj).hide();
 	}
 
 	function createHeader(id, label, html){
-		var header = $("<tr class='headerRow'></tr><th id='header_"+id+"' class='contentHeader'>"+html+"</th>");
+		var header = $("<tr class='headerRow'><th colspan='4' id='header_"+id+"' class='contentHeader'>"+html+"</th></tr>");
 		header.find(".contentHeader").data("label", label);
 		return header;
 	}

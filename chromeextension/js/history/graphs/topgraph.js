@@ -19,7 +19,6 @@ var TopGraph = {};
 	}
 
 	m.setSelection = function(offset, cap){
-		console.log("CAP", cap);
 		if(cap==1) cap = 0;
 		var selection = {x: (offset*GraphManager.width), dx: (cap*GraphManager.width)};
 		sPanel.data([selection]);
@@ -85,7 +84,7 @@ var TopGraph = {};
 			.top(0)
 			.width(function(d){ return d.dx})
 			.height(h)
-			.fillStyle("rgba(222, 222, 255, 0.15)")
+			.fillStyle("rgba(233, 233, 255, 0.2)")
 			.strokeStyle("rgba(128, 128, 128, 0.8)")
 			.lineWidth(0.5)
 			.cursor("move")

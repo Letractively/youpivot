@@ -3,6 +3,11 @@ var SearchManager = {};
 (function(){
 	var m = SearchManager;
 	var result = [];
+	var state = false; //is search currently in use
+
+	m.getState = function(){
+		return state;
+	}
 
 	function search(needle){
 		if(needle==""){ antiSearch(); return; }
@@ -12,14 +17,10 @@ var SearchManager = {};
 	}
 
 	function showResults(results){
-		toggleGraphs(false);
+		$("#searchResults").trigger("search", true);
 		TermManager.clearTerms();
 		DomainManager.clearDomains();
-		$("#textContent").hide();
-		$("#searchResults").show();
 		SortManager.sortItems(result);
-		$("#datePickers").addClass("dim");
-		$("#datePickers a").addClass("disabled");
 		loadResults(results);
 	}
 
@@ -44,24 +45,22 @@ var SearchManager = {};
 
 	function displayItem(id, item){
 		var obj = {id: id, date: item.startTime, name: item.title, color: item.domain.color, url: item.url, favUrl: item.domain.favUrl, domain: item.domain.name};
+		item.id = id;
 		$("#searchResults").itemTable("addItem", obj, item);
-	}
-
-	function toggleGraphs(enable){
-		$("#visualGraphs").css("pointer-events", (enable) ? "auto" : "none");
-		$("#visualGraphs>div").css("opacity", (enable) ? "1" : "0.4");
-		$("#topBackground").css("z-index", (enable) ? 0 : 10);
 	}
 
 	m.antiSearch = antiSearch;
 	function antiSearch(){
-		$("#searchResults").hide();
-		$("#textContent").show();
-		$("#datePickers").removeClass("dim");
-		$("#datePickers a").removeClass("disabled");
-		toggleGraphs(true);
-		TableManager.loadFilters();
+		$("#searchResults").trigger("search", false);
 	}
+
+	$("#searchResults").bind("search", function(e, active){
+		if(active){
+			$("#searchResults").show();
+		}else{
+			$("#searchResults").hide();
+		}
+	});
 
 	var lastSearch = "";
 	$(function(){

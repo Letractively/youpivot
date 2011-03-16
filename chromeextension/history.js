@@ -12,7 +12,7 @@ $(window).load(function(){
 	debugItems[debugItems.length] = {title: "Hide", url: "", keywords: ["Crap"], startTime: 0, endTime: 1, events: [], domain: crap};
 	debugItems[debugItems.length] = {title: "Crabby", url: "", keywords: ["Holy", "Crap"], startTime: -22*60*60000, endTime: -22*60*60000+1, events: [], domain: crap};
 
-	ItemManager.addItems(debugItems);
+	//ItemManager.addItems(debugItems);
 
 	if($(window).width()==0){
 		//to fix that weird CSS bug in webkit where the width is occasionally rendered wrongly at first

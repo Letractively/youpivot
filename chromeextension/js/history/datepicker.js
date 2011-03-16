@@ -6,18 +6,22 @@ var DatePicker = {};
 	var def = "now";
 
 	function pickDate(date){
-		if(date.indexOf("more")==0){
-			toggleCalendar();
-			return false;
-		}
 		if(typeof date == "string"){
+			if(date.indexOf("more")==0){
+				toggleCalendar();
+				return false;
+			}
 			date = translateDate(date);
 		}else{
 			date.setHours(12);
 		}
-		PivotManager.pivot(date.getTime());
 		$("#calendar").datepicker("setDate", date);
+		PivotManager.pivot(date.getTime(), true);
 		return true;
+	}
+	m.setDisplay = function(date){
+		$("#calendar").datepicker("setDate", date);
+		$("#datePickers").hList("select", {name: "more"});
 	}
 	function translateDate(name){
 		var d = new Date();
@@ -62,6 +66,16 @@ var DatePicker = {};
 	});
 	$(document).click(function(e){
 		hideCalendar();
+	});
+
+	$("#searchResults").bind("search", function(e, active){
+		if(active){
+			$("#datePickers").addClass("dim");
+			$("#datePickers a").addClass("disabled");
+		}else{
+			$("#datePickers").removeClass("dim");
+			$("#datePickers a").removeClass("disabled");
+		}
 	});
 
 	$(function(){
