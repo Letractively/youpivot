@@ -9,6 +9,10 @@ var SearchManager = {};
 		return state;
 	}
 
+	m.changeSchema = function(sortBy){
+		TableHelper.changeSchema($("#searchResults"), sortBy);
+	}
+
 	function search(needle){
 		if(needle==""){ antiSearch(); return; }
 		//Connector.send("search", {needle: needle});
@@ -25,7 +29,7 @@ var SearchManager = {};
 	}
 
 	function loadResults(results){
-		$("#searchResults").html("");
+		$("#searchResults").itemTable("clear");
 		TermManager.clearTerms(true);
 		DomainManager.clearDomains(true);
 		for(var i in results){
@@ -44,9 +48,8 @@ var SearchManager = {};
 	}
 
 	function displayItem(id, item){
-		var obj = {id: id, date: item.startTime, name: item.title, color: item.domain.color, url: item.url, favUrl: item.domain.favUrl, domain: item.domain.name};
 		item.id = id;
-		$("#searchResults").itemTable("addItem", obj, item);
+		TableHelper.addItem($("#searchResults"), item);
 	}
 
 	m.antiSearch = antiSearch;

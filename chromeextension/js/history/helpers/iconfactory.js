@@ -14,7 +14,7 @@ var IconFactory = {};
 
 	m.createIcon = function(src, name){
 		if(!name) name = src;
-		var img = $("<img src='"+src+"' title='"+name+"' />");
+		var img = $("<img src='"+src+"' title='"+name+"' class='favicon' />");
 		return img;
 	}
 })();

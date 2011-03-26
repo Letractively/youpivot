@@ -18,7 +18,8 @@ var Monitor = {};
 		});
 		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 			if(tab.status=="complete"){
-				tabUpdated(tab);
+				console.log(changeInfo);
+				tabUpdated(tab, changeInfo);
 			}
 		});
 		chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo){
@@ -49,9 +50,13 @@ var Monitor = {};
 	}
 
 	//note: Site redirection using JavaScript will cause an update
-	function tabUpdated(tab){
+	function tabUpdated(tab, changeInfo){
 		//console.log("tab updated");
 		if(arr[tab.id]){
+			if(arr[tab.id].url==tab.url){
+				console.log("URL did not change");
+				return;
+			}
 			uploadRemoveInfo(tab.id);
 			removeFromTabs(tab.id);
 		}
@@ -87,13 +92,13 @@ var Monitor = {};
 		var obj = {};
 		obj.title = info.title;
 		obj.url = info.url;
-		obj.domain = info.domain;
+		obj.eventtypename = info.domain;
 		console.log("domain", info.domain);
 		obj.favicon = info.favUrl;
 		obj.keyword = info.keywords[0]; //FIXME upload all keywords
 		obj.starttime = Math.floor(new Date().getTime()/1000);
 		obj.endtime = Math.floor((new Date().getTime()+1000)/1000); //FIXME should be changed to 1
-		obj.eventtypename = "chrometab";
+		//obj.eventtypename = "chrometab";
 		//obj.val = info.importance;
 		obj.tabindex = info.index;
 		obj.parenttab = info.parentTab;

@@ -74,6 +74,9 @@ var GraphManager = {};
 		setSelection(offset, cap);
 	}
 
+	m.getDataArray = function(){
+		return dataArray;
+	}
 	m.getData = function(i){
 		return dataArray[i];
 	}
@@ -139,6 +142,7 @@ var GraphManager = {};
 		$("#graphShadow").animate({height: (hiding) ? 83 : 270}, 200);
 		$("#streamGraph").slideToggle(200, function(){
 			ShadowManager.refresh();
+			StreamGraph.refreshScale(); //refresh the graph to solve positioning issue
 		});
 	}
 
