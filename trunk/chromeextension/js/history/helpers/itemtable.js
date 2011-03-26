@@ -39,6 +39,9 @@
 			case "destroy":
 				destroy(this);
 				break;
+			case "refreshTopRows":
+				refreshAllTopRows(this);
+				break;
 			default:
 				throw "Undefined action "+action;
 				break;
@@ -77,9 +80,11 @@
 			header.removeClass(cls);
 		}else{ console.log("header is undefined"); }
 		//show toprows
-		refreshTopRows(thiss, cls);
+		//refreshTopRows(thiss, cls);
 	}
 	function hideItem(thiss, cls){
+		throw "hideItem is deprecated";
+		/*
 		//hide row
 		thiss.addClass(cls);
 		//hide header
@@ -88,16 +93,11 @@
 			header.addClass(cls);
 		}
 		//hide toprows
-		refreshTopRows(thiss);
+		refreshTopRows(thiss);*/
 	}
 
 	function hideAll(table, cls){
 		var schema = getSchema(table);
-		for(var i in schema){
-			if(schema[i]=="toprow"){
-				$(".item_"+i).addClass(cls);
-			}
-		}
 		table.find("tr").addClass(cls);
 	}
 
@@ -133,9 +133,34 @@
 				var header = thiss.data("header");
 				var grp = header.nextUntil(".headerRow").find(".item_"+i+" span:contains('"+text+"')");
 				grp.removeClass("hidden");
-				var first = grp.filter(":visible").first();
-				grp.not(first).addClass("hidden");
+				var first;
+				var rawGrp = grp.get();
+				for(var i in rawGrp){
+					var item = $(rawGrp[i]);
+					if(item.is(":visible")){
+						first = item;
+						break;
+					}
+				}
+				if(first){
+					grp.not(first).addClass("hidden");
+				}else{
+					grp.addClass("hidden");
+				}
 			}
+		}
+	}
+
+	function refreshAllTopRows(table){
+		var header = $(".headerRow:first", table);
+		var batch = header.nextUntil(".headerRow");
+		while(batch.size()>0){
+			var lastText = "";
+			batch.filter(":visible").each(function(){
+				refreshTopRows($(this));
+			});
+			header = batch.last().next(".headerRow");
+			batch = header.nextUntil(".headerRow");
 		}
 	}
 
@@ -162,11 +187,12 @@
 	function createRow(id, schema, item){
 		var row = $("<tr class='item' id='item_"+id+"'></tr>");
 		for(var i in schema){
-			var col = $("<td class='item_"+i+"'></td>");
+			var col;
 			if(schema[i]=="toprow"){
-				col.append($("<span></span>").html(item[i]).addClass("hidden"));
-			}else
-				col.html(item[i]);
+				col = "<td class='item_"+i+"'><span class='hidden'>"+item[i]+"</span></td>";
+			}else{
+				col = "<td class='item_"+i+"'>"+item[i]+"</td>";
+			}
 			row.append(col);
 		}
 		//FIXME isolate this file, should not link to YouPivot specific objects/functions

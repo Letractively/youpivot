@@ -3,6 +3,10 @@ var Helper = {};
 (function(){
 	var m = Helper;
 
+	m.htmlEntities = function(string){
+		return string.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");		
+	}
+
 	//return an exponentially decaying number (0,1]
 	m.decay = function(num, rate, best){
 		//exponential decay

@@ -42,12 +42,15 @@ var FilterManager = {};
 			});
 			return;
 		}
-		$(".itemTable").each(function(){
+		$(".itemTable").each(function(){ // do on both search results and pivot table
 			$(this).itemTable("hideAll", {"class": "filtered"});
 		});
 		for(var i in filters){
 			applyFilter(filters[i].type, filters[i].value);
 		}
+		$(".itemTable").each(function(){
+			$(this).itemTable("refreshTopRows");
+		});
 	}
 
 	function applyFilter(type, value){
@@ -68,7 +71,6 @@ var FilterManager = {};
 		hideRow(obj, "filtered");
 	}
 	function filterName(value){
-		//$(".itemTable .item:not(.out)").each(function(){
 		$(".itemTable .item").each(function(){
 			var item = $(this).data("item");
 			if(matchKeywords(value, item.keywords)){
@@ -99,8 +101,7 @@ var FilterManager = {};
 		var endTime = time[1];
 		var tc = $("#textContent");
 		tc.itemTable("hideAll", {"class": "out"});
-		$(".itemTable .item", tc).each(function(){ hideTimeRow($(this)); })
-		.each(function(){
+		$(".itemTable .item", tc).each(function(){
 			var item = $(this).data("item");
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
 				showTimeRow($(this));
@@ -108,6 +109,7 @@ var FilterManager = {};
 				//hideTimeRow($(this));
 			}
 		});
+		$(".itemTable", tc).itemTable("refreshTopRows");
 		TableManager.loadFilters();
 	}
 	function showTimeRow(obj){

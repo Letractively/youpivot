@@ -44,15 +44,14 @@ var TableHelper = {};
 		}
 		if(sortBy=="domain"){
 			var label = item.domain.name;
-			var icon = IconFactory.createIcon(item.domain.favUrl, item.domain.name);
-			var html = $("<div></div>").html(icon).html() + label;
+			var icon = IconFactory.createTextIcon(item.domain.favUrl, item.domain.name);
+			var html = icon + label;
 			return {label: label, html: html};
 		}
 	}
 	function createName(item){
-		var output = $("<a href='"+item.url+"' target='_blank'></a>").text(item.title);
-		var icon = IconFactory.createIcon(item.domain.favUrl, item.name);
-		output.prepend(icon.addClass("item_icon"));
+		var icon = IconFactory.createTextIcon(item.domain.favUrl, item.name, "item_icon");
+		var output = "<a href='"+item.url+"' target='_blank'>"+icon+Helper.htmlEntities(item.title)+"</a>";
 		return output;
 	}
 	function createLeft(item){
