@@ -13,8 +13,13 @@ var IconFactory = {};
 	}
 
 	m.createIcon = function(src, name){
+		return $(m.createTextIcon(src, name));
+	}
+
+	m.createTextIcon = function(src, name, clss){
+		var classString = (clss) ? clss : "";
 		if(!name) name = src;
-		var img = $("<img src='"+src+"' title='"+name+"' class='favicon' />");
+		var img = "<img src='"+src+"' title='"+name+"' class='favicon "+classString+"' />";
 		return img;
 	}
 })();

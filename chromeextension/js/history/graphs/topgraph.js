@@ -79,7 +79,7 @@ var TopGraph = {};
 					return this; 
 				}
 			})
-		.add(pv.Bar)
+		var bar = sPanel.add(pv.Bar)
 			.left(function(d){ return d.x })
 			.top(0)
 			.width(function(d){ return d.dx})
@@ -89,7 +89,11 @@ var TopGraph = {};
 			.lineWidth(0.5)
 			.cursor("move")
 			.event("mousedown", pv.Behavior.drag())
-			.event("drag", function(d){ dragged = true; GraphManager.setSelectionScale(d.x/w, d.dx/w); })
+			.event("drag", function(d){
+				dragged = true;
+			   	GraphManager.setSelectionScale(d.x/w, d.dx/w);
+				return this.parent;
+			})
 			.event("dragend", function(d){
 				if(dragged){
 					dragged = false;
@@ -101,7 +105,23 @@ var TopGraph = {};
 					GraphManager.setSelectionScale(d.x/w, d.dx/w);
 					return this;
 				}
-			})
+			});
+		bar.anchor("left").add(pv.Bar)
+			.top(0)
+			.width(4)
+			.height(h)
+			.fillStyle("rgba(255, 255, 255, 0.01)") //alpha of 0 will destroy the mouse events
+			.cursor("e-resize")
+			.event("mousedown", pv.Behavior.resize("left"))
+			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; });
+		bar.anchor("right").add(pv.Bar)
+			.top(0)
+			.width(4)
+			.height(h)
+			.fillStyle("rgba(255, 255, 255, 0.01)")
+			.cursor("e-resize")
+			.event("mousedown", pv.Behavior.resize("right"))
+			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; });
 		tg.render();
 		m.obj = tg;
 	}
