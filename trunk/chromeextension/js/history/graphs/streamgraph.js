@@ -5,6 +5,7 @@ var StreamGraph = {};
 
 	var width;
 	var elements = {}; //DOM objects of the streamGraph layers
+	var graphHeight = 1;
 
 	m.changeColor = function(id, color){
 		//directly change the object in DOM rather than re-render to improve performance (significantly)
@@ -17,6 +18,7 @@ var StreamGraph = {};
 	}
 
 	m.draw = function(data, max){
+		graphHeight = max;
 		var sgbox = $("#streamGraph");
 		//sgbox.width(sgbox.width()); //Hack to make it not expand itself because the content is big - translating CSS 100% width to pixels for the system
 		var w = GraphManager.width*10,
@@ -43,18 +45,13 @@ var StreamGraph = {};
 			.event("mouseover", function(d, p){
 			   	this.title(""); //destroy the title used for DOM extraction
 				highlightItem(p.id, false); 
-				//p.active = true; 
-				//return this; 
 				})
 			.event("mouseout", function(d, p){ 
 				lowlightItem(p.id, false); 
-				//p.active = false; 
-				//return this; 
 				})
 			.event("click", function(d, p){ 
 			  	p.highlight = !p.highlight; 
 				toggleItemHighlight(p.id, p.highlight); 
-				//return this; 
 			});
 
 		streamGraph.render();
@@ -62,8 +59,41 @@ var StreamGraph = {};
 		saveElements();
 	}
 
+	m.refreshScale = function(){
+		$("#streamGraph svg").css("-webkit-transform", lastTransform);
+	}
+
+	var lastTransform = "";
 	m.scale = function(scale, offset, width){
-		$("#streamGraph svg").css("-webkit-transform", "scaleX("+scale+") translateX("+(-offset*width)+"px)");
+		var yScale = getYScale();
+		lastTransform = "scaleY("+yScale+") scaleX("+scale+") translateX("+(-offset*width)+"px)";
+		$("#streamGraph svg").css("-webkit-transform", lastTransform);
+	}
+
+	//stretch the streamgraph vertically
+	function getYScale(){
+		var graphPos = GraphManager.getGraphPos();
+		var offset = graphPos.offset, scale = graphPos.scale;
+		var lobound = Math.floor(offset*758);
+		var hibound = Math.ceil((offset+scale)*758);
+		var max = getMaxData(GraphManager.getDataArray(), lobound, hibound);
+		if(max==0) return 0;
+		return graphHeight/max;
+	}
+
+	function getMaxData(data, lobound, hibound){
+		if(data.length==0) return 0;
+		var len = data[0].data.length-1;
+		var bound = (len<hibound) ? len : hibound;
+		var max = 0;
+		for(var j=lobound; j<=bound; j++){
+			var sum = 0;
+			for(var i in data){
+				sum += data[i].data[j];
+			}
+			if(sum>max) max = sum;
+		}
+		return max;
 	}
 
 	function saveElements(){

@@ -33,8 +33,10 @@ var SortManager = {};
 	}
 	function sort(name){
 		m.sortBy = name;
-		SearchManager.reloadResult();
-		TableManager.reload();
+		TableManager.changeSchema(name);
+		SearchManager.changeSchema(name);
+		//SearchManager.reloadResult();
+		//TableManager.reload();
 		FilterManager.filterTime();
 		FilterManager.filter();
 		return true;

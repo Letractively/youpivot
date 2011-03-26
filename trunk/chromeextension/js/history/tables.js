@@ -27,8 +27,7 @@ var TableManager = {};
 	}
 
 	m.addItem = function(item){
-		var obj = {id: item.id, date: item.startTime, name: item.title, color: item.domain.color, url: item.url, favUrl: item.domain.favUrl, domain: item.domain.name};
-		var row = $("#textContent").itemTable("addItem", obj, item);
+		var row = TableHelper.addItem($("#textContent"), item);
 		row.mouseenter(function(e){
 			HighlightManager.highlightLayer(item.id, false);
 		});
@@ -39,6 +38,10 @@ var TableManager = {};
 
 	m.clearItems = function(){
 		$("#textContent").itemTable("clear");
+	}
+
+	m.changeSchema = function(sortBy){
+		TableHelper.changeSchema($("#textContent"), sortBy);
 	}
 
 	$("#searchResults").bind("search", function(e, active){

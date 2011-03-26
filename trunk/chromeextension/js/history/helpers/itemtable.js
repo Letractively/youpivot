@@ -1,13 +1,33 @@
-// A jQuery extension for containing search results and items table
+// schema: 
+//  toprow - only visible when it's the first row possessing that value
+//  normal - normal row
 
 (function($){
-	$.fn.itemTable = function(action, obj, tableItem){
+	$.fn.itemTable = function(action, params){
 		switch(action){
+			case "create":
+				var schema = getOptions(params, "schema", []);
+				createTable(this, schema);
+				break;
 			case "addItem":
-				return addItem(obj, tableItem, this);
+				var item = getOptions(params, "item", {});
+				var header = getOptions(params, "header", "");
+				return addItem(this, item, header);
+				break;
+			case "show":
+				var cls = getOptions(params, "class", "hidden");
+				showItem(this, cls);
+				break;
+			case "hide":
+				var cls = getOptions(params, "class", "hidden");
+				hideItem(this, cls);
+				break;
+			case "hideAll":
+				var cls = getOptions(params, "class", "hidden");
+				hideAll(this, cls);
 				break;
 			case "highlight":
-				var level = getOptions(obj, "level", "highbg");
+				var level = getOptions(params, "level", "highbg");
 				highlight(this, level);
 				break;
 			case "lowlight":
@@ -16,95 +36,69 @@
 			case "clear":
 				clear(this);
 				break;
-			default: 
-				throw "Action "+action+" is not defined";
+			case "destroy":
+				destroy(this);
+				break;
+			default:
+				throw "Undefined action "+action;
 				break;
 		}
-
-		return this;
 	}
 
-	function clear(obj){
-		obj.html("");
+	function createTable(thiss, schema){
+		var table = $("<table class='itemTable'></table>");
+		table.data("schema", schema);
+		thiss.html(table);
 	}
 
-	function getOptions(options, label, defaultValue){
-		if(!options || options[label] == undefined){
-			return defaultValue;
+	function addItem(thiss, item, headerInfo){
+		var table = $(".itemTable", thiss);
+		var schema = getSchema(table);
+		if(!schema){ throw "Schema not defined"; return false; }
+		//header creation
+		var header;
+		if(headerInfo){
+			header = getCreateHeader(table, headerInfo, count(schema));
 		}
-		return options[label];
+		//row creation
+		var row = createRow(item.id, schema, item);
+		row.data("header", header); //store the header element into the item
+		table.append(row);
+		showItem(row, "hidden");
+		return row;
 	}
 
-	function findHeader(label, wrap){
-		var exist = false;
-		$($(".contentHeader", wrap).get().reverse()).each(function(){
-			if($(this).data("label")==label){
-			   exist = true;
-			   return;
-			}
-		});
-		return exist;
+	function showItem(thiss, cls){
+		//show row
+		thiss.removeClass(cls);
+		//show header
+		var header = thiss.data("header");
+		if(header){
+			header.removeClass(cls);
+		}else{ console.log("header is undefined"); }
+		//show toprows
+		refreshTopRows(thiss, cls);
+	}
+	function hideItem(thiss, cls){
+		//hide row
+		thiss.addClass(cls);
+		//hide header
+		var header = thiss.data("header");
+		if(header.nextUntil(".headerRow").filter(":visible").size()==0){
+			header.addClass(cls);
+		}
+		//hide toprows
+		refreshTopRows(thiss);
 	}
 
-	var catCounter = 0;
-	var lastDateShown = "";
-	function addItem(obj, tableItem, wrap){
-		var id=obj.id, date=obj.date, url=obj.url, color=obj.color,
-			favUrl=obj.favUrl, name=obj.name;
-		var sortBy = SortManager.getSortMethod();
-
-		var table = wrap.find(".itemTable");
-		if(table.size()==0){
-			table = $("<table class='itemTable'></table>");
-			wrap.append(table);
-		}
-
-		var label = obj[sortBy];
-		var html;
-		if(sortBy=="date"){
-			label = Helper.formatDate(label);
-			html = label;
-		}else if(sortBy=="domain"){
-			html = "<img src='"+favUrl+"' class='favicon' />" + label;
-		}
-		if(!findHeader(label, wrap)){
-			var head = createHeader(++catCounter, label, html);
-			table.append(head);
-		}
-		var catId = catCounter; //ID assigned to header of current item
-
-		var item = $("<tr class='item' id='item_"+id+"'></tr>");
-		item.data("header", catId);
-		item.append($("<td class='itemDate'></td>").html("<span class='hidden'>"+Helper.formatDate(date, "F j, Y")+"</span>"));
-		if(lastDateShown != Helper.formatDate(date)){
-			lastDateShown = Helper.formatDate(date);
-			if(sortBy!="date"){
-				$(".itemDate span", item).removeClass("hidden");
+	function hideAll(table, cls){
+		var schema = getSchema(table);
+		for(var i in schema){
+			if(schema[i]=="toprow"){
+				$(".item_"+i).addClass(cls);
 			}
 		}
-		item.append($("<td class='itemLeft'></td>")
-			.append($("<button class='pivotBtn'>Pivot</button>").click(function(){
-				//pivot around start time/end time or center?
-				PivotManager.pivot(date, false);
-			}))
-			.append($("<div class='itemTime'></div>").text(Helper.formatTime(date, 12)))
-		);
-		item.append($("<td class='itemColor'></td>").css("background-color", Helper.createLighterColor(color, "low")));
-		item.append($("<td class='itemName'></td>").append($("<a href='"+url+"' target='_blank'></a>").text(name)));
-		item.data("item", tableItem);
-		var icon = IconFactory.createIcon(favUrl, name);
-		item.find(".itemName a").prepend(icon.addClass("itemIcon"));
-		item.mouseover(function(){
-			HighlightManager.highlightDomain(id, false, wrap);
-			showPivotButton($(this));
-		});
-		item.mouseout(function(){
-			HighlightManager.lowlightDomain(id, false, wrap);
-			hidePivotButton($(this));
-		});
-
-		table.append(item);
-		return item;
+		table.find("tr").addClass(cls);
 	}
 
 	function highlight(obj, level){
@@ -121,19 +115,90 @@
 		$(".itemColor", obj).css("background-color", Helper.createLighterColor(color, "low"));
 	}
 
-	function showPivotButton(obj){
-		$(".itemTime", obj).hide();
-		$(".pivotBtn", obj).show();
+	function clear(wrap){
+		if(wrap.children().first().hasClass("itemTable"))
+			wrap.find(".itemTable").html("");
 	}
-	function hidePivotButton(obj){
-		$(".itemTime", obj).show();
-		$(".pivotBtn", obj).hide();
+	function destroy(wrap){
+		if(wrap.children().first().hasClass("itemTable"))
+			wrap.html("");
 	}
 
-	function createHeader(id, label, html){
-		var header = $("<tr class='headerRow'><th colspan='4' id='header_"+id+"' class='contentHeader'>"+html+"</th></tr>");
-		header.find(".contentHeader").data("label", label);
+	/*** secondary functions ***/
+	function refreshTopRows(thiss){
+		var schema = getSchema(thiss.parents(".itemTable"));
+		for(var i in schema){
+			if(schema[i]=="toprow"){
+				var text = thiss.find(".item_"+i).text();
+				var header = thiss.data("header");
+				var grp = header.nextUntil(".headerRow").find(".item_"+i+" span:contains('"+text+"')");
+				grp.removeClass("hidden");
+				var first = grp.filter(":visible").first();
+				grp.not(first).addClass("hidden");
+			}
+		}
+	}
+
+	function getCreateHeader(table, headerInfo, width){
+		var header;
+		$(".headerRow", table).each(function(){
+			if($(this).data("label")==headerInfo.label){
+				header = $(this);
+				return;
+			}
+		});
+		if(!header){
+			header = createHeader(headerInfo, width);
+			table.append(header);
+		}
+		return header;
+	}
+	function createHeader(headerInfo, width){
+		var header = $("<tr class='headerRow'><th colspan='"+width+"' class='contentHeader'>"+headerInfo.html+"</th></tr>");
+		header.data("label", headerInfo.label);
 		return header;
 	}
 
+	function createRow(id, schema, item){
+		var row = $("<tr class='item' id='item_"+id+"'></tr>");
+		for(var i in schema){
+			var col = $("<td class='item_"+i+"'></td>");
+			if(schema[i]=="toprow"){
+				col.append($("<span></span>").html(item[i]).addClass("hidden"));
+			}else
+				col.html(item[i]);
+			row.append(col);
+		}
+		//FIXME isolate this file, should not link to YouPivot specific objects/functions
+		row.mouseover(function(){
+			HighlightManager.highlightDomain(id, false, $(this).parents(".itemTable"));
+			$(".item_time", this).hide();
+			$(".pivotBtn", this).show();
+		});
+		row.mouseout(function(){
+			HighlightManager.lowlightDomain(id, false, $(this).parents(".itemTable"));
+			$(".item_time", this).show();
+			$(".pivotBtn", this).hide();
+		});
+		return row;
+	}
+
+	function getSchema(table){
+		if(!table) return false;
+		var schema = table.data("schema");
+		return schema;
+	}
+
+	/*** additonal functions ***/
+	function getOptions(options, label, defaultValue){
+		if(!options || options[label] == undefined){
+			return defaultValue;
+		}
+		return options[label];
+	}
+	function count(obj){
+		var counter = 0;
+		for(var i in obj){ counter++; }
+		return counter;
+	}
 })(jQuery);

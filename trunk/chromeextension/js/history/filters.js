@@ -37,13 +37,14 @@ var FilterManager = {};
 	m.filter = function(){
 		if(filters.length==0){
 			//show all items
-			$(".itemTable .item:not(.out)").each(function(){
-				showRow($(this));
+			$(".itemTable .item").each(function(){
+				showFilterRow($(this));
 			});
 			return;
 		}
-		$(".itemTable .item:not(.out)").hide();
-		$(".itemTable tr:has(.contentHeader)").hide();
+		$(".itemTable").each(function(){
+			$(this).itemTable("hideAll", {"class": "filtered"});
+		});
 		for(var i in filters){
 			applyFilter(filters[i].type, filters[i].value);
 		}
@@ -60,19 +61,26 @@ var FilterManager = {};
 		}
 	}
 
+	function showFilterRow(obj){
+		showRow(obj, "filtered");
+	}
+	function hideFilterRow(obj){
+		hideRow(obj, "filtered");
+	}
 	function filterName(value){
-		$(".itemTable .item:not(.out)").each(function(){
+		//$(".itemTable .item:not(.out)").each(function(){
+		$(".itemTable .item").each(function(){
 			var item = $(this).data("item");
 			if(matchKeywords(value, item.keywords)){
-				showRow($(this));
+				showFilterRow($(this));
 			}
 		});
 	}
 	function filterDomain(domain){
-		$(".itemTable .item:not(.out)").each(function(){
+		$(".itemTable .item").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
-				showRow($(this));
+				showFilterRow($(this));
 			}
 		});
 	}
@@ -86,12 +94,12 @@ var FilterManager = {};
 			console.log("Time is not defined. Filtering aborted. ");
 			return; 
 		}
-		m.clearFilters();
+		//m.clearFilters();
 		var startTime = time[0];
 		var endTime = time[1];
 		var tc = $("#textContent");
-		$("tr:has(.contentHeader)", tc).hide();
-		$(".itemTable .item", tc).addClass("out").hide()
+		tc.itemTable("hideAll", {"class": "out"});
+		$(".itemTable .item", tc).each(function(){ hideTimeRow($(this)); })
 		.each(function(){
 			var item = $(this).data("item");
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
@@ -103,41 +111,18 @@ var FilterManager = {};
 		TableManager.loadFilters();
 	}
 	function showTimeRow(obj){
-		if(obj.is(":hidden")){
-			obj.removeClass("out");
-			showRow(obj);
-		}
+		showRow(obj, "out");
 	}
-	/*function hideTimeRow(obj){
-		if(obj.is(":visible")){
-			obj.addClass("out");
-			hideRow(obj);
-		}
-	}*/
-	function showRow(obj){
-		if(obj.is(":hidden")){
-			obj.show();
-			if(SortManager.getSortMethod()!="date"){
-				var prev = obj.prevAll(":visible").first();
-				if($(".itemDate>span", prev).text()!=$(".itemDate>span", obj).text()){
-					$(".itemDate>span", obj).removeClass("hidden");
-				}
-			}
-			var catId = obj.data("header");
-			var header = $("#header_"+catId).parent();
-			header.show(); // show the date label
-		}
+	function hideTimeRow(obj){
+		hideRow(obj, "out");
 	}
-	/*function hideRow(obj){
-		if(obj.is(":visible")){
-			obj.hide();
-			if(obj.hasClass("headerRow") && obj.next().hasClass("headerRow")){
-				var catId = obj.data("header");
-				var header = $("#header_"+catId);
-				header.hide(); // hide the date label
-			}
-		}
-	}*/
+	function hideRow(obj, type){
+		obj.itemTable("hide", {"class": type});
+	}
+	function showRow(obj, type){
+		obj.itemTable("show", {"class": type});
+	}
+
 	function matchKeywords(needle, keywords){
 		for(var i in keywords){
 			if(keywords[i].toLowerCase().indexOf(needle.toLowerCase())!=-1){
