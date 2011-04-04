@@ -115,6 +115,7 @@ a.active:active { color: #3870AD; }
 		.itemTable th { height: 26px; text-align: left; }
 		.itemTable .item_name { width: 100%; padding: 0px 5px; }
 		.itemTable .item_date { white-space: nowrap; }
+		.itemTable .item_date .grey { color: #999999; }
 		.itemTable .item_time { display: inline-block; color: #919194; width: 60px; text-align: center; }
 		.itemTable .item_left { padding: 0px 8px; width: 70px; height: 100%; }
 		.itemTable a { overflow: hidden; text-overflow: ellipsis; color: #000000; display: block; white-space: nowrap; }
