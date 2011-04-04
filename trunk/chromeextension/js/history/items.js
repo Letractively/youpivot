@@ -41,9 +41,30 @@ var ItemManager = {};
 		return output;
 	}*/
 
+	var domains = new Array();
+	function addToDomainList(domain, color){
+		for(var i in domains){
+			if(domains[i] == domain){
+				return i;
+			}
+		}
+		var output = domains.length;
+		domains[output] = domain;
+		return output;
+	}
+
+	m.getDomainId = function(domain){
+		for(var i in domains){
+			if(domains[i] == domain){
+				return i;
+			}
+		}
+	}
+
 	function addItem(id, item){
 		var domain = item.domain;
 		item.id = id;
+		item.domain.id = addToDomainList(domain.name, domain.color);
 		TermManager.addTerms(item.keywords);
 		TableManager.addItem(item);
 		DomainManager.addDomain(domain.favUrl, domain.name);

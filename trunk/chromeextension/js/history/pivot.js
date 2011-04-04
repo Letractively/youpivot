@@ -21,19 +21,18 @@ var PivotManager = {};
 	}
 
 	function pivotServer(time, range){
-		$("#spinner").show();
+		Helper.showLoading();
 		time = Math.floor(time/1000);
 		Connector.send("get", {pivottime: time}, function(data){
 			if(data=="Bad User"){ alert(data); return; }
 			var obj = JSON.parse(data);
-			console.log(obj);
 			var arr = createItemsArray(obj);
 			//console.log(arr);
 			GraphManager.setRange([time*1000-43200000, time*1000+43199999]); //FIXME load from server
 			ItemManager.clear();
 			ItemManager.addItems(arr);
 			GraphManager.draw();
-			$("#spinner").hide();
+			Helper.hideLoading();
 			GraphManager.setSelection(range[0], range[1]);
 		});
 	}

@@ -80,8 +80,8 @@ var Monitor = {};
 			if(data.length>0){
 				arr[tabId].eid = data;
 				console.log("upload successful, event id: "+data, arr[tabId].eid);
-				info.eid = data;
-				uploadUpdate(info);
+				//info.eid = data;
+				//uploadUpdate(info);
 			}else{
 				alert("Error uploading open tab info: "+data);
 			}
@@ -125,8 +125,7 @@ var Monitor = {};
 		var item = createUpdateItem(info);
 		Connector.send("update", item, function(data){
 			if(data.length>0){
-				console.log(data);
-				console.log("upload successful");
+				console.log("update successful");
 			}else{
 				alert("Error uploading open tab info: "+data);
 			}
@@ -145,8 +144,8 @@ var Monitor = {};
 			return false;
 		}
 		var obj = {};
-		obj.val = info.importance;
-		obj.time = Math.floor(new Date().getTime()/1000);
+		obj.val1 = info.importance;
+		obj.time1 = Math.floor(new Date().getTime()/1000);
 		obj.eventid = info.eid;
 		return obj;
 	}

@@ -37,6 +37,13 @@ var DomainManager = {};
 		var img = IconFactory.createIcon(icon, title);
 		img.css("opacity", Helper.decay(rating, 1, best));
 		$("#contentFilters").append(img.addClass("favicon"));
+		img.mouseover(function(){
+			var domainId = ItemManager.getDomainId(title);
+			HighlightManager.highlightDomain(domainId, {highlightself: false});
+		}).mouseout(function(){
+			var domainId = ItemManager.getDomainId(title);
+			HighlightManager.lowlightDomain(domainId, {highlightself: false});
+		});
 		img.click(function(){
 			var label = "<img class='favicon' src='"+$(this).attr("src")+"' />";
 			FilterManager.addFilter("domain", title, label);

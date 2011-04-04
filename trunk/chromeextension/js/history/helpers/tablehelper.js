@@ -19,6 +19,7 @@ var TableHelper = {};
 			PivotManager.pivot(item.startTime, false);
 		});
 		row.data("item", item);
+		row.addClass("item_domain_"+item.domain.id);
 		return row;
 	}
 	m.changeSchema = function(table, sortBy){

@@ -33,12 +33,17 @@ var SortManager = {};
 	}
 	function sort(name){
 		m.sortBy = name;
+		//Helper.showLoading();
 		TableManager.changeSchema(name);
 		SearchManager.changeSchema(name);
 		//SearchManager.reloadResult();
 		//TableManager.reload();
+		$(".itemTable").each(function(){
+			$(this).itemTable("refreshTopRows");
+		});
 		FilterManager.filterTime();
 		FilterManager.filter();
+		//Helper.hideLoading();
 		return true;
 	}
 	$(function(){

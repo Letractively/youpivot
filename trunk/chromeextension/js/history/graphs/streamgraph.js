@@ -57,16 +57,12 @@ var StreamGraph = {};
 		streamGraph.render();
 		m.obj = streamGraph;
 		saveElements();
+		$("#streamGraph").css("display", "block");
 	}
 
-	m.refreshScale = function(){
-		$("#streamGraph svg").css("-webkit-transform", lastTransform);
-	}
-
-	var lastTransform = "";
 	m.scale = function(scale, offset, width){
 		var yScale = getYScale();
-		lastTransform = "scaleY("+yScale+") scaleX("+scale+") translateX("+(-offset*width)+"px)";
+		var lastTransform = "scaleY("+yScale+") scaleX("+scale+") translateX("+(-offset*width)+"px)";
 		$("#streamGraph svg").css("-webkit-transform", lastTransform);
 	}
 
@@ -107,7 +103,7 @@ var StreamGraph = {};
 	}
 
 	function highlightItem(id, persistent){
-		HighlightManager.highlightDomain(id, persistent, $("#textContent"));
+		HighlightManager.highlightDomain(id, {persistent: persistent, parent: $("#textContent")});
 		HighlightManager.highlightLayer(id, persistent);
 		HighlightManager.scrollToItem(id, (persistent) ? 0 : 500);
 		//GraphManager.highlightTopGraph(GraphManager.getDataIndex(id));
@@ -116,7 +112,7 @@ var StreamGraph = {};
 
 	function lowlightItem(id, clearPersistent){
 		HighlightManager.cancelScroll(id); 
-		HighlightManager.lowlightDomain(id, clearPersistent, $("#textContent"));
+		HighlightManager.lowlightDomain(id, {clearPersistent: clearPersistent, parent: $("#textContent")});
 		HighlightManager.lowlightLayer(id, clearPersistent);
 		//GraphManager.highlightTopGraph(-1);
 		//TopGraph.highlight(-1); //cancel highlight on the topGraph

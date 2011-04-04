@@ -7,7 +7,7 @@ var GraphManager = {};
 	var endTime = -1;
 	var dataArray = new Array(); //array of the data for the graph (importance values)
 
-	var graphPos = {offset: 0, scale: 1}; // {offset, scale}
+	var graphPos = {offset: 0, scale: 0}; // {offset, scale}
 	m.width = 680; //width of the graphs
 
 	$(function(){
@@ -140,10 +140,7 @@ var GraphManager = {};
 		$("#eventsWrap").toggle();
 		$("#collapseGraph").animate({"rotate": (hiding) ? 180 : 0}, 150);
 		$("#graphShadow").animate({height: (hiding) ? 83 : 270}, 200);
-		$("#streamGraph").slideToggle(200, function(){
-			ShadowManager.refresh();
-			StreamGraph.refreshScale(); //refresh the graph to solve positioning issue
-		});
+		$("#streamGraph").animate({height: (hiding) ? 0 : 150}, 200); //block display to prevent it from occupying an extra row
 	}
 
 	function getScaleTime(offset, scale){
@@ -189,6 +186,15 @@ var GraphManager = {};
 		var time = getScaleTime(offset, cap);
 		loadTime(time);
 		FilterManager.filterTime(time);
+	}
+
+	m.startSelection = function(){
+		$("#textContent .item_date span").removeClass("hidden").addClass("grey");
+	}
+
+	m.finishSelection = function(){
+		$("#textContent .item_date span").removeClass("grey");
+		$("#textContent").itemTable("refreshTopRows");
 	}
 
 	var maxArrLength = 758; // 758 = 86400 / 114
