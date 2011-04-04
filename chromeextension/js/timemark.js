@@ -36,7 +36,7 @@ var TimeMarkManager = {};
 	}
 
 	function timemarkCallback(data){
-		if(data.toLowerCase()=="added stuff"){
+		if(data.length>0){
 			window.close();
 		}else{
 			alert("error: "+data); //FIXME

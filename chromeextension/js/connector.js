@@ -26,7 +26,7 @@ var Connector = {};
 
 	function sendString(type, string, callback){
 		var url = serverUrl+type+"?"+string;
-		ajaxGet(url, function(data){if(callback) sendCallbackData(callback, data);});
+		ajaxGet(url, function(data){console.log(data); if(callback) sendCallbackData(callback, data);});
 		console.log(url);
 	}
 

@@ -28,7 +28,7 @@ var DatePicker = {};
 		switch(name){
 			case "now":
 				//now is the end point instead of the center
-				return new Date(d.getTime()-43200000);
+				return new Date(d.getTime()); //FIXME change back to end point
 				break;
 			case "today":
 				return noonDay(d);

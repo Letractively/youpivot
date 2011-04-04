@@ -4,36 +4,50 @@ var HighlightManager = {};
 	var m = HighlightManager;
 
 	var lvls = ["highbg", "lowbg"];
-	m.highlightDomain = function(id, persistent, parent){
-		if(!parent) parent = $("#textContent");
-		var domain = $("#item_"+id, parent).data("item").domain.name;
-		$(".item", parent).each(function(){
-			var item = $(this).data("item");
-			if(item.domain.name == domain){
-				var lvl = (item.id==id) ? 1 : 2;
-				$(this).itemTable("highlight", {level: lvls[getMinLevel($(this), lvl)-1]});
-				if(persistent){
-					addToList($(this), lvl);
-				}
+	m.highlightDomain = function(id, options){
+		var persistent = Helper.getOptions(options, "persistent", false);
+		var parent = Helper.getOptions(options, "parent", $("#textContent"));
+		var highlightself = Helper.getOptions(options, "highlightself", true);
+		var hover, domain;
+		if(highlightself){
+			hover = $("#item_"+id, parent);
+			domain = hover.data("item").domain.id;
+		}else{
+			domain = id;
+		}
+		$("tr.item_domain_"+domain).each(function(){
+			var t = $(this);
+			var lvl = 2;
+			if(highlightself && t.get(0)==hover.get(0)) lvl = 1;
+			t.itemTable("highlight", {level: lvls[getMinLevel(t, lvl)-1]});
+			if(persistent){
+				addToList(t, lvl);
 			}
 		});
 	}
 
-	m.lowlightDomain = function(id, clearPersistent, parent){
-		if(!parent) parent = $("#textContent");
-		var domain = $("#item_"+id, parent).data("item").domain.name;
-		$(".item", parent).each(function(){
-			var item = $(this).data("item");
-			if(item.domain.name == domain){
-				var lvl = (item.id==id) ? 1 : 2;
-				if(clearPersistent){
-					removeFromList($(this), lvl);
-				}
-				if(getList($(this)).length===0)
-					$(this).itemTable("lowlight", {});
-				else
-					$(this).itemTable("highlight", {level: lvls[getMinLevel($(this))-1]});
+	m.lowlightDomain = function(id, clearPersistent, options){
+		var clearPersistent = Helper.getOptions(options, "clearPersistent", false);
+		var parent = Helper.getOptions(options, "parent", $("#textContent"));
+		var highlightself = Helper.getOptions(options, "highlightself", true);
+		var hover, domain;
+		if(highlightself){
+			hover = $("#item_"+id, parent);
+			domain = hover.data("item").domain.id;
+		}else{
+			domain = id;
+		}
+		$("tr.item_domain_"+domain).each(function(){
+			var t = $(this);
+			var lvl = 2;
+			if(highlightself && t.get(0)==hover.get(0)) lvl = 1;
+			if(clearPersistent){
+				removeFromList(t, lvl);
 			}
+			if(getList(t).length===0)
+				t.itemTable("lowlight", {});
+			else
+				t.itemTable("highlight", {level: lvls[getMinLevel(t)-1]});
 		});
 	}
 

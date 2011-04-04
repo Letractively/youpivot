@@ -109,8 +109,10 @@ var FilterManager = {};
 				//hideTimeRow($(this));
 			}
 		});
-		$(".itemTable", tc).itemTable("refreshTopRows");
-		TableManager.loadFilters();
+		//$(".itemTable", tc).itemTable("refreshTopRows");
+		if(!SearchManager.getState()){
+			TableManager.loadFilters();
+		}
 	}
 	function showTimeRow(obj){
 		showRow(obj, "out");
@@ -144,7 +146,7 @@ var FilterManager = {};
 	}
 
 	function addFilterLabel(type, value, lbl){
-		var label = $("<div class='filterLabel app'></div>");
+		var label = $("<div class='filterLabel app' title='click to remove'></div>");
 		label.click(function(){
 			m.removeFilter(type, value);
 			removeFilterLabel($(this));

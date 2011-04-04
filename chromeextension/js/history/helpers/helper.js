@@ -3,6 +3,23 @@ var Helper = {};
 (function(){
 	var m = Helper;
 
+	m.showLoading = function(){
+		$("#spinner").show();
+		$("body :visible").css("cursor", "progress");
+	}
+
+	m.hideLoading = function(){
+		$("#spinner").hide();
+		$("body :visible").css("cursor", "auto");
+	}
+
+	m.getOptions = function(options, label, defaultValue){
+		if(!options || options[label] == undefined){
+			return defaultValue;
+		}
+		return options[label];
+	}
+
 	m.htmlEntities = function(string){
 		return string.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");		
 	}

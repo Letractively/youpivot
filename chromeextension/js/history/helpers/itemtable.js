@@ -64,7 +64,7 @@
 			header = getCreateHeader(table, headerInfo, count(schema));
 		}
 		//row creation
-		var row = createRow(item.id, schema, item);
+		var row = createRow(item.id, schema, item, table);
 		row.data("header", header); //store the header element into the item
 		table.append(row);
 		showItem(row, "hidden");
@@ -102,16 +102,16 @@
 	}
 
 	function highlight(obj, level){
-		obj.addClass("hover");
+		//obj.addClass("hover");
 		var color = obj.data("item").domain.color;
 		obj.css("background-color", Helper.createLighterColor(color, level));
 		$(".itemColor", obj).css("background-color", (level=="highbg") ? color : Helper.createLighterColor(color, "med"));
 	}
 
 	function lowlight(obj){
-		obj.removeClass("hover");
+		//obj.removeClass("hover");
 		var color = obj.data("item").domain.color;
-		obj.css("background-color", "transparent");
+		obj.css("background-color", "");
 		$(".itemColor", obj).css("background-color", Helper.createLighterColor(color, "low"));
 	}
 
@@ -184,7 +184,7 @@
 		return header;
 	}
 
-	function createRow(id, schema, item){
+	function createRow(id, schema, item, table){
 		var row = $("<tr class='item' id='item_"+id+"'></tr>");
 		for(var i in schema){
 			var col;
@@ -196,13 +196,13 @@
 			row.append(col);
 		}
 		//FIXME isolate this file, should not link to YouPivot specific objects/functions
-		row.mouseover(function(){
-			HighlightManager.highlightDomain(id, false, $(this).parents(".itemTable"));
+		row.mouseenter(function(e){
+			HighlightManager.highlightDomain(id, {persistent: false, parent: table});
 			$(".item_time", this).hide();
 			$(".pivotBtn", this).show();
 		});
-		row.mouseout(function(){
-			HighlightManager.lowlightDomain(id, false, $(this).parents(".itemTable"));
+		row.mouseleave(function(){
+			HighlightManager.lowlightDomain(id, {clearPersistent: false, parent: table});
 			$(".item_time", this).show();
 			$(".pivotBtn", this).hide();
 		});

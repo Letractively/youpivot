@@ -22,6 +22,7 @@ var SearchManager = {};
 
 	function showResults(results){
 		$("#searchResults").trigger("search", true);
+		state = true;
 		TermManager.clearTerms();
 		DomainManager.clearDomains();
 		SortManager.sortItems(result);
@@ -54,6 +55,7 @@ var SearchManager = {};
 
 	m.antiSearch = antiSearch;
 	function antiSearch(){
+		state = false;
 		$("#searchResults").trigger("search", false);
 	}
 

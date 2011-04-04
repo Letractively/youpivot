@@ -67,6 +67,7 @@ var TopGraph = {};
 			.events("all")
 			.event("mousedown", pv.Behavior.select())
 			.event("select", function(d){ dragged = true; GraphManager.setSelectionScale(d.x/w, d.dx/w); })
+			.event("selectstart", function(){ GraphManager.startSelection(); })
 			.event("selectend", function(d){
 				if(dragged){
 				   dragged = false; 
@@ -76,8 +77,10 @@ var TopGraph = {};
 					if(d.x>w-defSelect) d.x = w-defSelect;
 					d.dx = defSelect;
 					GraphManager.setSelectionScale(d.x/w, d.dx/w);
+					GraphManager.finishSelection();
 					return this; 
 				}
+				GraphManager.finishSelection();
 			})
 		var bar = sPanel.add(pv.Bar)
 			.left(function(d){ return d.x })
@@ -94,6 +97,7 @@ var TopGraph = {};
 			   	GraphManager.setSelectionScale(d.x/w, d.dx/w);
 				return this.parent;
 			})
+			.event("dragstart", function(){ GraphManager.startSelection(); })
 			.event("dragend", function(d){
 				if(dragged){
 					dragged = false;
@@ -103,8 +107,10 @@ var TopGraph = {};
 					if(d.x>w-defSelect) d.x = w-defSelect;
 					d.dx = defSelect;
 					GraphManager.setSelectionScale(d.x/w, d.dx/w);
+					GraphManager.finishSelection();
 					return this;
 				}
+				GraphManager.finishSelection();
 			});
 		bar.anchor("left").add(pv.Bar)
 			.top(0)
@@ -113,7 +119,9 @@ var TopGraph = {};
 			.fillStyle("rgba(255, 255, 255, 0.01)") //alpha of 0 will destroy the mouse events
 			.cursor("e-resize")
 			.event("mousedown", pv.Behavior.resize("left"))
-			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; });
+			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; })
+			.event("resizestart", function(){ GraphManager.startSelection(); })
+			.event("resizeend", function(){ GraphManager.finishSelection(); });
 		bar.anchor("right").add(pv.Bar)
 			.top(0)
 			.width(4)
@@ -121,7 +129,9 @@ var TopGraph = {};
 			.fillStyle("rgba(255, 255, 255, 0.01)")
 			.cursor("e-resize")
 			.event("mousedown", pv.Behavior.resize("right"))
-			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; });
+			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; })
+			.event("resizestart", function(){ GraphManager.startSelection(); })
+			.event("resizeend", function(){ GraphManager.finishSelection(); });
 		tg.render();
 		m.obj = tg;
 	}
