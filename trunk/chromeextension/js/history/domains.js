@@ -44,9 +44,16 @@ var DomainManager = {};
 			var domainId = ItemManager.getDomainId(title);
 			HighlightManager.lowlightDomain(domainId, {highlightself: false});
 		});
-		img.click(function(){
+		img.click(function(e){
+			if(e.which!==3){
+				var label = "<img class='favicon' src='"+$(this).attr("src")+"' />";
+				FilterManager.addFilter("domain", title, label);
+			}
+		});
+		img.bind("contextmenu", function(e){
 			var label = "<img class='favicon' src='"+$(this).attr("src")+"' />";
-			FilterManager.addFilter("domain", title, label);
+			FilterManager.addOutcast("domain", title, label);
+			e.preventDefault();
 		});
 	}
 

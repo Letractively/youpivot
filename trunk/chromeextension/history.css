@@ -64,19 +64,19 @@ a.active:active { color: #3870AD; }
 				 background: url("images/hide.png"); opacity: 0.8; }
 #collapseGraph:hover { opacity: 1; }
 /*** visualGraphs ***/
-#visualGraphs { position: fixed; width: 100%; -webkit-user-select: none; cursor: default; 
+#visualGraphs { position: fixed; width: 100%; -webkit-user-select: none; cursor: default; z-index: 800;
 				background: -webkit-gradient(linear, left top, left bottom, color-stop(0.95, rgba(255, 255, 255, 1)), to(rgba(255, 255, 255, 0))); }
 
 #visualGraphsContent { margin-left: 280px; padding-left: 10px; }
 			
-#topBackground { position: absolute; width: 100%; height: 45px; z-index: 0;
+#topBackground { position: absolute; width: 100%; height: 45px; z-index: 801;
 	border-bottom: 1px solid #E5E8EB; pointer-events: all;
 	background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFF), to(#F4F6F9) ); }
 #spinner { position: absolute; margin-left: 690px; background: url("images/spinner.gif") center no-repeat; width: 22px; height: 45px; }
-#topGraph { width: 680px; height: 45px; position: relative; z-index: 9;
+#topGraph { width: 680px; height: 45px; position: relative; z-index: 820;
 			background-image: url("images/topbg.png"); }
 #topGraphDate { width: 100%; height: 20px;
-   				padding-top: 2px; position: absolute; z-index: 8; 
+   				padding-top: 2px; position: absolute; z-index: 810; 
 				font-size: 8pt; font-style: italic; color: #919191; }
 #streamGraph { width: 680px; height: 150px; overflow: hidden; }
 #streamGraph svg { -webkit-transform-origin: left; -webkit-transform: scaleX(0.1); }
@@ -92,12 +92,16 @@ a.active:active { color: #3870AD; }
 /*** contents ***/
 #content { margin-left: 280px; width: 100%; height: 100%; background-color: #FFFFFF; padding-left: 10px; }
 .term { font-size: 0px; /* if not the div will have min height (webkit bug/behavior) */ }
-.termAnchor { color: #555555 !important; display: inline-block; min-width: 50%; }
+.termAnchor { color: #555555 !important; display: inline-block; min-width: 50%; max-width: 100%; text-overflow: ellipsis; overflow: hidden; }
 .termAnchor:hover { color: #333333 !important; opacity: 1 !important; }
 	/*** filters ***/
 	#filtersWrap { display: none; padding: 2px; }
 	.filterLabel { display: inline-block; margin: 5px; cursor: default; height: 16px; vertical-align: top; line-height: 16px; }
 	.filterLabel { cursor: pointer; }
+
+	.outcastText { text-decoration: line-through; }
+	.outcastIcon { position: relative; z-index: 0; }
+	.outcastCross { position: absolute; width: 100%; height: 100%; background: url("images/cross.png"); }
 
 	/*** search results ***/
 	#searchResults { padding-bottom: 10px; display: none; -webkit-user-select: none; }
