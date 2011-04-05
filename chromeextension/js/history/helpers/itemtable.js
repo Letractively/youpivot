@@ -83,8 +83,6 @@
 		//refreshTopRows(thiss, cls);
 	}
 	function hideItem(thiss, cls){
-		throw "hideItem is deprecated";
-		/*
 		//hide row
 		thiss.addClass(cls);
 		//hide header
@@ -93,7 +91,7 @@
 			header.addClass(cls);
 		}
 		//hide toprows
-		refreshTopRows(thiss);*/
+		//refreshTopRows(thiss);
 	}
 
 	function hideAll(table, cls){
@@ -105,14 +103,14 @@
 		//obj.addClass("hover");
 		var color = obj.data("item").domain.color;
 		obj.css("background-color", Helper.createLighterColor(color, level));
-		$(".itemColor", obj).css("background-color", (level=="highbg") ? color : Helper.createLighterColor(color, "med"));
+		$(".item_color", obj).css("background-color", (level=="highbg") ? color : Helper.createLighterColor(color, "med"));
 	}
 
 	function lowlight(obj){
 		//obj.removeClass("hover");
 		var color = obj.data("item").domain.color;
 		obj.css("background-color", "");
-		$(".itemColor", obj).css("background-color", Helper.createLighterColor(color, "low"));
+		$(".item_color", obj).css("background-color", Helper.createLighterColor(color, "low"));
 	}
 
 	function clear(wrap){

@@ -44,6 +44,10 @@ var TermManager = {};
 		anchor.attr("href", "javascript: filter");
 		anchor.css("font-size", 20*Helper.decay(rating, 1, best)+"px");
 		anchor.css("opacity", Helper.decay(rating, 1, best));
+		anchor.bind("contextmenu", function(e){
+			FilterManager.addOutcast("name", text, text);
+			e.preventDefault();
+		});
 		anchor.click(function(){
 			FilterManager.addFilter("name", text, text);
 			return false;

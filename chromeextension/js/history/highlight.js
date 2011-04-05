@@ -26,7 +26,7 @@ var HighlightManager = {};
 		});
 	}
 
-	m.lowlightDomain = function(id, clearPersistent, options){
+	m.lowlightDomain = function(id, options){
 		var clearPersistent = Helper.getOptions(options, "clearPersistent", false);
 		var parent = Helper.getOptions(options, "parent", $("#textContent"));
 		var highlightself = Helper.getOptions(options, "highlightself", true);

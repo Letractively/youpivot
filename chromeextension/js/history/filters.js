@@ -3,27 +3,54 @@ var FilterManager = {};
 (function(){
 	var m = FilterManager;
 	var filters = new Array();
+	var outcasts = new Array();
 
 	m.addFilter = function(type, value, label){
 		if(getFilterIndex(type, value)!==false){
 			console.log("Filter already exists");
 			return false;
 		}
-		addFilterLabel(type, value, label);
 		var index = filters.length;
-		filters[index] = {type: type, value: value};
+		var element = addFilterLabel(type, value, label, false);
+		filters[index] = {type: type, value: value, element: element};
+		m.filter();
+		return index;
+	}
+
+	m.addOutcast = function(type, value, label){
+		if(getOutcastIndex(type, value)!==false){ //FIXME
+			console.log("Filter already exists");
+			return false;
+		}
+		var index = outcasts.length;
+		var element = addOutcastLabel(type, value, label);
+		outcasts[index] = {type: type, value: value, element: element};
 		m.filter();
 		return index;
 	}
 
 	m.removeFilter = function(type, value){
+		var id;
 		if(typeof type == "string"){
-			var index = getFilterIndex(type, value);
-			if(index===false) return;
-			filters.splice(index, 1);
+			id = getFilterIndex(type, value);
+			if(id===false) return;
 		}else if(typeof type = "number"){
-			filters.splice(type, 1);
+			id = type;
 		}
+		removeFilterLabel(id);
+		filters.splice(id, 1); //splice last to avoid shifting issues
+		m.filter();
+	}
+	function removeOutcast(type, value){
+		var id;
+		if(typeof type == "string"){
+			id = getOutcastIndex(type, value);
+			if(id===false) return;
+		}else if(typeof type = "number"){
+			id = type;
+		}
+		removeOutcastLabel(id);
+		outcasts.splice(id, 1); //splice last to avoid shifting issues
 		m.filter();
 	}
 
@@ -35,7 +62,7 @@ var FilterManager = {};
 	}
 
 	m.filter = function(){
-		if(filters.length==0){
+		if(filters.length==0 && outcasts.length==0){
 			//show all items
 			$(".itemTable .item").each(function(){
 				showFilterRow($(this));
@@ -45,21 +72,40 @@ var FilterManager = {};
 		$(".itemTable").each(function(){ // do on both search results and pivot table
 			$(this).itemTable("hideAll", {"class": "filtered"});
 		});
-		for(var i in filters){
-			applyFilter(filters[i].type, filters[i].value);
+		if(filters.length==0){
+			$(".itemTable .item").each(function(){
+				showFilterRow($(this));
+			});
+		}else{
+			for(var i in filters){
+				applyFilter(filters[i].type, filters[i].value);
+			}
+		}
+		for(var i in outcasts){
+			applyOutcast(outcasts[i].type, outcasts[i].value);
 		}
 		$(".itemTable").each(function(){
 			$(this).itemTable("refreshTopRows");
 		});
 	}
 
+	function applyOutcast(type, value){
+		switch(type){
+			case "name":
+				filterName(value, "negative");
+				break;
+			case "domain":
+				filterDomain(value, "negative");
+				break;
+		}
+	}
 	function applyFilter(type, value){
 		switch(type){
 			case "name":
-				filterName(value);
+				filterName(value, "positive");
 				break;
 			case "domain":
-				filterDomain(value);
+				filterDomain(value, "positive");
 				break;
 		}
 	}
@@ -70,19 +116,29 @@ var FilterManager = {};
 	function hideFilterRow(obj){
 		hideRow(obj, "filtered");
 	}
-	function filterName(value){
+	function filterName(value, dir){
 		$(".itemTable .item").each(function(){
 			var item = $(this).data("item");
 			if(matchKeywords(value, item.keywords)){
-				showFilterRow($(this));
+				if(dir == "positive")
+					showFilterRow($(this));
+				else if(dir == "negative")
+					hideFilterRow($(this));
+				else
+					throw "Error: direction "+dir+" is not defined";
 			}
 		});
 	}
-	function filterDomain(domain){
+	function filterDomain(domain, dir){
 		$(".itemTable .item").each(function(){
 			var item = $(this).data("item");
 			if(item.domain.name == domain){
-				showFilterRow($(this));
+				if(dir == "positive")
+					showFilterRow($(this));
+				else if(dir == "negative")
+					hideFilterRow($(this));
+				else
+					throw "Error: direction "+dir+" is not defined";
 			}
 		});
 	}
@@ -144,19 +200,46 @@ var FilterManager = {};
 		}
 		return false;
 	}
+	function getOutcastIndex(type, value){
+		for(var i in outcasts){
+			if(outcasts[i].type==type && outcasts[i].value==value){
+				return i;
+			}
+		}
+		return false;
+	}
 
-	function addFilterLabel(type, value, lbl){
+	function addOutcastLabel(type, value, lbl){
+		if(type=="name"){
+			lbl = "<div class='outcastText'>"+lbl+"</div>";
+		}else if(type=="domain"){
+			lbl = "<div class='outcastIcon'><div class='outcastCross'></div>"+lbl+"</div>";
+		}
+		return addFilterLabel(type, value, lbl, true);
+	}
+	function addFilterLabel(type, value, lbl, out){
 		var label = $("<div class='filterLabel app' title='click to remove'></div>");
 		label.click(function(){
-			m.removeFilter(type, value);
-			removeFilterLabel($(this));
+			if(out){
+				removeOutcast(type, value);
+			}else{
+				m.removeFilter(type, value);
+			}
 		});
 		label.html(lbl);
 		$("#filtersWrap").show();
 		$("#filters").append(label);
+		return label;
 	}
-	function removeFilterLabel(obj){
-		obj.remove();
+	function removeOutcastLabel(id){
+		outcasts[id].element.remove();
+		if($("#filters").html()==""){
+			$("#filtersWrap").hide();
+		}
+	}
+	function removeFilterLabel(id){
+		console.log(id);
+		filters[id].element.remove();
 		if($("#filters").html()==""){
 			$("#filtersWrap").hide();
 		}

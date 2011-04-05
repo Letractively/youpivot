@@ -16,14 +16,14 @@ var EventManager = {};
 		$("#events").append(img);
 		img.mouseover(function(){
 			$(this).addClass("active");
-			HighlightManager.highlightDomain(id, false);
+			HighlightManager.highlightDomain(id, {persistent: false});
 			HighlightManager.scrollToItem(id, 500);
 		});
 		img.mouseout(function(){
 			if(!$(this).hasClass("highlight")){
 				$(this).removeClass("active");
 			}
-			HighlightManager.lowlightDomain(id, false);
+			HighlightManager.lowlightDomain(id, {clearPersistent: false});
 			HighlightManager.cancelScroll(id);
 		});
 		img.click(function(){
@@ -60,9 +60,9 @@ var EventManager = {};
 		console.log("toggle");
 		var item = $("#item_"+id);
 		if(toggle)
-			HighlightManager.highlightDomain(id, true);
+			HighlightManager.highlightDomain(id, {persistent: true});
 		else
-			HighlightManager.lowlightDomain(id, true);
+			HighlightManager.lowlightDomain(id, {clearPersistent: true});
 	}
 
 	function getOffset(time){
