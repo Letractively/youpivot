@@ -11,12 +11,12 @@ import time
 
 from uuid import uuid4
 
-
 MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
 MANDATORY_GET_TERMS = ['pivottime', 'userid']
 MANDATORY_END_TERMS = ['eventid', 'endtime']
 MANDATORY_DELETE_TERMS = ['eventid']
 MANDATORY_UPDATE_TERMS = ['eventid'] 
+MANDATORY_SEARCH_TERMS = ['userid', 'string']
 DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
 
@@ -86,6 +86,10 @@ class Responder(object):
             return 'Missing Fields'
         self.addImpVal(args)
         return 'updated'
+    
+#    @cherrypy.expose()
+#    def search(self, **args):
+        
 
     #Evil person prevention
     def developerExists(self, args):
@@ -144,9 +148,9 @@ class Responder(object):
         
     def reply(self, args):
         time = int(args['pivottime'])
-        elevenHrs = 11 * 60 * 60
-        start = time - elevenHrs
-        end = time + elevenHrs
+        timeDiff = 12 * 60 * 60
+        start = time - timeDiff
+        end = time + timeDiff
         url = DB_SERVER_URL + VIEW_LOCATION
         queryString = 'startkey=[' + str(start) + ',"'+ args['userid'] +'"]&endkey=[' + str(end) +',"'+ args['userid'] +'"]'
         url += queryString
@@ -179,11 +183,11 @@ class Responder(object):
             if timeKey in args and valKey in args:
                 vals[int(args[timeKey])] = float(args[valKey])
                 counter = counter + 1
-                del doc[timeKey]
-                del doc[valKey]
+                #del doc[timeKey]
+                #del doc[valKey]
             else:
                 done = True
-        
+        counter = 0
         eventsdb.save(doc) 
         
 #Start me up        
