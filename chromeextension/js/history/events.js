@@ -65,13 +65,14 @@ var EventManager = {};
 			HighlightManager.lowlightDomain(id, {clearPersistent: true});
 	}
 
+	var favWidth = 22;
 	function getOffset(time){
 		var range = GraphManager.getRange();
 		var offset = (time-range.start)/(range.end-range.start);
 		var w = $("#events").width();
 		offset *= w;
-		if(offset > w+25) offset = -20;
-		if(offset > w-16) offset = w-16;
-		return offset;
+		//if(offset > w+25) offset = -20;
+		if(offset > w) offset = w;
+		return offset - favWidth/2;
 	}
 })();

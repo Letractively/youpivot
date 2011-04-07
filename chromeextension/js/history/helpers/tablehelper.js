@@ -14,7 +14,7 @@ var TableHelper = {};
 		obj.id = item.id;
 		var headerInfo = createHeader(item);
 		var row = table.itemTable("addItem", {item: obj, header: headerInfo});
-		row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, "low"));
+		row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, PrefManager.getOption("lowlightFg")));
 		row.find(".pivotBtn").click(function(){
 			PivotManager.pivot(item.startTime, false);
 		});
@@ -45,7 +45,7 @@ var TableHelper = {};
 		}
 		if(sortBy=="domain"){
 			var label = item.domain.name;
-			var icon = IconFactory.createTextIcon(item.domain.favUrl, item.domain.name);
+			var icon = IconFactory.createTextIcon(item.domain.favUrl, item.domain.name, "wrap");
 			var html = icon + label;
 			return {label: label, html: html};
 		}

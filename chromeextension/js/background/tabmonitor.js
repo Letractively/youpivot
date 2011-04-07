@@ -18,7 +18,6 @@ var Monitor = {};
 		});
 		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 			if(tab.status=="complete"){
-				console.log(changeInfo);
 				tabUpdated(tab, changeInfo);
 			}
 		});
@@ -80,8 +79,8 @@ var Monitor = {};
 			if(data.length>0){
 				arr[tabId].eid = data;
 				console.log("upload successful, event id: "+data, arr[tabId].eid);
-				//info.eid = data;
-				//uploadUpdate(info);
+				info.eid = data;
+				uploadUpdate(info);
 			}else{
 				alert("Error uploading open tab info: "+data);
 			}
@@ -97,16 +96,25 @@ var Monitor = {};
 		obj.favicon = info.favUrl;
 		obj.keyword = info.keywords[0]; //FIXME upload all keywords
 		obj.starttime = Math.floor(new Date().getTime()/1000);
-		obj.endtime = Math.floor((new Date().getTime()+1000)/1000); //FIXME should be changed to 1
+		obj.endtime = Math.floor((new Date().getTime())/1000 + 1); //FIXME should be changed to 1
 		//obj.eventtypename = "chrometab";
 		//obj.val = info.importance;
 		obj.tabindex = info.index;
 		obj.parenttab = info.parentTab;
 		obj.parentwindow = info.parentWindow;
 		obj.windowid = info.win;
+		//obj = addKeywordsToItem(obj, info.keywords);
 		return obj;
 	}
 
+	//add keywords to the item in keys "keyword0", "keyword1" etc
+	function addKeywordsToItem(obj, keywords){
+		for(var i in keywords){
+			obj["keyword"+i] = keywords[i];
+		}
+		console.log(obj);
+		return obj;
+	}
 
 	//send updated info about all tabs to server, every 114 seconds
 	function uploadUpdateInfo(){
@@ -123,6 +131,10 @@ var Monitor = {};
 
 	function uploadUpdate(info){
 		var item = createUpdateItem(info);
+		if(item === false){
+			console.log("Update unsuccessful. Item is not created. ");
+			return;
+		}
 		Connector.send("update", item, function(data){
 			if(data.length>0){
 				console.log("update successful");
@@ -140,12 +152,12 @@ var Monitor = {};
 	function createUpdateItem(info){
 		if(info.eid==-1){
 			console.log(info);
-			throw "ERROR: update item event id is not defined";
+			console.log("ERROR: update item event id is not defined");
 			return false;
 		}
 		var obj = {};
-		obj.val1 = info.importance;
-		obj.time1 = Math.floor(new Date().getTime()/1000);
+		obj.val0 = info.importance;
+		obj.time0 = Math.floor(new Date().getTime()/1000);
 		obj.eventid = info.eid;
 		return obj;
 	}

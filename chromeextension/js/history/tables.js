@@ -44,6 +44,20 @@ var TableManager = {};
 		TableHelper.changeSchema($("#textContent"), sortBy);
 	}
 
+	$(document).mousewheel(function(e, delta){
+		console.log(delta);
+		var b = $("body");
+		var bottom = (b.scrollTop() + b.height() == b[0].scrollHeight);
+		if(bottom && delta<0){
+			var graphPos = GraphManager.getGraphPos();
+			GraphManager.setSelectionScale(graphPos.offset-0.01, graphPos.scale+0.01);
+			b.scrollTop(b[0].scrollHeight);
+		}else if(b.scrollTop()==0 && delta>0){
+			var graphPos = GraphManager.getGraphPos();
+			GraphManager.setSelectionScale(graphPos.offset, graphPos.scale+0.01);
+		}
+	});
+
 	$("#searchResults").bind("search", function(e, active){
 		if(active){
 			$("#textContent").hide();

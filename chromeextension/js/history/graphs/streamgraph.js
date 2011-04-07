@@ -40,7 +40,7 @@ var StreamGraph = {};
 			.interpolate("cardinal")
 			.title(function(d, p){ return "layer-"+p.id; })
 			.fillStyle(function(d, p){ 
-				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, "high"); })
+				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, PrefManager.getOption("normalGraph")); })
 			.lineWidth(2)
 			.event("mouseover", function(d, p){
 			   	this.title(""); //destroy the title used for DOM extraction
@@ -62,8 +62,8 @@ var StreamGraph = {};
 
 	m.scale = function(scale, offset, width){
 		var yScale = getYScale();
-		var lastTransform = "scaleY("+yScale+") scaleX("+scale+") translateX("+(-offset*width)+"px)";
-		$("#streamGraph svg").css("-webkit-transform", lastTransform);
+		var transform = "scaleY("+yScale+") scaleX("+scale+") translateX("+(-offset*width)+"px)";
+		$("#streamGraph svg").css("-webkit-transform", transform);
 	}
 
 	//stretch the streamgraph vertically

@@ -3,7 +3,7 @@ var HighlightManager = {};
 (function(){
 	var m = HighlightManager;
 
-	var lvls = ["highbg", "lowbg"];
+	var lvls = ["highlight", "related"];
 	m.highlightDomain = function(id, options){
 		var persistent = Helper.getOptions(options, "persistent", false);
 		var parent = Helper.getOptions(options, "parent", $("#textContent"));
@@ -52,19 +52,19 @@ var HighlightManager = {};
 	}
 
 	m.highlightItem = function(item, persistent){
-		item.itemTable("highlight", {level: "highbg"});
-		//$("#item_"+id).itemTable("highlight", {level: 2});
+		item.itemTable("highlight", {level: "highlight"});
 	}
 
 	m.lowlightItem = function(item, clearPersistent){
-		//var item = (typeof id == "object") ? id : $("#item_"+id);
 		if(clearPersistent){
 			removeFromList(item, 2);
 		}
 		if(getList(item).length===0)
 			item.itemTable("lowlight", {});
-		else
-			item.itemTable("highlight", {level: lvls[getMinLevel(item)]});
+		else{
+			var lvl = lvls[getMinLevel(item)];
+			item.itemTable("highlight", {level: lvl});
+		}
 	}
 
 	var scrollEvents = {};

@@ -13,7 +13,14 @@ var IconFactory = {};
 	}
 
 	m.createIcon = function(src, name){
-		return $(m.createTextIcon(src, name));
+		var output;
+		try{
+			output = $(m.createTextIcon(src, name));
+		}catch(e){
+			console.log(e);
+			alert("icon error");
+		}
+		return output;
 	}
 
 	m.createTextIcon = function(src, name, clss){
