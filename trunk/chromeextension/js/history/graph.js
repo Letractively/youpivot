@@ -62,15 +62,21 @@ var GraphManager = {};
 	}
 
 	m.setSelection = function(startTime, endTime){
-		//TODO: check for out of range
 		var scale = getTimeScale(startTime, endTime);
-		TopGraph.setSelection(scale[0], scale[1]);
-		setSelection(scale[0], scale[1]);
+		m.setSelectionScale(scale[0], scale[1]);
+	}
+
+	m.setSelectionScale = function(offset, cap){
+		if(offset<0) offset = 0;
+		if(offset>1) offset = 1;
+		if(offset + cap > 1) cap = 1-offset;
+		TopGraph.setSelection(offset, cap);
+		setSelection(offset, cap);
 	}
 
 	// same as setSelection, but using 0-1 scale instead of time as variable
 	// called by changing topGraph
-	m.setSelectionScale = function(offset, cap){
+	m.topGraphCallScale = function(offset, cap){
 		setSelection(offset, cap);
 	}
 
@@ -95,7 +101,7 @@ var GraphManager = {};
 		dataArray[index].active = true;
 		if(persistent) dataArray[index].highlight = true;
 
-		var color = dataArray[index].color;
+		var color = Helper.createLighterColor(dataArray[index].color, PrefManager.getOption("highlightGraph"));
 		StreamGraph.changeColor(id, color);
 		m.highlightTopGraph(index, color);
 	}
@@ -126,7 +132,7 @@ var GraphManager = {};
 			dataArray[index].active = false;
 			dataArray[index].highlight = false;
 
-			var color = Helper.createLighterColor(dataArray[index].color, "high");
+			var color = Helper.createLighterColor(dataArray[index].color, PrefManager.getOption("normalGraph"));
 			StreamGraph.changeColor(id, color);
 			m.highlightTopGraph(-1);
 		}

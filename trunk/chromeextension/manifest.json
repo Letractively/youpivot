@@ -8,9 +8,9 @@
     "16": "images/icon_16.png",
     "48": "images/icon_48.png"
   },
-/*  "chrome_url_overrides" : {
+  "chrome_url_overrides" : {
     "history": "history.html"
-  },*/
+  },
   "browser_action": {
     "default_icon": "images/timemark_btn.png",
     "default_title": "Add a TimeMark - YouPivot",

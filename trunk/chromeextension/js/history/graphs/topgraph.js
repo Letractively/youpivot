@@ -66,7 +66,7 @@ var TopGraph = {};
 			.cursor("crosshair")
 			.events("all")
 			.event("mousedown", pv.Behavior.select())
-			.event("select", function(d){ dragged = true; GraphManager.setSelectionScale(d.x/w, d.dx/w); })
+			.event("select", function(d){ dragged = true; GraphManager.topGraphCallScale(d.x/w, d.dx/w); })
 			.event("selectstart", function(){ GraphManager.startSelection(); })
 			.event("selectend", function(d){
 				if(dragged){
@@ -76,7 +76,7 @@ var TopGraph = {};
 					if(d.x<0) d.x = 0;
 					if(d.x>w-defSelect) d.x = w-defSelect;
 					d.dx = defSelect;
-					GraphManager.setSelectionScale(d.x/w, d.dx/w);
+					GraphManager.topGraphCallScale(d.x/w, d.dx/w);
 					GraphManager.finishSelection();
 					return this; 
 				}
@@ -94,7 +94,7 @@ var TopGraph = {};
 			.event("mousedown", pv.Behavior.drag())
 			.event("drag", function(d){
 				dragged = true;
-			   	GraphManager.setSelectionScale(d.x/w, d.dx/w);
+			   	GraphManager.topGraphCallScale(d.x/w, d.dx/w);
 				return this.parent;
 			})
 			.event("dragstart", function(){ GraphManager.startSelection(); })
@@ -106,7 +106,7 @@ var TopGraph = {};
 					if(d.x<0) d.x = 0;
 					if(d.x>w-defSelect) d.x = w-defSelect;
 					d.dx = defSelect;
-					GraphManager.setSelectionScale(d.x/w, d.dx/w);
+					GraphManager.topGraphCallScale(d.x/w, d.dx/w);
 					GraphManager.finishSelection();
 					return this;
 				}
@@ -119,7 +119,7 @@ var TopGraph = {};
 			.fillStyle("rgba(255, 255, 255, 0.01)") //alpha of 0 will destroy the mouse events
 			.cursor("e-resize")
 			.event("mousedown", pv.Behavior.resize("left"))
-			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; })
+			.event("resize", function(d){ GraphManager.topGraphCallScale(d.x/w, d.dx/w); return this.parent; })
 			.event("resizestart", function(){ GraphManager.startSelection(); })
 			.event("resizeend", function(){ GraphManager.finishSelection(); });
 		bar.anchor("right").add(pv.Bar)
@@ -129,7 +129,7 @@ var TopGraph = {};
 			.fillStyle("rgba(255, 255, 255, 0.01)")
 			.cursor("e-resize")
 			.event("mousedown", pv.Behavior.resize("right"))
-			.event("resize", function(d){ GraphManager.setSelectionScale(d.x/w, d.dx/w); return this.parent; })
+			.event("resize", function(d){ GraphManager.topGraphCallScale(d.x/w, d.dx/w); return this.parent; })
 			.event("resizestart", function(){ GraphManager.startSelection(); })
 			.event("resizeend", function(){ GraphManager.finishSelection(); });
 		tg.render();

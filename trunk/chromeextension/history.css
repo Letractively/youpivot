@@ -50,7 +50,8 @@ a.active:active { color: #3870AD; }
 	#contentFilters img { cursor: pointer; }
 	#contentFilters img:hover { opacity: 1 !important; }
 
-.favicon { width: 16px; height: 16px; margin: 0px 3px; }
+.favicon { width: 16px; height: 16px; }
+.favicon.wrap { margin: 0px 3px; }
 /*** end left sidebar ***/
 
 /*** graph date ***/
@@ -84,7 +85,7 @@ a.active:active { color: #3870AD; }
 #events { width: 6800px; height: 20px; position: relative;
 		  -webkit-transform-origin: left; -webkit-transform: scaleX(0.1); }
 .eventIcon { width: 16px; height: 16px; position: absolute; top: 0px; 
-		  -webkit-transform-origin: right; -webkit-transform: scaleX(10); 
+		  -webkit-transform-origin: center; -webkit-transform: scaleX(10); 
 		  padding: 1px; border: 0px; }
 .eventIcon.active { border: 1px solid; padding: 0px; }
 /*** end visualGraphs ***/
@@ -96,7 +97,7 @@ a.active:active { color: #3870AD; }
 .termAnchor:hover { color: #333333 !important; opacity: 1 !important; }
 	/*** filters ***/
 	#filtersWrap { display: none; padding: 2px; }
-	.filterLabel { display: inline-block; margin: 5px; cursor: default; height: 16px; vertical-align: top; line-height: 16px; }
+	.filterLabel { display: inline-block; margin: 5px 10px 5px 0px; cursor: default; height: 16px; vertical-align: top; line-height: 16px; }
 	.filterLabel { cursor: pointer; }
 
 	.outcastText { text-decoration: line-through; }
@@ -116,7 +117,7 @@ a.active:active { color: #3870AD; }
 		.out { display: none; }
 		.filtered { display: none; }
 		.itemTable td { height: 26px; padding: 0px 2px; }
-		.itemTable th { height: 26px; text-align: left; }
+		.itemTable th { height: 26px; text-align: left; padding-top: 10px; }
 		.itemTable .item_name { width: 100%; padding: 0px 5px; }
 		.itemTable .item_date { white-space: nowrap; }
 		.itemTable .item_date .grey { color: #999999; }

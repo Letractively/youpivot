@@ -36,7 +36,7 @@ var DomainManager = {};
 	function displayDomain(icon, title, rating){
 		var img = IconFactory.createIcon(icon, title);
 		img.css("opacity", Helper.decay(rating, 1, best));
-		$("#contentFilters").append(img.addClass("favicon"));
+		$("#contentFilters").append(img.addClass("favicon wrap"));
 		img.mouseover(function(){
 			var domainId = ItemManager.getDomainId(title);
 			HighlightManager.highlightDomain(domainId, {highlightself: false});
@@ -46,12 +46,12 @@ var DomainManager = {};
 		});
 		img.click(function(e){
 			if(e.which!==3){
-				var label = "<img class='favicon' src='"+$(this).attr("src")+"' />";
+				var label = "<img class='favicon wrap' src='"+$(this).attr("src")+"' />";
 				FilterManager.addFilter("domain", title, label);
 			}
 		});
 		img.bind("contextmenu", function(e){
-			var label = "<img class='favicon' src='"+$(this).attr("src")+"' />";
+			var label = "<img class='favicon wrap' src='"+$(this).attr("src")+"' />";
 			FilterManager.addOutcast("domain", title, label);
 			e.preventDefault();
 		});

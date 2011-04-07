@@ -102,15 +102,16 @@
 	function highlight(obj, level){
 		//obj.addClass("hover");
 		var color = obj.data("item").domain.color;
-		obj.css("background-color", Helper.createLighterColor(color, level));
-		$(".item_color", obj).css("background-color", (level=="highbg") ? color : Helper.createLighterColor(color, "med"));
+		obj.css("background-color", Helper.createLighterColor(color, PrefManager.getOption(level+"Bg")));
+		var fgColor = Helper.createLighterColor(color, PrefManager.getOption(level+"Fg")); //foreground color
+		$(".item_color", obj).css("background-color", fgColor);
 	}
 
 	function lowlight(obj){
 		//obj.removeClass("hover");
 		var color = obj.data("item").domain.color;
 		obj.css("background-color", "");
-		$(".item_color", obj).css("background-color", Helper.createLighterColor(color, "low"));
+		$(".item_color", obj).css("background-color", Helper.createLighterColor(color, PrefManager.getOption("lowlightFg")));
 	}
 
 	function clear(wrap){

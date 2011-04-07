@@ -39,11 +39,20 @@ var Helper = {};
 	}
 	
 	m.createLighterColor = function(color, level){
+		if(level == "same"){
+			return color;
+		}
+		if(level == "transparent"){
+			return "transparent";
+		}
 		if(typeof level == "string"){
+			throw "Error: Create lighter color by string is deprecated "+level;
+			console.trace();
 			level = translateLevel(level);
 		}
 		if(typeof level == "undefined" || level>1 || level<0){
 			console.log("Invalid color level "+level);
+			console.trace();
 			return color;
 		}
 		var r = parseInt(color.substr(1,2),16);
