@@ -1,9 +1,16 @@
 var TableManager = {};
+/**
+ *	TableManager manages the items list on the main content, below the visualizations. 
+ *	It uses itemTable jQuery plugin (itemtable.js) as backbone
+ *		Search results table also uses itemtable.js
+ *	table.js implements only features specific to the items list
+ */
 
-//This class is using the structure itemtable.js as backbone
 (function(){
 	var m = TableManager;
 
+	//reload the items in the table. Basically clearing all the items and add it back. 
+	//This operation takes time
 	m.reload = function(){
 		m.clearItems();
 		var list = ItemManager.list;
@@ -13,6 +20,7 @@ var TableManager = {};
 		}
 	}
 
+	//load the filters back from this items list. Called when switching back from search results. 
 	m.loadFilters = function(){
 		// load back filters from pivot view
 		DomainManager.clearDomains();
@@ -26,8 +34,10 @@ var TableManager = {};
 		TermManager.display();
 	}
 
+	//add an item to the table
 	m.addItem = function(item){
 		var row = TableHelper.addItem($("#textContent"), item);
+		//add additional listener functions only for this table
 		row.mouseenter(function(e){
 			HighlightManager.highlightLayer(item.id, false);
 		});
@@ -36,6 +46,7 @@ var TableManager = {};
 		});
 	}
 
+	//clear all items from the table
 	m.clearItems = function(){
 		$("#textContent").itemTable("clear");
 	}
@@ -44,19 +55,77 @@ var TableManager = {};
 		TableHelper.changeSchema($("#textContent"), sortBy);
 	}
 
+	/** scrolling methods **/
+	var timer;
+	var deltaSum = 0;
+	var refractory = 0; // 0 - not refractory
+						// 1 - prevent only page flip
+						// 2 - prevent also normal scrolling
 	$(document).mousewheel(function(e, delta){
-		console.log(delta);
+		if(refractory){
+			//prevent default scrolling if in refractory state 2
+			if(refractory==2){
+				e.preventDefault();
+			}
+			//don't do anything during refractory period
+			return;
+		}
+		deltaSum += delta;
+		setFinishTimer();
+		if(Math.abs(deltaSum)<PrefManager.getOption("deltaThreshold")) return;
+		else finishTimer();
+		setRefractoryPeriod(2);
+
 		var b = $("body");
 		var bottom = (b.scrollTop() + b.height() == b[0].scrollHeight);
 		if(bottom && delta<0){
-			var graphPos = GraphManager.getGraphPos();
-			GraphManager.setSelectionScale(graphPos.offset-0.01, graphPos.scale+0.01);
-			b.scrollTop(b[0].scrollHeight);
+			scrollOlder();
 		}else if(b.scrollTop()==0 && delta>0){
-			var graphPos = GraphManager.getGraphPos();
-			GraphManager.setSelectionScale(graphPos.offset, graphPos.scale+0.01);
+			scrollNewer();
 		}
+	}).scroll(function(e){
+		setRefractoryPeriod(1);
 	});
+	function scrollOlder(){
+		var graphPos = GraphManager.getGraphPos();
+		if(graphPos.offset<=0) return;
+		var scrollScale = PrefManager.getOption("scrollScale");
+		var scrollMethod = PrefManager.getOption("scrollMethod");
+		if(scrollMethod == "expand"){
+			GraphManager.setSelectionScale(graphPos.offset-scrollScale, graphPos.scale+scrollScale);
+		}else if(scrollMethod == "move"){
+			GraphManager.setSelectionScale(graphPos.offset-scrollScale, graphPos.scale);
+		}else{
+			console.log("scrolling method in preferences not recognized. ");
+		}
+	}
+	function scrollNewer(){
+		var graphPos = GraphManager.getGraphPos();
+		if(graphPos.offset + graphPos.scale >= 1) return;
+		var scrollScale = PrefManager.getOption("scrollScale");
+		var scrollMethod = PrefManager.getOption("scrollMethod");
+		if(scrollMethod == "expand"){
+			GraphManager.setSelectionScale(graphPos.offset, graphPos.scale+scrollScale);
+		}else if(scrollMethod == "move"){
+			GraphManager.setSelectionScale(graphPos.offset+scrollScale, graphPos.scale);
+		}else{
+			console.log("scrolling method in preferences not recognized. ");
+		}
+	}
+	function setRefractoryPeriod(rValue){
+		refractory = rValue;
+		setTimeout(function(){ refractory = 0; }, PrefManager.getOption("wheelRefractory"));
+	}
+	function setFinishTimer(){
+		if(typeof timer == "undefined")
+			timer = setTimeout(finishTimer, PrefManager.getOption("wheelTimer"));
+	}
+	function finishTimer(){
+		deltaSum = 0;
+		clearTimeout(timer);
+		timer = undefined;
+	}
+	/** end scrolling methods **/
 
 	$("#searchResults").bind("search", function(e, active){
 		if(active){

@@ -14,12 +14,7 @@ var IconFactory = {};
 
 	m.createIcon = function(src, name){
 		var output;
-		try{
-			output = $(m.createTextIcon(src, name));
-		}catch(e){
-			console.log(e);
-			alert("icon error");
-		}
+		output = $(m.createTextIcon(src, name));
 		return output;
 	}
 

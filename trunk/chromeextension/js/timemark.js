@@ -21,7 +21,7 @@ var TimeMarkManager = {};
 	function createObj(description, time){
 		var obj = {};
 		obj.title = description;
-		obj.url = "http://www.youpivot.com/"; //FIXME
+		obj.url = "#pivot="+Math.floor(time/1000);
 		obj.favicon = timeMarkIcon;
 		obj.keyword = description.split(' ')[0]; //FIXME upload all keywords (not [0])
 		obj.starttime = Math.floor(time/1000);

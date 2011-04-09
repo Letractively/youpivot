@@ -130,3 +130,9 @@ a.active:active { color: #3870AD; }
 		.item_icon { width: 16px; height: 16px; margin: 0px 5px; vertical-align: middle; }
 	/*** end text contents ***/
 /*** end contents ***/
+
+/*** context menu style ***/
+	ul.context-menu { -webkit-border-radius: 4px; background-color: #F2F2F2; border: 1px solid #999; list-style-type: none; margin: 0px; padding: 0px; }
+	ul.context-menu li { padding: 5px; cursor: default; -webkit-user-select: none; }
+	ul.context-menu li:hover { background-color: #CCCCCC; }
+/*** end context menu style ***/

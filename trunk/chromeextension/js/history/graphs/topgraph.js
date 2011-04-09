@@ -19,7 +19,7 @@ var TopGraph = {};
 	}
 
 	m.setSelection = function(offset, cap){
-		if(cap==1) cap = 0;
+		if(cap>1) cap = 0;
 		var selection = {x: (offset*GraphManager.width), dx: (cap*GraphManager.width)};
 		sPanel.data([selection]);
 		sPanel.render();
@@ -78,7 +78,7 @@ var TopGraph = {};
 					d.dx = defSelect;
 					GraphManager.topGraphCallScale(d.x/w, d.dx/w);
 					GraphManager.finishSelection();
-					return this; 
+					return this.parent; 
 				}
 				GraphManager.finishSelection();
 			})
@@ -108,7 +108,7 @@ var TopGraph = {};
 					d.dx = defSelect;
 					GraphManager.topGraphCallScale(d.x/w, d.dx/w);
 					GraphManager.finishSelection();
-					return this;
+					return this.parent;
 				}
 				GraphManager.finishSelection();
 			});

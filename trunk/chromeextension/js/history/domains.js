@@ -44,17 +44,29 @@ var DomainManager = {};
 			var domainId = ItemManager.getDomainId(title);
 			HighlightManager.lowlightDomain(domainId, {highlightself: false});
 		});
+		img.data("title", title);
 		img.click(function(e){
 			if(e.which!==3){
-				var label = "<img class='favicon wrap' src='"+$(this).attr("src")+"' />";
-				FilterManager.addFilter("domain", title, label);
+				includeFilter(this);
 			}
 		});
-		img.bind("contextmenu", function(e){
-			var label = "<img class='favicon wrap' src='"+$(this).attr("src")+"' />";
-			FilterManager.addOutcast("domain", title, label);
-			e.preventDefault();
+		img.contextMenu("domain_menu", {
+			"Include this domain": {
+				click: includeFilter
+			},
+			"Exclude this domain": {
+				click: excludeFilter
+			}
 		});
+		function includeFilter(obj){
+			console.log(obj);
+			var label = "<img class='favicon wrap' src='"+$(obj).attr("src")+"' />";
+			FilterManager.addFilter("domain", $(obj).data("title"), label);
+		}
+		function excludeFilter(obj){
+			var label = "<img class='favicon wrap' src='"+$(obj).attr("src")+"' />";
+			FilterManager.addOutcast("domain", $(obj).data("title"), label);
+		}
 	}
 
 	function getDomainIndex(domain){
