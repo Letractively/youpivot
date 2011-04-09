@@ -15,7 +15,7 @@ var SearchManager = {};
 
 	function search(needle){
 		if(needle==""){ antiSearch(); return; }
-		//Connector.send("search", {needle: needle});
+		//Connector.send("search", {q: needle}, {});
 		result = debugSearch; //assign search result to array
 		showResults(result);
 	}

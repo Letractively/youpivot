@@ -2,7 +2,7 @@ var HighlightManager = {};
 
 (function(){
 	var m = HighlightManager;
-
+	
 	var lvls = ["highlight", "related"];
 	m.highlightDomain = function(id, options){
 		var persistent = Helper.getOptions(options, "persistent", false);
@@ -51,8 +51,10 @@ var HighlightManager = {};
 		});
 	}
 
-	m.highlightItem = function(item, persistent){
-		item.itemTable("highlight", {level: "highlight"});
+	m.highlightItem = function(item, options){
+		var persistent = Helper.getOption(options, "persistent", false);
+		var level = Helper.getOption(options, "level", "highlight");
+		item.itemTable("highlight", {level: level});
 	}
 
 	m.lowlightItem = function(item, clearPersistent){

@@ -5,6 +5,7 @@ var TableHelper = {};
 	var dateSchema = {"left": "normal", "color": "normal", "name": "normal"};
 	var typeSchema = {"date": "toprow", "left": "normal", "color": "normal", "name": "normal"};
 
+	//add an item to the specified itemTable (items list or search results)
 	m.addItem = function(table, item){
 		var obj = {};
 		obj.left = createLeft(item);
@@ -18,10 +19,31 @@ var TableHelper = {};
 		row.find(".pivotBtn").click(function(){
 			PivotManager.pivot(item.startTime, false);
 		});
-		row.data("item", item);
+		//set link to pivot if it is a timemark
+		if(item.domain.name == "timemark"){
+			row.find(".item_name a").click(function(e){
+				PivotManager.pivot(item.startTime, false);
+				e.preventDefault();
+			});
+		}
+		//add mouseover events
+		row.mouseenter(function(e){
+			HighlightManager.highlightDomain(item.id, {persistent: false, parent: table});
+			$(".item_time", this).hide();
+			$(".pivotBtn", this).show();
+		});
+		row.mouseleave(function(e){
+			//TODO: use related target to minimize calculation
+			HighlightManager.lowlightDomain(item.id, {clearPersistent: false, parent: table});
+			$(".item_time", this).show();
+			$(".pivotBtn", this).hide();
+		});
+		row.data("item", item); //store the item with the DOM object
 		row.addClass("item_domain_"+item.domain.id);
 		return row;
 	}
+	//change the schema of the table. Requires complete rebuilding of the table
+	//The operation takes time and freezes the tab during loading
 	m.changeSchema = function(table, sortBy){
 		var schema;
 		if(sortBy=="chronological") schema = dateSchema;
@@ -33,6 +55,8 @@ var TableHelper = {};
 		SearchManager.reloadResult();
 	}
 
+	//convenient wrapper function for Helper.formatDate for specific use in this class
+	//Output date format: "April 1, 2011"
 	function createDate(item){
 		var output = Helper.formatDate(item.startTime, "F j, Y");
 		return output;

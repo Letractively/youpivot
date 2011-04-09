@@ -75,14 +75,16 @@ var Monitor = {};
 		console.log("open", tabId);
 		var info = arr[tabId].getInfo();
 		var item = createOpenItem(info);
-		Connector.send("add", item, function(data){
-			if(data.length>0){
-				arr[tabId].eid = data;
-				console.log("upload successful, event id: "+data, arr[tabId].eid);
-				info.eid = data;
-				uploadUpdate(info);
-			}else{
-				alert("Error uploading open tab info: "+data);
+		Connector.send("add", item, {
+			onSuccess: {function(data){
+				if(data.length>0){
+					arr[tabId].eid = data;
+					console.log("upload successful, event id: "+data, arr[tabId].eid);
+					info.eid = data;
+					uploadUpdate(info);
+				}else{
+					alert("Error uploading open tab info: "+data);
+				}
 			}
 		});
 	}
@@ -135,11 +137,13 @@ var Monitor = {};
 			console.log("Update unsuccessful. Item is not created. ");
 			return;
 		}
-		Connector.send("update", item, function(data){
-			if(data.length>0){
-				console.log("update successful");
-			}else{
-				alert("Error uploading open tab info: "+data);
+		Connector.send("update", item, {
+			onSuccess: function(data){
+				if(data.length>0){
+					console.log("update successful");
+				}else{
+					alert("Error uploading open tab info: "+data);
+				}
 			}
 		});
 	}

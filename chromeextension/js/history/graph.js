@@ -67,7 +67,10 @@ var GraphManager = {};
 	}
 
 	m.setSelectionScale = function(offset, cap){
-		if(offset<0) offset = 0;
+		if(offset<0){
+		   cap += offset; 
+		   offset = 0;
+		}
 		if(offset>1) offset = 1;
 		if(offset + cap > 1) cap = 1-offset;
 		TopGraph.setSelection(offset, cap);

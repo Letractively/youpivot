@@ -184,7 +184,7 @@
 	}
 
 	function createRow(id, schema, item, table){
-		var row = $("<tr class='item' id='item_"+id+"'></tr>");
+		var row = "<tr class='item' id='item_"+id+"'>";
 		for(var i in schema){
 			var col;
 			if(schema[i]=="toprow"){
@@ -192,20 +192,10 @@
 			}else{
 				col = "<td class='item_"+i+"'>"+item[i]+"</td>";
 			}
-			row.append(col);
+			row += col;
 		}
-		//FIXME isolate this file, should not link to YouPivot specific objects/functions
-		row.mouseenter(function(e){
-			HighlightManager.highlightDomain(id, {persistent: false, parent: table});
-			$(".item_time", this).hide();
-			$(".pivotBtn", this).show();
-		});
-		row.mouseleave(function(){
-			HighlightManager.lowlightDomain(id, {clearPersistent: false, parent: table});
-			$(".item_time", this).show();
-			$(".pivotBtn", this).hide();
-		});
-		return row;
+		row += "</tr>";
+		return $(row);
 	}
 
 	function getSchema(table){

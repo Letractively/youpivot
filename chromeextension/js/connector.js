@@ -26,24 +26,35 @@ var Connector = {};
 
 	function sendString(type, string, callback){
 		var url = serverUrl+type+"?"+string;
-		ajaxGet(url, function(data){console.log(data); if(callback) sendCallbackData(callback, data);});
+		ajaxGet(url, function(data, success){
+			console.log(data);
+			if(callback) sendCallbackData(callback, success, data);
+		});
 		console.log(url);
 	}
 
-	function sendCallbackData(callback, data){
-		if(typeof callback == "function"){
-			callback(data);
+	function sendCallbackData(callbacks, success, data){
+		console.log(callbacks);
+		if(typeof callbacks == "object"){
+			if(success){
+				callbacks.onSuccess(data);
+			}else{
+				callbacks.onError(data);
+			}
+		}else if(typeof callbacks == "string"){
+			if(success)
+				chrome.extension.sendRequest({action: callbacks, data: data});
 		}else{
-			chrome.extension.sendRequest({action: callback, data: data});
+			console.trace();
+			console.log(typeof callbacks, "not recognized");
 		}
 	}
 
 	function ajaxGet(url, callback){
 		$.ajax({
 			url: url,
-			success: function(data){
-				callback(data);
-			}
+			success: function(data){ callback(data, true); }, 
+			error: function(data){ callback(data, false); }
 		});
 	}
 

@@ -44,16 +44,29 @@ var TermManager = {};
 		anchor.attr("href", "javascript: filter");
 		anchor.css("font-size", 20*Helper.decay(rating, 1, best)+"px");
 		anchor.css("opacity", Helper.decay(rating, 1, best));
-		anchor.bind("contextmenu", function(e){
-			FilterManager.addOutcast("name", text, text);
-			e.preventDefault();
-		});
 		anchor.click(function(){
 			FilterManager.addFilter("name", text, text);
+			includeFilter(this);
 			return false;
 		});
+		anchor.data("title", text);
 		var term = $("<div class='term'></div>").append(anchor);
 		$("#terms").append(term);
+		anchor.contextMenu("term_menu", {
+			"Include this keyword": {
+				click: includeFilter
+			},
+			"Exclude this keyword": {
+				click: excludeFilter
+			}
+		});
+
+		function includeFilter(obj){
+			FilterManager.addFilter("name", $(obj).data("title"), $(obj).data("title"));
+		}
+		function excludeFilter(obj){
+			FilterManager.addOutcast("name", $(obj).data("title"), $(obj).data("title"));
+		}
 	}
 	function sortFunction(a, b){
 		return b.rating-a.rating;
