@@ -1,11 +1,16 @@
 var PrefManager = {};
 
+function pref(label){
+	return PrefManager.getOption(label);
+}
+
 (function(){
 	var m = PrefManager;
 	var defaults = {
 		"collapseGraph": false,
 		"sortMethod": "chronological",
 		"keywordHighlight": false,
+		"pageFlipRange": 6*3600000, 
 		//scrolling preferences
 		"scrollMethod": "expand",
 		"scrollScale": 0.03,

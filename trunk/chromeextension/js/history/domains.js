@@ -34,9 +34,10 @@ var DomainManager = {};
 
 	var best = 1; //dummy. To be overwritten before first call
 	function displayDomain(icon, title, rating){
-		var img = IconFactory.createIcon(icon, title);
+		var tImg = IconFactory.createTextIcon(icon, title, "wrap");
+		var img = $(tImg);
 		img.css("opacity", Helper.decay(rating, 1, best));
-		$("#contentFilters").append(img.addClass("favicon wrap"));
+		$("#contentFilters").append(img);
 		img.mouseover(function(){
 			var domainId = ItemManager.getDomainId(title);
 			HighlightManager.highlightDomain(domainId, {highlightself: false});
@@ -57,14 +58,14 @@ var DomainManager = {};
 			"Exclude this domain": {
 				click: excludeFilter
 			}
-		});
+		}, 
+		{ title: tImg+"<span>"+title+"<span>" });
 		function includeFilter(obj){
-			console.log(obj);
-			var label = "<img class='favicon wrap' src='"+$(obj).attr("src")+"' />";
+			var label = IconFactory.createTextIcon($(obj).attr("src"), "click to remove", "wrap");
 			FilterManager.addFilter("domain", $(obj).data("title"), label);
 		}
 		function excludeFilter(obj){
-			var label = "<img class='favicon wrap' src='"+$(obj).attr("src")+"' />";
+			var label = IconFactory.createTextIcon($(obj).attr("src"), "click to remove", "wrap");
 			FilterManager.addOutcast("domain", $(obj).data("title"), label);
 		}
 	}

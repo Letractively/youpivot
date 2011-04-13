@@ -5,12 +5,12 @@ var Helper = {};
 
 	m.showLoading = function(){
 		$("#spinner").show();
-		$("body :visible").css("cursor", "progress");
+		$("body").prepend("<div id='blocker' style='z-index: 999999; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; cursor: progress'></div>");
 	}
 
 	m.hideLoading = function(){
 		$("#spinner").hide();
-		$("body :visible").css("cursor", "auto");
+		$("#blocker").remove();
 	}
 
 	m.getOptions = function(options, label, defaultValue){
