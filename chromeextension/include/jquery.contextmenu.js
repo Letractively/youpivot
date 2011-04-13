@@ -6,6 +6,8 @@
  * @author Jonas Arnklint
  * @version 1.3
  *  
+ *  Edited by Maurice Lam to allow multiple calling on the same context menu
+ *  So multiple calls to the function with the same ID will only create one menu
  */
 // Making a local '$' alias of jQuery to support jQuery.noConflict
 (function($) {
@@ -20,11 +22,12 @@
             $('body').unbind('click', hide_menu);
           }, 
           default_options = {
-              disable_native_context_menu: false // disables the native contextmenu everywhere you click
+              disable_native_context_menu: false, // disables the native contextmenu everywhere you click
+			  title: ""
           },
           options = $.extend(default_options, options);
       
-	  if($("#"+name).size() == 0){
+	  if($("#"+name).size() == 0){ //create a new context menu only if none exists
 		  $(document).bind('contextmenu', function(e) {
 			if (options.disable_native_context_menu)
 			  e.preventDefault();
@@ -32,6 +35,9 @@
 		  });
           menu = $('<ul id="'+name+'" class="context-menu"></ul>'),
 		  menu.hide().appendTo('body');
+		  $("<div class='title'></div>").appendTo(menu).click(function(e){
+			  e.stopPropagation();
+		  });
 		  $.each(actions, function(me, item_options) {
 			  var menuItem = $('<li>'+me+'</li>');
 
@@ -53,7 +59,6 @@
           active_element = $(this); // set clicked element
 		  var menu = $("#"+name);
 		  menu.data("invoker", active_element);
-		  console.log(menu.data("invoker"));
 
           if (options.showMenu) {
               options.showMenu.call(menu, active_element);
@@ -65,6 +70,8 @@
                   options.hideMenu.call(menu, active_element);
               });
           }
+
+		  menu.find(".title").html(options.title);
 
           menu.show(0, function() { $('body').bind('click', hide_menu); }).css({
             position: 'absolute', 

@@ -29,8 +29,11 @@
 		<div id="visualGraphs">
 			<div id="topBackground"></div>
 			<div id="visualGraphsContent">
-				<div id="spinner"></div>
+				<div id="spinner" class="statusIcon"></div>
+				<div id="errorIcon" class="statusIcon"></div>
 				<div id="topGraphDate"></div>
+				<div id="graphMoveLeft" class="graphArrow"></div>
+				<div id="graphMoveRight" class="graphArrow"></div>
 				<div id="topGraph"><!--24-hour map--></div>
 				<div id="graphInfo">
 					<a href="javascript:collapse-graph" id="collapseGraph"></a>
@@ -39,7 +42,7 @@
 					</div>
 				</div>
 				<div id="streamGraph">
-					Loading....<!--Steam graph-->
+					Loading....<!--Stream graph-->
 				</div>
 				<div id="eventsWrap">
 					<div id="events"></div>
@@ -52,7 +55,9 @@
 				<div class="contentHeader app">Active filters</div>
 				<div id="filters"></div>
 			</div>
+			<div id="moveRightRow" class="pageFlipper top app">Load 6 more hours</div>
 			<div id="textContent"></div>
+			<div id="moveLeftRow" class="pageFlipper bottom app">Load 6 more hours</div>
 			<div id="searchResults"></div>
 		</div>
 	</body>

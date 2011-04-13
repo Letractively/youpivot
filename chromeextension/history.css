@@ -73,10 +73,18 @@ a.active:active { color: #3870AD; }
 #topBackground { position: absolute; width: 100%; height: 45px; z-index: 801;
 	border-bottom: 1px solid #E5E8EB; pointer-events: all;
 	background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFF), to(#F4F6F9) ); }
-#spinner { position: absolute; margin-left: 690px; background: url("images/spinner.gif") center no-repeat; width: 22px; height: 45px; }
+.statusIcon { position: absolute; margin-left: 700px; width: 22px; height: 45px; }
+#spinner { background: url("images/spinner.gif") center no-repeat; }
+#errorIcon { background: url("images/error.png") center no-repeat; display: none; }
+.errorMessage { text-align: center; color: #AA0000; }
+
+.graphArrow { position: absolute; width: 10px; height: 45px; background: url("images/pageflip.png"); opacity: 0.2; }
+.graphArrow:hover { opacity: 1; }
+#graphMoveLeft { margin-left: -10px; -webkit-transform: scaleX(-1); }
+#graphMoveRight { margin-left: 680px; }
 #topGraph { width: 680px; height: 45px; position: relative; z-index: 820;
 			background-image: url("images/topbg.png"); }
-#topGraphDate { width: 100%; height: 20px;
+#topGraphDate { width: 680px; height: 20px;
    				padding-top: 2px; position: absolute; z-index: 810; 
 				font-size: 8pt; font-style: italic; color: #919191; }
 #streamGraph { width: 680px; height: 150px; overflow: hidden; }
@@ -107,6 +115,11 @@ a.active:active { color: #3870AD; }
 	/*** search results ***/
 	#searchResults { padding-bottom: 10px; display: none; -webkit-user-select: none; }
 	/*** end search results ***/
+
+	.pageFlipper { display: none; width: 680px; text-align: center; color: #BECAD8; cursor: pointer; }
+	.pageFlipper:hover { background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(245,246,250)), color-stop(0.97, rgb(235,242,245))); color: #3870AD; }
+	.pageFlipper.bottom { border-top: 1px solid #E1E4EB; }
+	.pageFlipper.top { border-bottom: 1px solid #E1E4EB; }
 	/*** text contents ***/
 	#textContent { padding-bottom: 10px; -webkit-user-select: none; }
 	.contentHeader { font-weight: bold; }
@@ -135,4 +148,7 @@ a.active:active { color: #3870AD; }
 	ul.context-menu { -webkit-border-radius: 4px; background-color: #F2F2F2; border: 1px solid #999; list-style-type: none; margin: 0px; padding: 0px; }
 	ul.context-menu li { padding: 5px; cursor: default; -webkit-user-select: none; }
 	ul.context-menu li:hover { background-color: #CCCCCC; }
+	ul.context-menu div.title { padding: 5px; font-weight: bold; -webkit-user-select: none; cursor: default; vertical-align: middle; }
+	ul.context-menu div.title>img { vertical-align: middle; }
+	ul.context-menu div.title>span { vertical-align: middle; }
 /*** end context menu style ***/

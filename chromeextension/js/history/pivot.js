@@ -17,12 +17,23 @@ var PivotManager = {};
 			pivotServer(time, range);
 		}else{
 			GraphManager.setSelection(time-(pivotInterval/2), time+(pivotInterval/2));
+			GraphManager.finishSelection();
 		}
 	}
 
 	m.pivotRange = function(startRange, endRange){
 		console.log("pivot range is not yet implemented");
 		console.log(startRange +" ::: "+ endRange);
+	}
+
+	m.pageFlip = function(direction){
+		var range = GraphManager.getRange();
+		var midpoint = Math.floor((range.end+range.start)/2);
+		if(direction>0){
+			m.pivot(midpoint+pref("pageFlipRange"), true);
+		}else{
+			m.pivot(midpoint-pref("pageFlipRange"), true);
+		}
 	}
 
 	function pivotServer(time, range){
@@ -46,8 +57,10 @@ var PivotManager = {};
 		GraphManager.setSelection(range[0], range[1]);
 	}
 
-	function pivotOnError(data){
-		alert("Error pivoting. "+data);
+	function pivotOnError(response){
+		Helper.hideLoading();
+		$("#errorIcon").show();
+		$("#streamGraph").html("<div class='errorMessage'>Error loading information from server. Please try again. </div>");
 	}
 
 	function createItemsArray(obj){
@@ -57,4 +70,17 @@ var PivotManager = {};
 		}
 		return output;
 	}
+
+	$("#graphMoveLeft").click(function(){
+		m.pageFlip(-1);
+	});
+	$("#graphMoveRight").click(function(){
+		m.pageFlip(1);
+	});
+	$("#moveLeftRow").click(function(){
+		m.pageFlip(-1);
+	});
+	$("#moveRightRow").click(function(){
+		m.pageFlip(1);
+	});
 })();

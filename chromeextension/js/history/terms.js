@@ -59,7 +59,8 @@ var TermManager = {};
 			"Exclude this keyword": {
 				click: excludeFilter
 			}
-		});
+		}, 
+		{ title: text });
 
 		function includeFilter(obj){
 			FilterManager.addFilter("name", $(obj).data("title"), $(obj).data("title"));

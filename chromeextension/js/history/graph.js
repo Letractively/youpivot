@@ -186,6 +186,12 @@ var GraphManager = {};
 	}
 
 	function setSelection(offset, cap){
+		//show/hide "load more items"
+		if(offset==0) TableManager.showMoveLeftRow();
+		else TableManager.hideMoveLeftRow();
+		if(offset+cap == 1) TableManager.showMoveRightRow();
+		else TableManager.hideMoveRightRow();
+
 		graphPos = {offset: offset, scale: cap};
 		xScale = 0.1/cap; //0.1 is the smallest value coz the graph is rendered at 10x width
 		StreamGraph.scale(xScale, offset, m.width*10);

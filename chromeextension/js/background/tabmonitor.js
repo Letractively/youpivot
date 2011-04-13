@@ -76,7 +76,7 @@ var Monitor = {};
 		var info = arr[tabId].getInfo();
 		var item = createOpenItem(info);
 		Connector.send("add", item, {
-			onSuccess: {function(data){
+			onSuccess: function(data){
 				if(data.length>0){
 					arr[tabId].eid = data;
 					console.log("upload successful, event id: "+data, arr[tabId].eid);

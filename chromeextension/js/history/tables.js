@@ -55,6 +55,19 @@ var TableManager = {};
 		TableHelper.changeSchema($("#textContent"), sortBy);
 	}
 
+	m.showMoveLeftRow = function(){
+		$("#moveLeftRow").show();
+	}
+	m.showMoveRightRow = function(){
+		$("#moveRightRow").show();
+	}
+	m.hideMoveLeftRow = function(){
+		$("#moveLeftRow").hide();
+	}
+	m.hideMoveRightRow = function(){
+		$("#moveRightRow").hide();
+	}
+
 	/** scrolling methods **/
 	var timer;
 	var deltaSum = 0;
@@ -72,7 +85,7 @@ var TableManager = {};
 		}
 		deltaSum += delta;
 		setFinishTimer();
-		if(Math.abs(deltaSum)<PrefManager.getOption("deltaThreshold")) return;
+		if(Math.abs(deltaSum)<pref("deltaThreshold")) return;
 		else finishTimer();
 		setRefractoryPeriod(2);
 
@@ -89,8 +102,8 @@ var TableManager = {};
 	function scrollOlder(){
 		var graphPos = GraphManager.getGraphPos();
 		if(graphPos.offset<=0) return;
-		var scrollScale = PrefManager.getOption("scrollScale");
-		var scrollMethod = PrefManager.getOption("scrollMethod");
+		var scrollScale = pref("scrollScale");
+		var scrollMethod = pref("scrollMethod");
 		if(scrollMethod == "expand"){
 			GraphManager.setSelectionScale(graphPos.offset-scrollScale, graphPos.scale+scrollScale);
 		}else if(scrollMethod == "move"){
@@ -98,12 +111,13 @@ var TableManager = {};
 		}else{
 			console.log("scrolling method in preferences not recognized. ");
 		}
+		$("#textContent").itemTable("refreshTopRows");
 	}
 	function scrollNewer(){
 		var graphPos = GraphManager.getGraphPos();
 		if(graphPos.offset + graphPos.scale >= 1) return;
-		var scrollScale = PrefManager.getOption("scrollScale");
-		var scrollMethod = PrefManager.getOption("scrollMethod");
+		var scrollScale = pref("scrollScale");
+		var scrollMethod = pref("scrollMethod");
 		if(scrollMethod == "expand"){
 			GraphManager.setSelectionScale(graphPos.offset, graphPos.scale+scrollScale);
 		}else if(scrollMethod == "move"){
@@ -111,14 +125,15 @@ var TableManager = {};
 		}else{
 			console.log("scrolling method in preferences not recognized. ");
 		}
+		$("#textContent").itemTable("refreshTopRows");
 	}
 	function setRefractoryPeriod(rValue){
 		refractory = rValue;
-		setTimeout(function(){ refractory = 0; }, PrefManager.getOption("wheelRefractory"));
+		setTimeout(function(){ refractory = 0; }, pref("wheelRefractory"));
 	}
 	function setFinishTimer(){
 		if(typeof timer == "undefined")
-			timer = setTimeout(finishTimer, PrefManager.getOption("wheelTimer"));
+			timer = setTimeout(finishTimer, pref("wheelTimer"));
 	}
 	function finishTimer(){
 		deltaSum = 0;

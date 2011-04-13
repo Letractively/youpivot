@@ -54,7 +54,9 @@ var Connector = {};
 		$.ajax({
 			url: url,
 			success: function(data){ callback(data, true); }, 
-			error: function(data){ callback(data, false); }
+			error: function(xhr, textstatus){
+				callback({xhr: xhr, textstatus: textstatus} , false);
+			}
 		});
 	}
 
