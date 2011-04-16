@@ -14,9 +14,6 @@ function pref(label){
 		//scrolling preferences
 		"scrollMethod": "expand",
 		"scrollScale": 0.03,
-		"deltaThreshold": 7,
-		"wheelTimer": 400,
-		"wheelRefractory": 300,
 		//highlight colors
 		"highlightBg": 0.9,
 		"highlightFg": "same",

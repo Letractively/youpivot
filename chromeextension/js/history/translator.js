@@ -12,7 +12,11 @@ var Translator = {};
 		output.url = server.url;
 		//console.log(server.importancevalues);
 		output.importance = translateImportance(server.importancevalues, output.startTime);
-		output.keywords = [unescape(server.keyword)];
+		if(typeof server.keyword == "string"){
+			output.keywords = [unescape(server.keyword)]
+		}else if(typeof server.keyword == "object"){
+			output.keywords = server.keyword;
+		}
 		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: "#FF0000"}; //FIXME
 		return output;
 	}

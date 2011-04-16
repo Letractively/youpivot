@@ -12,17 +12,23 @@ var HighlightManager = {};
 		if(highlightself){
 			hover = $("#item_"+id, parent);
 			domain = hover.data("item").domain.id;
+			m.highlightItem(hover, {persistent: persistent});
 		}else{
 			domain = id;
 		}
+		$("#textContent").clearQueue();
 		$("tr.item_domain_"+domain).each(function(){
 			var t = $(this);
-			var lvl = 2;
-			if(highlightself && t.get(0)==hover.get(0)) lvl = 1;
-			t.itemTable("highlight", {level: lvls[getMinLevel(t, lvl)-1]});
-			if(persistent){
-				addToList(t, lvl);
-			}
+			$("#textContent").queue(function(){
+				if(!highlightself || t.get(0)!=hover.get(0)){
+					t.itemTable("highlight", {level: lvls[getMinLevel(t, 2)-1]});
+					if(persistent){
+						addToList(t, 2);
+					}
+				}
+				var dq = function(){ $("#textContent").dequeue(); };
+				setTimeout(dq, 5);
+			});
 		});
 	}
 
@@ -34,26 +40,28 @@ var HighlightManager = {};
 		if(highlightself){
 			hover = $("#item_"+id, parent);
 			domain = hover.data("item").domain.id;
+			m.lowlightItem(hover, clearPersistent);
 		}else{
 			domain = id;
 		}
+		$("#textContent").clearQueue();
 		$("tr.item_domain_"+domain).each(function(){
 			var t = $(this);
-			var lvl = 2;
-			if(highlightself && t.get(0)==hover.get(0)) lvl = 1;
-			if(clearPersistent){
-				removeFromList(t, lvl);
+			if(!highlightself || t.get(0)!=hover.get(0)){
+				if(clearPersistent){
+					removeFromList(t, 2);
+				}
+				if(getList(t).length===0)
+					t.itemTable("lowlight", {});
+				else
+					t.itemTable("highlight", {level: lvls[getMinLevel(t)-1]});
 			}
-			if(getList(t).length===0)
-				t.itemTable("lowlight", {});
-			else
-				t.itemTable("highlight", {level: lvls[getMinLevel(t)-1]});
 		});
 	}
 
 	m.highlightItem = function(item, options){
-		var persistent = Helper.getOption(options, "persistent", false);
-		var level = Helper.getOption(options, "level", "highlight");
+		var persistent = Helper.getOptions(options, "persistent", false);
+		var level = Helper.getOptions(options, "level", "highlight");
 		item.itemTable("highlight", {level: level});
 	}
 

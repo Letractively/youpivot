@@ -20,7 +20,7 @@ var TopGraph = {};
 
 	m.setSelection = function(offset, cap){
 		if(cap>1) cap = 0;
-		var selection = {x: (offset*GraphManager.width), dx: (cap*GraphManager.width)};
+		var selection = {x: (offset*(GraphManager.width-20)), dx: (cap*(GraphManager.width-20))};
 		sPanel.data([selection]);
 		sPanel.render();
 	}
@@ -32,7 +32,7 @@ var TopGraph = {};
 
 		var box = $("#topGraph");
 
-		var w = GraphManager.width;
+		var w = GraphManager.width-20;
 			h = box.height(),
 			x = pv.Scale.linear(0, 758).range(0, w),
 			y = pv.Scale.linear(0, max).range(0, h);
