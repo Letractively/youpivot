@@ -57,6 +57,7 @@ var PivotManager = {};
 		GraphManager.setSelection(range[0], range[1]);
 	}
 
+	// Displays an error message if the server cannot be connected
 	function pivotOnError(response){
 		Helper.hideLoading();
 		$("#errorIcon").show();

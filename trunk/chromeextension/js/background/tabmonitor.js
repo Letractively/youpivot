@@ -96,9 +96,9 @@ var Monitor = {};
 		obj.eventtypename = info.domain;
 		console.log("domain", info.domain);
 		obj.favicon = info.favUrl;
-		obj.keyword = info.keywords[0]; //FIXME upload all keywords
+		obj.keyword = info.keywords; //FIXME upload all keywords
 		obj.starttime = Math.floor(new Date().getTime()/1000);
-		obj.endtime = Math.floor((new Date().getTime())/1000 + 1); //FIXME should be changed to 1
+		obj.endtime = Math.floor((new Date().getTime())/1000 + 1);
 		//obj.eventtypename = "chrometab";
 		//obj.val = info.importance;
 		obj.tabindex = info.index;

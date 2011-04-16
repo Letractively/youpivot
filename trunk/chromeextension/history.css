@@ -78,13 +78,13 @@ a.active:active { color: #3870AD; }
 #errorIcon { background: url("images/error.png") center no-repeat; display: none; }
 .errorMessage { text-align: center; color: #AA0000; }
 
-.graphArrow { position: absolute; width: 10px; height: 45px; background: url("images/pageflip.png"); opacity: 0.2; }
-.graphArrow:hover { opacity: 1; }
+.graphArrow { position: absolute; width: 20px; height: 45px; background: url("images/pageflip.png"); opacity: 0.7; }
+.graphArrow:hover { opacity: 1; background: url("images/pageflip_hover.png"); }
 #graphMoveLeft { margin-left: -10px; -webkit-transform: scaleX(-1); }
 #graphMoveRight { margin-left: 680px; }
-#topGraph { width: 680px; height: 45px; position: relative; z-index: 820;
+#topGraph { margin-left: 10px; width: 660px; height: 45px; position: relative; z-index: 820;
 			background-image: url("images/topbg.png"); }
-#topGraphDate { width: 680px; height: 20px;
+#topGraphDate { width: 660px; height: 20px; margin-left: 10px;
    				padding-top: 2px; position: absolute; z-index: 810; 
 				font-size: 8pt; font-style: italic; color: #919191; }
 #streamGraph { width: 680px; height: 150px; overflow: hidden; }
@@ -116,10 +116,14 @@ a.active:active { color: #3870AD; }
 	#searchResults { padding-bottom: 10px; display: none; -webkit-user-select: none; }
 	/*** end search results ***/
 
-	.pageFlipper { display: none; width: 680px; text-align: center; color: #BECAD8; cursor: pointer; }
-	.pageFlipper:hover { background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(245,246,250)), color-stop(0.97, rgb(235,242,245))); color: #3870AD; }
-	.pageFlipper.bottom { border-top: 1px solid #E1E4EB; }
-	.pageFlipper.top { border-bottom: 1px solid #E1E4EB; }
+	.pageFlipper { width: 680px; height: 70px; text-align: center; color: #BECAD8; cursor: pointer; padding: 10px; box-sizing: border-box; }
+	.pageFlipper:hover, .pageFlipper.active { background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(245,246,250)), color-stop(0.97, rgb(235,242,245))); color: #3870AD; }
+	.pageFlipper.active { color: #000000; }
+	.pageFlipper.active { font-weight: bold; }
+	.pageFlipper .cancelLabel { font-weight: normal; color: #AA0000; }
+	.pageFlipper.active:hover { background: -webkit-gradient(linear, left bottom, left top, color-stop(0.97, rgb(240,197,197)), color-stop(0, rgb(245,220,220))); }
+	#bottomPageFlipper { border-top: 1px solid #E1E4EB; }
+	#topPageFlipper { border-bottom: 1px solid #E1E4EB; }
 	/*** text contents ***/
 	#textContent { padding-bottom: 10px; -webkit-user-select: none; }
 	.contentHeader { font-weight: bold; }

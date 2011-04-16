@@ -27,7 +27,7 @@ var Connector = {};
 	function sendString(type, string, callback){
 		var url = serverUrl+type+"?"+string;
 		ajaxGet(url, function(data, success){
-			console.log(data);
+			//console.log(data);
 			if(callback) sendCallbackData(callback, success, data);
 		});
 		console.log(url);
@@ -84,7 +84,16 @@ var Connector = {};
 		var arr = [];
 		for(var i in obj){
 			if(typeof obj[i] == "object"){
-				arr[arr.length] = i+"="+escape(JSON.stringify(obj[i]));
+				//FIXME remove hard coding
+				if(i=="keyword"){
+					var keys = obj[i];
+					for(var j in keys){
+						keys[j] = i+"="+keys[j];
+					}
+					arr[arr.length] = keys.join("&");
+				}else{ //FIXME send up JSON array instead
+					arr[arr.length] = i+"="+escape(JSON.stringify(obj[i]));
+				}
 			}else{
 				arr[arr.length] = i+"="+escape(obj[i]);
 			}

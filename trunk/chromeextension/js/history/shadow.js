@@ -4,7 +4,7 @@ var ShadowManager = {};
 	var m = ShadowManager;
 
 	m.setShadowHeight = function(h){
-		$("#graphShadow").height(h);
+		$("#graphShadow").height(h).trigger("resize");
 	}
 
 	m.refresh = function(){

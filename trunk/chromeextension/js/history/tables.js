@@ -55,50 +55,134 @@ var TableManager = {};
 		TableHelper.changeSchema($("#textContent"), sortBy);
 	}
 
-	m.showMoveLeftRow = function(){
-		$("#moveLeftRow").show();
-	}
-	m.showMoveRightRow = function(){
-		$("#moveRightRow").show();
-	}
-	m.hideMoveLeftRow = function(){
-		$("#moveLeftRow").hide();
-	}
-	m.hideMoveRightRow = function(){
-		$("#moveRightRow").hide();
-	}
-
 	/** scrolling methods **/
-	var timer;
-	var deltaSum = 0;
-	var refractory = 0; // 0 - not refractory
-						// 1 - prevent only page flip
-						// 2 - prevent also normal scrolling
+	$(function(){
+		$(document).scrollTop($("#topPageFlipper").height());
+		//initialize the timer bars
+		$("#topPageFlipper .flip").timerBar("create", {complete: doScrollNew, speed: 100, number: 20});
+		$("#bottomPageFlipper .flip").timerBar("create", {complete: doScrollOld, speed: 100, number: 20});
+	});
+	$(window).resize(onresize);
+	$("#graphShadow").bind("resize", onresize);
+	function onresize(e){
+		var mHeight = window.innerHeight - $("#graphShadow").height();
+		$("#textContent").css("min-height", mHeight);
+	}
+	$(document).mouseenter(function(e){
+		stopFlip("all");
+		scrollHideFlipper(100);
+	});
+	$("#topPageFlipper").mouseenter(function(e){
+		pauseFlip("top");
+	}).mouseleave(function(e){
+		resumeFlip("top", doScrollNew);
+	}).click(function(e){
+		stopFlip("top");
+		scrollHideFlipper(100);
+	});
+	$("#bottomPageFlipper").mouseenter(function(e){
+		pauseFlip("bottom");
+	}).mouseleave(function(e){
+		resumeFlip("bottom", doScrollOld);
+	}).click(function(e){
+		stopFlip("bottom");
+		scrollHideFlipper(100);
+	});
 	$(document).mousewheel(function(e, delta){
-		if(refractory){
-			//prevent default scrolling if in refractory state 2
-			if(refractory==2){
-				e.preventDefault();
-			}
-			//don't do anything during refractory period
+		if(atTop(1) && delta<0){
+			stopFlip("top");
+			scrollHideFlipper(100);
+			e.preventDefault();
+		}
+		if(atBottom(1) && delta>0){
+			stopFlip("bottom");
+			scrollHideFlipper(100);
+			e.preventDefault();
+		}
+	});
+	$(document).scroll(function(e){
+		if(atTop(2)){
+			startFlip("top");
+		}else{
+			stopFlip("top");
+		}
+		if(atBottom(2)){
+			startFlip("bottom");
+		}else{
+			stopFlip("bottom");
+		}
+	});
+	function doScrollNew(){
+		var topItem = $("#textContent tr.item:visible").first();
+		scrollNewer();
+		resetFlipButton($("#topPageFlipper"));
+		$("#topPageFlipper .flip").timerBar("reset");
+		$(document).scrollTop(topItem.offset().top - $("#graphShadow").height() - 107);
+		scrollHideFlipper(500);
+	}
+	function doScrollOld(){
+		scrollOlder();
+		resetFlipButton($("#bottomPageFlipper"));
+		$("#bottomPageFlipper .flip").timerBar("reset");
+		scrollHideFlipper(500);
+	}
+	function scrollHideFlipper(duration){
+		var flipperHeight = $("#topPageFlipper").outerHeight()+6;
+		if(atTop(1)){
+			$("body").animate({"scrollTop": flipperHeight}, duration);
+		}else if(atBottom(1)){
+			$("body").animate({"scrollTop": $("body")[0].scrollHeight - $("body").height() - flipperHeight}, duration);
+		}
+	}
+	function resetFlipButton(button){
+		button.removeClass("active");
+		button.find(".label").text("Load more items");
+		$(".cancelLabel", button).remove();
+	}
+	function startFlip(dir){
+		var flipper = $("#"+dir+"PageFlipper");
+		$(".flip", flipper).timerBar("reset");
+		$(".flip", flipper).timerBar("start");
+		flipper.addClass("active");
+		$(".label", flipper).text("Loading more items....");
+		$(".flip", flipper).after("<div class='cancelLabel'>Click to cancel</div>");
+	}
+	function stopFlip(dir){
+		if(dir=="all"){
+			stopFlip("top");
+			stopFlip("bottom");
 			return;
 		}
-		deltaSum += delta;
-		setFinishTimer();
-		if(Math.abs(deltaSum)<pref("deltaThreshold")) return;
-		else finishTimer();
-		setRefractoryPeriod(2);
-
-		var b = $("body");
-		var bottom = (b.scrollTop() + b.height() == b[0].scrollHeight);
-		if(bottom && delta<0){
-			scrollOlder();
-		}else if(b.scrollTop()==0 && delta>0){
-			scrollNewer();
+		var flipper = $("#"+dir+"PageFlipper");
+		$(".flip", flipper).timerBar("options", {speed: 100}).timerBar("reset");
+		resetFlipButton(flipper);
+	}
+	function pauseFlip(dir){
+		$("#"+dir+"PageFlipper .flip").timerBar("options", {speed: 750});
+	}
+	function resumeFlip(dir, callback){
+		$("#"+dir+"PageFlipper .flip").timerBar("options", {speed: 100});
+	}
+	// level 1 - page flipper is visible; 2 - at the very top of document
+	function atTop(level){
+		var scrollTop = $(document).scrollTop();
+		if(level==1){
+			var flipperHeight = $("#topPageFlipper").outerHeight();
+			return scrollTop < flipperHeight;
+		}else if(level==2){
+			return scrollTop == 0;
 		}
-	}).scroll(function(e){
-		setRefractoryPeriod(1);
-	});
+	}
+	function atBottom(level){
+		var scrollTop = $(document).scrollTop();
+		var maxScrollTop = $("body")[0].scrollHeight - $("body").height();
+		if(level==1){
+			var flipperHeight = $("#bottomPageFlipper").outerHeight();
+			return scrollTop > maxScrollTop - flipperHeight;
+		}else if(level==2){
+			return scrollTop == maxScrollTop;
+		}
+	}
 	function scrollOlder(){
 		var graphPos = GraphManager.getGraphPos();
 		if(graphPos.offset<=0) return;
@@ -126,19 +210,6 @@ var TableManager = {};
 			console.log("scrolling method in preferences not recognized. ");
 		}
 		$("#textContent").itemTable("refreshTopRows");
-	}
-	function setRefractoryPeriod(rValue){
-		refractory = rValue;
-		setTimeout(function(){ refractory = 0; }, pref("wheelRefractory"));
-	}
-	function setFinishTimer(){
-		if(typeof timer == "undefined")
-			timer = setTimeout(finishTimer, pref("wheelTimer"));
-	}
-	function finishTimer(){
-		deltaSum = 0;
-		clearTimeout(timer);
-		timer = undefined;
 	}
 	/** end scrolling methods **/
 
