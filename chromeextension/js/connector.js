@@ -34,11 +34,10 @@ var Connector = {};
 	}
 
 	function sendCallbackData(callbacks, success, data){
-		console.log(callbacks);
 		if(typeof callbacks == "object"){
 			if(success){
 				callbacks.onSuccess(data);
-			}else{
+			}else if(typeof callbacks.onError == "function"){
 				callbacks.onError(data);
 			}
 		}else if(typeof callbacks == "string"){

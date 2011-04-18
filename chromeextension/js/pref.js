@@ -11,9 +11,10 @@ function pref(label){
 		"sortMethod": "chronological",
 		"keywordHighlight": false,
 		"pageFlipRange": 6*3600000, 
-		//scrolling preferences
+		//scrolling/flipping preferences
 		"scrollMethod": "expand",
 		"scrollScale": 0.03,
+		"stopFlipOnMove": true,
 		//highlight colors
 		"highlightBg": 0.9,
 		"highlightFg": "same",

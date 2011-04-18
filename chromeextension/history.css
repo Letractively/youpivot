@@ -49,6 +49,10 @@ a.active:active { color: #3870AD; }
 	#contentFilters { padding-top: 5px; }
 	#contentFilters img { cursor: pointer; }
 	#contentFilters img:hover { opacity: 1 !important; }
+	/*** stream filters ***/
+	#streamFilters { padding-top: 5px; }
+	#streamFilters img { cursor: pointer; }
+	#streamFilters img:hover { opacity: 1 !important; }
 
 .favicon { width: 16px; height: 16px; }
 .favicon.wrap { margin: 0px 3px; }

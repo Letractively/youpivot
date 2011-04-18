@@ -197,6 +197,7 @@ var GraphManager = {};
 		var time = getScaleTime(offset, cap);
 		loadTime(time);
 		FilterManager.filterTime(time);
+		$("#visualGraphs").trigger("setselection");
 	}
 
 	m.startSelection = function(){
