@@ -18,6 +18,7 @@ var Translator = {};
 			output.keywords = server.keyword;
 		}
 		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: "#FF0000"}; //FIXME
+		output.stream = server.stream;
 		return output;
 	}
 

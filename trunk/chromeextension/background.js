@@ -12,9 +12,15 @@ $(function(){
 			case "uploadInfo":
 				Connector.send(request.eventType, request.info, request.callback);
 				break;
+			case "saveTerms":
+				printTerms(request.terms);
+				break;
 			default:
 				console.log("Unknown internal request received");
 		}
 	});
 	/*** end chrome event listeners ***/
+	function printTerms(arr){
+		console.log(arr);
+	}
 });

@@ -14,6 +14,7 @@ var ItemManager = {};
 		}
 		DomainManager.display();
 		TermManager.display();
+		StreamManager.display();
 	}
 
 	m.clear = function(){
@@ -68,6 +69,7 @@ var ItemManager = {};
 		TermManager.addTerms(item.keywords);
 		TableManager.addItem(item);
 		DomainManager.addDomain(domain.favUrl, domain.name);
+		StreamManager.addStream(item.stream);
 		var importance = item.importance;
 		if(importance && importance.length>0){ 
 			GraphManager.addLayer(item.domain.color, item.importance, item.id, item.startTime, domain.name);

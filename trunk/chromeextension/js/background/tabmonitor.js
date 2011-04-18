@@ -18,6 +18,9 @@ var Monitor = {};
 		});
 		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 			if(tab.status=="complete"){
+				chrome.tabs.executeScript(tabId, {file: "js/background/termextractor.js"}, function(){
+					console.log("execute complete");
+				});
 				tabUpdated(tab, changeInfo);
 			}
 		});
@@ -85,6 +88,9 @@ var Monitor = {};
 				}else{
 					alert("Error uploading open tab info: "+data);
 				}
+			}, 
+			onError: function(data){
+				console.log("error uploading open information. "+data);
 			}
 		});
 	}
@@ -96,7 +102,7 @@ var Monitor = {};
 		obj.eventtypename = info.domain;
 		console.log("domain", info.domain);
 		obj.favicon = info.favUrl;
-		obj.keyword = info.keywords; //FIXME upload all keywords
+		obj.keyword = info.keywords; //FIXME use TF-IDF instead
 		obj.starttime = Math.floor(new Date().getTime()/1000);
 		obj.endtime = Math.floor((new Date().getTime())/1000 + 1);
 		//obj.eventtypename = "chrometab";
@@ -105,6 +111,7 @@ var Monitor = {};
 		obj.parenttab = info.parentTab;
 		obj.parentwindow = info.parentWindow;
 		obj.windowid = info.win;
+		obj.stream = "chrometab";
 		//obj = addKeywordsToItem(obj, info.keywords);
 		return obj;
 	}

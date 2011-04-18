@@ -21,7 +21,8 @@ var IconFactory = {};
 	m.createTextIcon = function(src, name, clss){
 		var classString = (clss) ? clss : "";
 		if(!name) name = src;
-		var img = "<img src='"+src+"' title='"+name+"' class='favicon "+classString+"' />";
+		var error = (src) ? "onerror='this.src=\""+getFavicon(src)+"\"'" : "";
+		var img = "<img src='"+src+"' title='"+name+"' "+error+" class='favicon "+classString+"' />";
 		return img;
 	}
 })();

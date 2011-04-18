@@ -92,20 +92,26 @@ var FilterManager = {};
 	function applyOutcast(type, value){
 		switch(type){
 			case "name":
-				filterName(value, "negative");
+				filterGeneral(value, "negative", nameTest);
 				break;
 			case "domain":
-				filterDomain(value, "negative");
+				filterGeneral(value, "negative", domainTest);
+				break;
+			case "stream":
+				filterGeneral(value, "negative", streamTest);
 				break;
 		}
 	}
 	function applyFilter(type, value){
 		switch(type){
 			case "name":
-				filterName(value, "positive");
+				filterGeneral(value, "positive", nameTest);
 				break;
 			case "domain":
-				filterDomain(value, "positive");
+				filterGeneral(value, "positive", domainTest);
+				break;
+			case "stream":
+				filterGeneral(value, "positive", streamTest);
 				break;
 		}
 	}
@@ -116,10 +122,10 @@ var FilterManager = {};
 	function hideFilterRow(obj){
 		hideRow(obj, "filtered");
 	}
-	function filterName(value, dir){
+	function filterGeneral(value, dir, test){
 		$(".itemTable .item").each(function(){
 			var item = $(this).data("item");
-			if(matchKeywords(value, item.keywords)){
+			if(test(value, item)){
 				if(dir == "positive")
 					showFilterRow($(this));
 				else if(dir == "negative")
@@ -129,18 +135,14 @@ var FilterManager = {};
 			}
 		});
 	}
-	function filterDomain(domain, dir){
-		$(".itemTable .item").each(function(){
-			var item = $(this).data("item");
-			if(item.domain.name == domain){
-				if(dir == "positive")
-					showFilterRow($(this));
-				else if(dir == "negative")
-					hideFilterRow($(this));
-				else
-					throw "Error: direction "+dir+" is not defined";
-			}
-		});
+	function nameTest(value, item){
+		return matchKeywords(value, item.keywords);
+	}
+	function domainTest(domain, item){
+		return item.domain.name == domain;
+	}
+	function streamTest(stream, item){
+		return item.stream == stream;
 	}
 	var lastTime;
 	m.filterTime = function(time){
@@ -212,7 +214,7 @@ var FilterManager = {};
 	function addOutcastLabel(type, value, lbl){
 		if(type=="name"){
 			lbl = "<div class='outcastText'>"+lbl+"</div>";
-		}else if(type=="domain"){
+		}else if(type=="domain" || type=="stream"){
 			lbl = "<div class='outcastIcon'><div class='outcastCross'></div>"+lbl+"</div>";
 		}
 		return addFilterLabel(type, value, lbl, true);
