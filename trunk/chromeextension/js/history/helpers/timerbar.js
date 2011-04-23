@@ -59,7 +59,7 @@
 	}
 	function addOne(bar){
 		var count = bar.data("timerBar_count");
-		bar.find(".timer_"+(count)).css("color", "#3870AD");
+		bar.find(".timer_"+(count)).css("color", "#749BC6");
 		var number = bar.data("timerBar_number");
 		bar.data("timerBar_count", count+1);
 		if(count+1 >= number){

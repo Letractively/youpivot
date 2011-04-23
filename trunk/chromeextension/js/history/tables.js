@@ -25,13 +25,16 @@ var TableManager = {};
 		// load back filters from pivot view
 		DomainManager.clearDomains();
 		TermManager.clearTerms();
+		StreamManager.clearStreams();
 		$("#textContent .itemTable .item:not(.out)").each(function(){
 			var item = $(this).data("item");
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			TermManager.addTerms(item.keywords);
+			StreamManager.addStream(item.stream);
 		});
 		DomainManager.display();
 		TermManager.display();
+		StreamManager.display();
 	}
 
 	//add an item to the table

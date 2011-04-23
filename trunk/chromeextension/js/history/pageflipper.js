@@ -38,10 +38,11 @@ var PageFlipper = {};
 	function onresize(e){
 		var mHeight = window.innerHeight - $("#graphShadow").height();
 		$("#textContent").css("min-height", mHeight);
+		m.hideFlipper();
 	}
-	$("#visualGraphs").bind("setselection", function(){
+	m.hideFlipper = function(){
 		scrollHideFlipper(0);
-	});
+	}
 
 	$(document).mouseenter(function(e){
 		if(!enabled) return;
@@ -110,7 +111,6 @@ var PageFlipper = {};
 	function resetFlipButton(button){
 		button.removeClass("active");
 		button.find(".label").text("Load more items");
-		$(".cancelLabel", button).remove();
 	}
 	var mousepos = {};
 	function startFlip(dir){
@@ -119,7 +119,6 @@ var PageFlipper = {};
 		$(".flip", flipper).timerBar("start");
 		flipper.addClass("active");
 		$(".label", flipper).text("Loading more items....");
-		$(".flip", flipper).after("<div class='cancelLabel'>Click to cancel</div>");
 		//cancel on move
 		mousepos.x = undefined, mousepos.y = undefined;
 		if(pref("stopFlipOnMove")){
@@ -132,7 +131,7 @@ var PageFlipper = {};
 			mousepos.y = e.pageY;
 			return;
 		}
-		if(Math.abs(e.pageX - mousepos.x) > 5 || Math.abs(e.pageY - mousepos.y) > 5){
+		if(Math.abs(e.pageX - mousepos.x) > 10 || Math.abs(e.pageY - mousepos.y) > 10){
 			stopFlipAndScroll();
 		}
 	}

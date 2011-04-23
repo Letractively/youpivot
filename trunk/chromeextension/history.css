@@ -122,10 +122,7 @@ a.active:active { color: #3870AD; }
 
 	.pageFlipper { width: 680px; height: 70px; text-align: center; color: #BECAD8; cursor: pointer; padding: 10px; box-sizing: border-box; }
 	.pageFlipper:hover, .pageFlipper.active { background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(245,246,250)), color-stop(0.97, rgb(235,242,245))); color: #3870AD; }
-	.pageFlipper.active { color: #000000; }
-	.pageFlipper.active { font-weight: bold; }
-	.pageFlipper .cancelLabel { font-weight: normal; color: #AA0000; }
-	.pageFlipper.active:hover { background: -webkit-gradient(linear, left bottom, left top, color-stop(0.97, rgb(240,197,197)), color-stop(0, rgb(245,220,220))); }
+	.pageFlipper.active { color: #555555; font-weight: bold; }
 	#bottomPageFlipper { border-top: 1px solid #E1E4EB; }
 	#topPageFlipper { border-bottom: 1px solid #E1E4EB; }
 	/*** text contents ***/
