@@ -34,7 +34,7 @@ var FilterManager = {};
 		if(typeof type == "string"){
 			id = getFilterIndex(type, value);
 			if(id===false) return;
-		}else if(typeof type = "number"){
+		}else if(typeof type == "number"){
 			id = type;
 		}
 		removeFilterLabel(id);
@@ -87,6 +87,7 @@ var FilterManager = {};
 		$(".itemTable").each(function(){
 			$(this).itemTable("refreshTopRows");
 		});
+		PageFlipper.hideFlipper();
 	}
 
 	function applyOutcast(type, value){
@@ -171,6 +172,7 @@ var FilterManager = {};
 		if(!SearchManager.getState()){
 			TableManager.loadFilters();
 		}
+		PageFlipper.hideFlipper();
 	}
 	function showTimeRow(obj){
 		showRow(obj, "out");

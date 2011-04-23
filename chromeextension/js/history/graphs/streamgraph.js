@@ -25,34 +25,37 @@ var StreamGraph = {};
 			h = sgbox.height(),
 			x = pv.Scale.linear(0, 758).range(0, w),
 			y = pv.Scale.linear(0, max*1.1).range(0, h);
+
+		function sg_value(d){ return data[this.index].data; }
+		function sg_x(d){ return x(this.index); }
+		function sg_title(d, p){ return "layer-"+p.id; }
+		function sg_fillStyle(d, p){ return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, PrefManager.getOption("normalGraph")); }
+		function sg_mouseover(d, p){ 
+			this.title(""); //destroy the title used for DOM extraction
+			highlightItem(p.id, false);
+		}
+		function sg_mouseout(d, p){ lowlightItem(p.id, false); }
+		function sg_click(d, p){ p.highlight = !p.highlight; toggleItemHighlight(p.id, p.highlight); }
+
 		var streamGraph = new pv.Panel()
 			.canvas("streamGraph")
 			.width(w)
 			.height(h)
 			.add(pv.Layout.Stack)
 			.layers(data)
-			.values(function(d){ return data[this.index].data; })
+			.values(sg_value)
 			.order("reverse")
 			.offset("silohouette")
-			.x(function(d){ return x(this.index) })
+			.x(sg_x)
 			.y(y)
 			.layer.add(pv.Area)
 			.interpolate("cardinal")
-			.title(function(d, p){ return "layer-"+p.id; })
-			.fillStyle(function(d, p){ 
-				return (p.active || p.highlight) ? p.color : Helper.createLighterColor(p.color, PrefManager.getOption("normalGraph")); })
+			.title(sg_title)
+			.fillStyle(sg_fillStyle)
 			.lineWidth(2)
-			.event("mouseover", function(d, p){
-			   	this.title(""); //destroy the title used for DOM extraction
-				highlightItem(p.id, false); 
-				})
-			.event("mouseout", function(d, p){ 
-				lowlightItem(p.id, false); 
-				})
-			.event("click", function(d, p){ 
-			  	p.highlight = !p.highlight; 
-				toggleItemHighlight(p.id, p.highlight); 
-			});
+			.event("mouseover", sg_mouseover)
+			.event("mouseout", sg_mouseout)
+			.event("click", sg_click);
 
 		streamGraph.render();
 		m.obj = streamGraph;

@@ -150,7 +150,7 @@ var GraphManager = {};
 		$("#graphDate .dash").toggle();
 		$("#eventsWrap").toggle();
 		$("#collapseGraph").animate({"rotate": (hiding) ? 180 : 0}, 150);
-		$("#graphShadow").animate({height: (hiding) ? 83 : 270}, 200);
+		ShadowManager.animate((hiding) ? 83 : 270, 200);
 		$("#streamGraph").animate({height: (hiding) ? 0 : 150}, 200); //block display to prevent it from occupying an extra row
 	}
 

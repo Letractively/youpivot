@@ -108,6 +108,7 @@ var HighlightManager = {};
 	function scrollToItem(id){
 		var range = [$("#graphShadow").height()+30, $(window).height()-60];
 		var item = $("#item_"+id);
+		if(!item.is(":visible")) return;
 		var top = item.offset().top;
 		var scrollTop = $("body").scrollTop();
 		if(top-scrollTop<range[0]){
