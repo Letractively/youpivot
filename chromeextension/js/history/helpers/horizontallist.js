@@ -30,7 +30,7 @@
 		}
 	}
 	function createItem(name, onclick){
-		var item = $("<a class='app hItem_"+name+"' href='#'></a>").text(name);
+		var item = $("<span class='app anchor hItem hItem_"+name+"'></span>").text(name);
 		item.click(function(){ clickEvent($(this), onclick); return false; });
 		return item;
 	}

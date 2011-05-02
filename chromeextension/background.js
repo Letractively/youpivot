@@ -21,6 +21,7 @@ $(function(){
 	});
 	/*** end chrome event listeners ***/
 	function printTerms(arr){
-		console.log(arr);
+		console.log("print terms is skipped");
+		//console.log(arr);
 	}
 });

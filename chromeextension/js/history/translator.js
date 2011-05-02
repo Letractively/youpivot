@@ -17,9 +17,46 @@ var Translator = {};
 		}else if(typeof server.keyword == "object"){
 			output.keywords = server.keyword;
 		}
-		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: "#FF0000"}; //FIXME
+		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: getDomainColor(server.eventtypename)}; //FIXME
 		output.stream = server.stream;
+		output.eventId = server._id;
 		return output;
+	}
+
+	function getDomainColor(name){
+		switch(name){
+			case "google.com":
+				return "#018F3D";
+			case "facebook.com":
+				return "#3B5998";
+			case "jquery.com":
+				return "#235676";
+			case "docs.jquery.com":
+				return "#235676";
+			case "api.jquery.com":
+				return "#235676";
+			case "forum.jquery.com":
+				return "#235676";
+			case "nytimes.com":
+				return "#333333";
+			case "news.ycombinator.com":
+				return "#FF6600";
+			case "developer.mozilla.org":
+				return "#AA0000";
+			case "macrumors.com":
+				return "#A00000";
+			case "engadget.com":
+				return "#8BC4CE";
+			case "lifehacker.com":
+				return "#6C663F";
+			case "apple.com":
+				return "#9A9A9A";
+			case "processingjs.org":
+				return "#024779";
+			default: 
+				return "#FF0000";
+				break;
+		}
 	}
 
 	function translateImportance(obj, startTime){

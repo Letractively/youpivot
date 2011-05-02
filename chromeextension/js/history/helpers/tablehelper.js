@@ -17,7 +17,7 @@ var TableHelper = {};
 		var row = table.itemTable("addItem", {item: obj, header: headerInfo});
 		row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, PrefManager.getOption("lowlightFg")));
 		row.find(".pivotBtn").click(function(){
-			PivotManager.pivot(item.startTime, false);
+			PivotManager.pivotItem(item.eventId);
 		});
 		//set link to pivot if it is a timemark
 		if(item.domain.name == "timemark"){

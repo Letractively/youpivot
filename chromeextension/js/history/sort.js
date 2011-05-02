@@ -36,13 +36,11 @@ var SortManager = {};
 		//Helper.showLoading();
 		TableManager.changeSchema(name);
 		SearchManager.changeSchema(name);
-		//SearchManager.reloadResult();
-		//TableManager.reload();
+		FilterManager.filterTime();
+		FilterManager.filter();
 		$(".itemTable").each(function(){
 			$(this).itemTable("refreshTopRows");
 		});
-		FilterManager.filterTime();
-		FilterManager.filter();
 		//Helper.hideLoading();
 		return true;
 	}

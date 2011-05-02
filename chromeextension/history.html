@@ -15,19 +15,19 @@
 			</div>
 			<div class="sidebarGroup">
 				<div class="sidebarLabel">Stream</div>
-				<div id="streamFilters"></div>
+				<div id="streamFilters" class="collapse"></div>
 			</div>
 			<div class="sidebarGroup">
 				<div class="sidebarLabel">Content</div>
-				<div id="contentFilters"></div>
+				<div id="contentFilters" class="collapse"></div>
 			</div>
 			<div class="sidebarGroup">
 				<div class="sidebarLabel">Sort</div>
-				<div id="sortItems"></div>
+				<div id="sortItems" class="collapse"></div>
 			</div>
 			<div class="sidebarGroup">
 				<div class="sidebarLabel">Terms</div>
-				<div id="terms"></div>
+				<div id="terms" class="collapse"></div>
 			</div>
 		</div>
 		<div id="visualGraphs">
@@ -40,7 +40,7 @@
 				<div id="graphMoveRight" class="graphArrow"></div>
 				<div id="topGraph"><!--24-hour map--></div>
 				<div id="graphInfo">
-					<a href="javascript:collapse-graph" id="collapseGraph"></a>
+					<div id="collapseGraph"></div>
 					<div id="graphDate">
 						<div id="startDate">00:00</div><span class="dash hidden"> - </span><div id="endDate">23:59</div>
 					</div>
@@ -87,19 +87,21 @@
 <script type="text/javascript" src="js/history/helpers/tablehelper.js"></script>
 <script type="text/javascript" src="js/history/helpers/itemtable.js"></script>
 <script type="text/javascript" src="js/history/helpers/timerbar.js"></script>
+<script type="text/javascript" src="js/history/helpers/collapsable.js"></script>
 
 <script type="text/javascript" src="js/history/graph.js"></script>
 <script type="text/javascript" src="js/history/graphs/topgraph.js"></script>
 <script type="text/javascript" src="js/history/graphs/streamgraph.js"></script>
 
 <!-- Sidebar elements -->
-<script type="text/javascript" src="js/history/terms.js"></script>
-<script type="text/javascript" src="js/history/domains.js"></script>
-<script type="text/javascript" src="js/history/streams.js"></script>
-<script type="text/javascript" src="js/history/datepicker.js"></script>
-<script type="text/javascript" src="js/history/calendar.js"></script>
-<script type="text/javascript" src="js/history/search.js"></script>
-<script type="text/javascript" src="js/history/filters.js"></script>
+<script type="text/javascript" src="js/history/sidebar/sidebar.js"></script>
+<script type="text/javascript" src="js/history/sidebar/terms.js"></script>
+<script type="text/javascript" src="js/history/sidebar/domains.js"></script>
+<script type="text/javascript" src="js/history/sidebar/streams.js"></script>
+<script type="text/javascript" src="js/history/sidebar/datepicker.js"></script>
+<script type="text/javascript" src="js/history/sidebar/calendar.js"></script>
+<script type="text/javascript" src="js/history/sidebar/search.js"></script>
+<script type="text/javascript" src="js/history/sidebar/filters.js"></script>
 
 <!-- UI elements -->
 <script type="text/javascript" src="js/history/tables.js"></script>

@@ -41,6 +41,7 @@ var SearchManager = {};
 		}
 		TermManager.display();
 		DomainManager.display();
+		$("#searchResults").itemTable("refreshTopRows");
 	}
 
 	m.reloadResult = function(){

@@ -4,20 +4,18 @@ a:link { color: #202080; text-decoration: none; }
 a:visited { color: #60609F; text-decoration: none; }
 a:active { color: #60609F; text-decoration: none; }
 a:hover { color: #666699; text-decoration: none; }
-a.app:link { color: #919191; text-decoration: none; }
+.anchor { cursor: pointer; }
+a.app:link, .anchor { color: #919191; text-decoration: none; }
 a.app:visited { color: #919191; text-decoration: none; }
 a.app:active { color: #919191; text-decoration: none; }
-a.app:hover { color: #888888; text-decoration: none; }
+a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 .app { -webkit-user-select: none; }
 .hidden { display: none; }	
 .left { float: left; }
 .right { float: right; }
+.pointer { cursor: pointer; }
 
-.active { cursor: default; }
-a.active:link { color: #3870AD; }
-a.active:hover { color: #3870AD; }
-a.active:visited { color: #3870AD; }
-a.active:active { color: #3870AD; }
+.hItem.active { cursor: default; color: #3870AD; }
 
 .dim { opacity: 0.4; }
 .disabled { pointer-events: none; }
@@ -32,6 +30,9 @@ a.active:active { color: #3870AD; }
 			 } 
 .sidebarGroup { margin: 1em 0px; }
 .sidebarLabel { font-weight: bold; color: #000000; }
+.collapsable_indicator { display: inline-block; width: 9px; height: 9px; background: url('images/arrow.png'); }
+.collapsable_indicator.active { -webkit-transform: rotate(90deg); }
+.collapse { margin-left: 9px; }
 #searchBox { width: 100%; box-sizing: border-box; }
 	/*** calendar ***/
 	#calendar { display: none; margin-left: 30px; }
@@ -64,7 +65,7 @@ a.active:active { color: #3870AD; }
 #graphDate { width: 99%; color: #919191; text-align: right; }
 #startDate { width: 50%; text-align: left; }
 #endDate { width: 50%; text-align: right; }
-#collapseGraph { display: inline-block; position: absolute; 
+#collapseGraph { display: inline-block; position: absolute; cursor: pointer; 
 				 margin-left: 690px; width: 14px; height: 14px;
 				 background: url("images/hide.png"); opacity: 0.8; }
 #collapseGraph:hover { opacity: 1; }

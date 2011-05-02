@@ -71,7 +71,31 @@ var Monitor = {};
 	function uploadRemoveInfo(tabId){
 		console.log("remove", tabId);
 		var info = arr[tabId].getInfo();
-		console.log(info);
+		var item = createRemoveItem(info);
+		Connector.send("update", item, {
+			onSuccess: function(data){
+				if(data.length>0){
+					console.log("remove successful, event id: "+data);
+				}else{
+					alert("Error uploading remove tab info: "+data);
+				}
+			}, 
+			onError: function(data){
+				console.log("error uploading remove information. "+data);
+			}
+		});
+	}
+
+	function createRemoveItem(info){
+		if(info.eid==-1){
+			console.log(info);
+			console.log("Event id is not defined in info. Cannot set end time for item");
+			return false;
+		}
+		var obj = {};
+		obj.endtime = (new Date().getTime()/1000)+1;
+		obj.eventid = info.eid;
+		return obj;
 	}
 
 	function uploadOpenInfo(tabId){
@@ -170,6 +194,7 @@ var Monitor = {};
 		obj.val0 = info.importance;
 		obj.time0 = Math.floor(new Date().getTime()/1000);
 		obj.eventid = info.eid;
+		obj.endtime = Math.floor(new Date().getTime()/1000)+1;
 		return obj;
 	}
 

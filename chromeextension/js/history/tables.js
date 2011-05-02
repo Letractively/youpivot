@@ -62,7 +62,7 @@ var TableManager = {};
 		if(active){
 			$("#textContent").hide();
 		}else{
-			$("#textContent").show();
+			$("#textContent").show().itemTable("refreshTopRows");
 			m.loadFilters();
 		}
 	});
