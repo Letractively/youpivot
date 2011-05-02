@@ -16,19 +16,14 @@ var HighlightManager = {};
 		}else{
 			domain = id;
 		}
-		$("#textContent").clearQueue();
 		$("tr.item_domain_"+domain).each(function(){
 			var t = $(this);
-			$("#textContent").queue(function(){
-				if(!highlightself || t.get(0)!=hover.get(0)){
-					t.itemTable("highlight", {level: lvls[getMinLevel(t, 2)-1]});
-					if(persistent){
-						addToList(t, 2);
-					}
+			if(!highlightself || t.get(0)!=hover.get(0)){
+				t.itemTable("highlight", {level: lvls[getMinLevel(t, 2)-1]});
+				if(persistent){
+					addToList(t, 2);
 				}
-				var dq = function(){ $("#textContent").dequeue(); };
-				setTimeout(dq, 5);
-			});
+			}
 		});
 	}
 
@@ -44,7 +39,6 @@ var HighlightManager = {};
 		}else{
 			domain = id;
 		}
-		$("#textContent").clearQueue();
 		$("tr.item_domain_"+domain).each(function(){
 			var t = $(this);
 			if(!highlightself || t.get(0)!=hover.get(0)){
@@ -59,20 +53,30 @@ var HighlightManager = {};
 		});
 	}
 
+	m.clearHighlight = function(){
+		$(".item").each(function(){
+			$(this).data("highlight", []);
+			$(this).itemTable("lowlight", {});
+		});
+	}
+
 	m.highlightItem = function(item, options){
 		var persistent = Helper.getOptions(options, "persistent", false);
 		var level = Helper.getOptions(options, "level", "highlight");
 		item.itemTable("highlight", {level: level});
+		if(persistent){
+			addToList(item, 1);
+		}
 	}
 
 	m.lowlightItem = function(item, clearPersistent){
 		if(clearPersistent){
-			removeFromList(item, 2);
+			removeFromList(item, 1);
 		}
 		if(getList(item).length===0)
 			item.itemTable("lowlight", {});
 		else{
-			var lvl = lvls[getMinLevel(item)];
+			var lvl = lvls[getMinLevel(item)-1];
 			item.itemTable("highlight", {level: lvl});
 		}
 	}

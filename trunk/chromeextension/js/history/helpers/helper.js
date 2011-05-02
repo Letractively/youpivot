@@ -45,11 +45,6 @@ var Helper = {};
 		if(level == "transparent"){
 			return "transparent";
 		}
-		if(typeof level == "string"){
-			throw "Error: Create lighter color by string is deprecated "+level;
-			console.trace();
-			level = translateLevel(level);
-		}
 		if(typeof level == "undefined" || level>1 || level<0){
 			console.log("Invalid color level "+level);
 			console.trace();
@@ -59,7 +54,13 @@ var Helper = {};
 		var g = parseInt(color.substr(3,2),16);
 		var b = parseInt(color.substr(5,2),16);
 		var hsl = RGB.rgbToHsl(r, g, b);
-		hsl[2] = level;
+		if(typeof level == "string" && (level.indexOf("+")==0 || level.indexOf("-")==0)){
+			level = parseFloat(level);
+			hsl[2] += level;
+			if(hsl[2]>0.9) hsl[2] = 0.9; //cap brightness value at 0.96
+		}else{
+			hsl[2] = level;
+		}
 		hsl[1] -= level*0.3;
 		if(hsl[1]<0) hsl[1] = 0;
 		var rgb = RGB.hslToRgb(hsl[0], hsl[1], hsl[2]);
@@ -67,15 +68,6 @@ var Helper = {};
 
 		function toCode(num){
 			return m.padZero(Math.floor(num).toString(16), 2);
-		}
-		function translateLevel(string){
-			if(string=="highbg") return 0.9;
-			if(string=="lowbg") return 0.96;
-			if(string=="high") return 0.7;
-			if(string=="med") return 0.75;
-			if(string=="low") return 0.8;
-			console.log("Unknown color string "+string);
-			return -1;
 		}
 	}
 

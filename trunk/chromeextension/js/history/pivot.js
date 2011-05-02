@@ -4,7 +4,31 @@ var PivotManager = {};
 	var m = PivotManager;
 
 	var pivotInterval = 3600000;
-	m.pivot = function(time, forceReload){
+	m.pivotItem = function(eventId){
+		var row = findRowByEventId(eventId);
+		var item = row.data("item");
+		m.pivot(item.startTime, false, function(){
+			var row = findRowByEventId(eventId);
+			var item = row.data("item");
+			HighlightManager.clearHighlight();
+			HighlightManager.highlightItem(row, {persistent: true, level: "highlight"});
+			HighlightManager.scrollToItem(item.id, 0);
+		});
+	}
+
+	function findRowByEventId(eventId){
+		var rows = $("#textContent").find(".item");
+		for(var i in rows){
+			var t = $(rows[i]);
+			var item = t.data("item");
+			if(item.eventId == eventId){
+				return t;
+			}
+		}
+	}
+
+	m.pivot = function(time, forceReload, callback){
+		if(!callback) callback = function(){};
 		SearchManager.antiSearch();
 		var range = GraphManager.getRange();
 		var midPoint = (range.start+range.end)/2;
@@ -14,10 +38,11 @@ var PivotManager = {};
 				DatePicker.setDisplay(new Date(time));
 			}
 			var range = [time-(pivotInterval/2), time+(pivotInterval/2)];
-			pivotServer(time, range);
+			pivotServer(time, range, callback);
 		}else{
 			GraphManager.setSelection(time-(pivotInterval/2), time+(pivotInterval/2));
 			GraphManager.finishSelection();
+			callback();
 		}
 	}
 
@@ -36,11 +61,12 @@ var PivotManager = {};
 		}
 	}
 
-	function pivotServer(time, range){
+	function pivotServer(time, range, callback){
 		Helper.showLoading();
 		time = Math.floor(time/1000);
 		Connector.send("get", {pivottime: time}, {onSuccess: function(data){
 			pivotOnSuccess(data, time, range); 
+			callback();
 		}, onError: pivotOnError});
 	}
 
@@ -55,6 +81,7 @@ var PivotManager = {};
 		GraphManager.draw();
 		Helper.hideLoading();
 		GraphManager.setSelection(range[0], range[1]);
+		$("#errorIcon").hide();
 	}
 
 	// Displays an error message if the server cannot be connected

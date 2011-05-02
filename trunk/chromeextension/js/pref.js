@@ -16,13 +16,13 @@ function pref(label){
 		"scrollScale": 0.03,
 		"stopFlipOnMove": true,
 		//highlight colors
-		"highlightBg": 0.9,
+		"highlightBg": "+0.3",
 		"highlightFg": "same",
-		"normalGraph": 0.7,
+		"normalGraph": "+0.15",
 		"highlightGraph": "same",
-		"relatedBg": 0.96,
-		"relatedFg": 0.75,
-		"lowlightFg": 0.8,
+		"relatedBg": 0.95,
+		"relatedFg": "+0.2",
+		"lowlightFg": "+0.15",
 		"lowlightBg": "transparent",
 	};
 
