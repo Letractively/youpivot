@@ -7,18 +7,22 @@ Created on Feb 21, 2011
 import cherrypy
 import couchdb
 import urllib
-import time
 
 from uuid import uuid4
+
+import png_colors
 
 MANDATORY_ADD_TERMS = ['keyword', 'userid', 'title', 'starttime', 'endtime', 'url', 'favicon', 'developerid', 'eventtypename']
 MANDATORY_GET_TERMS = ['pivottime', 'userid']
 MANDATORY_END_TERMS = ['eventid', 'endtime']
 MANDATORY_DELETE_TERMS = ['eventid']
 MANDATORY_UPDATE_TERMS = ['eventid'] 
-MANDATORY_SEARCH_TERMS = ['userid', 'string']
-DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
+MANDATORY_SEARCH_TERMS = ['userid', 'q']
+MANDATORY_GET_BY_ID_Terms = []
+#DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
+DB_SERVER_URL = 'http://localhost:5984/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
+SEARCH_LOCATION = "events/_fti/_design/foo/by_keyword?q="
 
 #Connect to the Couch Server and db's
 couch = couchdb.Server(DB_SERVER_URL)
@@ -45,6 +49,7 @@ class Responder(object):
         id = self.createDoc(args)
         args['eventid'] = id
         self.addImpVal(args)
+        print png_colors.GetFaviconColors(args['favicon'], 1)
         return id
     
     #Called when reading from the db
@@ -87,9 +92,15 @@ class Responder(object):
         self.addImpVal(args)
         return 'updated'
     
-#    @cherrypy.expose()
-#    def search(self, **args):
-        
+    @cherrypy.expose()
+    def search(self, **args):
+        #Check to make sure we have the required fields
+        if not self.hasRequiredSearchTerms(args):
+            return 'Missing Fields' 
+        #Check that the user exists
+        if not self.userExists(args):
+            return 'Bad User'
+        return self.performSearch(args)
 
     #Evil person prevention
     def developerExists(self, args):
@@ -135,6 +146,12 @@ class Responder(object):
                 return False
         return True
     
+    def hasRequiredSearchTerms(self, args):
+        for mandatoryTerm in MANDATORY_SEARCH_TERMS:
+            if not mandatoryTerm in args:
+                return False
+        return True
+    
     #Create the document in the events database
     def createDoc(self, args):
         doc = args
@@ -147,12 +164,12 @@ class Responder(object):
         return id
         
     def reply(self, args):
-        time = int(args['pivottime'])
+        time = long(args['pivottime'])
         timeDiff = 12 * 60 * 60
-        start = time - timeDiff
-        end = time + timeDiff
+        start = str(time - timeDiff)
+        end = str(time + timeDiff)
         url = DB_SERVER_URL + VIEW_LOCATION
-        queryString = 'startkey=[' + str(start) + ',"'+ args['userid'] +'"]&endkey=[' + str(end) +',"'+ args['userid'] +'"]'
+        queryString = 'starttime<long>:[' + start + '%20TO%20' + end + ']%20AND%endtime<long>:[' + start + '%20TO%20' + end + ']%20userid:' + args['userid']
         url += queryString
         print url
         response = urllib.urlopen(url)
@@ -189,6 +206,16 @@ class Responder(object):
                 done = True
         counter = 0
         eventsdb.save(doc) 
+        
+    def performSearch(self, args):
+        #Build search url and get the result
+        queryString = DB_SERVER_URL + SEARCH_LOCATION + "keyword:" +args['q'] + "%20userid:" + args['userid']
+        print queryString
+        response = urllib.urlopen(queryString)
+        return response.read()
+        
+        
+        
         
 #Start me up        
 cherrypy.quickstart(Responder())
