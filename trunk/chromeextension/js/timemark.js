@@ -27,11 +27,12 @@ var TimeMarkManager = {};
 		obj.starttime = Math.floor(time/1000);
 		obj.endtime = Math.floor((time+1)/1000);
 		obj.eventtypename = "timemark";
+		obj.stream = "timemark";
 		return obj;
 	}
 
 	function send(info){
-		info.eventType = "timemark";
+		//info.eventType = "timemark";
 		chrome.extension.sendRequest({action: "uploadInfo", eventType: "add", info: info, callback: "timemarkCallback"});
 	}
 

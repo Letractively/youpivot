@@ -16,9 +16,9 @@ function pref(label){
 		"scrollScale": 0.03,
 		"stopFlipOnMove": true,
 		//highlight colors
-		"highlightBg": "+0.3",
+		"highlightBg": "+0.35",
 		"highlightFg": "same",
-		"normalGraph": "+0.15",
+		"normalGraph": "+0.2",
 		"highlightGraph": "same",
 		"relatedBg": 0.95,
 		"relatedFg": "+0.2",

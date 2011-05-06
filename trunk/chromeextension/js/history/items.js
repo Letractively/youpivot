@@ -15,6 +15,7 @@ var ItemManager = {};
 		DomainManager.display();
 		TermManager.display();
 		StreamManager.display();
+		$(window).trigger("itemsLoaded");
 	}
 
 	m.clear = function(){

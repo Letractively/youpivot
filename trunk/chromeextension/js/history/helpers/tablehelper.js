@@ -22,7 +22,7 @@ var TableHelper = {};
 		//set link to pivot if it is a timemark
 		if(item.domain.name == "timemark"){
 			row.find(".item_name a").click(function(e){
-				PivotManager.pivot(item.startTime, false);
+				PivotManager.pivotItem(item.eventId);
 				e.preventDefault();
 			});
 		}

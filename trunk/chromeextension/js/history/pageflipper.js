@@ -48,18 +48,20 @@ var PageFlipper = {};
 		if(!enabled) return;
 		stopFlipAndScroll();
 	});
-	$("#topPageFlipper").mouseenter(function(e){
-		pauseFlip("top");
-	}).mouseleave(function(e){
-		resumeFlip("top", doScrollNew);
-	}).click(stopFlipAndScroll);
-	$("#bottomPageFlipper").mouseenter(function(e){
-		pauseFlip("bottom");
-	}).mouseleave(function(e){
-		resumeFlip("bottom", doScrollOld);
-	}).click(function(e){
-		stopFlipAndScroll();
-	});
+	if(!pref("stopFlipOnMove")){
+		$("#topPageFlipper").mouseenter(function(e){
+			pauseFlip("top");
+		}).mouseleave(function(e){
+			resumeFlip("top", doScrollNew);
+		}).click(stopFlipAndScroll);
+		$("#bottomPageFlipper").mouseenter(function(e){
+			pauseFlip("bottom");
+		}).mouseleave(function(e){
+			resumeFlip("bottom", doScrollOld);
+		}).click(function(e){
+			stopFlipAndScroll();
+		});
+	}
 	$(document).mousewheel(function(e, delta){
 		if(!enabled) return;
 		if(atTop(1) && delta<0){
@@ -181,7 +183,11 @@ var PageFlipper = {};
 	}
 	function scrollOlder(){
 		var graphPos = GraphManager.getGraphPos();
-		if(graphPos.offset<=0) return;
+		if(graphPos.offset<=0){
+			//query server for more 
+			PivotManager.pageFlip(-1);
+			return;
+		}
 		var scrollScale = pref("scrollScale");
 		var scrollMethod = pref("scrollMethod");
 		if(scrollMethod == "expand"){
@@ -195,7 +201,11 @@ var PageFlipper = {};
 	}
 	function scrollNewer(){
 		var graphPos = GraphManager.getGraphPos();
-		if(graphPos.offset + graphPos.scale >= 1) return;
+		if(graphPos.offset + graphPos.scale >= 1){
+			//query server for more
+			PivotManager.pageFlip(1);
+			return;
+		}
 		var scrollScale = pref("scrollScale");
 		var scrollMethod = pref("scrollMethod");
 		if(scrollMethod == "expand"){

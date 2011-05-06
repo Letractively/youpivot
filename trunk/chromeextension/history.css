@@ -20,6 +20,8 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 .dim { opacity: 0.4; }
 .disabled { pointer-events: none; }
 
+#alternative { position: fixed; top: 0px; right: 0px; z-index: 999999; }
+
 /*** left sidebar ***/
 #sidebarTitle { text-align: right; font-size: 20px; color: #53627D; padding: 0.76em 0px; } 
 #leftSidebar {  position: fixed; float: left; padding: 0px 15px; color: #919191; z-index: 999;

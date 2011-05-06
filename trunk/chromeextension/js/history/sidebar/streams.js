@@ -68,6 +68,8 @@ var StreamManager = {};
 		switch(name){
 			case "chrometab":
 				return "images/streams/chrome.png";
+			case "timemark":
+				return "images/timemark.png";
 			default: // FIXME make this extensible
 				console.log("Unknown stream: "+name);
 				return "";
