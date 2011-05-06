@@ -4,7 +4,12 @@ var PivotManager = {};
 	var m = PivotManager;
 
 	var pivotInterval = 3600000;
+
 	m.pivotItem = function(eventId){
+		location.href = "#pivotitem="+eventId;
+	}
+
+	function pivotItem(eventId){
 		var row = findRowByEventId(eventId);
 		var item = row.data("item");
 		m.pivot(item.startTime, false, function(){
@@ -21,10 +26,14 @@ var PivotManager = {};
 		for(var i in rows){
 			var t = $(rows[i]);
 			var item = t.data("item");
-			if(item.eventId == eventId){
+			if(item && item.eventId == eventId){
 				return t;
 			}
 		}
+	}
+
+	m.pivotUrl = function(time){
+		location.href = "#pivot="+time;
 	}
 
 	m.pivot = function(time, forceReload, callback){
@@ -52,6 +61,7 @@ var PivotManager = {};
 	}
 
 	m.pageFlip = function(direction){
+		//FIXME use pivotRange should be better
 		var range = GraphManager.getRange();
 		var midpoint = Math.floor((range.end+range.start)/2);
 		if(direction>0){
@@ -110,5 +120,36 @@ var PivotManager = {};
 	});
 	$("#moveRightRow").click(function(){
 		m.pageFlip(1);
+	});
+
+	//listen for hash change
+	$(window).bind("hashchange", function(){
+		var hash = location.hash.substr(1); //substring 1 to remove the # sign
+		var pairs = hash.split("&");
+		var obj = [];
+		for(var i in pairs){
+			obj[i] = pairs[i].split("=");
+			runHash(obj[i]);
+		}
+	});
+
+	function runHash(pair){
+		switch(pair[0]){
+			case "pivot":
+				m.pivot(pair[1], false);
+				break;
+			case "pivotitem":
+				pivotItem(pair[1]);
+				break;
+			default: 
+				HighlightManager.clearHighlight();
+				console.log("Unknown hash value");
+				break;
+		}
+	}
+
+	$(window).bind("itemsLoaded", function(){
+		//invoke the window hash change to parse hash when started
+		$(window).trigger("hashchange");
 	});
 })();
