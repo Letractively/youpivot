@@ -72,10 +72,10 @@ var Monitor = {};
 		console.log("remove", tabId);
 		var info = arr[tabId].getInfo();
 		var item = createRemoveItem(info);
-		Connector.send("update", item, {
+		Connector.send("end", item, {
 			onSuccess: function(data){
 				if(data.length>0){
-					console.log("remove successful, event id: "+data);
+					console.log("remove successful, response: "+data);
 				}else{
 					alert("Error uploading remove tab info: "+data);
 				}
@@ -93,7 +93,7 @@ var Monitor = {};
 			return false;
 		}
 		var obj = {};
-		obj.endtime = (new Date().getTime()/1000)+1;
+		obj.endtime = Math.floor(new Date().getTime()/1000)+1;
 		obj.eventid = info.eid;
 		return obj;
 	}
@@ -106,9 +106,7 @@ var Monitor = {};
 			onSuccess: function(data){
 				if(data.length>0){
 					arr[tabId].eid = data;
-					console.log("upload successful, event id: "+data, arr[tabId].eid);
-					info.eid = data;
-					uploadUpdate(info);
+					console.log("upload successful, event id: "+data);
 				}else{
 					alert("Error uploading open tab info: "+data);
 				}
@@ -124,19 +122,19 @@ var Monitor = {};
 		obj.title = info.title;
 		obj.url = info.url;
 		obj.eventtypename = info.domain;
-		console.log("domain", info.domain);
 		obj.favicon = info.favUrl;
-		obj.keyword = info.keywords; //FIXME use TF-IDF instead
+		obj.keyword = info.keywords; //FIXME extract from document instead
 		obj.starttime = Math.floor(new Date().getTime()/1000);
 		obj.endtime = Math.floor((new Date().getTime())/1000 + 1);
-		//obj.eventtypename = "chrometab";
-		//obj.val = info.importance;
+		obj.time0 = Math.floor(new Date().getTime()/1000);
+		obj.val0 = info.importance;
 		obj.tabindex = info.index;
 		obj.parenttab = info.parentTab;
 		obj.parentwindow = info.parentWindow;
 		obj.windowid = info.win;
 		obj.stream = "chrometab";
 		//obj = addKeywordsToItem(obj, info.keywords);
+		console.log("domain", info.domain);
 		return obj;
 	}
 

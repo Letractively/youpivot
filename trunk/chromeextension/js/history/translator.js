@@ -17,13 +17,19 @@ var Translator = {};
 		}else if(typeof server.keyword == "object"){
 			output.keywords = server.keyword;
 		}
-		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: getDomainColor(server.eventtypename)}; //FIXME
+		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: getDomainColor(server.color, server.eventtypename)}; //FIXME
 		output.stream = server.stream;
 		output.eventId = server._id;
 		return output;
 	}
 
-	function getDomainColor(name){
+	function getDomainColor(color, name){
+		if(color){
+			var r = Helper.padZero(color[0].toString(16), 2);
+			var g = Helper.padZero(color[1].toString(16), 2);
+			var b = Helper.padZero(color[2].toString(16), 2);
+			return "#"+r+g+b;
+		}
 		switch(name){
 			case "google.com":
 				return "#018F3D";
