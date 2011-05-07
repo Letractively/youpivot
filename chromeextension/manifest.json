@@ -1,7 +1,7 @@
 {
-  "name": "YouPivot",
-  "version": "0.0",
-  "description": "Lets you search visually. ",
+  "name": "YouPivot (alpha)",
+  "version": "1.0.0",
+  "description": "Contextual search for your personal digital history. ",
   "background_page": "background.html", 
   "options_page": "options.html",
   "icons": {
@@ -16,6 +16,7 @@
     "default_title": "Add a TimeMark - YouPivot",
     "default_popup": "popup.html"
   },
+  "homepage_url": "http://www.youpivot.com/",
   "permissions": [
 	"http://127.0.0.1/",
 	"<all_urls>",

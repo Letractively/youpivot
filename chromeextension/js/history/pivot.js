@@ -99,7 +99,7 @@ var PivotManager = {};
 	function pivotOnError(response){
 		Helper.hideLoading();
 		$("#errorIcon").show();
-		$("#streamGraph").html("<div class='errorMessage'>Error loading information from server. Please try again. </div>");
+		$("body").append("<div class='errorMessage' style='position: absolute; left: 400px; top: 200px; z-index: 999999;'>Error loading information. Please make sure the background daemon is running and try again. </div>");
 	}
 
 	function createItemsArray(obj){
