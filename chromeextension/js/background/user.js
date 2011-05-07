@@ -1,7 +1,7 @@
 var UserManager = {};
 
 $(function(){
-	//debug, pretend to be logged in
+	//FIXME debug, pretend to be logged in
 	UserManager.login();
 });
 

@@ -38,6 +38,7 @@ var PivotManager = {};
 
 	m.pivot = function(time, forceReload, callback){
 		if(!callback) callback = function(){};
+		FilterManager.clearFilters();
 		SearchManager.antiSearch();
 		var range = GraphManager.getRange();
 		var midPoint = (range.start+range.end)/2;
