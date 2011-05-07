@@ -12,6 +12,7 @@ var SortManager = {};
 		return m.sortBy;
 	}
 	m.sortItems = function(items){
+		if(!items) return [];
 		items.sort(sortFunction);
 	}
 	function sortFunction(a, b){

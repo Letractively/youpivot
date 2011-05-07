@@ -19,8 +19,7 @@ var SearchManager = {};
 		Connector.send("search", {q: needle}, {
 			onSuccess: function(response){
 				var result = parseResponse(response);
-				showResults(result, false);
-				setTimeout(function(){ if($("#searchBox").val()==needle) showResults(result, true); }, 1000); // to prevent loading too many results from freezing the UI
+				showResults(needle, result);
 			},
 			onError: function(response){
 				alert("error while searching");
@@ -33,36 +32,81 @@ var SearchManager = {};
 		var output = [];
 		for(var i in input){
 			output[i] = Translator.translateItem(input[i].value);
+			output[i].domain.id = addToDomainList(output[i].domain.name, output[i].domain.color);
 		}
 		return output;
 	}
 
-	function showResults(results, realLoad){
+	var domains = new Array();
+	function addToDomainList(domain, color){
+		for(var i in domains){
+			if(domains[i] == domain){
+				return i;
+			}
+		}
+		var output = domains.length;
+		domains[output] = domain;
+		return output;
+	}
+
+	m.getDomainId = function(domain){
+		for(var i in domains){
+			if(domains[i] == domain){
+				return i;
+			}
+		}
+	}
+
+	function showResults(needle, results){
+		if($("#searchBox").val() != needle) return;
 		$("#searchResults").trigger("search", true);
 		state = true;
 		TermManager.clearTerms();
 		DomainManager.clearDomains();
 		SortManager.sortItems(result);
-		loadResults(results, realLoad);
+		loadResults(needle, results);
 	}
 
-	function loadResults(results, realLoad){
+	function loadResults(needle, results){
+		SortManager.sortItems(results);
 		$("#searchResults").itemTable("clear");
 		TermManager.clearTerms(true);
 		DomainManager.clearDomains(true);
-		for(var i in results){
-			if(!realLoad && i>30) return;
+		StreamManager.clearStreams(true);
+		for(var i=0; i<results.length; i++){
+			if(i>30){ //load first 30 items first to prevent performance lag
+				setTimeout(function(){ loadExtendedResults(needle, results); }, 1000);
+				break;
+			}
 			var item = results[i];
 			TermManager.addTerms(item.keywords);
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
+			StreamManager.addStream(item.stream);
 			displayItem(i, item);
 		}
 		TermManager.display();
 		DomainManager.display();
+		StreamManager.display();
+		$("#searchResults").itemTable("refreshTopRows");
+	}
+
+	function loadExtendedResults(needle, results){
+		if($("#searchBox").val() != needle) return;
+		for(var i=30; i<results.length; i++){
+			var item = results[i];
+			TermManager.addTerms(item.keywords);
+			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
+			StreamManager.addStream(item.stream);
+			displayItem(i, item);
+		}
+		TermManager.display();
+		DomainManager.display();
+		StreamManager.display();
 		$("#searchResults").itemTable("refreshTopRows");
 	}
 
 	m.reloadResult = function(){
+		if(result.length == 0) return;
 		SortManager.sortItems(result);
 		loadResults(result);
 	}
