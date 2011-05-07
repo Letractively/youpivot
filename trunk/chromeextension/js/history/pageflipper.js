@@ -4,13 +4,10 @@ var PageFlipper = {};
 	var m = PageFlipper;
 	var enabled = true;
 
-	//initialization
-	$(function(){
-		$(document).scrollTop($("#topPageFlipper").height());
-		//initialize the timer bars
-		$("#topPageFlipper .flip").timerBar("create", {complete: doScrollNew, speed: 100, number: 20});
-		$("#bottomPageFlipper .flip").timerBar("create", {complete: doScrollOld, speed: 100, number: 20});
-	});
+	$(document).scrollTop($("#topPageFlipper").height());
+	//initialize the timer bars
+	$("#topPageFlipper .flip").timerBar("create", {complete: doScrollNew, speed: 100, number: 20});
+	$("#bottomPageFlipper .flip").timerBar("create", {complete: doScrollOld, speed: 100, number: 20});
 
 	function disable(){
 		enabled = false;
@@ -30,18 +27,22 @@ var PageFlipper = {};
 		}else{
 			enable();
 			scrollHideFlipper(0);
+			onresize();
 		}
 	});
 
 	$(window).resize(onresize);
 	$("#graphShadow").bind("resize", onresize);
 	function onresize(e){
-		var mHeight = window.innerHeight - $("#graphShadow").height();
-		$("#textContent").css("min-height", mHeight);
-		m.hideFlipper();
+		if(enabled){
+			var mHeight = window.innerHeight - $("#graphShadow").height();
+			$("#textContent").css("min-height", mHeight);
+			m.hideFlipper();
+		}
 	}
 	m.hideFlipper = function(){
-		scrollHideFlipper(0);
+		if(enabled)
+			scrollHideFlipper(0);
 	}
 
 	$(document).mouseenter(function(e){
@@ -128,6 +129,7 @@ var PageFlipper = {};
 		}
 	}
 	function mousemoveHandler(e){
+		if(!enabled) return;
 		if(typeof mousepos.x == "undefined"){
 			mousepos.x = e.pageX;
 			mousepos.y = e.pageY;
