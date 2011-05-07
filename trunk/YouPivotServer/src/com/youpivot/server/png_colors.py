@@ -33,7 +33,7 @@ def GetFaviconColors(filename, k):
 	
 	
 	if badIconArray == im[2]:
-		return [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255), 'random']
+		return [random.randint(50, 200), random.randint(50, 200), random.randint(50, 200), 'random']
 	
 	pixels = []
 	count = 0

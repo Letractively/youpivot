@@ -22,6 +22,7 @@ MANDATORY_GET_BY_ID_Terms = []
 #DB_SERVER_URL = 'http://admin:youpivot@youpivottest.couchone.com/'
 DB_SERVER_URL = 'http://localhost:5984/'
 VIEW_LOCATION = "events/_design/endtimeuserid/_view/endtimeuserid?"
+TEMP_SEARCH_LOCATION = "events/_design/endtimeuserid/_view/temp_search?"
 SEARCH_LOCATION = "events/_fti/_design/foo/by_keyword?q="
 
 #Connect to the Couch Server and db's
@@ -46,10 +47,10 @@ class Responder(object):
         #Check that the user exists
         if not self.userExists(args):
             return 'Bad User'
+        args['color'] = png_colors.GetFaviconColors(args['eventtypename'], 2)
         id = self.createDoc(args)
         args['eventid'] = id
         self.addImpVal(args)
-        print png_colors.GetFaviconColors(args['favicon'], 1)
         return id
     
     #Called when reading from the db
@@ -209,7 +210,8 @@ class Responder(object):
         
     def performSearch(self, args):
         #Build search url and get the result
-        queryString = DB_SERVER_URL + SEARCH_LOCATION + "keyword:" +args['q'] + "%20userid:" + args['userid']
+        #queryString = DB_SERVER_URL + SEARCH_LOCATION + "keyword:" +args['q'] + "%20userid:" + args['userid']
+	queryString = DB_SERVER_URL + TEMP_SEARCH_LOCATION + "startkey=%5B\"" + args['q'] + "\",\"" + args['userid'] + "\"%5D&endkey=%5B\"" + args['q'] + "\uFF00\",\"" + args['userid'] + "\"%5D&limit=100"
         print queryString
         response = urllib.urlopen(queryString)
         return response.read()
