@@ -15,25 +15,43 @@ var SearchManager = {};
 
 	function search(needle){
 		if(needle==""){ antiSearch(); return; }
-		//Connector.send("search", {q: needle}, {});
-		result = debugSearch; //assign search result to array
-		showResults(result);
+		needle = needle.toLowerCase(); //change to lower case as the search algorithm is also changed to lower case (to make it case insensitive)
+		Connector.send("search", {q: needle}, {
+			onSuccess: function(response){
+				var result = parseResponse(response);
+				showResults(result, false);
+				setTimeout(function(){ if($("#searchBox").val()==needle) showResults(result, true); }, 1000); // to prevent loading too many results from freezing the UI
+			},
+			onError: function(response){
+				alert("error while searching");
+			}
+		});
 	}
 
-	function showResults(results){
+	function parseResponse(response){
+		var input = JSON.parse(response).rows;
+		var output = [];
+		for(var i in input){
+			output[i] = Translator.translateItem(input[i].value);
+		}
+		return output;
+	}
+
+	function showResults(results, realLoad){
 		$("#searchResults").trigger("search", true);
 		state = true;
 		TermManager.clearTerms();
 		DomainManager.clearDomains();
 		SortManager.sortItems(result);
-		loadResults(results);
+		loadResults(results, realLoad);
 	}
 
-	function loadResults(results){
+	function loadResults(results, realLoad){
 		$("#searchResults").itemTable("clear");
 		TermManager.clearTerms(true);
 		DomainManager.clearDomains(true);
 		for(var i in results){
+			if(!realLoad && i>30) return;
 			var item = results[i];
 			TermManager.addTerms(item.keywords);
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);

@@ -17,7 +17,7 @@ var Translator = {};
 		}else if(typeof server.keyword == "object"){
 			output.keywords = server.keyword;
 		}
-		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: getDomainColor(server.color, server.eventtypename)}; //FIXME
+		output.domain = {name: server.eventtypename, favUrl: server.favicon, color: getDomainColor(server.color, server.eventtypename)};
 		output.stream = server.stream;
 		output.eventId = server._id;
 		return output;
