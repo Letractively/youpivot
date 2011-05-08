@@ -1,6 +1,6 @@
 {
   "name": "YouPivot (alpha)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Contextual search for your personal digital history. ",
   "background_page": "background.html", 
   "options_page": "options.html",
