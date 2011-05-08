@@ -30,8 +30,8 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 
 .sideTab { color: #426DC9; font-size: 105%; padding: 7px 15px; text-align: right; text-shadow: white 0 1px 1px; cursor: pointer; border-top: 1px solid transparent; border-bottom: 1px solid transparent; }
 .sideTab.active { border-top: 1px solid #8FAAD9; border-bottom: 1px solid #8FAAD9; }
-.sideTab.selected { background: -webkit-linear-gradient(left, #BBCEE9, #BBCEE9 97%, #AABEDC); border-top: 1px solid #8FAAD9; border-bottom: 1px solid #8FAAD9; color: #000000; text-shadow: #BBCEE9 0 1px 1px; }
+.sideTab.selected { cursor: default; background: -webkit-linear-gradient(left, #BBCEE9, #BBCEE9 97%, #AABEDC); border-top: 1px solid #8FAAD9; border-bottom: 1px solid #8FAAD9; color: #000000; text-shadow: #BBCEE9 0 1px 1px; }
 /*** end left sidebar ***/
 
 /*** contents ***/
-#content { margin-left: 280px; width: 100%; height: 100%; background-color: #FFFFFF; padding-left: 10px; }
+#content { margin-left: 280px; width: 100%; height: 100%; background-color: #FFFFFF; padding: 10px; padding-left: 10px; }
