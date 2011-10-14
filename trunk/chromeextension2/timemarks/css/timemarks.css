@@ -1,0 +1,158 @@
+/******************************************************************************/
+
+#results, #searchResults {
+  height: 100%;
+  overflow: auto;
+  z-index:1; 
+}
+
+.day {
+  padding: 10px 3px;
+  display: inline-block;
+	
+  font-weight: bold;
+  
+  clear: both;
+	float: left;
+}
+
+.entry {
+  margin-left: 18px;
+  line-height:16px;
+  margin-top:5px;
+  float:left;
+  clear:both;
+}
+
+.entry .timeMarkHeader{
+	margin: 0px 0px 10px 0px;
+	line-height: 16px;
+	min-height: 16px;
+}
+
+.entry .time {
+  float: left;
+  min-width: 56px;
+  margin-right: 5px;
+  padding-top: 1px;
+  white-space: nowrap;
+  color: rgb(145, 145, 148);
+  line-height:16px;
+}
+
+.entry .spacer{
+  width: 3px;
+  height: 26px;
+  margin-right: 10px;
+  margin-left: 10px;
+  float: left;	
+}
+
+.entry .title {
+  max-width: 600px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.entry .title a:link {text-decoration: none; color:#5F5F5F;}
+.entry .title a:visited {text-decoration: none; color:#5F5F5F;} 
+.entry .timeOpen{color:#a9a9a9;}
+
+.results .time, .results .title {
+  margin-top: 18px;
+}
+
+.entry .time{
+	padding: 0px 0px 0px 0px;
+	float:left;
+}
+
+.entry .title > a {
+  line-height:16px;
+  padding: 4px 0px 0px 30px;
+  text-shadow: 0px 1px 0px white;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ -webkit-box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: 0px 4px;
+}
+
+.entry .description {
+   padding: 0px 0px 0px 20px;
+   text-shadow: 0px 1px 0px white;
+   display: inline-block;
+   overflow: hidden;
+   text-overflow: ellipsis;
+  -webkit-box-sizing: border-box;
+   cursor:pointer;
+   line-height:16px;
+   background:url("../images/arrow.png") no-repeat;
+   float:left;
+}
+
+.entry.open .description{
+   background:url("../images/arrow_down.png") no-repeat;
+}
+
+.entry .timeMarkIcon{
+	float:left;
+	
+	}
+
+.entry .timeMarkDescription{
+	float:left;
+	padding-left:19px;
+	
+}
+
+.entry .pages-box{
+  padding: 0px 0px 0px 85px;
+  display:none;
+  margin-bottom:20px;
+  float:left;
+}
+
+.entry.open .pages-box{
+   display:block;
+}
+
+.entry .description > a{
+   background:no-repeat;
+   line-height:16px;
+   padding-top:0px;
+   display:block;
+}
+
+
+
+
+.selectionDiv h1{
+   margin-bottom:0px;
+}
+
+.icon{
+   float:left;
+   margin-top:8px;
+}
+
+
+.activeFilters{
+	height:20px;
+}
+
+.timemark-window{
+   border-left:#cccccc 1px solid;
+   padding-left:10px;
+   margin-bottom:10px;
+}
+
+.timeMarkLocation{
+   padding-left:10px;
+   color:#999999;
+   height:16px;
+}
