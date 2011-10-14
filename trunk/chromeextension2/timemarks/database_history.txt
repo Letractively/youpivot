@@ -1,0 +1,15 @@
+v0.0.3
+   timemark(id integer primary key asc, timestamp integer, description string, color string)
+   page(id integer primary key asc, timemark_id integer, title string, url string, favicon string, window integer, tabPosition integer, timeOpen integer)
+   
+v0.0.4
+   timemark(id integer primary key asc, timestamp integer, description string, color string, latitude integer, longitude integer)
+   page(id integer primary key asc, timemark_id integer, title string, url string, favicon string, window integer, tabPosition integer, timeOpen integer)
+   
+v0.0.5
+   timemark(id integer primary key asc, timestamp integer, description string, color string, latitude integer, longitude integer, computer string)
+   page(id integer primary key asc, timemark_id integer, title string, url string, favicon string, window integer, tabPosition integer, timeOpen integer)
+   
+v0.0.6
+   timemark(id string, timestamp integer, description string, color string, latitude integer, longitude integer, computer string, sycned boolean)
+   page(id string, timemark_id integer, title string, url string, favicon string, window integer, tabPosition integer, timeOpen integer)
