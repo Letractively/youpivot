@@ -1,0 +1,434 @@
+/*** sidebar color style ***/
+#h-leftSidebar {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(234, 238, 243, 0)), to(#F2EBE4)), -webkit-gradient(linear, left top, right top, from(#F2EBE4), color-stop(0.97, #F2EBE4), to(#D6C9C0)); 
+}
+
+#h-leftSidebar .m-sidebarTitle { 
+    color: #7D6654;
+}
+
+/**************************/
+
+.grayText{
+  color:#919191;  
+}
+
+
+/**************************/
+
+#m-tabView_traditionalhistory #spinner{
+	float: left;
+	left: -330px;
+	position: relative;
+	top: -7px;
+	z-index: 3000;	
+}
+
+/***************************/
+
+.hiddenScrollFix{
+	position: fixed;
+	top: 0px;
+	left:0px;
+	width: 100%;
+	height:100%;
+	z-index:400000;
+	pointer-events:none;
+}
+
+/***************************/
+
+.contentSelection{
+	display:none;	
+}
+
+#hiddenContent{
+	display:none;
+}
+
+#visualization_ctrl_group{
+	display:none;	
+}
+
+/**************************/
+#sidebar {
+  float: left;
+  height: 100%;
+  padding: 0px 15px 0px 15px;
+  position: fixed;
+  z-index:2000;
+
+  background: -webkit-gradient(linear,
+                               left top,
+                               left bottom,
+                               from(rgba(234, 238, 243, 0)),
+                               to(#eaeef3)),
+               -webkit-gradient(linear,
+                                left top,
+                                right top,
+                                from(#eaeef3),
+                                color-stop(0.97, #eaeef3),
+                                to(#d3d7db));
+   -webkit-border-end: 1px solid #c6c9ce;
+   
+   position: fixed;
+   width: 250px;
+}
+
+
+#sidebar #term {
+  width: 100%;
+  margin: 15px 0px 0px 0px;
+}
+
+#sidebar #tagCloud {
+  width: 100%;
+  min-height: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  text-decoration: none; color:#5F5F5F;
+}
+
+#sidebar #tagCloud a:link{
+	font-family: Helvetica, Arial, sans-serif;
+	text-decoration: none; color:#5F5F5F;
+}
+
+#sidebar #tagCloud .tagCloud_term{
+	float:left;
+	width: 100%;	
+	cursor:pointer;
+}
+
+#sidebar h1 {
+  font-size: 148%;
+  font-weight: normal;
+  color: #53627d;
+
+  font-weight: normal;
+  text-align: right;
+}
+
+#sidebar #date-range {
+  margin: 10px 0px;
+  min-height: 20px;
+}
+
+#sidebar #faviconFilter{
+  padding: 5px 0px 0px 0px;
+  min-height: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+#sidebar #faviconFilter .faviconFilterIcon{
+  padding: 0px 5px 5px 0px;
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+
+
+#sidebar #faviconFilter .icon,#sidebar #activeFilterList .icon {
+  padding: 0px 0px 0px 0px;
+  height: 16px;
+  width: 16px;
+  cursor:pointer;
+	background-repeat: no-repeat;
+    background-position: 0px 0px;
+  	background-size:16px;
+}
+
+
+.selectionGroup {
+  margin: 0px 0px 0px 0px;
+
+}
+
+#sidebar .contentSelection, #sidebar .sortSelection, #sidebar{
+	min-height: 20px;
+}
+
+#sidebar h2,#historyResults #bodyCopy #activeFilters h2, #sidebar .selectionSpacer,
+#sidebar .date-range-selected,  #sidebar .date-range-selectionOption,
+#sidebar .contentSelection-selected, #sidebar .contentSelection-selectionOption,
+#sidebar .sortSelection-selected, #sidebar .sortSelection-selectionOption{
+  font-family: Helvetica, Arial, sans-serif;
+  
+  margin: 0px;
+}
+
+#sidebar .selectionSpacer,
+#sidebar .date-range-selected,  #sidebar .date-range-selectionOption,
+#sidebar .contentSelection-selected, #sidebar .contentSelection-selectionOption,
+#sidebar .sortSelection-selected, #sidebar .sortSelection-selectionOption{
+  padding-right:4pt;
+  float: left;
+}
+#sidebar .date-range-selected,  #sidebar .date-range-selectionOption,
+#sidebar .contentSelection-selected, #sidebar .contentSelection-selectionOption,
+#sidebar .sortSelection-selected, #sidebar .sortSelection-selectionOption{
+  cursor:pointer;
+}
+
+#sidebar .selectionSpacer,
+#sidebar .date-range-selectionOption,
+#sidebar .contentSelection-selectionOption,
+#sidebar .sortSelection-selectionOption{
+  color:#919191;  
+}
+
+#sidebar .date-range-selected, 
+#sidebar .contentSelection-selected, 
+#sidebar .sortSelection-selected{
+  color:#3870ad;  
+}
+
+#sidebar h2,#bodyCopy #activeFilters h2 {
+  color:#000000;  
+  margin: 1em 0px 0px 0px;
+  font-size: 100%;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  position:static;
+  
+}
+
+/*********active filters*****/
+
+
+#activeFilterList{
+	-webkit-user-select: none;
+	min-height: 20px;
+	overflow: hidden;
+	padding: 5px 0px 0px;
+	width: 100%;	
+}
+
+#activeFilterList .filterText{
+	cursor:pointer;	
+}
+
+#activeFilterList .activeFilter{
+	float: left;
+	min-height: 20px;
+	padding-top:0px;
+	padding-bottom:0px;
+	padding-right:5px;
+	padding-left:0px;
+
+}
+
+#activeFilterList .activeFilter_close{
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size:16px;
+  background-image:url('close.png');
+  position:absolute;
+  top:0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+#activeFilterList .icon {
+  padding: 0px 0px 0px 0px;
+  height: 16px;
+  width: 16px;
+  cursor:pointer;
+	background-repeat: no-repeat;
+    background-position: 0px 0px;
+  	background-size:16px;
+}
+
+/**************************/
+#bodyCopyNoScroll{
+  position:fixed;  
+  background-image:url('whiteFade.png');
+  height: 260px;
+  z-index:1000; 
+  width: 100%;
+  padding: 0px 15px 0px 280px;
+}
+
+/**************************/
+
+#topNav{
+  height:46px;
+  width:100%;
+  padding: 0px 0px 0px 10px;
+  
+  border-bottom: 1px solid #e5e8eb;
+  background: -webkit-gradient(linear,
+    left top, left bottom,
+    from(#fefeff),
+    to(#f4f6f9)
+  );
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  
+}
+
+#topNav #contextDateInfo{
+  padding: 11px 11px 0px 0px;
+    height: 32px;
+    width: 321px;
+  float: left;
+    z-index: 10;
+  pointer-events:none;
+  
+}
+
+#topNav #contextDateInfo_contextOf {
+  padding: 0px 11px 0px 0px;
+    height: 8px;
+    width: 321px;
+  color:#919191;  
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  font-style:italic;
+  margin: 0px;
+
+    
+}
+
+#topNav #contextDateInfo_currentState {
+  padding: 7px 0px 0px 0px;
+    height: 17px;
+    width: 321px;
+    
+    display:none;
+    
+  font-family: Helvetica, Arial, sans-serif;
+  
+  margin: 0px;
+  font-weight:bold;  
+}
+#topNav #sparkline {
+  height: 37px;
+  width: 680px; 
+  float:left;
+  position:relative;
+  left:-331px;
+  top: -15px;
+  padding: 0px 10px 10px 0px;
+}
+
+#topNav #sparkline_dayLight{
+  height: 6px;
+  width: 680px; 
+  float:left;
+  position:relative;
+  left:-331px;
+  top: 2px;
+  z-index: 50;
+  pointer-events:none;
+}
+
+#topNav #sparkline_sunMoon{
+  height: 10px;
+  width: 680px; 
+  float:left;
+  position:relative;
+  left:-331px;
+  top: -4px;
+  z-index: 51;
+  pointer-events:none;
+}
+
+#topNav #sparkline_sunMoon .icon{
+  height: 16px;
+  width: 16px;
+  background-position: 0px 0px;
+  background-size:16px;
+  background-repeat: no-repeat;
+  position: absolute;
+  float: left;
+  top: -4px;
+}
+
+
+/**************************/
+
+#mainVizDateRange{
+  height:16px;
+  padding: 20px 0px 0px 10px;
+  
+}
+
+#mainVizDateRange #mainVizDateRange_left {
+    height: 16px;
+    width: 341px;
+  float: left; 
+  
+  -webkit-user-select:none;
+  -moz-user-select:none;
+}
+#mainVizDateRange #mainVizDateRange_right {
+  height: 16px;
+  width: 341px; 
+  float:left;
+  text-align:right;
+  padding: 0px 16px 0px 0px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+}
+#mainVizDateRange #mainVizHide {
+  height: 14px;
+  width: 14px; 
+  float:left;
+  padding: 0px 0px 0px 0px;
+  background-image:url('hide.png');
+  background-repeat:no-repeat;
+}
+
+/**************************/
+#mainViz{
+	height: 146px;
+	width:100%;
+	
+	padding: 0px 0px 0px 0px;
+}
+
+#mainViz_favIcons{
+	height: 20px;
+	width:100%;
+	position: relative;
+	padding: 0px 0px 20px 0px;
+}
+
+.focusEventFavicon{
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  height: 16px;
+  width: 16px;
+  top:0;
+  border-style:solid;
+  border-width:0px;
+  position:absolute;
+}
+
+.focusEventFavicon .icon{
+  height: 16px;
+  width: 16px;
+  background-position: 0px 0px;
+  background-size:16px;
+  background-repeat: no-repeat;
+}
+
+#mainViz_outerDiv{
+	height: 186px;
+	width:100%;
+	padding: 0px 0px 0px 10px;
+}
+
+/**************************/
+#bodyCopy{
+}
+
+
+
+#blankResults{
+   z-index:1; 
+  height: 260px;
+}
