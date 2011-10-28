@@ -1,0 +1,2 @@
+.DBCalendar { position: absolute; z-index: 9999; display: none; }
+.DBCalendar .ui-datepicker { display: block; }
