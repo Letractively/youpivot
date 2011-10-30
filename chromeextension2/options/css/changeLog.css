@@ -1,0 +1,82 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#bodyCopy_changeLogContent{
+	font:13px/23px "Meiryo","MS PGothic","Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #505050;
+}
+
+.changeLogVersion{
+	font-weight:bold;
+	padding-top:20px;
+
+}
+
+.changeLogDate{
+	font-style:italic;
+	font-weight:normal;
+	font-size:85%;
+	display:inline;
+	padding-left:10px;
+	
+}
+.changeLog_Update{
+	padding-left:10px;
+	border-bottom: 1px solid #f3f3f3;
+	max-width:600px;
+}
+
+.changeLogElement{
+	display:inline-block;
+	padding-left:10px;
+	
+}
+.changeLog_UpdateAssociation{
+	font-style:italic;
+	background-repeat: no-repeat;
+  	background-size: 16px;
+  	background-position: 0px 0px;
+	margin-left:10px;
+	padding-left:30px;
+	color:#999;
+	min-width:80px;	
+}
+
+.changeLog_UpdateAssociation_timeMarks{
+	background-image:url("../images/timeMarkClock/clockface_48.png");	
+	
+	background-position: 3px;
+}
+.changeLog_UpdateAssociation_general{
+	background-image:url("../images/box0.png");
+	background-size: 23px;
+}
+.changeLog_UpdateAssociation_history{
+	background-image:url("../images/historyClock.png");
+	background-position: 3.5px -0.2px;
+}
+.changeLog_UpdateAssociation_geo{
+	background-image:url("../images/geo.png");
+	background-position: 1px;
+	background-size: 20px;
+}
+
+.changeLog_UpdateType{
+	min-width:60px;	
+}
+.changeLog_UpdateType_changed{
+	color:#96F;
+	
+}
+.changeLog_UpdateType_new{
+	color:#C90;
+}
+.changeLog_UpdateType_fixed{
+	color:#096;
+}
+.changeLog_UpdateDescription{
+	max-width:400px;
+	white-space:normal;
+	font-size:95%; 
+	
+}
