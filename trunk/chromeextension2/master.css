@@ -29,12 +29,13 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 .m-tabimg { height: 30px; width: 30px; vertical-align: middle; padding-right: 3px; -webkit-user-select: none; }
 .m-tabname { display: inline; font-size: 11px; vertical-align: middle; color: #888888; text-shadow: 0 1px 1px white; }
 
-.m-topTab.active { background: -webkit-linear-gradient(top, #e0e0e0 0%,#f0f0f0 100%); }
+.m-topTab.active { background: -webkit-linear-gradient(top, #dddddd 0%,#e5e5e5 100%); }
+.m-topTab.active .m-tabname { color: #777; }
 
-.m-topTab:hover { background: -webkit-linear-gradient(top, #dddddd 0%,#e5e5e5 100%); }
+.m-topTab:hover { background: -webkit-linear-gradient(top, #ccc 0%,#e5e5e5 100%); }
 .m-topTab:hover .m-tabname { color: #666; }
 
-.m-topTab.pressed { background: -webkit-linear-gradient(top, #ccc 0%,#e5e5e5 100%); }
+.m-topTab.pressed { background: -webkit-linear-gradient(top, #bfbfbf 0%,#e5e5e5 100%); }
 .m-topTab.pressed .m-tabname { color: #555; }
 
 
