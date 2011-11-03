@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#m-tab_timemarks .m-tabimg { background: url("/images/relief/timemarks.png"); }
+#m-tab_timemarks:hover .m-tabimg { background: url("/images/small/timemarks.png"); }
+#m-tab_timemarks:hover .m-tabname { color: #750000; }
+
+#t-leftSidebar .m-sidebarTitle { 
+    color: #750000;
+}

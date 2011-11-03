@@ -87,7 +87,7 @@ function getUsersHistory_numWeeks(divName){
 			
 			traditional_faviconDomainChecker.clear(); //clear out old favicon data too
 			
-			$("#"+divName).append("<div id='activeFilters_history' class='activeFilters'>" +"</div>"); //add active Filter DIV
+			$("#"+divName).append("<div id='activeFilters_label' class='contentHeader'>Active Filters</div><div id='activeFilters_history' class='activeFilters'></div>"); //add active Filter DIV
 			
 			insertHistoryButtons(divName); //add buttons to top
 			

@@ -43,9 +43,13 @@ function filterClicked(dataArray){
 		document.getElementById(activeFilterDiv).appendChild(div_activeFavIconFilter);
 		
 		$('#activeKey_'+uniqueHash).click(new Array(title,uniqueHash,filterTargetDivTitle,filterTargetDivTitleClass,filterArray,activeFilterDiv,favIconUrl),filterClicked);
+
+        $("#activeFilters_label").show();
 		
 	}else{
 		filterArray.splice(index,1);
+        if(filterArray.length == 0)
+            $("#activeFilters_label").hide();
 		
 		$("#activeKey_"+uniqueHash).remove();
 	}
@@ -100,12 +104,12 @@ function createFilterList(hashtable,filterDivTitle,filterTargetDivTitle,target_f
             favIconArray[1]
         ]
 		
-        THFilterManager.addDomain(favIconArray[1], favIconArray[0], data);
+        // favIconArray[0] = name of the domain
+        // favIconArray[1] = url of the favicon
+        // favIconArray[2] = visit count
 
-		//var div_favIconFilter = createFilterIcon(favIconArray[0],favIconArray[1],key,"key_");
-		
-		//document.getElementById(filterDivTitle).appendChild(div_favIconFilter);
-		
+        THFilterManager.addDomain(favIconArray[1], favIconArray[0], data, favIconArray[2]);
+
 	}
     THFilterManager.display();
 

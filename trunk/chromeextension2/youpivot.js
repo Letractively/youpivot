@@ -1,4 +1,5 @@
 include("youpivot/js/history/datebox_controller.js");
+style("/youpivot/controls.css");
 
 var YouPivot = {};
 
@@ -19,12 +20,8 @@ var YouPivot = {};
         bar.append(searchBox);
     }
 
-    m.tabImage = function(){
-        return "images/tab_youpivot.png";
-    }
-
     m.titleIcon = function(){
-        return "images/titleicon_youpivot.png";
+        return "images/large/youpivot.png";
     }
 
     // initialization
