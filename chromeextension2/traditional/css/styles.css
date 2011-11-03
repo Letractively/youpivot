@@ -7,6 +7,10 @@
     color: #7D6654;
 }
 
+#historyFilters { padding-top: 5px; }
+#historyFilters img { cursor: pointer; }
+#historyFilters img:hover { opacity: 1 !important; }
+
 /**************************/
 
 .grayText{

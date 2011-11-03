@@ -16,13 +16,13 @@
 
 	function createList(obj, handle, indicator){
 		if(!handle){
-			console.log("Handler is not defined");
+			console.log("Handle is not defined");
 			return;
 		}
 		if(typeof handle == "object"){
 			handle.click(function(){
-				obj.toggle();
-				$(this).parent().find(".collapsable_indicator").toggleClass("active", obj.is(":visible"));
+				$(this).parent().find(".collapsable_indicator").toggleClass("active", !obj.is(":visible"));
+				obj.slideToggle(50);
 			});
 			if(indicator){
 				//create the indicator triangle

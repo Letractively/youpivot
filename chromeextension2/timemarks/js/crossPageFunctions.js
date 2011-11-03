@@ -24,7 +24,7 @@ function getUniqueString_(url, favIconUrl,title,favIconImg_base64,extractedDomai
 
 
 
-function filterClicked(dataArray){
+/*function filterClicked(dataArray){
 	
 	var dataArrayData = dataArray.data;
 	var title = dataArrayData[0];
@@ -53,7 +53,7 @@ function filterClicked(dataArray){
 	
 	reFilter(filterTargetDivTitle,filterTargetDivTitleClass,filterArray);
 	
-}
+}*/
 
 function reFilter(filterTargetDivTitle,filterTargetDivTitleClass,filterArray){
 	
@@ -80,7 +80,7 @@ function reFilter(filterTargetDivTitle,filterTargetDivTitleClass,filterArray){
 	//console.log("hello "+children.size()+" of "+filterArray.length);
 }
 
-function createFilterList(hashtable,filterDivTitle,filterTargetDivTitle,target_filterList,targetElementClass,activeFilterDiv){
+/*function createFilterList(hashtable,filterDivTitle,filterTargetDivTitle,target_filterList,targetElementClass,activeFilterDiv){
 	$("#"+filterDivTitle).empty(); //clear out old data
 	target_filterList = new Array();
 	
@@ -115,7 +115,7 @@ function createFilterIcon(title,faviconURL,key,idPreText){
 	div_favIconFilter.setAttribute('id',idPreText+key);
 	
 	return div_favIconFilter
-}
+}*/
 
 //var myHash = new Hash('one', 1, 'two', 2, 'three', 3);
 function Hash()

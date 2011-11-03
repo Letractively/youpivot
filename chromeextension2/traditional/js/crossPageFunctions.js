@@ -25,7 +25,6 @@ function getUniqueString_(url, favIconUrl,title,favIconImg_base64,extractedDomai
 
 
 function filterClicked(dataArray){
-	
 	var dataArrayData = dataArray.data;
 	var title = dataArrayData[0];
 	var uniqueHash = dataArrayData[1];
@@ -34,7 +33,7 @@ function filterClicked(dataArray){
 	var filterArray = dataArrayData[4];
 	var activeFilterDiv = dataArrayData[5];
 	var favIconUrl = dataArrayData[6];
-	
+
 	var index = $.inArray(uniqueHash, filterArray);
 	if(index==-1){
 		filterArray.push(uniqueHash);
@@ -81,6 +80,39 @@ function reFilter(filterTargetDivTitle,filterTargetDivTitleClass,filterArray){
 }
 
 function createFilterList(hashtable,filterDivTitle,filterTargetDivTitle,target_filterList,targetElementClass,activeFilterDiv){
+    THFilterManager.clearDomains(false);
+	target_filterList = new Array();
+
+	var keyArray = hashtable.getKeys();
+	
+	for(var i=0; i<keyArray.length; i++) {
+		var key = keyArray[i];
+
+		var favIconArray = hashtable.getItem(key);
+
+        var data = [
+            favIconArray[0],
+            key,
+            filterTargetDivTitle,
+            targetElementClass,
+            target_filterList,
+            activeFilterDiv,
+            favIconArray[1]
+        ]
+		
+        THFilterManager.addDomain(favIconArray[1], favIconArray[0], data);
+
+		//var div_favIconFilter = createFilterIcon(favIconArray[0],favIconArray[1],key,"key_");
+		
+		//document.getElementById(filterDivTitle).appendChild(div_favIconFilter);
+		
+	}
+    THFilterManager.display();
+
+}
+/*
+
+function createFilterList(hashtable,filterDivTitle,filterTargetDivTitle,target_filterList,targetElementClass,activeFilterDiv){
 	$("#"+filterDivTitle).empty(); //clear out old data
 	target_filterList = new Array();
 	
@@ -105,7 +137,7 @@ function createFilterList(hashtable,filterDivTitle,filterTargetDivTitle,target_f
 		$('#key_'+key).click(new Array(favIconArray[0],key,filterTargetDivTitle,targetElementClass,target_filterList,activeFilterDiv,favIconArray[1]),filterClicked);
 	}
 	
-}
+}*/
 
 function createFilterIcon(title,faviconURL,key,idPreText){
 	var div_favIconFilter = document.createElement('div');

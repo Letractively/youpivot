@@ -1,3 +1,4 @@
+include("js/utilities.js");
 var TermManager = {};
 
 (function(){
@@ -42,8 +43,8 @@ var TermManager = {};
 	function displayTerm(text, rating){
 		var anchor = $("<a href='' class='termAnchor'></a>").text(text);
 		anchor.attr("href", "javascript: filter");
-		anchor.css("font-size", 20*Helper.decay(rating, 1, best)+"px");
-		anchor.css("opacity", Helper.decay(rating, 1, best));
+		anchor.css("font-size", 20*Utilities.decay(rating, 1, best)+"px");
+		anchor.css("opacity", Utilities.decay(rating, 1, best));
 		anchor.click(function(){
 			FilterManager.addFilter("name", text, text);
 			includeFilter(this);
