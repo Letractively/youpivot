@@ -1,3 +1,5 @@
+style("timemarks/controls.css");
+
 var TimeMarks = {};
 
 (function(){
@@ -12,12 +14,8 @@ var TimeMarks = {};
         // no topbar
     }
 
-    m.tabImage = function(){
-        return "images/tab_timemark.png";
-    }
-
     m.titleIcon = function(){
-        return "images/titleicon_timemark.png";
+        return "images/large/timemarks2.png";
     }
 
     // initialization

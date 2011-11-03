@@ -1,3 +1,5 @@
+style("/traditional/controls.css");
+
 var TraditionalHistory = {};
 
 (function(){
@@ -13,11 +15,11 @@ var TraditionalHistory = {};
     }
 
     m.tabImage = function(){
-        return "images/tab_history.png";
+        return "images/relief/traditional.png";
     }
 
     m.titleIcon = function(){
-        return "images/titleicon_history.png";
+        return "images/large/traditional.png";
     }
 
     // initialization

@@ -15,10 +15,7 @@ var Master = {};
         $("#m-content").append(div.hide());
 
         // create tab button
-        var img = "images/tab_default.png";
-        if(typeof obj.tabImage == "function" && obj.tabImage())
-            img = obj.tabImage();
-        addTabHandle(id, name, img);
+        addTabHandle(id, name);
 
         // create topbar
         var topbar = $("<div />").attr("id", "m-topbar_"+id);
@@ -102,8 +99,8 @@ var Master = {};
         //$("#m-sidebarTitle").text(tabs[id].name);
     }
 
-    function addTabHandle(id, name, img){
-        var div = $("<div />").addClass("m-topTab").attr("id", "m-tab_"+id).html('<img src="'+img+'" class="m-tabimg"/><div class="m-tabname">'+name+'</div>');
+    function addTabHandle(id, name){
+        var div = $("<div />").addClass("m-topTab").attr("id", "m-tab_"+id).html('<div class="m-tabimg"></div><div class="m-tabname">'+name+'</div>');
         div.addClass("app");
         $("#m-topbarTabs").append(div).append('<div class="m-topTabDivider"/>');
 

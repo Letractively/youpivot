@@ -13,10 +13,6 @@ var Options = {};
         // no topbar
     }
 
-    m.tabImage = function(){
-        return "images/tab_settings.png";
-    }
-
     m.titleIcon = function(){
         return "images/titleicon_settings.png";
     }

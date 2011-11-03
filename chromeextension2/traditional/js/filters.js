@@ -15,14 +15,17 @@ var THFilterManager = {};
 
     // add a domain to the list, adjusting the the best values. 
     // note that this have no effect on the display until display() is called. 
-	m.addDomain = function(url, name, data){
+	m.addDomain = function(url, name, data, visitCount){
+        if(visitCount === undefined) visitCount = 1;
 		var index = getDomainIndex(name);
 		if(index==-1){
-			domains[domains.length] = {url: url, name: name, rating: 1, data: data};
+			domains[domains.length] = {url: url, name: name, rating: visitCount, data: data};
+			if(visitCount>best) best = visitCount;
 		}else{
 			var domain = domains[index];
-			domains[index] = {url: url, name: name, rating: domain.rating+1, data: data};
-			if(domain.rating+1>best) best = domain.rating+1;
+            var newRating = domain.rating + visitCount;
+			domains[index] = {url: url, name: name, rating: newRating, data: data};
+			if(newRating>best) best = newRating;
 		}
 	}
 

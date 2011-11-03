@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#m-tab_traditionalhistory .m-tabimg { background: url("/images/relief/traditional.png"); }
+#m-tab_traditionalhistory:hover .m-tabimg { background: url("/images/small/traditional.png"); }
+#m-tab_traditionalhistory:hover .m-tabname { color: #557D56; }
+
+#h-leftSidebar .m-sidebarTitle { 
+    color: #557D56;
+}
