@@ -2,7 +2,7 @@ include("js/dateformatter.js");
 
 // Controller of itemTable, converts YouPivot type data into info shown in the table
 var TableHelper = {};
-var addItemCount = 0;
+var addItemCount = 0; // debug
 
 (function(){
 	var m = TableHelper;
@@ -10,18 +10,6 @@ var addItemCount = 0;
 	var typeSchema = {"date": "toprow", "left": "normal", "color": "normal", "name": "normal"};
 
     var initialized = false;
-    m.initTables = function(){
-        if(initialized) return;
-		$("#textContent").itemTable("create", {schema: dateSchema});
-		$("#y-searchResults").itemTable("create", {schema: dateSchema});
-        tableCreated = true;
-        $("#textContent").bind("attachItem", function(e, row){
-            var id = row.data("id");
-            var item = ItemManager.getItem(id);
-	        row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, PrefManager.getOption("lowlightFg")));
-		    row.find(".pivotBtn").click({"eventId": item.eventId}, pivotclick);
-        });
-    }
 
 	//add an item to the specified itemTable (items list or search results)
     var mouseenterrow = function(e){
@@ -39,9 +27,9 @@ var addItemCount = 0;
         PivotManager.pivotItem(e.data.eventId);
     };
     var deleteentry = function(obj){
-        var id = $(obj).data("id");
-        $(obj).itemTable("deleteItem", {id: id});
-        Connector.send("delete", {eventid: ItemManager.list[id].eventId}, {
+        //var id = $(obj).data("id");
+        //$(obj).itemTable("deleteItem", {id: id});
+        /*Connector.send("delete", {eventid: ItemManager.list[id].eventId}, {
             onSuccess: function(data){
                 console.log("item deleted -- ", data);
             }, 
@@ -49,9 +37,10 @@ var addItemCount = 0;
                 console.log("item delete error -- ", data);
             }
         });
-        ItemManager.deleteItem(id);
+        ItemManager.deleteItem(id);*/
+        throw "delete entry is not implemented yet";
     };
-	m.addItem = function(table, item){
+	m.addItem = function(itemTable, item){
         addItemCount++;
 		var obj = {};
 		obj.left = createLeft(item);
@@ -60,7 +49,7 @@ var addItemCount = 0;
 		obj.date = createDate(item);
 		obj.id = item.id;
 		var headerInfo = createHeader(item);
-		var row = table.itemTable("addItem", {item: obj, header: headerInfo});
+        var row = itemTable.addItem(obj, headerInfo);
 		//set link to pivot if it is a timemark
 		if(item.domain.name == "timemark"){
 			row.find(".item_name a").click(function(e){
@@ -69,29 +58,32 @@ var addItemCount = 0;
 			});
 		}
 		//add mouseover events
-		row.mouseenter({"table": table}, mouseenterrow);
-		row.mouseleave({"table": table}, mouseleaverow);
+		//row.mouseenter({"table": table}, mouseenterrow);
+		//row.mouseleave({"table": table}, mouseleaverow);
 		var icon = IconFactory.createTextIcon(item.domain.favUrl, item.title, "item_icon");
-		row.contextMenu("table_menu", {
+		/*row.contextMenu("table_menu", {
 			"Delete this entry": {
 				click: deleteentry
 			}
 		}, 
-		{ title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
+		{ title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });*/
 		row.data("id", item.id); //store the item with the DOM object
 		//row.addClass("item_domain_"+item.domain.id);
+        var item = ItemManager.getItem(item.id);
+        row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, PrefManager.getOption("lowlightFg")));
+        row.find(".pivotBtn").click({"eventId": item.eventId}, pivotclick);
 		return row;
 	}
 
 	//change the schema of the table. Requires complete rebuilding of the table
 	//The operation takes time and freezes the tab during loading
-	m.changeSchema = function(table, sortBy, caller){
+	m.changeSchema = function(itemTable, sortBy, caller){
         console.log("change schema");
 		var schema = dateSchema;
 		if(sortBy=="by type") schema = typeSchema;
         else if(sortBy=="chronological") schema = dateSchema;
-		table.itemTable("destroy");
-		table.itemTable("create", {schema: schema});
+        itemTable.destroy();
+        itemTable.create(schema);
         if(typeof caller.reload == "function")
             caller.reload();
 	}

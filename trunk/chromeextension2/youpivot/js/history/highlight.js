@@ -11,16 +11,16 @@ var HighlightManager = {};
 
     m.mouseEnterGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.highlightDomain(domainId, $("#textContent"));
-        m.highlightItem(id, $("#textContent"));
+        m.highlightDomain(domainId);
+        m.highlightHistoryListItem(id);
         m.highlightLayer(id);
         m.scrollToItem(id, 500);
     }
 
     m.mouseLeaveGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.lowlightDomain(domainId, $("#textContent"));
-        m.lowlightItem(id, $("#textContent"));
+        m.lowlightDomain(domainId);
+        m.lowlightHistoryListItem(id);
         m.lowlightLayer(id);
         m.cancelScroll(id);
     }
@@ -30,71 +30,74 @@ var HighlightManager = {};
     m.clickOnGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
         if(!graphToggleState[id]){
-            m.highlightDomain(domainId, $("#textContent"));
-            m.highlightItem(id, $("#textContent"));
+            m.highlightDomain(domainId);
+            m.highlightHistoryListItem(id);
             m.highlightLayer(id);
             m.cancelScroll(id);
             m.scrollToItem(id, 0);
             graphToggleState[id] = true;
         }else{
-            m.lowlightDomain(domainId, $("#textContent"));
-            m.lowlightItem(id, $("#textContent"));
+            m.lowlightDomain(domainId);
+            m.lowlightHistoryListItem(id);
             m.lowlightLayer(id);
             graphToggleState[id] = false;
         }
     }
 
     m.mouseEnterHistoryListItem = function(id){
-        m.mouseEnterTableItem(id, $("#textContent"));
+        var domainId = ItemManager.getItem(id).domain.id;
+        m.highlightDomain(domainId);
+        m.highlightHistoryListItem(id);
+        m.highlightLayer(id);
     }
 
     m.mouseLeaveHistoryListItem = function(id){
-        m.mouseLeaveTableItem(id, $("#textContent"));
-    }
-
-    m.mouseEnterTableItem = function(id, parent){
-        var domainId = ItemManager.getItem(id).domain.id;
-        m.highlightDomain(domainId);
-        m.highlightItem(id, parent);
-        m.highlightLayer(id, parent);
-    }
-
-    m.mouseLeaveTableItem = function(id, parent){
         var domainId = ItemManager.getItem(id).domain.id;
         m.lowlightDomain(domainId);
-        m.lowlightItem(id, parent);
-        m.lowlightLayer(id, parent);
+        m.lowlightHistoryListItem(id);
+        m.lowlightLayer(id);
     }
 
+    m.mouseEnterSearchTableItem = function(id){
+        var domainId = ItemManager.getItem(id).domain.id;
+        m.highlightDomain(domainId);
+        m.highlightSearchTableItem(id);
+    }
+
+    m.mouseLeaveSearchTableItem = function(id){
+        var domainId = ItemManager.getItem(id).domain.id;
+        m.lowlightDomain(domainId);
+        m.lowlightSearchTableItem(id);
+    }
 
     /*********** Highlight implementations *************/
 
-    m.highlightDomain = function(domainId, parent){
+    m.highlightDomain = function(domainId){
         var list = ItemManager.list;
         for(var i=0; i<list.length; i++){
             if(list[i].domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, list[i].id, 1);
                 // domain must be highlighted here
-                $("#item_"+list[i].id).itemTable("highlight", {level: "related"});
+                TableManager.highlight(list[i].id, "related");
                 if(tableHighlightPool[list[i].id] > 0){
-                    $("#item_"+list[i].id).itemTable("highlight", {level: "highlight"});
+                    TableManager.highlight(list[i].id, "highlight");
                 }
             }
         }
     }
 
-    m.lowlightDomain = function(domainId, parent){
+    m.lowlightDomain = function(domainId){
         var list = ItemManager.list;
         for(var i=0; i<list.length; i++){
             if(list[i].domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, list[i].id, -1);
 
                 if(tableHighlightPool[list[i].id] > 0){
-                    $("#item_"+list[i].id).itemTable("highlight", {level: "highlight"});
+                    TableManager.highlight(list[i].id, "highlight");
                 }else if(domainHighlightPool[list[i].id] > 0){
-                    $("#item_"+list[i].id).itemTable("highlight", {level: "related"});
+                    TableManager.highlight(list[i].id, "related");
                 }else{
-                    $("#item_"+list[i].id).itemTable("lowlight");
+                    TableManager.lowlight(list[i].id);
                 }
             }
         }
@@ -111,23 +114,39 @@ var HighlightManager = {};
 	
 	m.clearHighlight = function(){
 		$(".item").each(function(){
-			$(this).itemTable("lowlight");
+            TableManager.lowlight($(this).data("id"));
 		});
 	}
 
-    m.highlightItem = function(id, parent){
+    m.highlightHistoryListItem = function(id){
         addToHighlightPool(tableHighlightPool, id, 1);
-        $("#item_"+id, parent).itemTable("highlight", {level: "highlight"});
+        TableManager.highlight(id, "highlight");
     }
 
-    m.lowlightItem = function(id, parent){
+    m.lowlightHistoryListItem = function(id){
         var list = ItemManager.list;
         if(addToHighlightPool(tableHighlightPool, id, -1) > 0){
-            $("#item_"+id, parent).itemTable("highlight", {level: "highlight"});
+            TableManager.highlight(id, "highlight");
         }else if(domainHighlightPool[list[i].id] > 0){
-            $("#item_"+id, parent).itemTable("highlight", {level: "related"});
+            TableManager.highlight(id, "highlight");
         }else{
-            $("#item_"+id, parent).itemTable("lowlight");
+            TableManager.lowlight(id);
+        }
+    }
+
+    m.highlightSearchTableItem = function(id){
+        addToHighlightPool(tableHighlightPool, id, 1);
+        SearchManager.highlight(id, "highlight");
+    }
+
+    m.lowlightSearchTableItem = function(id){
+        var list = ItemManager.list;
+        if(addToHighlightPool(tableHighlightPool, id, -1) > 0){
+            SearchManager.highlight(id, "highlight");
+        }else if(domainHighlightPool[list[i].id] > 0){
+            SearchManager.highlight(id, "highlight");
+        }else{
+            SearchManager.lowlight(id);
         }
     }
 

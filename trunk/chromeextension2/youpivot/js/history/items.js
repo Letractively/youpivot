@@ -7,6 +7,11 @@ var ItemManager = {};
 	m.list = new Array();
 	var counter = 0;
 
+    m.init = function(){
+        TableManager.init();
+        SearchManager.init();
+    }
+
 	m.addItems = function(items){
         var ttt = new Date().getTime();
 		SortManager.sortItems(items);
@@ -20,7 +25,6 @@ var ItemManager = {};
 		DomainManager.display();
 		TermManager.display();
 		StreamManager.display();
-        TableHelper.initTables();
         console.log("time to display item: ", new Date().getTime() - ttt);
 		$(window).trigger("itemsLoaded");
 	}

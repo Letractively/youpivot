@@ -7,7 +7,7 @@ var Helper = {};
 
 	m.showLoading = function(){
 		$("#y-spinner").show();
-		$("#content").parent().prepend("<div id='blocker' style='z-index: 999999; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; cursor: progress'></div>");
+		$("#content").parent().prepend("<div id='blocker' style='z-index: 999999; position: fixed; height: 100%; width: 100%; top: 35px; left: 0px; cursor: progress'></div>");
 	}
 
 	m.hideLoading = function(){

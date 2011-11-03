@@ -15,10 +15,10 @@ var FilterTimeManager = {};
 		}
 		var startTime = time[0];
 		var endTime = time[1];
-		var tc = $("#textContent");
-        tc.itemTable("detachAll");
+        TableManager.detachAll();
         var items = ItemManager.list;
 
+		var tc = $("#textContent");
 
         for(var i=0; i<items.length; i++){
             var item = ItemManager.getItem(i);
@@ -27,7 +27,6 @@ var FilterTimeManager = {};
 			}
         }
 
-		//$(".itemTable", tc).itemTable("refreshTopRows");
 		if(!SearchManager.getState()){
 			TableManager.loadFilters();
 		}
@@ -36,7 +35,6 @@ var FilterTimeManager = {};
 
 	function showTimeRow(tc, item, id){
         TableManager.addItem(item);
-        tc.itemTable("attach", {"id": id});
 	}
 
 })();

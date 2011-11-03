@@ -132,7 +132,7 @@ var GraphManager = {};
 
     function finishSelection(){
 		$("#textContent .item_date span").removeClass("grey");
-		$("#textContent").itemTable("refreshTopRows");
+        TableManager.refreshTopRows();
 	}
 
     /************ graph data handling ************/
@@ -165,7 +165,7 @@ var GraphManager = {};
 	m.draw = function(){
                                             var ttt = new Date().getTime(); // debug
                                             console.log("Start drawing graphs"); // debug
-        var totalArray = getTotalArray(dataArray);
+        var totalArray = getTotalArrayAndCalculateDomainData(dataArray);
 		TopGraph.draw(totalArray, getMaxData(totalArray));
                                             console.log("Top graph drawn: ", new Date().getTime() - ttt); // debug
                                             ttt = new Date().getTime();
@@ -174,11 +174,11 @@ var GraphManager = {};
 	}
 
     m.drawTopGraph = function(){
-        var totalArray = getTotalArray(dataArray);
+        var totalArray = getTotalArrayAndCalculateDomainData(dataArray);
         TopGraph.draw(dataArray, getMaxData(totalArray));
     }
 
-	m.getData = function(i){
+	/*m._getData = function(i){
 		return dataArray[i];
 	}
 
@@ -189,10 +189,19 @@ var GraphManager = {};
 			}
 		}
 		return false;
-	}
+	}*/
+
+    function getDataIndex(id){
+		for(var i in dataArray){
+			if(dataArray[i].id === id){
+				return i;
+			}
+		}
+		return false;
+    }
 
 	m.highlightLayer = function(id, persistent){
-		var index = m.getDataIndex(id);
+		var index = getDataIndex(id);
 		if(!index) return;
 
         var color = ItemManager.getItem(id).domain.color;
@@ -223,7 +232,7 @@ var GraphManager = {};
 
 	//toggle the visibility of the graph
 	function toggleGraph(){
-        console.log("hide");
+        console.log("toggle graph");
 		var hiding = $("#eventsWrap").is(":visible");
 		$("#graphDate div").width((hiding) ? "auto" : "50%");
 		$("#graphDate .dash").toggle();
@@ -268,17 +277,24 @@ var GraphManager = {};
         return offset;
     }
 
-    function getTotalArray(dataArray){
-        var output = [];
+    function getTotalArrayAndCalculateDomainData(dataArray){
+        var allzero = [];
         for(var i=0; i<maxArrLength; i++){
-            output[i] = 0;
+            allzero[i] = 0;
         }
+        output = allzero.slice(0);
         for(var i in dataArray){
+            var domain = ItemManager.getDomain(dataArray[i].id); // domain
+            var domainArray = (domain.data) ? domain.data : allzero.slice(0);
+
             var data = dataArray[i].array;
             var offset = dataArray[i].offset;
             for(var j=0; j<data.length; j++){
                 output[j+offset] += data[j];
+                domainArray[j+offset] += data[j]; // domain
             }
+
+            domain.data = domainArray; // domain
         }
         return output;
     }

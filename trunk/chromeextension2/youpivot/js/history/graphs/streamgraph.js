@@ -312,10 +312,10 @@ var StreamGraph = {};
             //    P.vertex(x, y);
         }
 
-        function getData(id){
+        /*function getData(id){
             var index = GraphManager.getDataIndex(id);
             return GraphManager.getData(index);
-        }
+        }*/
 
         // Return colorMode, range, color triplet (either in rgb or hsb, specified by colorMode)
         function getColor(layer){

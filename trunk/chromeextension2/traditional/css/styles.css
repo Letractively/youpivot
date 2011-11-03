@@ -1,7 +1,7 @@
 /*** sidebar color style ***/
-#h-leftSidebar {
+/*#h-leftSidebar {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(234, 238, 243, 0)), to(#F2EBE4)), -webkit-gradient(linear, left top, right top, from(#F2EBE4), color-stop(0.97, #F2EBE4), to(#D6C9C0)); 
-}
+}*/
 
 #h-leftSidebar .m-sidebarTitle { 
     color: #7D6654;
