@@ -26,7 +26,8 @@ var TraditionalHistory = {};
         var bar = Master.createSidebar("traditionalhistory");
         bar.attr("id", "h-leftSidebar");
         bar.find(".m-sidebarTitle span").text("Traditional History");
-        bar.append('<div id="navbar-container"><div id="navbar_filters"><div id="navbar_filters_timeMarks" class="navbar_filter"></div><div id="navbar_filters_traditionalHistory" class="navbar_filter"></div></div></div>');
+        bar.append('<div id="navbar-container"><div id="navbar_filters"><div id="navbar_filters_timeMarks" class="navbar_filter"></div><div id="navbar_filters_traditionalHistory" class="navbar_filter"></div></div></div><div class="sidebarLabel">Filters</div><div id="historyFilters" class="collapse"></div>');
+        THSidebar.init();
     }
 })();
 

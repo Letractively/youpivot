@@ -1,3 +1,4 @@
+include("js/utilities.js");
 var StreamManager = {};
 
 (function(){
@@ -37,7 +38,7 @@ var StreamManager = {};
 		var icon = getStreamIcon(name);
 		var tImg = IconFactory.createTextIcon(icon, name, "wrap");
 		var img = $(tImg);
-		img.css("opacity", Helper.decay(rating, 1, best));
+		img.css("opacity", Utilities.decay(rating, 1, best));
 		$("#streamFilters").append(img);
 		img.data("title", name);
 		img.click(function(e){
