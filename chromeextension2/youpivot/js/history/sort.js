@@ -39,9 +39,6 @@ var SortManager = {};
 		//SearchManager.changeSchema(name);
 		FilterTimeManager.filterTime();
 		FilterManager.filter();
-		$(".itemTable").each(function(){
-			$(this).itemTable("refreshTopRows");
-		});
 		//Helper.hideLoading();
 		return true;
 	}

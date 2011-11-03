@@ -3,369 +3,283 @@
 //  normal - normal row
 
 (function($){
-	$.fn.itemTable = function(action, params){
-        lastObj = this;
-		switch(action){
-			case "create":
-                // $(wrapDiv).itemTable("create", {"schema": someSchema});
-				var schema = getOptions(params, "schema", []);
-				createTable(this, schema);
-				break;
-			case "addItem":
-				var item = getOptions(params, "item", {});
-				var header = getOptions(params, "header", "");
-				return addItem(this, item, header);
-				break;
-            case "deleteItem":
-				var id = getOptions(params, "id", -1);
-                deleteItem(this, id);
-                break;
-            case "attach":
-                // $(wrapDiv).itemTable("attach", {id: itemId});
-				var id = getOptions(params, "id", -1);
-                attachItem(this, id);
-                break;
-            case "detach":
-				var id = getOptions(params, "id", -1);
-                detachItem(this, id);
-                break;
-            case "detachAll":
-                detachAll(this);
-                break;
-			case "show":
-				var cls = getOptions(params, "class", "hidden");
-				showItem(this, cls);
-				break;
-			case "hide":
-				var cls = getOptions(params, "class", "hidden");
-				hideItem(this, cls);
-				break;
-			case "hideAll":
-				var cls = getOptions(params, "class", "hidden");
-				hideAll(this, cls);
-				break;
-			case "highlight":
-				var level = getOptions(params, "level", "highbg");
-				highlight(this, level);
-				break;
-			case "lowlight":
-				lowlight(this);
-				break;
-			case "clear":
-				clear(this);
-				break;
-			case "destroy":
-				destroy(this);
-				break;
-			case "refreshTopRows":
-				refreshAllTopRows(this);
-				break;
-			default:
-				throw "Undefined action "+action;
-				break;
-		}
-	}
-
-    // for accessing instance variables
-    var instances = [];
-    var lastObj;
-
-    function getObj(){
-        if(lastObj.children(".itemTable").size() !== 0)
-            return lastObj;
-        if(lastObj.hasClass("itemTable"))
-            return lastObj.parent();
-        return lastObj.parents(".itemTable", ".itemTable").parent();
+    $.fn.itemTable = function(schema){
+        // schema is an object of { (String) name : (ItemTableType) type, name : type, name : type .... }
+        if(this.find(".itemTable").length == 0){
+            if(!schema) throw "Schema is not provided";
+            return new ItemTable(this, schema);
+        }else{
+            throw "table already initialized";
+        }
     }
 
-    function instance(){
-        var obj = getObj();
-        if(obj.data("instance") === undefined)
-            console.log(obj);
-        return instances[obj.data("instance")];
-    }
-
-    function newInstance(obj){
-        var obj = getObj();
-        var newId = instances.length;
-        if(obj.data("instance") === undefined){
-            obj.data("instance", newId);
-        }
-        instances[newId] = {};
-        return instances[newId];
-    }
-
-	function createTable(thiss, schema){
-		var table = $("<table />").addClass("itemTable");
-		table.data("schema", schema);
-		thiss.html(table);
-        newInstance(thiss).rows = {};
-        instance().rawRows = {};
-        instance().headers = [];
-	}
-
-    // gathers necessary information to create row
-	function addItem(thiss, item, headerInfo){
-		var table = $(".itemTable", thiss);
-		var schema = getSchema(table);
-		if(!schema){ throw "Schema not defined"; return false; }
-		//header creation
-		var headerId;
-		if(headerInfo){
-			headerId = getCreateHeader(table, headerInfo, count(schema));
-		}
-
-        instance().rawRows[item.id] = {schema: schema, item: item, table: table};
-        var row = createEmptyRow(item.id);
-        instance().rows[item.id] = row;
-
-		row.data("header", headerId); //store the header id into the item
-		return row;
-	}
-
-    function deleteItem(item, id){
-        // maybe want to trigger an event here (detach?)
-        console.log(item);
-
-		//hide header
-		var header = item.data("header");
-		if(header && header.nextUntil(".headerRow").filter(":visible").size()==0){
-			header.addClass("hidden");
-		}
-
-        item.remove();
-        delete instance().rows[id];
-        delete instance().rawRows[id];
-    }
-
-    // actually builds the DOM item to prepare showing on screen
-    function buildItem(raw){
-        var item = raw.item;
-        var schema = raw.schema;
-        var table = raw.table;
-		populateRow(item.id, schema, item, table);
-    }
-
-    // attach (put into DOM) an item with info previously added to the table
-    function attachItem(wrap, id){
-        var table = $(".itemTable", wrap);
-
-        if(!instance().rows[id] || instance().rows[id].is(":empty")){
-            buildItem(instance().rawRows[id]);
-        }
-
-		//show header
-		var headerId = instance().rows[id].data("header");
-        if(!instance().headers[headerId].visible){
-            table.append(instance().headers[headerId].obj);
-            instance().headers[headerId].visible = true;
-        }
-
-        table.append(instance().rows[id]);
-        wrap.trigger("attachItem", [instance().rows[id]]);
-
-    }
-
-    function detachItem(wrap, id){
-        var item = wrap.find("#item_"+id);
-        item.detach();
-        wrap.trigger("detachItem", item);
-
-		//hide header
-		var headerId = item.data("header");
-        var header = instance().headers[headerId].obj;
-		if(header && header.nextUntil(".headerRow").filter(":visible").size()==0){
-			header.detach();
-            instance().headers[headerId].visible = false;
-		}
-    }
-
-    function detachAll(wrap){
-        // FIXME not very efficient
-        if(instance()){
-            for(var i in instance().headers){
-                instance().headers[i].visible = false;
-            }
-        }
-        $(".itemTable .item", wrap).detach();
-        $(".itemTable .headerRow", wrap).detach();
-    }
-
-	function showItem(thiss, cls){
-		//show row
-		thiss.removeClass(cls);
-		//show header
-		var headerId = thiss.data("header");
-		if(headerId !== undefined){
-            instance().headers[headerId].obj.removeClass("hidden");
-		}else{
-            console.log("header is undefined"); 
-        }
-		//show toprows
-		//refreshTopRows(thiss, cls);
-	}
-
-    // a better way to show/hide headers is to count the number of descendants
-	function hideItem(thiss, cls){
-		//hide row
-		thiss.addClass(cls);
-		//hide header
-		var headerId = thiss.data("header");
-        var header = instance().headers[headerId].obj;
-        console.log(header.nextUntil(".headerRow"));
-		if(header.nextUntil(".headerRow").filter(":visible").size()==0){
-			header.addClass("hidden");
-		}
-		//hide toprows
-		//refreshTopRows(thiss);
-	}
-
-	function hideAll(table, cls){
-		//var schema = getSchema(table);
-		table.find("tr:not(.headerRow)").addClass(cls);
-        table.find("tr.headerRow").addClass("hidden");
-	}
-
-	function highlight(obj, level){
-		//obj.addClass("hover");
-        var item = ItemManager.getItem(obj.data("id"));
-        if(!item){
-            return;
-        }
-        var color = item.domain.color;
-		obj.css("background-color", Helper.createLighterColor(color, PrefManager.getOption(level+"Bg")));
-		var fgColor = Helper.createLighterColor(color, PrefManager.getOption(level+"Fg")); //foreground color
-		$(".item_color", obj).css("background-color", fgColor);
-	}
-
-	function lowlight(obj){
-		//obj.removeClass("hover");
-        var item = ItemManager.getItem(obj.data("id"));
-        if(!item){
-            return;
-        }
-        var color = item.domain.color;
-		obj.css("background-color", "");
-		$(".item_color", obj).css("background-color", Helper.createLighterColor(color, PrefManager.getOption("lowlightFg")));
-	}
-
-	function clear(wrap){
-		if(wrap.children().first().hasClass("itemTable")){
-			wrap.find(".itemTable").html("");
-            instance().rows = {};
-            instance().rawRows = {};
-        }
-	}
-
-	function destroy(wrap){
-		if(wrap.children().first().hasClass("itemTable"))
-			wrap.html("");
-        if(instance()){
-            instance().rows = {};
-            instance().rawRows = {};
-        }
-	}
-
-	/*** secondary functions ***/
-	function refreshTopRows(thiss){
-		var schema = getSchema(thiss.parents(".itemTable"));
-		for(var i in schema){
-			if(schema[i]=="toprow"){
-				var text = thiss.find(".item_"+i).text();
-				var header = thiss.data("header");
-				var grp = header.nextUntil(".headerRow").find(".item_"+i+" span:contains('"+text+"')");
-				grp.removeClass("hidden");
-				var first;
-				var rawGrp = grp.get();
-				for(var i in rawGrp){
-					var item = $(rawGrp[i]);
-					if(item.is(":visible")){
-						first = item;
-						break;
-					}
-				}
-				if(first){
-					grp.not(first).addClass("hidden");
-				}else{
-					grp.addClass("hidden");
-				}
-			}
-		}
-	}
-
-	function refreshAllTopRows(table){
-		var header = $(".headerRow:first", table);
-		var batch = header.nextUntil(".headerRow");
-		while(batch.size()>0){
-			var lastText = "";
-			batch.filter(":visible").each(function(){
-				refreshTopRows($(this));
-			});
-			header = batch.last().next(".headerRow");
-			batch = header.nextUntil(".headerRow");
-		}
-	}
-
-	function getCreateHeader(table, headerInfo, width){
-        for(var i in instance().headers){
-            if(instance().headers[i].label == headerInfo.label){
-                return i;
-            }
-        }
+    var ItemTable = function(obj, _schema){
+        var self = this;
         
-        var id = createHeader(headerInfo, width);
-        return id;
-	}
-	function createHeader(headerInfo, width){
-        var header = $("<tr/>").addClass("headerRow");
-        var th = $("<th/>").addClass("contentHeader").attr("colspan", width).html(headerInfo.html);
-        header.append(th);
-        var id = instance().headers.length;
-        instance().headers[id] = {label: headerInfo.label, obj: header};
-		header.data("id", id);
-		return id;
-	}
+        self.element = obj;
 
+        // private ivars
+        var schema = _schema;
+        var table;
+        var rows = {};
+        var headers = {};
 
-    function createEmptyRow(id){
-        var tr = $("<tr />").addClass("item").attr("id", "item_"+id);
-		return tr;
+        // initializer
+        (function init(){
+            table = $("<table />").addClass("itemTable");
+            self.element.html(table);
+        })();
+
+        // item is an object of { (String) name : (DOM) element, (String) name : (DOM) element, ...}
+        // header is a DOM element
+        this.addItem = function(item, headerInfo, refresh){
+            var row = rows[item.id];
+            var returnValue = null; // return null if merely attaching
+            if(!row){
+                row = buildItem(item); // buildItem stores the created item into rows object as well
+                returnValue = row;
+            }
+
+            //header creation
+            if(headerInfo){
+                headerKey = getCreateHeader(headerInfo);
+                row.data("header", headerKey); //store the header id into the item
+            }
+
+            // attach item
+            var nextHeader = headers[headerKey].element.nextAll(".headerRow").first();
+            if(nextHeader.length == 0)
+                table.append(row);
+            nextHeader.before(row); // attach below the right header
+
+            rows[item.id] = row;
+
+            if(refresh == undefined || refresh) self.refreshTopRows();
+
+            return returnValue;
+        }
+
+        // this will not remove the item from memory. 
+        // If an item with the same ID is added using addItem() function, this DOM element will be reused
+        this.detachItem = function(id, refresh){
+            var item = self.element.find("#item_"+id);
+            item.detach();
+            self.element.trigger("detachItem", item);
+
+            //hide header
+            headers[item.data("header")].release();
+
+            if(refresh === undefined || refresh) self.refreshTopRows();
+        }
+
+        // note: refresh will always be performed
+        this.detachAll = function(){
+            // FIXME not very efficient
+            for(var i in headers){
+                headers[i].resetRetainCount();
+            }
+            $(".itemTable .item", self.element).detach();
+
+            self.refreshTopRows();
+        }
+
+        // Remove an item in the table from memory. 
+        this.deleteItem = function(id, refresh){
+            // maybe want to trigger an event here (detach?)
+
+            //hide header
+            headers[item.data("header")].release();
+
+            item.remove();
+            delete rows[id];
+
+            if(refresh === undefined || refresh) self.refreshTopRows();
+        }
+
+        // note: refresh will always be performed
+        // is it same as clear?
+        this.deleteAll = function(){}
+
+        this.show = function(obj, cls){
+            //show row
+            obj.removeClass(cls);
+            //show header
+            headers[obj.data("header")].retain();
+
+            self.refreshTopRows();
+        }
+
+        this.hide = function(obj, cls){
+            //hide row
+            obj.addClass(cls);
+            //hide header
+            headers[obj.data("header")].release();
+
+            self.refreshTopRows();
+        }
+
+        this.hideAll = function(cls){
+            table.find("tr:not(.headerRow)").addClass(cls);
+            for(var i in headers){
+                headers[i].resetRetainCount();
+            }
+        }
+
+        // use for hiding / showing
+        this.addClass = function(id, className, refresh){
+            var obj = self.getDOM(id);
+            //hide row
+            obj.addClass(className);
+            //hide header
+            headers[obj.data("header")].release();
+
+            if(refresh === undefined || refresh) self.refreshTopRows();
+        }
+        this.removeClass = function(id, className, refresh){
+            var obj = self.getDOM(id);
+            //show row
+            obj.removeClass(className);
+            //show header
+            headers[obj.data("header")].retain();
+
+            if(refresh === undefined || refresh) self.refreshTopRows();
+        }
+
+        // returns number of 
+        this.getDOM = function(id){
+            return table.find("#item_"+id);
+        }
+
+        // refresh the top rows
+        this.refreshTopRows = function(){
+        }
+
+        this.clear = function(){
+            self.element.find(".itemTable").html("");
+            rows = {};
+            headers = {};
+        }
+
+        this.destroy = function(){
+            self.element.html("");
+            rows = {};
+            headers = {};
+        }
+
+        /*** secondary functions ***/
+        function refreshTopRows(thiss){
+            for(var i in schema){
+                if(schema[i]=="toprow"){
+                    var text = thiss.find(".item_"+i).text();
+                    var header = thiss.data("header");
+                    var grp = header.nextUntil(".headerRow").find(".item_"+i+" span:contains('"+text+"')");
+                    grp.removeClass("hidden");
+                    var first;
+                    var rawGrp = grp.get();
+                    for(var i in rawGrp){
+                        var item = $(rawGrp[i]);
+                        if(item.is(":visible")){
+                            first = item;
+                            break;
+                        }
+                    }
+                    if(first){
+                        grp.not(first).addClass("hidden");
+                    }else{
+                        grp.addClass("hidden");
+                    }
+                }
+            }
+        }
+
+        function refreshAllTopRows(table){
+            var header = $(".headerRow:first", table);
+            var batch = header.nextUntil(".headerRow");
+            while(batch.size()>0){
+                var lastText = "";
+                batch.filter(":visible").each(function(){
+                    refreshTopRows($(this));
+                });
+                header = batch.last().next(".headerRow");
+                batch = header.nextUntil(".headerRow");
+            }
+        }
+
+        function getCreateHeader(headerInfo){
+            var key = headerInfo.key;
+            if(headers[key]){
+                headers[key].retain();
+                return key;
+            }
+
+            createHeader(headerInfo);
+            return key;
+        }
+        function createHeader(headerInfo){
+            var key = headerInfo.key;
+            var header = $("<tr/>").addClass("headerRow");
+            var th = $("<th/>").addClass("contentHeader").attr("colspan", count(schema)).html(headerInfo.html);
+            header.append(th);
+
+            headers[key] = new HeaderItem(header, table);
+        }
+
+        // actually builds the DOM item to prepare showing on screen
+        function buildItem(item){
+            var tr = $("<tr />").addClass("item").attr("id", "item_"+item.id);
+
+            var rowarr = new Array();
+            var k = 0;
+            for(var i in schema){
+                // not top row
+                var col = "<td class='item_"+i+"'>"+item[i]+"</td>";
+                if(schema[i]=="toprow"){
+                    col = "<td class='item_"+i+"'><span class='hidden'>"+item[i]+"</span></td>";
+                }
+                rowarr[k++] = col;
+            }
+            var row = rowarr.join();
+            tr.append(row);
+            return tr;
+        }
+
+        /*** additonal functions ***/
+        function count(obj){
+            var counter = 0;
+            for(var i in obj){ counter++; }
+            return counter;
+        }
     }
-
-    function populateRow(id, schema, item, table){
-        var rowarr = new Array();
-        var k = 0;
-		for(var i in schema){
-			var col;
-			if(schema[i]=="toprow"){
-				col = "<td class='item_"+i+"'><span class='hidden'>"+item[i]+"</span></td>";
-			}else{
-				col = "<td class='item_"+i+"'>"+item[i]+"</td>";
-			}
-			rowarr[k++] = col;
-		}
-        var row = rowarr.join();
-        var item = instance().rows[id];
-        item.append(row);
-		return item;
-    }
-
-	function getSchema(table){
-		if(!table) return false;
-		var schema = table.data("schema");
-		return schema;
-	}
-
-	/*** additonal functions ***/
-	function getOptions(options, label, defaultValue){
-		if(!options || options[label] == undefined){
-			return defaultValue;
-		}
-		return options[label];
-	}
-	function count(obj){
-		var counter = 0;
-		for(var i in obj){ counter++; }
-		return counter;
-	}
 })(jQuery);
+
+var HeaderItem = function(element, table){
+    var self = this;
+
+    self.element = element;
+    var table = table;
+    var retainCount = 1; 
+
+    (function init(){
+        console.log("append header");
+        table.append(self.element);
+    })();
+
+    this.release = function(){
+        retainCount--;
+        if(retainCount <= 0){
+            self.element.hide();
+            retainCount = 0;
+        }
+    }
+
+    this.retain = function(){
+        retainCount++;
+        if(retainCount > 0)
+            self.element.show();
+    }
+
+    this.resetRetainCount = function(){
+        self.element.hide();
+        retainCount = 0;
+    }
+}

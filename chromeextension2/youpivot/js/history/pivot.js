@@ -93,16 +93,17 @@ var PivotManager = {};
 		ItemManager.addItems(arr);
         GraphManager.finishLoadingData(range[0], range[1]);
 		Helper.hideLoading();
-		$("#errorIcon").hide();
         $(window).trigger("pivot");
 	}
 
     var errorMessage = "Error loading information. Please make sure the background daemon is running and try again. ";
+    var errorIcon = "<div id='errorIcon' />";
 	// Displays an error message if the server cannot be connected
 	function pivotOnError(response){
-		Helper.hideLoading();
-		$("#errorIcon").show();
-		$("#visualGraphs").append("<div class='errorMessage' style='position: absolute; left: 100px; top: 200px; z-index: 999999;'>"+errorMessage+"</div>");
+        $("#y-spinner").hide();
+		$("#blocker").html("<div class='errorMessage' style='text-align: middle; position: relative; top: 200px;'>"
+                + errorIcon + "<br />" + errorMessage + "</div>")
+            .css("background-color", "rgba(180, 180, 180, 0.7)").css("cursor", "default");
 	}
 
 	function createItemsArray(obj){

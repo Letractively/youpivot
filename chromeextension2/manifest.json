@@ -1,6 +1,6 @@
 {
-  "name": "YouPivot alpha",
-  "version": "1.0.2",
+  "name": "YouPivot & TimeMarks (alpha)",
+  "version": "1.1",
   "description": "Contextual search for your personal digital history. YouPivot is more than a history page replacement allowing you to navigate through your digital history with ease. ",
   "background_page": "background.html", 
   "options_page": "options/options.html",

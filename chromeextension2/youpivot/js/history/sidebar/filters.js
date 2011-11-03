@@ -69,9 +69,8 @@ var FilterManager = {};
 			});
 			return;
 		}
-		$(".itemTable").each(function(){ // do on both search results and pivot table
-			$(this).itemTable("hideAll", {"class": "filtered"});
-		});
+        TableManager.hideAll("filtered");
+        SearchManager.hideAll("filtered");
 		if(filters.length==0){
 			$(".itemTable .item").each(function(){
 				showFilterRow($(this));
@@ -84,10 +83,8 @@ var FilterManager = {};
 		for(var i in outcasts){
 			applyOutcast(outcasts[i].type, outcasts[i].value);
 		}
-		$(".itemTable").each(function(){
-			$(this).itemTable("refreshTopRows");
-		});
-		//PageFlipper.hideFlipper();
+        TableManager.refreshTopRows();
+        SearchManager.refreshTopRows();
 	}
 
 	function applyOutcast(type, value){
@@ -147,10 +144,12 @@ var FilterManager = {};
 	}
 
 	function hideRow(obj, type){
-		obj.itemTable("hide", {"class": type});
+        var id = obj.data("id");
+        TableManager.hide(obj, type);
 	}
 	function showRow(obj, type){
-		obj.itemTable("show", {"class": type});
+        var id = obj.data("id");
+        TableManager.show(obj, type);
 	}
 
 	function matchKeywords(needle, keywords){

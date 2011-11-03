@@ -1,7 +1,7 @@
 /*** claimed namespace: m ***/
 
 html { height: 100%; }
-body { height: 100%; margin: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 13px; overflow-x: hidden; }
+body { margin: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 13px; overflow-x: hidden; }
 a:link { color: #202080; text-decoration: none; }
 a:visited { color: #60609F; text-decoration: none; }
 a:active { color: #60609F; text-decoration: none; }
@@ -51,7 +51,7 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 				width: 280px; height: 100%; box-sizing: border-box;
 				-webkit-border-end: 1px solid #C6C9CE;
 				-webkit-user-select: none; cursor: default;
-				background: -webkit-gradient(linear, left top, left bottom, from(rgba(234, 238, 243, 0)), to(#EAEEF3)), -webkit-gradient(linear, left top, right top, from(#EAEEF3), color-stop(0.97, #EAEEF3), to(#D3D7DB)); 
+				background: -webkit-gradient(linear, left top, left bottom, from(rgba(234, 238, 243, 0)), to(#EFEFEF)), -webkit-gradient(linear, left top, right top, from(#EFEFEF), color-stop(0.97, #EFEFEF), to(#D8D8D8)); 
 			 } 
 html[dir='rtl'] #m-leftSidebar {
   background: -webkit-linear-gradient(rgba(234, 238, 243, 0), #EAEEF3),
