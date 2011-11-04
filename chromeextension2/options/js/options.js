@@ -1,17 +1,19 @@
+include("/js/urlhash.js");
+
 function initView(){
-   var currentView = window.location.hash;
-   if(currentView == "#timemarks"){
+    var currentView = URLHash.getHashValue("options");
+   if(currentView == "timemarks"){
       navBar_clickTimeMarks();
-   }else if(currentView == "#history"){
+   }else if(currentView == "history"){
       navBar_clickTraditionalHistory();
-   }else if(currentView == "#geolocation"){
+   }else if(currentView == "geolocation"){
       navBar_clickGeo();
-   }else if(currentView == "#general"){
+   }else if(currentView == "general"){
       navBar_clickGeneral();
-   }else if(currentView == "#changelog"){
+   }else if(currentView == "changelog"){
 	  navBar_clickChangeLog();
-   }else if(currentView == "#youpivot"){
-		  navBar_clickYouPivot();
+   }else if(currentView == "youpivot"){
+      navBar_clickYouPivot();
    }
    
    favicon.change("images/box0.png");
@@ -55,22 +57,34 @@ function openWebpage(targetUrl) {
 }
 
 function redirect_general(){
-	window.location = (window.location+"").split("#")[0]+"#general";
+    URLHash.setHash("options", "general");
+    initView();
+	//window.location = (window.location+"").split("#")[0]+"#general";
 }
 function redirect_timeMarks(){
-	window.location = (window.location+"").split("#")[0]+"#timemarks";
+    URLHash.setHash("options", "timemarks");
+    initView();
+	//window.location = (window.location+"").split("#")[0]+"#timemarks";
 }
 function redirect_youpivot(){
-	window.location = (window.location+"").split("#")[0]+"#youpivot";
+    URLHash.setHash("options", "youpivot");
+    initView();
+	//window.location = (window.location+"").split("#")[0]+"#youpivot";
 }
 function redirect_history(){
-	window.location = (window.location+"").split("#")[0]+"#history";
+    URLHash.setHash("options", "history");
+    initView();
+	//window.location = (window.location+"").split("#")[0]+"#history";
 }
 function redirect_geo(){
-	window.location = (window.location+"").split("#")[0]+"#geolocation";
+    URLHash.setHash("options", "geolocation");
+    initView();
+	//window.location = (window.location+"").split("#")[0]+"#geolocation";
 }
 function redirect_changeLog(){
-	window.location = (window.location+"").split("#")[0]+"#changelog";
+    URLHash.setHash("options", "changelog");
+    initView();
+	//window.location = (window.location+"").split("#")[0]+"#changelog";
 }
 
 function navBar_unClick(){

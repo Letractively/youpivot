@@ -101,12 +101,13 @@ var PivotManager = {};
 	}
 
     var errorMessage = "Error loading information. Please make sure the background daemon is running and try again. ";
+    var youpivotdisabled = "In the current Alpha Release, YouPivot is not enabled. This feature will be enabled when the server binary is completed. Please check for updates regularly. This functionality will be integrated by the Beta release.";
     var errorIcon = "<div id='errorIcon' />";
 	// Displays an error message if the server cannot be connected
 	function pivotOnError(response){
         $("#y-spinner").hide();
-		$("#blocker").html("<div class='errorMessage' style='text-align: middle; position: relative; top: 200px;'>"
-                + errorIcon + "<br />" + errorMessage + "</div>")
+		$("#blocker").html("<div class='errorMessage' style='text-align: middle; position: relative; top: 100px;'>"
+                + errorIcon + "<br />" + youpivotdisabled + "</div>")
             .css("background-color", "rgba(180, 180, 180, 0.7)").css("cursor", "default");
 	}
 
