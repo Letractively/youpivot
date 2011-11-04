@@ -45,10 +45,10 @@ var DomainManager = {};
 		$("#contentFilters").append(img);
 		img.mouseover(function(){
 			var domainId = ItemManager.getDomainId(title);
-			HighlightManager.highlightDomain(domainId, {highlightself: false});
+			HighlightManager.highlightHistoryListDomain(domainId);
 		}).mouseout(function(){
 			var domainId = ItemManager.getDomainId(title);
-			HighlightManager.lowlightDomain(domainId, {highlightself: false});
+			HighlightManager.lowlightHistoryListDomain(domainId, {highlightself: false});
 		});
 		img.data("title", title);
 		img.click(function(e){

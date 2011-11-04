@@ -1,3 +1,5 @@
+include("/js/urlhash.js");
+
 var PivotManager = {};
 
 (function(){
@@ -6,7 +8,8 @@ var PivotManager = {};
 	var pivotInterval = pref("pivotInterval");
 
 	m.pivotItem = function(eventId){
-		location.href = "#pivotitem="+eventId;
+        pivotItem(eventId);
+        URLHash.setHash("pivotitem", eventId);
 	}
 
 	function pivotItem(eventId){
@@ -35,7 +38,8 @@ var PivotManager = {};
 	}
 
 	m.pivotUrl = function(time){
-		location.href = "#pivot="+time;
+        m.pivotItem(item);
+        URLHash.setHash("pivot", time);
 	}
 
 	m.pivot = function(time, options){
@@ -127,34 +131,11 @@ var PivotManager = {};
 		m.pageFlip(1);
 	});
 
-	//listen for hash change
-	$(window).bind("hashchange", function(){
-		var hash = location.hash.substr(1); //substring 1 to remove the # sign
-		var pairs = hash.split("&");
-		var obj = [];
-		for(var i in pairs){
-			obj[i] = pairs[i].split("=");
-			runHash(obj[i]);
-		}
-	});
+    URLHash.onHashValueChange("pivot", function(time){
+        m.pivot(time, {"forceReload": false});
+    });
+    URLHash.onHashValueChange("pivotitem", function(item){
+        m.pivotItem(item);
+    });
 
-	function runHash(pair){
-		switch(pair[0]){
-			case "pivot":
-				m.pivot(pair[1], {"forceReload": false});
-				break;
-			case "pivotitem":
-				pivotItem(pair[1]);
-				break;
-			default: 
-				HighlightManager.clearHighlight();
-				console.log("Unknown hash value");
-				break;
-		}
-	}
-
-	$(window).bind("itemsLoaded", function(){
-		//invoke the window hash change to parse hash when started
-		$(window).trigger("hashchange");
-	});
 })();
