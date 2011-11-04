@@ -26,7 +26,8 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 
 .m-topTab { height: 30px; display: table-cell; padding: 2px 5px; cursor: default; width: 500px; }
 .m-topTabDivider { border-right: 1px solid #FFF; border-left: 1px solid #AAA; width: 0px; height: 30px; vertical-align: middle; display: table-cell; }
-.m-tabimg { height: 30px; width: 30px; vertical-align: middle; margin-right: 3px; -webkit-user-select: none; display: inline-block; }
+.m-tabimg { height: 30px; width: 30px; vertical-align: middle; margin-right: 3px; -webkit-user-select: none; display: inline-block; 
+            background-repeat: no-repeat; background-position: center;}
 .m-tabname { display: inline; font-size: 11px; vertical-align: middle; color: #888888; text-shadow: 0 1px 1px white; }
 
 .m-topTab.active { background: -webkit-linear-gradient(top, #dddddd 0%,#e5e5e5 100%); }
