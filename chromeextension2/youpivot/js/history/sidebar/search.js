@@ -4,13 +4,14 @@ var SearchManager = {};
 
 (function(){
 	var m = SearchManager;
+
 	var result = [];
+    m.result = result;
+
 	var state = false; //is search currently in use
     var itemTable;
 
     /********* Transitional functions **************/
-    var sr = $("#y-searchResults");
-
     m.hideAll = function(className){
         itemTable.hideAll(className);
     }
@@ -223,15 +224,18 @@ var SearchManager = {};
 		{ title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
 		row.data("id", item.id); //store the item with the DOM object
 		//row.addClass("item_domain_"+item.domain.id);
-        var item = ItemManager.getItem(item.id);
         row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, PrefManager.getOption("lowlightFg")));
         row.find(".pivotBtn").click(function(){
             PivotManager.pivotItem(item.eventId);
         });
+        result[id] = item;
 	}
 
     // both public and private function? 
-	m.antiSearch = antiSearch;
+    m.antiSearch = function(){
+        $("#searchBox").val("");
+        antiSearch();
+    }
     // called when search is finished (going back to pivot mode)
 	function antiSearch(){
 		state = false;

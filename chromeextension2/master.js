@@ -1,3 +1,5 @@
+include("/js/urlhash.js");
+
 var Master = {};
 
 (function(){
@@ -26,9 +28,11 @@ var Master = {};
     }
 
     m.changeTab = function(id){
+        if(tabs[id] === undefined) return;
         if(activeTab)
             deactivateTab(activeTab);
         activateTab(id);
+        URLHash.setHash("tab", id);
     }
 
     m.changeTabHandle = function(id, newHandle){

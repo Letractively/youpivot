@@ -11,7 +11,7 @@ var HighlightManager = {};
 
     m.mouseEnterGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.highlightDomain(domainId);
+        m.highlightHistoryListDomain(domainId);
         m.highlightHistoryListItem(id);
         m.highlightLayer(id);
         m.scrollToItem(id, 500);
@@ -19,7 +19,7 @@ var HighlightManager = {};
 
     m.mouseLeaveGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.lowlightDomain(domainId);
+        m.lowlightHistoryListDomain(domainId);
         m.lowlightHistoryListItem(id);
         m.lowlightLayer(id);
         m.cancelScroll(id);
@@ -46,58 +46,72 @@ var HighlightManager = {};
 
     m.mouseEnterHistoryListItem = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.highlightDomain(domainId);
+        m.highlightHistoryListDomain(domainId);
         m.highlightHistoryListItem(id);
         m.highlightLayer(id);
     }
 
     m.mouseLeaveHistoryListItem = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.lowlightDomain(domainId);
+        m.lowlightHistoryListDomain(domainId);
         m.lowlightHistoryListItem(id);
         m.lowlightLayer(id);
     }
 
     m.mouseEnterSearchTableItem = function(id){
-        var domainId = ItemManager.getItem(id).domain.id;
-        m.highlightDomain(domainId);
+        var domainId = SearchManager.results[id].domain.id;
+        m.highlightSearchTableDomain(domainId);
         m.highlightSearchTableItem(id);
     }
 
     m.mouseLeaveSearchTableItem = function(id){
-        var domainId = ItemManager.getItem(id).domain.id;
-        m.lowlightDomain(domainId);
+        var domainId = SearchManager.results[id].domain.id;
+        m.lowlightSearchTableDomain(domainId);
         m.lowlightSearchTableItem(id);
     }
 
     /*********** Highlight implementations *************/
 
-    m.highlightDomain = function(domainId){
-        var list = ItemManager.list;
+    m.highlightHistoryListDomain = function(domainId){
+        m.highlightDomain(domainId, TableManager, ItemManager.list);
+    }
+
+    m.lowlightHistoryListDomain = function(domainId){
+        m.lowlightDomain(domainId, TableManager, ItemManager.list);
+    }
+
+    m.highlightSearchTableDomain = function(domainId){
+        m.highlightDomain(domainId, SearchManager, SearchManager.result);
+    }
+
+    m.lowlightSearchTableDomain = function(domainId){
+        m.lowlightDomain(domainId, SearchManager, SearchManager.result);
+    }
+
+    m.highlightDomain = function(domainId, controller, list){
         for(var i=0; i<list.length; i++){
             if(list[i].domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, list[i].id, 1);
-                // domain must be highlighted here
-                TableManager.highlight(list[i].id, "related");
+                // domain must be highlighted here before the actual item
+                controller.highlight(list[i].id, "related");
                 if(tableHighlightPool[list[i].id] > 0){
-                    TableManager.highlight(list[i].id, "highlight");
+                    controller.highlight(list[i].id, "highlight");
                 }
             }
         }
     }
 
-    m.lowlightDomain = function(domainId){
-        var list = ItemManager.list;
+    m.lowlightDomain = function(domainId, controller, list){
         for(var i=0; i<list.length; i++){
             if(list[i].domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, list[i].id, -1);
 
                 if(tableHighlightPool[list[i].id] > 0){
-                    TableManager.highlight(list[i].id, "highlight");
+                    controller.highlight(list[i].id, "highlight");
                 }else if(domainHighlightPool[list[i].id] > 0){
-                    TableManager.highlight(list[i].id, "related");
+                    controller.highlight(list[i].id, "related");
                 }else{
-                    TableManager.lowlight(list[i].id);
+                    controller.lowlight(list[i].id);
                 }
             }
         }
