@@ -1,5 +1,5 @@
 // JavaScript Document
-
+/*
 function redirect_timeMarks(){
 	window.location = (window.location+"").split("#")[0]+"#timemarks";
 }
@@ -78,3 +78,4 @@ function setVersionNumber(){
 	});
 	
 }
+*/

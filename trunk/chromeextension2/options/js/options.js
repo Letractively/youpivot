@@ -10,6 +10,8 @@ function initView(){
       navBar_clickGeneral();
    }else if(currentView == "#changelog"){
 	  navBar_clickChangeLog();
+   }else if(currentView == "#youpivot"){
+		  navBar_clickYouPivot();
    }
    
    favicon.change("images/box0.png");
@@ -58,6 +60,9 @@ function redirect_general(){
 function redirect_timeMarks(){
 	window.location = (window.location+"").split("#")[0]+"#timemarks";
 }
+function redirect_youpivot(){
+	window.location = (window.location+"").split("#")[0]+"#youpivot";
+}
 function redirect_history(){
 	window.location = (window.location+"").split("#")[0]+"#history";
 }
@@ -74,6 +79,7 @@ function navBar_unClick(){
 	navBar_hide_TraditionalHistory();
 	navBar_hide_timeMarks();
 	navBar_hide_ChangeLog();
+	navBar_hide_YouPivot();
 }
 
 function navBar_clickGeneral(){
@@ -106,40 +112,66 @@ function navBar_clickChangeLog(){
 	//document.title = "Option: ChangeLog";
 }
 
+function navBar_clickYouPivot(){
+	
+	navBar_unClick();navBar_show_YouPivot();
+	//document.title = "Option: ChangeLog";
+}
+
 
 function navBar_hide_TraditionalHistory(){
 	$("#navBar_traditional_history").removeClass( 'navbar-item-selected' );
-	$("#bodyCopy_history").css("display","none");
+	$("#m-tabView_options #bodyCopy_history").css("display","none");
 }
 function navBar_hide_timeMarks(){
 	$("#navBar_timeMarks").removeClass( 'navbar-item-selected' );
-	$("#bodyCopy_timeMarks").css("display","none");
+    $("#m-tabView_options #bodyCopy_timeMarks").css("display","none");
 }
 function navBar_hide_timeMarkGeo(){
-	$("#bodyCopy_geo").css("display","none");
+	$("#m-tabView_options #bodyCopy_geo").css("display","none");
 	$("#navBar_geo").removeClass( 'navbar-item-selected' );
 }
 function navBar_hide_general(){
-	$("#bodyCopy_general").css("display","none");
+	$("#m-tabView_options #bodyCopy_general").css("display","none");
 	$("#navBar_general").removeClass( 'navbar-item-selected' );
 }
 
+function navBar_hide_ChangeLog(){
+	$("#m-tabView_options #bodyCopy_changeLog").css("display","none");
+	$("#m-tabView_options #navBar_changeLog").removeClass( 'navbar-item-selected-gray' );
+	changeLog_hideAll();
+}
+
+function navBar_hide_YouPivot(){
+	$("#m-tabView_options #navBar_youPivot").removeClass( 'navbar-item-selected' );
+	$("#m-tabView_options #bodyCopy_youPivot").css("display","none");
+}
+
+function navBar_show_YouPivot(){
+	$("#m-tabView_options #navBar_youPivot").addClass( 'navbar-item-selected' );
+		$("#m-tabView_options #bodyCopy_youPivot").css("display","block");
+}
 
 function navBar_show_TraditionalHistory(){
 	$("#navBar_traditional_history").addClass( 'navbar-item-selected' );
-	$("#bodyCopy_history").css("display","block");
+	$("#m-tabView_options #bodyCopy_history").css("display","block");
 }
 function navBar_show_timeMarks(){
 	$("#navBar_timeMarks").addClass( 'navbar-item-selected' );
-	$("#bodyCopy_timeMarks").css("display","block");
+	$("#m-tabView_options #bodyCopy_timeMarks").css("display","block");
 }
 function navBar_show_timeMarkGeo(){
-	$("#bodyCopy_geo").css("display","block");
+	$("#m-tabView_options #bodyCopy_geo").css("display","block");
 	$("#navBar_geo").addClass( 'navbar-item-selected' );	
 }
 function navBar_show_general(){
-	$("#bodyCopy_general").css("display","block");
+	$("#m-tabView_options #bodyCopy_general").css("display","block");
 	$("#navBar_general").addClass( 'navbar-item-selected' );
+}
+function navBar_show_ChangeLog(){
+	$("#navBar_changeLog").addClass( 'navbar-item-selected-gray' );
+	$("#m-tabView_options #bodyCopy_changeLog").css("display","block");
+	changeLog_showAll();
 }
 
 $(function(){

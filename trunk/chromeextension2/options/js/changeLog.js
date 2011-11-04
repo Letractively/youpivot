@@ -4,9 +4,8 @@ function navBar_show_ChangeLog_empty(){
 	$("#bodyCopy_changeLogContent").empty(); //clear out old data
 }
 
-function navBar_hide_ChangeLog(){
-	$("#bodyCopy_changeLog").css("display","none");
-	$("#navBar_changeLog").removeClass( 'navbar-item-selected-gray' );
+function changeLog_hideAll(){
+
 	navBar_show_ChangeLog_empty();
 }
 
@@ -32,9 +31,8 @@ function changeLog_addNew(associatedPart,description){
 	changeLog_addUpdate("new",associatedPart,description);
 }
 
-function navBar_show_ChangeLog(){
-	$("#navBar_changeLog").addClass( 'navbar-item-selected-gray' );
-	$("#bodyCopy_changeLog").css("display","block");
+function changeLog_showAll(){
+
 	
 	navBar_show_ChangeLog_empty();
 	changeLog_addVersion("Alpha 0.0.??","Friday, ?? ??, 2011");
