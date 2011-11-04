@@ -1,7 +1,7 @@
 {
   "name": "YouPivot & TimeMarks (alpha)",
-  "version": "1.1",
-  "description": "Contextual search for your personal digital history. YouPivot is more than a history page replacement allowing you to navigate through your digital history with ease. ",
+  "version": "0.1",
+  "description": "Contextual search for your personal digital history. YouPivot & TimeMarks is more than a history page replacement allowing you to navigate through your digital history with ease. ",
   "background_page": "background.html", 
   "options_page": "optionsredirect.html",
   "icons": {
@@ -13,7 +13,7 @@
   },
   "browser_action": {
     "default_icon": "images/timemark_btn.png",
-    "default_title": "Add a TimeMark - YouPivot",
+    "default_title": "YouPivot and TimeMarks",
     "default_popup": "popup/popup.html"
   },
   "homepage_url": "http://www.youpivot.com/",
