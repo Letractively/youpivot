@@ -58,6 +58,5 @@ database.addTimeMark = function(timemark){
             tx.executeSql("INSERT INTO page (id,timemark_id, title, url, favicon, window, tabPosition, timeOpen) VALUES (?,?,?,?,?,?,?,?)", [page.id,timemark.id,page.title,page.url,page.favicon,page.window,page.tabPosition,page.timeOpen]);
          }
       });
-      sendTimeMark(timemark.id);
    });
 }
