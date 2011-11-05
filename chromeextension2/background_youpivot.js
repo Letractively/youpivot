@@ -12,6 +12,10 @@ $(function(){
 			case "saveTerms":
                 throw "saveTerms is deprecated";
 				break;
+            case "ping":
+                // use AJAX to get info from manifest.json?
+                sendResponse({name: "YouPivot & Timemarks (alpha)", version: "0.1"});
+                break;
 			default:
 				console.log("Unknown internal request received");
 		}

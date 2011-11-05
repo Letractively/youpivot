@@ -40,6 +40,14 @@ var SearchManager = {};
         $(".item_color", row).css("background-color", Helper.createLighterColor(color, PrefManager.getOption("lowlightFg")));
     }
 
+    m.getDomainId = function(title){
+        for(var i in result){
+            if(result[i].domain.name == title)
+                return result[i].domain.id;
+        }
+        return -1;
+    }
+
     /********* end transitional functions ***********/
 
 	var dateSchema = {"left": "normal", "color": "normal", "name": "normal"};

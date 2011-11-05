@@ -59,18 +59,52 @@ var HighlightManager = {};
     }
 
     m.mouseEnterSearchTableItem = function(id){
-        var domainId = SearchManager.results[id].domain.id;
+        var domainId = SearchManager.result[id].domain.id;
         m.highlightSearchTableDomain(domainId);
         m.highlightSearchTableItem(id);
     }
 
     m.mouseLeaveSearchTableItem = function(id){
-        var domainId = SearchManager.results[id].domain.id;
+        var domainId = SearchManager.result[id].domain.id;
         m.lowlightSearchTableDomain(domainId);
         m.lowlightSearchTableItem(id);
     }
 
     /*********** Highlight implementations *************/
+
+    // highlights the domain on the table that is currently visible to the user
+    // domain ID cannot be used here because it's different for search results and normal history items
+    m.highlightActiveTableDomain = function(title){
+        var domainId, controller, list;
+
+        if(SearchManager.getState()){
+            domainId = SearchManager.getDomainId(title);
+            controller = SearchManager;
+            list = SearchManager.result;
+        }else{
+            domainId = ItemManager.getDomainId(title);
+            controller = TableManager;
+            list = ItemManager.list;
+        }
+        m.highlightDomain(domainId, controller, list);
+    }
+
+    // lowlights the domain on the table that is currently visible to the user
+    // domain ID cannot be used here because it's different for search results and normal history items
+    m.lowlightActiveTableDomain = function(title){
+        var domainId, controller, list;
+
+        if(SearchManager.getState()){
+            domainId = SearchManager.getDomainId(title);
+            controller = SearchManager;
+            list = SearchManager.result;
+        }else{
+            domainId = ItemManager.getDomainId(title);
+            controller = TableManager;
+            list = ItemManager.list;
+        }
+        m.lowlightDomain(domainId, controller, list);
+    }
 
     m.highlightHistoryListDomain = function(domainId){
         m.highlightDomain(domainId, TableManager, ItemManager.list);

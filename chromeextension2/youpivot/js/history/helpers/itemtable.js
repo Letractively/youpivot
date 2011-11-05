@@ -226,6 +226,7 @@
 
         // actually builds the DOM item to prepare showing on screen
         function buildItem(item){
+            console.log(schema);
             var tr = $("<tr />").addClass("item").attr("id", "item_"+item.id);
 
             var rowarr = new Array();

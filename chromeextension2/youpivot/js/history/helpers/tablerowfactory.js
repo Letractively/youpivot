@@ -22,7 +22,7 @@ var TableRowFactory = {};
 		if(sortBy=="domain"){
 			var key = item.domain.name;
 			var icon = IconFactory.createTextIcon(item.domain.favUrl, item.domain.name, "wrap");
-			var html = icon + label;
+			var html = icon + key;
 			return {key: key, html: html};
 		}
 	}
