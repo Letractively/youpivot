@@ -21,32 +21,7 @@ database.createTable = function() {
             tx.executeSql("create table page(id string, timemark_id integer, title string, url string, favicon string, window integer, tabPosition integer, timeOpen integer)",[]);
          });
       });
-   }
-   if(database.db.version == "0.0.3"){
-      database.db.changeVersion("0.0.3","0.0.6",function(){
-         database.db.transaction(
-            function(tx) {
-               tx.executeSql("alter table timemark add column latitude integer",[]);
-               tx.executeSql("alter table timemark add column longitude integer",[]);
-               tx.executeSql("alter table timemark add column computer string",[]);
-            }
-         );
-      });
-   }
-   
-   if(database.db.version == "0.0.4"){
-      database.db.changeVersion("0.0.4","0.0.6",function(){
-         database.db.transaction(
-            function(tx) {
-               tx.executeSql("DROP TABLE timemark",[]);
-               tx.executeSql("DROP TABLE page",[]);
-               tx.executeSql("create table timemark(id string, timestamp integer, description string, color string, latitude integer, longitude integer, computer string, synced boolean)",[]);
-               tx.executeSql("create table page(id string, timemark_id integer, title string, url string, favicon string, window integer, tabPosition integer, timeOpen integer)",[]);
-            }
-         );
-      });
-   }
-   
+   }   
 }
 
 database.addTimeMark = function(timemark){
