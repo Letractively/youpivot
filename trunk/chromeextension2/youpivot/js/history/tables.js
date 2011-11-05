@@ -97,9 +97,11 @@ var TableManager = {};
 		m.clearItems();
 		var list = ItemManager.list;
 		SortManager.sortItems(list);
-		for(var i in list){
+        FilterTimeManager.filterTime();
+		/*for(var i in list){
 			m.addItem(list[i]);
 		}
+        console.log(list);*/
 	}
 
 	//load the filters back from this items list. Called when switching back from search results. 
@@ -133,8 +135,12 @@ var TableManager = {};
 		var headerInfo = TableRowFactory.createHeader(item);
         var row = itemTable.addItem(obj, headerInfo);
 
+        //console.log("addi");
+        // don't add mouse event listeners if already added
         if(row === null) return;
+        console.log(row);
 
+        //console.log("addi2");
 		//set link to pivot if it is a timemark
 		if(item.domain.name == "timemark"){
 			row.find(".item_name a").click(function(e){
@@ -175,7 +181,7 @@ var TableManager = {};
 		if(sortBy=="by type") schema = typeSchema;
         else if(sortBy=="chronological") schema = dateSchema;
         itemTable.destroy();
-        $("#textContent").itemTable(schema);
+        itemTable = $("#textContent").itemTable(schema);
         m.reload();
 	}
 

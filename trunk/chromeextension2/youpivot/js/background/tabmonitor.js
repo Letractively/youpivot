@@ -18,9 +18,9 @@ var Monitor = {};
 		});
 		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 			if(tab.status=="complete"){
-				chrome.tabs.executeScript(tabId, {file: "youpivot/js/background/termextractor.js"}, function(){
+				/*chrome.tabs.executeScript(tabId, {file: "youpivot/js/background/termextractor.js"}, function(){
 					console.log("execute complete");
-				});
+				});*/
 				tabUpdated(tab, changeInfo);
 			}
 		});

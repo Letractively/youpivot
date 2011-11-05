@@ -44,11 +44,9 @@ var DomainManager = {};
 		img.css("opacity", Utilities.decay(rating, 1, best));
 		$("#contentFilters").append(img);
 		img.mouseover(function(){
-			var domainId = ItemManager.getDomainId(title);
-			HighlightManager.highlightHistoryListDomain(domainId);
+			HighlightManager.highlightActiveTableDomain(title);
 		}).mouseout(function(){
-			var domainId = ItemManager.getDomainId(title);
-			HighlightManager.lowlightHistoryListDomain(domainId, {highlightself: false});
+			HighlightManager.lowlightActiveTableDomain(title);
 		});
 		img.data("title", title);
 		img.click(function(e){
