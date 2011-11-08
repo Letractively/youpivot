@@ -59,13 +59,13 @@ var HighlightManager = {};
     }
 
     m.mouseEnterSearchTableItem = function(id){
-        var domainId = SearchManager.result[id].domain.id;
+        var domainId = SearchManager.results[id].domain.id;
         m.highlightSearchTableDomain(domainId);
         m.highlightSearchTableItem(id);
     }
 
     m.mouseLeaveSearchTableItem = function(id){
-        var domainId = SearchManager.result[id].domain.id;
+        var domainId = SearchManager.results[id].domain.id;
         m.lowlightSearchTableDomain(domainId);
         m.lowlightSearchTableItem(id);
     }
@@ -80,7 +80,7 @@ var HighlightManager = {};
         if(SearchManager.getState()){
             domainId = SearchManager.getDomainId(title);
             controller = SearchManager;
-            list = SearchManager.result;
+            list = SearchManager.results;
         }else{
             domainId = ItemManager.getDomainId(title);
             controller = TableManager;
@@ -97,7 +97,7 @@ var HighlightManager = {};
         if(SearchManager.getState()){
             domainId = SearchManager.getDomainId(title);
             controller = SearchManager;
-            list = SearchManager.result;
+            list = SearchManager.results;
         }else{
             domainId = ItemManager.getDomainId(title);
             controller = TableManager;
@@ -115,40 +115,40 @@ var HighlightManager = {};
     }
 
     m.highlightSearchTableDomain = function(domainId){
-        m.highlightDomain(domainId, SearchManager, SearchManager.result);
+        m.highlightDomain(domainId, SearchManager, SearchManager.results);
     }
 
     m.lowlightSearchTableDomain = function(domainId){
-        m.lowlightDomain(domainId, SearchManager, SearchManager.result);
+        m.lowlightDomain(domainId, SearchManager, SearchManager.results);
     }
 
     m.highlightDomain = function(domainId, controller, list){
-        for(var i=0; i<list.length; i++){
-            if(list[i].domain.id == domainId){
-                addToHighlightPool(domainHighlightPool, list[i].id, 1);
+        list.iterate(function(item){
+            if(item.domain.id == domainId){
+                addToHighlightPool(domainHighlightPool, item.id, 1);
                 // domain must be highlighted here before the actual item
-                controller.highlight(list[i].id, "related");
-                if(tableHighlightPool[list[i].id] > 0){
-                    controller.highlight(list[i].id, "highlight");
+                controller.highlight(item.id, "related");
+                if(tableHighlightPool[item.id] > 0){
+                    controller.highlight(item.id, "highlight");
                 }
             }
-        }
+        });
     }
 
     m.lowlightDomain = function(domainId, controller, list){
-        for(var i=0; i<list.length; i++){
-            if(list[i].domain.id == domainId){
-                addToHighlightPool(domainHighlightPool, list[i].id, -1);
+        list.iterate(function(item){
+            if(item.domain.id == domainId){
+                addToHighlightPool(domainHighlightPool, item.id, -1);
 
-                if(tableHighlightPool[list[i].id] > 0){
-                    controller.highlight(list[i].id, "highlight");
-                }else if(domainHighlightPool[list[i].id] > 0){
-                    controller.highlight(list[i].id, "related");
+                if(tableHighlightPool[item.id] > 0){
+                    controller.highlight(item.id, "highlight");
+                }else if(domainHighlightPool[item.id] > 0){
+                    controller.highlight(item.id, "related");
                 }else{
-                    controller.lowlight(list[i].id);
+                    controller.lowlight(item.id);
                 }
             }
-        }
+        });
     }
 
     function addToHighlightPool(pool, id, delta){

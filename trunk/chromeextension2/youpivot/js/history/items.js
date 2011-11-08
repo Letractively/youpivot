@@ -1,10 +1,11 @@
+include("js/keytable.js");
 include("js/color.js");
 
 var ItemManager = {};
 
 (function(){
 	var m = ItemManager;
-	m.list = new Array();
+	m.list = new KeyTable();
 	var counter = 0;
 
     m.init = function(){
@@ -14,13 +15,13 @@ var ItemManager = {};
 
 	m.addItems = function(items){
         var ttt = new Date().getTime();
-		SortManager.sortItems(items);
         console.log("time to sort: ", new Date().getTime() - ttt);
 		for(var i in items){
 			var id = counter++;
 			addItem(id, items[i]);
 			m.list[id] = items[i];
 		}
+		SortManager.sortItems(m.list);
         console.log("time to create item: ", new Date().getTime() - ttt);
 		DomainManager.display();
 		TermManager.display();
@@ -31,7 +32,7 @@ var ItemManager = {};
 
 	m.clear = function(){
 		counter = 0;
-		m.list = [];
+		m.list = new KeyTable();
 		TableManager.clearItems();
 		GraphManager.clear();
 		EventManager.clear();
@@ -115,9 +116,9 @@ var ItemManager = {};
 	function addItem(id, item){
 		var domain = item.domain;
 		item.id = id;
-		//TableManager.addItem(item);
-		var importance = item.importance;
+        // no need to add to table because they will be added when filterTime is called
         item.domain.id = addToDomainList(domain.name, domain.color);
+		var importance = item.importance;
 		if(importance && importance.length>0){ 
 			GraphManager.loadData(domains[domain.id].graphColor, item.importance, item.id, item.startTime, domain.id);
 		}else{

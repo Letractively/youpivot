@@ -20,12 +20,11 @@ var FilterTimeManager = {};
 
 		var tc = $("#textContent");
 
-        for(var i=0; i<items.length; i++){
-            var item = ItemManager.getItem(i);
+        ItemManager.list.iterate(function(item){
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
-				showTimeRow(tc, item, item.id);
+				showTimeRow(item);
 			}
-        }
+        });
 
 		if(!SearchManager.getState()){
 			TableManager.loadFilters();
@@ -33,7 +32,7 @@ var FilterTimeManager = {};
         FilterManager.filter();
 	}
 
-	function showTimeRow(tc, item, id){
+	function showTimeRow(item){
         TableManager.addItem(item);
 	}
 

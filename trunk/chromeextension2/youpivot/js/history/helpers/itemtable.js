@@ -48,9 +48,11 @@
 
             // attach item
             var nextHeader = headers[headerKey].element.nextAll(".headerRow").first();
-            if(nextHeader.length == 0)
+            if(nextHeader.length == 0){
                 table.append(row);
-            nextHeader.before(row); // attach below the right header
+            }else{
+                nextHeader.before(row); // attach below the right header
+            }
 
             rows[item.id] = row;
 
@@ -125,7 +127,7 @@
             }
         }
 
-        // use for hiding / showing
+        // use for hiding / showing a row in an entry. Used in filters in YouPivot
         this.addClass = function(id, className, refresh){
             var obj = self.getDOM(id);
             //hide row
@@ -145,21 +147,41 @@
             if(refresh === undefined || refresh) self.refreshTopRows();
         }
 
-        // returns number of 
+        // returns DOM entry of the row. A more objective approach than simply $("item_"+id)
         this.getDOM = function(id){
             return table.find("#item_"+id);
         }
 
-        // refresh the top rows
+        // refresh the top rows. "toprow" in the schema means it only shows the first occurence of that row for adjacent rows
+        // i.e. If 10 consecutive rows have the same date, only the first date is shown (assuming date is a toprow)
         this.refreshTopRows = function(){
+            self.element.find(".item_"+i+" span").addClass("hidden");
+            for(var i in schema){
+                if(schema[i] == "toprow"){
+                    var lastText = "";
+                    self.element.find(".itemTable tr:visible").each(function(){ 
+                        // this iteration includes the header row
+                        // to trick the system into renewing lastText so the top row is shown
+                        // skip invisible items
+
+                        var column = $(this).find(".item_"+i+">span");
+                        if(column.text() != lastText){
+                            column.removeClass("hidden");
+                        }
+                        lastText = column.text();
+                    });
+                }
+            }
         }
 
+        // clears everything in the table, returning to initial state
         this.clear = function(){
             self.element.find(".itemTable").html("");
             rows = {};
             headers = {};
         }
 
+        // destroy the table, as if this itemTable has never been created
         this.destroy = function(){
             self.element.html("");
             rows = {};
@@ -167,44 +189,6 @@
         }
 
         /*** secondary functions ***/
-        function refreshTopRows(thiss){
-            for(var i in schema){
-                if(schema[i]=="toprow"){
-                    var text = thiss.find(".item_"+i).text();
-                    var header = thiss.data("header");
-                    var grp = header.nextUntil(".headerRow").find(".item_"+i+" span:contains('"+text+"')");
-                    grp.removeClass("hidden");
-                    var first;
-                    var rawGrp = grp.get();
-                    for(var i in rawGrp){
-                        var item = $(rawGrp[i]);
-                        if(item.is(":visible")){
-                            first = item;
-                            break;
-                        }
-                    }
-                    if(first){
-                        grp.not(first).addClass("hidden");
-                    }else{
-                        grp.addClass("hidden");
-                    }
-                }
-            }
-        }
-
-        function refreshAllTopRows(table){
-            var header = $(".headerRow:first", table);
-            var batch = header.nextUntil(".headerRow");
-            while(batch.size()>0){
-                var lastText = "";
-                batch.filter(":visible").each(function(){
-                    refreshTopRows($(this));
-                });
-                header = batch.last().next(".headerRow");
-                batch = header.nextUntil(".headerRow");
-            }
-        }
-
         function getCreateHeader(headerInfo){
             var key = headerInfo.key;
             if(headers[key]){
@@ -226,7 +210,6 @@
 
         // actually builds the DOM item to prepare showing on screen
         function buildItem(item){
-            console.log(schema);
             var tr = $("<tr />").addClass("item").attr("id", "item_"+item.id);
 
             var rowarr = new Array();
@@ -261,7 +244,6 @@ var HeaderItem = function(element, table){
     var retainCount = 1; 
 
     (function init(){
-        console.log("append header");
         table.append(self.element);
     })();
 

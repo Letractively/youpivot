@@ -36,7 +36,7 @@ var SortManager = {};
 		m.sortBy = name;
 		//Helper.showLoading();
 		TableManager.changeSchema(name);
-		//SearchManager.changeSchema(name);
+		SearchManager.changeSchema(name);
 		FilterTimeManager.filterTime();
 		FilterManager.filter();
 		//Helper.hideLoading();
