@@ -90,7 +90,8 @@ var PivotManager = {};
 	function pivotOnSuccess(data, time, range){
 		if(data=="Bad User"){ alert(data); return; }
 		var obj = JSON.parse(data);
-		var arr = createItemsArray(obj);
+		//var arr = createItemsArray(obj);
+		var arr = createItemsArray(obj, time*1000-43200000); // FIXME remove the startTime filtering (should be done in server)
 		//console.log(arr);
 		GraphManager.startLoadingData(time*1000-43200000, time*1000+43199999); //FIXME load from server
 		ItemManager.clear();
@@ -111,10 +112,13 @@ var PivotManager = {};
             .css("background-color", "rgba(180, 180, 180, 0.7)").css("cursor", "default");
 	}
 
-	function createItemsArray(obj){
+    // FIXME remove the startTime filtering (should be done in server)
+	function createItemsArray(obj, startTime){
 		var output = [];
+        var k=0;
 		for(var i in obj.rows){
-			output[i] = Translator.translateItem(obj.rows[i].value);
+			output[k] = Translator.translateItem(obj.rows[i].value);
+            if(output[k].endTime >= startTime) k++; // accept the item only if it ends after our display startTime
 		}
 		return output;
 	}

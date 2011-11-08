@@ -1,17 +1,25 @@
 include("youpivot/js/history/helpers/tablerowfactory.js");
+include("js/keytable.js");
 
 var SearchManager = {};
 
 (function(){
 	var m = SearchManager;
 
-	var result = [];
-    m.result = result;
+    m.results = new KeyTable();
 
 	var state = false; //is search currently in use
     var itemTable;
 
     /********* Transitional functions **************/
+
+    m.hide = function(obj, className){
+        itemTable.hide(obj, className);
+    }
+    m.show = function(obj, className){
+        itemTable.show(obj, className);
+    }
+
     m.hideAll = function(className){
         itemTable.hideAll(className);
     }
@@ -23,7 +31,7 @@ var SearchManager = {};
     m.highlight = function(id, level){
         var row = $("#y-searchResults #item_"+id);
         if(row.length == 0) return;
-        var item = result[id];
+        var item = m.results[id];
         if(!item) return;
         var color = item.domain.color;
         row.css("background-color", Helper.createLighterColor(color, PrefManager.getOption(level+"Bg")));
@@ -33,7 +41,7 @@ var SearchManager = {};
     m.lowlight = function(id){
         var row = $("#y-searchResults #item_"+id);
         if(row.length == 0) return;
-        var item = result[id];
+        var item = m.results[id];
         if(!item) return;
         var color = item.domain.color;
         row.css("background-color", "");
@@ -41,9 +49,9 @@ var SearchManager = {};
     }
 
     m.getDomainId = function(title){
-        for(var i in result){
-            if(result[i].domain.name == title)
-                return result[i].domain.id;
+        for(var i in m.results){
+            if(m.results[i].domain.name == title)
+                return m.results[i].domain.id;
         }
         return -1;
     }
@@ -67,7 +75,7 @@ var SearchManager = {};
 		if(sortBy=="by type") schema = typeSchema;
         else if(sortBy=="chronological") schema = dateSchema;
         itemTable.destroy();
-        $("#y-searchResults").itemTable(schema);
+        itemTable = $("#y-searchResults").itemTable(schema);
         m.reload();
 	}
 
@@ -115,22 +123,20 @@ var SearchManager = {};
 		}
 	}
 
-	function showResults(needle, results){
+	function showResults(needle, result){
 		if($("#searchBox").val() != needle) return;
 		$("#y-searchResults").trigger("search", true);
 		state = true;
 		TermManager.clearTerms();
 		DomainManager.clearDomains();
-		SortManager.sortItems(result);
-		loadResults(needle, results);
+		SortManager.sortItems(m.results);
+		loadResults(needle, result);
 	}
 
     // loads the search results from the server and displays it
     // only loads the first 30 items for real-time result display (search as you type)
 	function loadResults(needle, results){
 		SortManager.sortItems(results);
-        // deleting and re-adding is a rather inefficient way to sort
-        // especially with all the cache created for the rows
         itemTable.clear();
 		TermManager.clearTerms(true);
 		DomainManager.clearDomains(true);
@@ -144,7 +150,9 @@ var SearchManager = {};
 			TermManager.addTerms(item.keywords);
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			StreamManager.addStream(item.stream);
-			displayItem(i, item);
+            item.id = i;
+            m.results[i] = item;
+			displayItem(item);
 		}
 		TermManager.display();
 		DomainManager.display();
@@ -160,7 +168,9 @@ var SearchManager = {};
 			TermManager.addTerms(item.keywords);
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			StreamManager.addStream(item.stream);
-			displayItem(i, item);
+            item.id = i;
+            m.results[i] = item;
+			displayItem(item);
 		}
 		TermManager.display();
 		DomainManager.display();
@@ -168,10 +178,19 @@ var SearchManager = {};
         itemTable.refreshTopRows();
 	}
 
+	function loadSortedResults(){
+        itemTable.clear();
+        m.results.iterate(function(item){
+            //console.log(item);
+			displayItem(item);
+		});
+        itemTable.refreshTopRows();
+	}
+
 	m.reload = function(){
-		if(result.length == 0) return;
-		SortManager.sortItems(result);
-		loadResults(result);
+		//if(esult.length == 0) return;
+		SortManager.sortItems(m.results);
+		loadSortedResults();
 	}
 
     var mouseenterrow = function(){
@@ -200,8 +219,7 @@ var SearchManager = {};
         //throw "delete entry is not implemented yet";
     };
 
-	function displayItem(id, item){
-		item.id = id;
+	function displayItem(item){
 		var obj = {};
 		obj.left = TableRowFactory.createLeft(item);
 		obj.color = "";
@@ -236,7 +254,6 @@ var SearchManager = {};
         row.find(".pivotBtn").click(function(){
             PivotManager.pivotItem(item.eventId);
         });
-        result[id] = item;
 	}
 
     // both public and private function? 

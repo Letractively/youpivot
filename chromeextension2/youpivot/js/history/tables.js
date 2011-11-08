@@ -12,10 +12,7 @@ var TableManager = {};
 	var m = TableManager;
     var itemTable;
 
-
     /********* Transitional functions **************/
-
-    var tc = $("#textContent");
 
     m.hideAll = function(className){
         itemTable.hideAll(className);
@@ -23,6 +20,7 @@ var TableManager = {};
 
     m.refreshTopRows = function(){
         itemTable.refreshTopRows();
+        console.log("refresh top rows");
     }
 
     m.hide = function(obj, className){
@@ -95,13 +93,8 @@ var TableManager = {};
 	//This operation takes time
 	m.reload = function(){
 		m.clearItems();
-		var list = ItemManager.list;
-		SortManager.sortItems(list);
+		SortManager.sortItems(ItemManager.list);
         FilterTimeManager.filterTime();
-		/*for(var i in list){
-			m.addItem(list[i]);
-		}
-        console.log(list);*/
 	}
 
 	//load the filters back from this items list. Called when switching back from search results. 
@@ -135,10 +128,8 @@ var TableManager = {};
 		var headerInfo = TableRowFactory.createHeader(item);
         var row = itemTable.addItem(obj, headerInfo);
 
-        //console.log("addi");
         // don't add mouse event listeners if already added
         if(row === null) return;
-        console.log(row);
 
         //console.log("addi2");
 		//set link to pivot if it is a timemark

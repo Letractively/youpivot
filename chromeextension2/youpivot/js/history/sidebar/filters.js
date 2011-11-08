@@ -64,15 +64,14 @@ var FilterManager = {};
 	m.filter = function(){
 		if(filters.length==0 && outcasts.length==0){
 			//show all items
-			$(".itemTable .item").each(function(){
+			activeTable().find(".itemTable .item").each(function(){
 				showFilterRow($(this));
 			});
 			return;
 		}
-        TableManager.hideAll("filtered");
-        SearchManager.hideAll("filtered");
+        activeTableManager().hideAll("filtered");
 		if(filters.length==0){
-			$(".itemTable .item").each(function(){
+			activeTable().find(".itemTable .item").each(function(){
 				showFilterRow($(this));
 			});
 		}else{
@@ -83,8 +82,7 @@ var FilterManager = {};
 		for(var i in outcasts){
 			applyOutcast(outcasts[i].type, outcasts[i].value);
 		}
-        TableManager.refreshTopRows();
-        SearchManager.refreshTopRows();
+        activeTableManager().refreshTopRows();
 	}
 
 	function applyOutcast(type, value){
@@ -120,8 +118,9 @@ var FilterManager = {};
 	function hideFilterRow(obj){
 		hideRow(obj, "filtered");
 	}
+
 	function filterGeneral(value, dir, test){
-		$(".itemTable .item").each(function(){
+		activeTable().find(".itemTable .item").each(function(){
 			var item = ItemManager.getItem($(this).data("id"));
 			if(test(value, item)){
 				if(dir == "positive")
@@ -145,11 +144,11 @@ var FilterManager = {};
 
 	function hideRow(obj, type){
         var id = obj.data("id");
-        TableManager.hide(obj, type);
+        activeTableManager().hide(obj, type);
 	}
 	function showRow(obj, type){
         var id = obj.data("id");
-        TableManager.show(obj, type);
+        activeTableManager().show(obj, type);
 	}
 
 	function matchKeywords(needle, keywords){
@@ -213,4 +212,23 @@ var FilterManager = {};
 			$("#filtersWrap").hide();
 		}
 	}
+
+    function activeTableManager(){
+        if(SearchManager.getState())
+            return SearchManager;
+        else 
+            return TableManager;
+    }
+
+    function activeTable(){
+        if(SearchManager.getState())
+            return $("#y-searchResults");
+        else
+            return $("#textContent");
+    }
+
+    // clear all the filters when changing from search results to history list
+    $("#y-searchResults").bind("search", function(e, active){
+        m.clearFilters();
+    });
 })();

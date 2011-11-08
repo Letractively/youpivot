@@ -127,11 +127,11 @@ var GraphManager = {};
 	}
 
     function startSelection(){
-		$("#textContent .item_date span").removeClass("hidden").addClass("grey");
+		//$("#textContent .item_date span").removeClass("hidden").addClass("grey");
 	}
 
     function finishSelection(){
-		$("#textContent .item_date span").removeClass("grey");
+		//$("#textContent .item_date span").removeClass("grey");
         TableManager.refreshTopRows();
 	}
 
