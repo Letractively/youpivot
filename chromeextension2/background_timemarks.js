@@ -6,7 +6,7 @@ if(window.localStorage['initialized']!="true"){
    window.localStorage['geolocation'] = "true";
    window.localStorage['timemarksync'] = "false";
    window.localStorage['computer_id'] = jQuery.uuid();
-   chrome.tabs.create({"url":chrome.extension.getURL('options.html#general')}); 
+   chrome.tabs.create({"url":chrome.extension.getURL('optionsredirect.html')}); 
 }
 
 //correction for mistake reed made early on. Could be removed at somepoint

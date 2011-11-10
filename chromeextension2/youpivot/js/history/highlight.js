@@ -30,14 +30,14 @@ var HighlightManager = {};
     m.clickOnGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
         if(!graphToggleState[id]){
-            m.highlightDomain(domainId);
+            m.highlightHistoryListDomain(domainId);
             m.highlightHistoryListItem(id);
             m.highlightLayer(id);
             m.cancelScroll(id);
             m.scrollToItem(id, 0);
             graphToggleState[id] = true;
         }else{
-            m.lowlightDomain(domainId);
+            m.lowlightHistoryListDomain(domainId);
             m.lowlightHistoryListItem(id);
             m.lowlightLayer(id);
             graphToggleState[id] = false;
@@ -161,9 +161,16 @@ var HighlightManager = {};
     }
 	
 	m.clearHighlight = function(){
-		$(".item").each(function(){
+        domainHighlightPool = {};
+        tableHighlightPool = {};
+        graphHighlightPool = {};
+
+		$("#textContent .item").each(function(){
             TableManager.lowlight($(this).data("id"));
 		});
+        $("#y-searchResults .item").each(function(){
+            SearchManager.lowlight($(this).data("id"));
+        });
 	}
 
     m.highlightHistoryListItem = function(id){

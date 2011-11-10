@@ -13,10 +13,10 @@
         }
     }
 
-    var ItemTable = function(obj, _schema){
+    var ItemTable = function(element, _schema){
         var self = this;
         
-        self.element = obj;
+        self.element = element;
 
         // private ivars
         var schema = _schema;
@@ -97,10 +97,6 @@
 
             if(refresh === undefined || refresh) self.refreshTopRows();
         }
-
-        // note: refresh will always be performed
-        // is it same as clear?
-        this.deleteAll = function(){}
 
         this.show = function(obj, cls){
             //show row
