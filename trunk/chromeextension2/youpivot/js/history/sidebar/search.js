@@ -1,4 +1,4 @@
-include("youpivot/js/history/helpers/tablerowfactory.js");
+include("youpivot/js/history/helpers/pivottable.js");
 include("js/keytable.js");
 
 var SearchManager = {};
@@ -29,23 +29,14 @@ var SearchManager = {};
     }
 
     m.highlight = function(id, level){
-        var row = $("#y-searchResults #item_"+id);
-        if(row.length == 0) return;
         var item = m.results[id];
         if(!item) return;
-        var color = item.domain.color;
-        row.css("background-color", Helper.createLighterColor(color, PrefManager.getOption(level+"Bg")));
-        var fgColor = Helper.createLighterColor(color, PrefManager.getOption(level+"Fg")); //foreground color
-        $(".item_color", row).css("background-color", fgColor);
+        itemTable.highlight(id, item.domain.color, level);
     }
     m.lowlight = function(id){
-        var row = $("#y-searchResults #item_"+id);
-        if(row.length == 0) return;
         var item = m.results[id];
         if(!item) return;
-        var color = item.domain.color;
-        row.css("background-color", "");
-        $(".item_color", row).css("background-color", Helper.createLighterColor(color, PrefManager.getOption("lowlightFg")));
+        itemTable.lowlight(id, item.domain.color);
     }
 
     m.getDomainId = function(title){
@@ -58,11 +49,8 @@ var SearchManager = {};
 
     /********* end transitional functions ***********/
 
-	var dateSchema = {"left": "normal", "color": "normal", "name": "normal"};
-	var typeSchema = {"date": "toprow", "left": "normal", "color": "normal", "name": "normal"};
-
     m.init = function(){
-        itemTable = $("#y-searchResults").itemTable(dateSchema);
+        itemTable = $("#y-searchResults").pivotTable();
     }
 
 	m.getState = function(){
@@ -70,18 +58,13 @@ var SearchManager = {};
 	}
 
 	m.changeSchema = function(sortBy){
-        console.log("change schema");
-		var schema = dateSchema;
-		if(sortBy=="by type") schema = typeSchema;
-        else if(sortBy=="chronological") schema = dateSchema;
-        itemTable.destroy();
-        itemTable = $("#y-searchResults").itemTable(schema);
+        itemTable.resetToSortMode(sortBy);
         m.reload();
 	}
 
 	function search(needle){
 		if(needle==""){ antiSearch(); return; }
-		needle = needle.toLowerCase(); //change to lower case as the search algorithm is also changed to lower case (to make it case insensitive)
+		needle = needle.toLowerCase(); //change to lower case as the search algorithm is also changed to lower case (for case insensitiveness)
 		Connector.send("search", {q: needle}, {
 			onSuccess: function(response){
 				var result = parseResponse(response);
@@ -181,33 +164,27 @@ var SearchManager = {};
 	function loadSortedResults(){
         itemTable.clear();
         m.results.iterate(function(item){
-            //console.log(item);
 			displayItem(item);
 		});
         itemTable.refreshTopRows();
 	}
 
 	m.reload = function(){
-		//if(esult.length == 0) return;
 		SortManager.sortItems(m.results);
 		loadSortedResults();
 	}
 
     var mouseenterrow = function(){
         HighlightManager.mouseEnterSearchTableItem($(this).data("id"));
-        $(".item_time", this).hide();
-        $(".pivotBtn", this).show();
     };
     var mouseleaverow = function(){
         //TODO: use related target to minimize calculation
         HighlightManager.mouseLeaveSearchTableItem($(this).data("id"));
-        $(".item_time", this).show();
-        $(".pivotBtn", this).hide();
     };
     var deleteentry = function(obj){
         var id = $(obj).data("id");
         itemTable.deleteItem(id);
-        Connector.send("delete", {eventid: ItemManager.list[id].eventId}, {
+        Connector.send("delete", {eventid: m.results[id].eventId}, {
             onSuccess: function(data){
                 console.log("item deleted -- ", data);
             }, 
@@ -215,29 +192,14 @@ var SearchManager = {};
                 console.log("item delete error -- ", data);
             }
         });
-        ItemManager.deleteItem(id);
-        //throw "delete entry is not implemented yet";
+        var item = ItemManager.getItemByEventId(m.results[id].eventId);
+        ItemManager.deleteItem(item.id);
     };
 
 	function displayItem(item){
-		var obj = {};
-		obj.left = TableRowFactory.createLeft(item);
-		obj.color = "";
-		obj.name = TableRowFactory.createName(item);
-		obj.date = TableRowFactory.createDate(item);
-		obj.id = item.id;
-		var headerInfo = TableRowFactory.createHeader(item);
-        var row = itemTable.addItem(obj, headerInfo);
-
+        var row = itemTable.addItem(item);
         if(row === null) return;
 
-		//set link to pivot if it is a timemark
-		if(item.domain.name == "timemark"){
-			row.find(".item_name a").click(function(e){
-				PivotManager.pivotItem(item.eventId);
-				e.preventDefault();
-			});
-		}
 		//add mouseover events
 		row.mouseenter(mouseenterrow);
 		row.mouseleave(mouseleaverow);
@@ -248,12 +210,6 @@ var SearchManager = {};
 			}
 		}, 
 		{ title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
-		row.data("id", item.id); //store the item with the DOM object
-		//row.addClass("item_domain_"+item.domain.id);
-        row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, PrefManager.getOption("lowlightFg")));
-        row.find(".pivotBtn").click(function(){
-            PivotManager.pivotItem(item.eventId);
-        });
 	}
 
     // both public and private function? 

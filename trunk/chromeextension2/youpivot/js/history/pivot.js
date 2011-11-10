@@ -20,10 +20,9 @@ var PivotManager = {};
         }
 		var pivotTime = (item.startTime + item.endTime) / 2;
 		m.pivot(pivotTime, {"forceReload": false, "callback": function(){
-            var row = $("#item_"+item.id);
 			HighlightManager.clearHighlight();
-			HighlightManager.highlightItem(row, {persistent: true, level: "highlight"});
-			HighlightManager.scrollToItem(item.id, 0);
+            var id = ItemManager.getItemByEventId(item.eventId).id;
+            HighlightManager.clickOnGraph(id);
 		}, "selection": [item.startTime, item.endTime]});
 	}
 
@@ -31,6 +30,12 @@ var PivotManager = {};
         var list = ItemManager.list;
         for(var i in list){
             if(list[i] && list[i].eventId == eventId){
+                return list[i];
+            }
+        }
+        list = SearchManager.results;
+        for(var i in list){
+            if(list[i].eventId == eventId){
                 return list[i];
             }
         }
@@ -95,7 +100,7 @@ var PivotManager = {};
 		//console.log(arr);
 		GraphManager.startLoadingData(time*1000-43200000, time*1000+43199999); //FIXME load from server
 		ItemManager.clear();
-		ItemManager.addItems(arr);
+		ItemManager.addItems(arr); // ItemManager loads data to GraphManager
         GraphManager.finishLoadingData(range[0], range[1]);
 		Helper.hideLoading();
         $(window).trigger("pivot");

@@ -44,20 +44,12 @@ var ItemManager = {};
         return m.list[id];
     }
 
-	/*m.getDomainItemsById = function(id){
-		var domain = m.list[id].domain.name;
-		m.getDomainItems(domain);
-	}
-
-	m.getDomainItems = function(domain){
-		var output = [];
-		for(var i in m.list){
-			if(m.list[i].domain.name == domain){
-				output[output.length] = m.list[i];
-			}
-		}
-		return output;
-	}*/
+    m.getItemByEventId = function(eventId){
+        for(var i in m.list){
+            if(m.list[i].eventId == eventId)
+                return m.list[i];
+        }
+    }
 
     m.getDomain = function(itemId){
         var item = m.list[itemId];

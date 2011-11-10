@@ -83,15 +83,12 @@ var StreamGraph = {};
 
         for (var i = 0; i < numLayers; i++)
         {
-            //if(data[i].type == "graph")
-            //var colorString = Helper.createLighterColor(data[i].color, pref("normalGraph"));
-            //var color = [1, 255].concat(Color.toRGBArray(colorString));
             var array = expandDataArray(data[i].offset, data[i].array);
             layersArray.push(new Layer(data[i].id, data[i].color, array));
             //var dataArray = createDataArray(data[i].dataArray, data[i].startTime);
         }
 
-        console.log("time to create layers: ", new Date().getTime()-ttt);
+        //console.log("time to create layers: ", new Date().getTime()-ttt);
         return layersArray;
     }
 
@@ -158,8 +155,8 @@ var StreamGraph = {};
         P.draw = function(){
                             //console.trace();
 
-                            console.log("cycle time: ", P.millis() - m); // FIXME debug
-                            m = P.millis(); // FIXME debug
+                            //console.log("cycle time: ", P.millis() - m); // FIXME debug
+                            //m = P.millis(); // FIXME debug
 
             // don't draw if data is undefined
             if(!layers){
@@ -169,7 +166,7 @@ var StreamGraph = {};
 
             /* Set up screen geometry */
             if(drawMode == DrawModes.all){ //don't redo all the calculations if only changing color
-                            var ttt3 = P.millis(); // FIXME debug
+                            //var ttt3 = P.millis(); // FIXME debug
                 if (endPoint == -1){
                     endPoint = layers[0].size.length;
                 }
@@ -182,21 +179,21 @@ var StreamGraph = {};
                 layer_layout(layers);
 
                 createLayerTable(layers);
-                            console.log("sort time: ", P.millis() - ttt3); // FIXME debug
+                            //console.log("sort time: ", P.millis() - ttt3); // FIXME debug
             }
 
 
             if(drawMode == DrawModes.all || drawMode == DrawModes.scale){
-                            var ttt2 = P.millis(); // FIXME debug
+                            //var ttt2 = P.millis(); // FIXME debug
                 scaleLayers(layers, P.height + 10);
-                            console.log("scale time: ", P.millis() - ttt2);
+                            //console.log("scale time: ", P.millis() - ttt2);
             }
 
             /* Draw */
             var curve = settings.curve;
             drawLayers(layers, curve);
 
-                            console.log("total time to draw: ", P.millis() - m); // FIXME debug
+                            //console.log("total time to draw: ", P.millis() - m); // FIXME debug
         }
 
         function scaleLayers(layers, canvasHeight) 
