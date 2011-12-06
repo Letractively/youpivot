@@ -22,6 +22,7 @@
 	"<all_urls>",
     "tabs",
 	"history",
+	"geolocation",
     "chrome://favicon/"
   ]
 }

@@ -31,31 +31,31 @@
       $("#computer-name").val(window.localStorage['computer_name']);
 
 		var labels = window.localStorage['labels'];
-		      if(labels == undefined){
-		         labels = new Object();
-		         labels['red'] = "";
-		         labels['back'] = "";
-		         labels['blue'] = "";
-		         labels['darkBlue'] = "";
-		         labels['darkGreen'] = "";
-		         labels['green'] = "";
-		         labels['orange'] = "";
-		         labels['purple'] = "";
-		         labels['silver'] = "";
-		         labels['yellow'] = "";
-		      }else{
-		         labels = JSON.parse(labels,null);
-		      }
-		      $("#label-red").val(labels['red']);
-		      $("#label-black").val(labels['black']);
-		      $("#label-blue").val(labels['blue']);
-		      $("#label-darkBlue").val(labels['darkBlue']);
-		      $("#label-darkGreen").val(labels['darkGreen']);
-		      $("#label-green").val(labels['green']);
-		      $("#label-orange").val(labels['orange']);
-		      $("#label-purple").val(labels['purple']);
-		      $("#label-silver").val(labels['silver']);
-		      $("#label-yellow").val(labels['yellow']);
+		if(labels == undefined){
+         labels = new Object();
+         labels['red'] = "";
+         labels['back'] = "";
+         labels['blue'] = "";
+         labels['darkBlue'] = "";
+         labels['darkGreen'] = "";
+         labels['green'] = "";
+         labels['orange'] = "";
+         labels['purple'] = "";
+         labels['silver'] = "";
+         labels['yellow'] = "";
+      }else{
+         labels = JSON.parse(labels,null);
+      }
+      $("#label-red").val(labels['red']);
+      $("#label-black").val(labels['black']);
+      $("#label-blue").val(labels['blue']);
+      $("#label-darkBlue").val(labels['darkBlue']);
+      $("#label-darkGreen").val(labels['darkGreen']);
+      $("#label-green").val(labels['green']);
+      $("#label-orange").val(labels['orange']);
+      $("#label-purple").val(labels['purple']);
+      $("#label-silver").val(labels['silver']);
+      $("#label-yellow").val(labels['yellow']);
    }
    
    $(document).ready(function(){
