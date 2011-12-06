@@ -108,13 +108,16 @@ function createNewTimeMark(description,color){
       var latitude = null;
       var longitude = null;
       if(window.localStorage['geolocation'] == "true"){
+         console.log("getting geolocation.");
          navigator.geolocation.getCurrentPosition(function(position){
+            console.log(position);
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
             //create a new time mark object
             var timemark = new TimeMark(description,pageArray,color,latitude,longitude);
             database.addTimeMark(timemark);
          }, function(){
+            console.log("position failed.");
             var timemark = new TimeMark(description,pageArray,color,latitude,longitude);
             database.addTimeMark(timemark);
          });
