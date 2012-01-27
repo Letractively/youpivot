@@ -1,13 +1,13 @@
+include("/js/iconfactory.js");
 include("/youpivot/js/history/helpers/pivottable.js");
 
-var TableManager = {};
 /**
  *	TableManager manages the items list on the main content, below the visualizations. 
  *	It uses itemTable jQuery plugin (itemtable.js) as backbone
  *		Search results table also uses itemtable.js
  *	table.js implements only features specific to the items list
  */
-
+var TableManager = {};
 (function(){
 	var m = TableManager;
     var itemTable;
@@ -47,6 +47,15 @@ var TableManager = {};
     /********* end transitional functions ***********/
 
     m.init = function(){
+        $("#y-searchResults").bind("search", function(e, active){
+            if(active){
+                $("#textContent").hide();
+            }else{
+                $("#textContent").show();
+                m.loadFilters();
+            }
+        });
+
         itemTable = $("#textContent").pivotTable();
     }
 
@@ -70,7 +79,6 @@ var TableManager = {};
             }
         });
         ItemManager.deleteItem(id);
-        //throw "delete entry is not implemented yet";
     };
 
 	//add an item to the table
@@ -124,15 +132,4 @@ var TableManager = {};
 		TermManager.display();
 		StreamManager.display();
 	}
-
-    $(function(){
-        $("#y-searchResults").bind("search", function(e, active){
-            if(active){
-                $("#textContent").hide();
-            }else{
-                $("#textContent").show();
-                m.loadFilters();
-            }
-        });
-    });
 })();

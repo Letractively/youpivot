@@ -51,7 +51,6 @@ var StreamGraph = {};
     }
 
     m.draw = function(data, offset, scale){
-        if(data.length==0) return;
         processData(data);
         pjs.stream.setScale(offset, scale);
         pjs.stream.draw();
@@ -124,6 +123,7 @@ var StreamGraph = {};
         }
 
         P.stream.setScale = function(offset, scale){
+            if(layers.length == 0) return;
             if(offset<0 || offset+scale>1){
                 console.log("offset:", offset, "scale:", scale);
                 throw "Offset and scale out of bounds. ";
@@ -159,7 +159,7 @@ var StreamGraph = {};
                             //m = P.millis(); // FIXME debug
 
             // don't draw if data is undefined
-            if(!layers){
+            if(!layers || layers.length == 0){
                 P.background.apply(this, settings.background); // background(0,0,0,0); -> transparent
                 return;
             }

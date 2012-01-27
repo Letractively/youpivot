@@ -1,35 +1,32 @@
-style("/traditional/controls.css");
+style("/traditional/css/controls.css");
 
-var TraditionalHistory = {};
+var TraditionalHistory = new (function _TraditionalHistory(){
+    var self = this;
 
-(function(){
-    var m = TraditionalHistory;
-
-    m.onAttached = function(){
-        getAllTimeMarks();
-        getUsersHistory();
-        initView();
+    self.onAttached = function(){
     }
 
-    m.populateTopbar = function(bar){
+    self.populateTopbar = function(bar){
     }
 
-    m.tabImage = function(){
+    self.tabImage = function(){
         return "images/relief/traditional.png";
     }
 
-    m.titleIcon = function(){
+    self.titleIcon = function(){
         return "images/large/traditional.png";
     }
 
     // initialization
     if(Master){
-        Master.addTab("traditionalhistory", m, "History", "traditional/view.html#history");
+        Master.addTab("traditionalhistory", self, "History", "traditional/history.html");
         var bar = Master.createSidebar("traditionalhistory");
         bar.attr("id", "h-leftSidebar");
         bar.find(".m-sidebarTitle span").text("Traditional History");
-        bar.append('<div id="navbar-container"><div id="navbar_filters"><div id="navbar_filters_timeMarks" class="navbar_filter"></div><div id="navbar_filters_traditionalHistory" class="navbar_filter"></div></div></div><div class="sidebarLabel">Filters</div><div id="historyFilters" class="collapse"></div>');
-        THSidebar.init();
+        bar.append('<div class="sidebarGroup"><div class="sidebarLabel">Content</div><div id="th-contentFilters" class="collapse"></div></div>');
+        include("js/views/collapsable.js");
+        var contentHandle = $("#th-contentFilters").parent().find(".sidebarLabel");
+        $("#th-contentFilters").collapsable("create", {handle: contentHandle, indicator: true});
     }
 })();
 

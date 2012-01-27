@@ -1,9 +1,7 @@
-var DomainExtractor = {};
+var DomainExtractor = new (function _DomainExtractor(){
+    var self = this;
 
-(function(){
-	var m = DomainExtractor;
-
-	m.getName = function(url){
+	self.getName = function(url){
 		var domain = url.split("://")[1];
 		domain = domain.replace("www.", "");
 		domain = domain.split("/")[0];

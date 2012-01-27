@@ -93,11 +93,12 @@ var PivotManager = {};
 	}
 
 	function pivotOnSuccess(data, time, range){
+        //console.log(data);
+        console.log("pivot successful");
 		if(data=="Bad User"){ alert(data); return; }
 		var obj = JSON.parse(data);
 		//var arr = createItemsArray(obj);
 		var arr = createItemsArray(obj, time*1000-43200000); // FIXME remove the startTime filtering (should be done in server)
-		//console.log(arr);
 		GraphManager.startLoadingData(time*1000-43200000, time*1000+43199999); //FIXME load from server
 		ItemManager.clear();
 		ItemManager.addItems(arr); // ItemManager loads data to GraphManager

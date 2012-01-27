@@ -1,3 +1,5 @@
+include("/js/iconfactory.js");
+
 var EventManager = {};
 
 (function(){

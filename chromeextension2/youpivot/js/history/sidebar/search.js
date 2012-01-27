@@ -1,65 +1,84 @@
+include("/js/iconfactory.js");
 include("youpivot/js/history/helpers/pivottable.js");
 include("js/keytable.js");
 
-var SearchManager = {};
+var SearchManager = new (function _SearchManager(){
+    var self = this;
 
-(function(){
-	var m = SearchManager;
-
-    m.results = new KeyTable();
+    self.results = new KeyTable();
 
 	var state = false; //is search currently in use
     var itemTable;
 
     /********* Transitional functions **************/
 
-    m.hide = function(obj, className){
+    self.hide = function(obj, className){
         itemTable.hide(obj, className);
     }
-    m.show = function(obj, className){
+    self.show = function(obj, className){
         itemTable.show(obj, className);
     }
 
-    m.hideAll = function(className){
+    self.hideAll = function(className){
         itemTable.hideAll(className);
     }
 
-    m.refreshTopRows = function(){
+    self.refreshTopRows = function(){
         itemTable.refreshTopRows();
     }
 
-    m.highlight = function(id, level){
-        var item = m.results[id];
+    self.highlight = function(id, level){
+        var item = self.results[id];
         if(!item) return;
         itemTable.highlight(id, item.domain.color, level);
     }
-    m.lowlight = function(id){
-        var item = m.results[id];
+    self.lowlight = function(id){
+        var item = self.results[id];
         if(!item) return;
         itemTable.lowlight(id, item.domain.color);
     }
 
-    m.getDomainId = function(title){
-        for(var i in m.results){
-            if(m.results[i].domain.name == title)
-                return m.results[i].domain.id;
+    self.getDomainId = function(title){
+        for(var i in self.results){
+            if(self.results[i].domain.name == title)
+                return self.results[i].domain.id;
         }
         return -1;
     }
 
     /********* end transitional functions ***********/
 
-    m.init = function(){
+    var lastSearch = "";
+    self.init = function(){
+        $("#y-searchResults").bind("search", function(e, active){
+            console.log("search", active);
+            if(active){
+                console.log("search: true");
+                $("#y-searchResults").show();
+            }else{
+                $("#y-searchResults").hide();
+            }
+        });
+
+		$("#searchBox").keyup(function(){
+			lastSearch = $(this).val();
+			search($(this).val());
+		}).click(function(){
+			if(lastSearch.length>0 && $(this).val()==""){
+				search(""); //invoke antiSearch()
+			}
+		});
+
         itemTable = $("#y-searchResults").pivotTable();
     }
 
-	m.getState = function(){
+	self.getState = function(){
 		return state;
 	}
 
-	m.changeSchema = function(sortBy){
+	self.changeSchema = function(sortBy){
         itemTable.resetToSortMode(sortBy);
-        m.reload();
+        self.reload();
 	}
 
 	function search(needle){
@@ -98,7 +117,7 @@ var SearchManager = {};
 		return output;
 	}
 
-	m.getDomainId = function(domain){
+	self.getDomainId = function(domain){
 		for(var i in domains){
 			if(domains[i] == domain){
 				return i;
@@ -112,7 +131,7 @@ var SearchManager = {};
 		state = true;
 		TermManager.clearTerms();
 		DomainManager.clearDomains();
-		SortManager.sortItems(m.results);
+		SortManager.sortItems(self.results);
 		loadResults(needle, result);
 	}
 
@@ -134,7 +153,7 @@ var SearchManager = {};
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			StreamManager.addStream(item.stream);
             item.id = i;
-            m.results[i] = item;
+            self.results[i] = item;
 			displayItem(item);
 		}
 		TermManager.display();
@@ -152,7 +171,7 @@ var SearchManager = {};
 			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
 			StreamManager.addStream(item.stream);
             item.id = i;
-            m.results[i] = item;
+            self.results[i] = item;
 			displayItem(item);
 		}
 		TermManager.display();
@@ -163,14 +182,14 @@ var SearchManager = {};
 
 	function loadSortedResults(){
         itemTable.clear();
-        m.results.iterate(function(item){
+        self.results.iterate(function(item){
 			displayItem(item);
 		});
         itemTable.refreshTopRows();
 	}
 
-	m.reload = function(){
-		SortManager.sortItems(m.results);
+	self.reload = function(){
+		SortManager.sortItems(self.results);
 		loadSortedResults();
 	}
 
@@ -184,7 +203,7 @@ var SearchManager = {};
     var deleteentry = function(obj){
         var id = $(obj).data("id");
         itemTable.deleteItem(id);
-        Connector.send("delete", {eventid: m.results[id].eventId}, {
+        Connector.send("delete", {eventid: self.results[id].eventId}, {
             onSuccess: function(data){
                 console.log("item deleted -- ", data);
             }, 
@@ -192,7 +211,7 @@ var SearchManager = {};
                 console.log("item delete error -- ", data);
             }
         });
-        var item = ItemManager.getItemByEventId(m.results[id].eventId);
+        var item = ItemManager.getItemByEventId(self.results[id].eventId);
         ItemManager.deleteItem(item.id);
     };
 
@@ -213,7 +232,7 @@ var SearchManager = {};
 	}
 
     // both public and private function? 
-    m.antiSearch = function(){
+    self.antiSearch = function(){
         $("#searchBox").val("");
         antiSearch();
     }
@@ -222,26 +241,4 @@ var SearchManager = {};
 		state = false;
 		$("#y-searchResults").trigger("search", false);
 	}
-
-	var lastSearch = "";
-	$(function(){
-        $("#y-searchResults").bind("search", function(e, active){
-            console.log("search", active);
-            if(active){
-                console.log("search: true");
-                $("#y-searchResults").show();
-            }else{
-                $("#y-searchResults").hide();
-            }
-        });
-
-		$("#searchBox").keyup(function(){
-			lastSearch = $(this).val();
-			search($(this).val());
-		}).click(function(){
-			if(lastSearch.length>0 && $(this).val()==""){
-				search(""); //invoke antiSearch()
-			}
-		});
-	});
 })();

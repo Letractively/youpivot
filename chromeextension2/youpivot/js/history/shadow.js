@@ -1,13 +1,15 @@
-var ShadowManager = {};
+var ShadowManager = new (function _ShadowManager(){
+    var self = this;
 
-(function(){
-	var m = ShadowManager;
+    self.init = function(){
+        $("#graphShadow").height(270);
+    }
 
-	m.setShadowHeight = function(h){
+	self.setShadowHeight = function(h){
 		$("#graphShadow").height(h).trigger("resize");
 	}
 
-	m.animate = function(newHeight, time){
+	self.animate = function(newHeight, time){
 		$("#graphShadow").animate({height: newHeight}, {
 			duration: 200, 
 			step: function(){
@@ -19,13 +21,9 @@ var ShadowManager = {};
 		});
 	}
 
-	m.refresh = function(){
+	self.refresh = function(){
 		var h = $("#visualGraphs").outerHeight(true);
         console.log(h);
-		m.setShadowHeight(h);
+		self.setShadowHeight(h);
 	}
-
-    $(function(){
-        $("#graphShadow").height(270);
-    });
 })();

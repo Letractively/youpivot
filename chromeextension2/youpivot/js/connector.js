@@ -31,7 +31,7 @@ var Connector = {};
 			//console.log(data);
 			if(callback) sendCallbackData(callback, success, data);
 		});
-		console.log(url);
+		//console.log(url);
 	}
 
 	function sendCallbackData(callbacks, success, data){

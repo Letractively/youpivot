@@ -1,3 +1,4 @@
+include("/js/iconfactory.js");
 include("js/utilities.js");
 var StreamManager = {};
 

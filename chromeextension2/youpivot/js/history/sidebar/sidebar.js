@@ -1,14 +1,10 @@
+include("/js/views/collapsable.js");
+
 // Make the groups in sidebar collapsable
-var SidebarManager = {};
+var SidebarManager = new (function _SidebarManager(){
+    var self = this;
 
-(function(){
-	var m = SidebarManager;
-
-    $(function(){
-        m.initialize();
-    });
-
-    m.initialize = function(){
+    self.init = function(){
         var streamHandle = $("#streamFilters").prev();
         $("#streamFilters").collapsable("create", {handle: streamHandle, indicator: true});
 
@@ -20,5 +16,7 @@ var SidebarManager = {};
 
         var sortHandle = $("#sortItems").parent().find(".sidebarLabel");
         $("#sortItems").collapsable("create", {handle: sortHandle, indicator: true});
+
+        SortManager.init();
     }
 })();
