@@ -12,7 +12,7 @@ class CouchDBManager
 
     def init
         if super
-            @couchPath = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("Couchbase Single Server.app/Contents/MacOS/Couchbase Single Server")
+            @couchPath = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("Couchbase Single Server.app/Contents/MacOS/Couchbase Server")
             @task = NSTask.alloc.init
             @task.setLaunchPath(@couchPath)
             self

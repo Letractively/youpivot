@@ -7,7 +7,7 @@
 import couchdb
 import urllib
 
-DB_SERVER_URL = 'http://admin:admin@localhost:5984'
+DB_SERVER_URL = 'http://localhost:5984'
 couch = couchdb.Server(DB_SERVER_URL)
 
 def createDB(dbname):
