@@ -1,5 +1,0 @@
-[{release,"OTP  APN 181 01","R14B01","5.8.2",
-          [{kernel,"2.14.2","%ERL_ROOT%/lib/kernel-2.14.2"},
-           {stdlib,"1.17.2","%ERL_ROOT%/lib/stdlib-1.17.2"},
-           {sasl,"2.1.9.2","%ERL_ROOT%/lib/sasl-2.1.9.2"}],
-          permanent}].
