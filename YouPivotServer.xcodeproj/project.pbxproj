@@ -28,6 +28,7 @@
 		8838925714D249C900DBAD9F /* youpivot.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8838925614D249C900DBAD9F /* youpivot.icns */; };
 		8838925914D249E400DBAD9F /* youpivot.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8838925814D249E400DBAD9F /* youpivot.icns */; };
 		8838925B14D24A3800DBAD9F /* Couchbase Single Server.app in Resources */ = {isa = PBXBuildFile; fileRef = 8838925A14D24A3700DBAD9F /* Couchbase Single Server.app */; };
+		883CFF1B14D25DA100217751 /* png.py in Resources */ = {isa = PBXBuildFile; fileRef = 883CFF1A14D25DA100217751 /* png.py */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		8838925614D249C900DBAD9F /* youpivot.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = youpivot.icns; path = YouPivotServer/youpivot.icns; sourceTree = "<group>"; };
 		8838925814D249E400DBAD9F /* youpivot.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = youpivot.icns; sourceTree = "<group>"; };
 		8838925A14D24A3700DBAD9F /* Couchbase Single Server.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "Couchbase Single Server.app"; sourceTree = "<group>"; };
+		883CFF1A14D25DA100217751 /* png.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = png.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				8838925114D249BE00DBAD9F /* logo_18_black.png */,
 				8838925214D249BE00DBAD9F /* logo_18_grey.png */,
 				468E5780148E49270074A055 /* png_colors.py */,
+				883CFF1A14D25DA100217751 /* png.py */,
 				468E577E148E486E0074A055 /* Responder.py */,
 				468E55A4148E41D80074A055 /* CouchDB-0.8-py2.6.egg */,
 				468E55A2148E41930074A055 /* setup.py */,
@@ -234,6 +237,7 @@
 				8838925714D249C900DBAD9F /* youpivot.icns in Resources */,
 				8838925914D249E400DBAD9F /* youpivot.icns in Resources */,
 				8838925B14D24A3800DBAD9F /* Couchbase Single Server.app in Resources */,
+				883CFF1B14D25DA100217751 /* png.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
