@@ -1,6 +1,0 @@
-@charset "UTF-8";
-/* CSS Document */
-
-#m-tab_youpivot .m-tabimg { background: url("/images/relief/youpivot.png"); }
-#m-tab_youpivot:hover .m-tabimg { background: url("/images/small/youpivot.png"); }
-#m-tab_youpivot:hover .m-tabname { color: #53627D; }
