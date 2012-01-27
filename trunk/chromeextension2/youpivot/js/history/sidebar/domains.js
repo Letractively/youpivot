@@ -1,4 +1,6 @@
-include("js/utilities.js");
+include("/js/iconfactory.js");
+include("/js/utilities.js");
+
 var DomainManager = {};
 
 (function(){

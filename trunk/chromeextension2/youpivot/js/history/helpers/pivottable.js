@@ -1,4 +1,4 @@
-include("/youpivot/js/history/helpers/itemtable.js");
+include("/js/views/itemtable.js");
 include("/youpivot/js/history/helpers/tablerowfactory.js");
 
 (function($){

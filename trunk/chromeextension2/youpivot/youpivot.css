@@ -1,7 +1,3 @@
-a:link { color: #202080; text-decoration: none; }
-a:visited { color: #60609F; text-decoration: none; }
-a:active { color: #60609F; text-decoration: none; }
-a:hover { color: #666699; text-decoration: none; }
 .anchor { cursor: pointer; }
 a.app:link, .anchor { color: #919191; text-decoration: none; }
 a.app:visited { color: #919191; text-decoration: none; }
@@ -129,24 +125,7 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 	#textContent { padding-bottom: 10px; -webkit-user-select: none; }
 	.contentHeader { font-weight: bold; }
 	.contentHeader img { vertical-align: middle; }
-		/*** items table ***/
-		.itemTable { width: 100%; border-spacing: 0px; padding-right: 5px; cursor: default; -webkit-user-select: none; border-collapse: collapse; margin-bottom: 20px; }
-		.itemTable tr { height: 26px; /*display: block; /* to kill mouseout event when move between cells */ }
-		.out { display: none; }
-		.filtered { display: none; }
-		.itemTable td { height: 26px; padding: 0px 2px; }
-		.itemTable th { height: 26px; text-align: left; padding-top: 10px; }
-		.itemTable .item_name { width: 100%; padding: 0px 5px; }
-		.itemTable .item_date { white-space: nowrap; }
-		.itemTable .item_date .grey { color: #999999; }
-		.itemTable .item_time { display: inline-block; color: #919194; width: 60px; text-align: center; }
-		.itemTable .item_left { padding: 0px 8px; width: 70px; height: 100%; }
-		.itemTable a { overflow: hidden; text-overflow: ellipsis; color: #000000; display: block; white-space: nowrap; }
-		.pivotBtn { width: 60px; display: none; }
-
-		.item_color { width: 0px; padding: 0px 3px 0px 0px !important; }
-		.item_icon { width: 16px; height: 16px; margin: 0px 5px; vertical-align: middle; }
-	/*** end text contents ***/
+    .pivotBtn { width: 60px; display: none; }
 /*** end contents ***/
 
 /*** context menu style ***/

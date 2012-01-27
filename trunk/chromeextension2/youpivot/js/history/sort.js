@@ -6,6 +6,13 @@ var SortManager = {};
 
 	var sorts = ["chronological", "by type"];
 	var def = "chronological"; //default value;
+
+    m.init = function(){
+		$("#sortItems").hList("loadArray", {items: sorts, callback: sort});
+		$("#sortItems").hList("select", {name: "chronological"});
+		//m.sort(def);
+    }
+
 	m.getSortMethod = function(){
 		if(m.sortBy == "chronological") return "date";
 		if(m.sortBy == "by type") return "domain";
@@ -42,9 +49,4 @@ var SortManager = {};
 		//Helper.hideLoading();
 		return true;
 	}
-	$(function(){
-		$("#sortItems").hList("loadArray", {items: sorts, callback: sort});
-		$("#sortItems").hList("select", {name: "chronological"});
-		//m.sort(def);
-	});
 })();

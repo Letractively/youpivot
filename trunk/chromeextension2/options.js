@@ -1,26 +1,24 @@
-var Options = {};
+var Options = new (function _Options(){
+    var self = this;
 
-(function(){
-    var m = Options;
-
-    m.onAttached = function(){
+    self.onAttached = function(){
     }
 
-    m.onDetached = function(){
+    self.onDetached = function(){
     }
 
-    m.populateTopbar = function(bar){
+    self.populateTopbar = function(bar){
         // no topbar
     }
 
-    m.titleIcon = function(){
+    self.titleIcon = function(){
         return "images/titleicon_settings.png";
     }
 
     // initialization
     if(Master){
         // add the new tab
-        Master.addTab("options", m, "Settings", "options/options.html");
+        Master.addTab("options", self, "Settings", "options/options.html");
         // change tab handle to the hear icon on the right
         Master.changeTabHandle("options", $("#m-settings"));
 

@@ -13,7 +13,7 @@ var Translator = {};
 		//console.log(server.importancevalues);
 		output.importance = translateImportance(server.importancevalues, output.startTime);
 		if(typeof server.keyword == "string"){
-			output.keywords = [unescape(server.keyword)]
+			output.keywords = [unescape(server.keyword)];
 		}else if(typeof server.keyword == "object"){
 			output.keywords = server.keyword;
 		}

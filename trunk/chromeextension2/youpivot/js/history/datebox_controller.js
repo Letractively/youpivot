@@ -1,7 +1,5 @@
 include("js/views/datebox.js");
 
-var DateBoxController = {};
-
 /********** API ***********
 
 setDate(startDate, endDate)
@@ -10,18 +8,18 @@ setDate(startDate, endDate)
 
 ***************************/
 
-(function(){
-	var m = DateBoxController;
+var DateBoxController = new (function _DateBoxController(){
+    var self = this;
     
     var dateBox;
 
-    m.createDateBox = function(){
+    self.createDateBox = function(){
         dateBox = $('<div id="dateBox" />').dateBox();
         dateBox.onDateChanged(onDateChanged);
         return dateBox.element;
     }
 
-    m.setDate = function(startDate, endDate){
+    self.setDate = function(startDate, endDate){
         dateBox.setDateDisplay(startDate, endDate);
         DatePicker.setDateDisplay(startDate, endDate);
     }

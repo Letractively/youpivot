@@ -14,23 +14,24 @@ var ItemManager = {};
     }
 
 	m.addItems = function(items){
-        var ttt = new Date().getTime();
-        console.log("time to sort: ", new Date().getTime() - ttt);
+                //var ttt = new Date().getTime();
+                //console.log("time to sort: ", new Date().getTime() - ttt);
 		for(var i in items){
 			var id = counter++;
 			addItem(id, items[i]);
 			m.list[id] = items[i];
 		}
 		SortManager.sortItems(m.list);
-        console.log("time to create item: ", new Date().getTime() - ttt);
+                //console.log("time to create item: ", new Date().getTime() - ttt);
 		DomainManager.display();
 		TermManager.display();
 		StreamManager.display();
-        console.log("time to display item: ", new Date().getTime() - ttt);
+                //console.log("time to display item: ", new Date().getTime() - ttt);
 		$(window).trigger("itemsLoaded");
 	}
 
 	m.clear = function(){
+        console.log("clear");
 		counter = 0;
 		m.list = new KeyTable();
 		TableManager.clearItems();

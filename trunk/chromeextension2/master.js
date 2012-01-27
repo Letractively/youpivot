@@ -13,7 +13,9 @@ var Master = {};
         var attrid = "m-tabView_"+id;
 
         // create tab content view
-        var div = $("<div />").addClass("m-tabViews").attr("id", attrid).load(htmlfile);
+        var div = $("<div />").addClass("m-tabViews").attr("id", attrid).load(htmlfile, function(){
+            $("#m-tabView_"+id).trigger("tabready");
+        });
         $("#m-content").append(div.hide());
 
         // create tab button

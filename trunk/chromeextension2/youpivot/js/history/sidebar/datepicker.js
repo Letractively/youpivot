@@ -74,7 +74,7 @@ var DatePicker = {};
 		$("#calendar").slideUp(100);
 	}
 
-	$(function(){
+	$("#m-tabView_youpivot").bind("tabready", function(){
         $("#y-searchResults").bind("search", function(e, active){
             if(active){
                 $("#datePickers").addClass("dim");

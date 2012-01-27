@@ -8,34 +8,31 @@ var Monitor = {};
 	//constants
 	var updateInterval = 114*1000;
 
+    chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
+        tabRemoved(tabId);
+    });
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+        if(tab.status=="complete"){
+            tabUpdated(tab, changeInfo);
+        }
+    });
+    chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo){
+        updateFocus();
+    });
+    chrome.tabs.onMoved.addListener(function(tabId, moveInfo){
+        updateFocus();
+    });
+    chrome.tabs.onDetached.addListener(function(tabId, detachInfo){
+        updateFocus();
+    });
+    chrome.windows.onFocusChanged.addListener(function(windowId){
+        updateFocus();
+    });
+
 	$(function(){
 		registerOpenTabs();
 		updateFocus();
 		startTimer();
-
-		chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
-			tabRemoved(tabId);
-		});
-		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-			if(tab.status=="complete"){
-				/*chrome.tabs.executeScript(tabId, {file: "youpivot/js/background/termextractor.js"}, function(){
-					console.log("execute complete");
-				});*/
-				tabUpdated(tab, changeInfo);
-			}
-		});
-		chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo){
-			updateFocus();
-		});
-		chrome.tabs.onMoved.addListener(function(tabId, moveInfo){
-			updateFocus();
-		});
-		chrome.tabs.onDetached.addListener(function(tabId, detachInfo){
-			updateFocus();
-		});
-		chrome.windows.onFocusChanged.addListener(function(windowId){
-			updateFocus();
-		});
 	});
 
 	function startTimer(){
@@ -64,7 +61,11 @@ var Monitor = {};
 		}
 		if(urlValid(tab.url)){
 			addToTabs(tab.id, createItemFromTab(tab));
-			uploadOpenInfo(tab.id);
+            extractKeywords(tab.id, function(terms){
+                console.log(arr[tab.id]);
+                arr[tab.id].keywords = terms;
+                uploadOpenInfo(tab.id);
+            });
 		}
 	}
 
@@ -75,21 +76,20 @@ var Monitor = {};
 		Connector.send("end", item, {
 			onSuccess: function(data){
 				if(data.length>0){
-					console.log("remove successful, response: "+data);
+					console.log("remove successful, response: ", data);
 				}else{
 					alert("Error uploading remove tab info: "+data);
 				}
 			}, 
 			onError: function(data){
-				console.log("error uploading remove information. "+data);
+				console.log("error uploading remove information. ", data);
 			}
 		});
 	}
 
 	function createRemoveItem(info){
 		if(info.eid==-1){
-			console.log(info);
-			console.log("Event id is not defined in info. Cannot set end time for item");
+			console.log("Event id is not defined in info. Cannot set end time for item", info);
 			return false;
 		}
 		var obj = {};
@@ -106,13 +106,13 @@ var Monitor = {};
 			onSuccess: function(data){
 				if(data.length>0){
 					arr[tabId].eid = data;
-					console.log("upload successful, event id: "+data);
+					console.log("upload successful, event id: ", data);
 				}else{
 					alert("Error uploading open tab info: "+data);
 				}
 			}, 
 			onError: function(data){
-				console.log("error uploading open information. "+data);
+				console.log("error uploading open information. ", data);
 			}
 		});
 	}
@@ -179,13 +179,12 @@ var Monitor = {};
 
 	//function currently not in use
 	function uploadBatch(batch){
-		console.log(batch);
+        throw "Upload batch is deprecated";
 	}
 
 	function createUpdateItem(info){
 		if(info.eid==-1){
-			console.log(info);
-			console.log("ERROR: update item event id is not defined");
+			console.log("ERROR updating item: event id is not defined", info);
 			return false;
 		}
 		var obj = {};
@@ -198,12 +197,30 @@ var Monitor = {};
 
 	/*** end server calls ***/
 
+    function extractKeywords(tabId, callback){
+        var handler = function(request){
+            if(request.action == "saveTerms"){
+                callback(request.terms);
+            }
+            chrome.extension.onRequest.removeListener(handler);
+        }
+        chrome.extension.onRequest.addListener(handler);
+        chrome.tabs.executeScript(tabId, {file: "youpivot/js/background/termextractor.js"}, function(){
+            console.log("keywords extracted");
+        });
+    }
+
+    m.saveKeywords = function(keywords){
+        item.keywords = keywords;
+        return item;
+    }
+
 	//check if the URL is valid for logging
 	function urlValid(url){
-		if(url.indexOf("chrome")===0){
+		if(url.indexOf("chrome")===0)
 			return false;
-		}
-		if(url.indexOf("about")===0) return false;
+		if(url.indexOf("about")===0)
+            return false;
 		return true;
 	}
 
@@ -266,6 +283,7 @@ var Monitor = {};
 
 	//poor man's keyword generator
 	//FIXME doesn't work for non-english alphabets
+    // this is fallback method to create keywords when it's not extracted from the body text
 	function getKeywords(title){
 		title = title.replace(/[^a-zA-Z0-9]/g, " ").replace(/\s+/g, " ");
 		var output = title.split(" ");
