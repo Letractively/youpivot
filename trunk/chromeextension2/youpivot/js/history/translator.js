@@ -24,13 +24,15 @@ var Translator = {};
 	}
 
 	function getDomainColor(color, name){
+        if(typeof color == "string")
+            return color;
 		if(color){
 			var r = Helper.padZero(color[0].toString(16), 2);
 			var g = Helper.padZero(color[1].toString(16), 2);
 			var b = Helper.padZero(color[2].toString(16), 2);
 			return "#"+r+g+b;
 		}
-		return "#FF6600";
+		return "#000000";
 	}
 
 	function translateImportance(obj, startTime){

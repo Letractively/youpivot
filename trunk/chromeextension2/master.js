@@ -1,14 +1,12 @@
 include("/js/urlhash.js");
 
-var Master = {};
-
-(function(){
-    var m = Master;
+var Master = new (function _Master(){
+    var self = this;
 
     var tabs = {};
     var activeTab;
 
-    m.addTab = function(id, obj, name, htmlfile){
+    self.addTab = function(id, obj, name, htmlfile){
         tabs[id] = {obj: obj, name: name};
         var attrid = "m-tabView_"+id;
 
@@ -29,7 +27,7 @@ var Master = {};
         }
     }
 
-    m.changeTab = function(id){
+    self.changeTab = function(id){
         if(tabs[id] === undefined) return;
         if(activeTab)
             deactivateTab(activeTab);
@@ -37,13 +35,13 @@ var Master = {};
         URLHash.setHash("tab", id);
     }
 
-    m.changeTabHandle = function(id, newHandle){
+    self.changeTabHandle = function(id, newHandle){
         $("#m-tab_"+id).next().remove();
         $("#m-tab_"+id).remove();
         newHandle.attr("id", "m-tab_"+id);
         
         newHandle.click(function(){
-            m.changeTab(id);
+            self.changeTab(id);
         });
 
         newHandle.mousedown(function(){
@@ -56,7 +54,7 @@ var Master = {};
     }
 
     // create sidebar for the tab client (easier coding and more consistent style)
-    m.createSidebar = function(id){
+    self.createSidebar = function(id){
         var tabView = $("#m-tabView_"+id);
         tabView.children().css("margin-left", "280px");
 
@@ -111,7 +109,7 @@ var Master = {};
         $("#m-topbarTabs").append(div).append('<div class="m-topTabDivider"/>');
 
         div.click(function(){
-            m.changeTab(id);
+            self.changeTab(id);
         });
 
         div.mousedown(function(){

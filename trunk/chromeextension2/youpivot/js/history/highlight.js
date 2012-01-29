@@ -198,7 +198,7 @@ var HighlightManager = {};
         var list = ItemManager.list;
         if(addToHighlightPool(tableHighlightPool, id, -1) > 0){
             SearchManager.highlight(id, "highlight");
-        }else if(domainHighlightPool[list[i].id] > 0){
+        }else if(domainHighlightPool[list[id].id] > 0){
             SearchManager.highlight(id, "highlight");
         }else{
             SearchManager.lowlight(id);

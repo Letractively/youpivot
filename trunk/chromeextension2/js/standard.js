@@ -1,3 +1,13 @@
+var O_O = {};
+
+O_O.include = function(jsfile, baseurl){
+    include(jsfile, baseurl);
+}
+
+O_O.style = function(jsfile, baseurl){
+    include(jsfile, baseurl);
+}
+
 var _inclusions = {};
 function include(jsfile, baseurl){
     var url;
@@ -25,4 +35,10 @@ function pref(label){
 	return PrefManager.getOption(label);
 }
 
-include("js/pref.js");
+O_O.include("js/pref.js");
+
+(function($){
+    $.fn.view = function(){
+        return this.data("view");
+    }
+})(jQuery);
