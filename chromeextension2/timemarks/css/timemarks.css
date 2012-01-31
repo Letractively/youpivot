@@ -156,3 +156,21 @@
    color:#999999;
    height:16px;
 }
+
+#timemarksEditButton{
+   float:right;
+   margin-right:10px;
+}
+
+#timemarksEditButton input{
+   width:60px;
+}
+
+.deletePage{
+   padding-left:10px;
+   display:none;
+}
+
+.deletePage a{
+   color:red !important;
+}

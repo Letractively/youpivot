@@ -11,6 +11,14 @@ function getColorTimeMarks(color){
    });
 }
 
+function deleteTimeMarkPage(id){
+   database.db.transaction(function(tx){
+      tx.executeSql("DELETE FROM page WHERE id=?",[id],function(tx,results){
+         
+      });
+   });
+}
+
 
 function printTimeMarks(tx,result){
    $("#bodyCopy_timeMarks").html("");
@@ -61,6 +69,7 @@ function printTimeMark(item,rows){
       var timeOpen = new Date(item.timeOpen);
 
       string += " <span class='timeOpen'> - open " + timeOpen.getMinutes() + " minutes";
+      string += " <span class='deletePage'><a href='javascript:deleteTimeMarkPage(\"" + item.id + "\");'>Delete</a></span>";
       string += "</div>";
    }
    string += "</div>";

@@ -19,7 +19,7 @@ var HistoryModel = new (function _HistoryModel(){
                 history[historyItems[i].id] = {url: historyItems[i].url, title: historyItems[i].title};
 
                 chrome.history.getVisits({url: historyItems[i].url}, function(visitItems){
-                    console.log("hi");
+                    
                     for(var j in visitItems){
                         var hItem = history[visitItems[j].id];
                         if(visitItems[j].visitTime >= startTime && visitItems[j].visitTime <= endTime 

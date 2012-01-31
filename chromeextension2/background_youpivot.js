@@ -17,6 +17,7 @@ $(function(){
                 sendResponse({name: "YouPivot & Timemarks (alpha)", version: "0.1"});
                 break;
 			default:
+				onRequest(request, sender, sendResponse);
 				console.log("Request not recognized by YouPivot");
 		}
 	});

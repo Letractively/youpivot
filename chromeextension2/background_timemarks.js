@@ -70,7 +70,7 @@ database.createTable();
 
 
 //add a listener to listen for requests
-chrome.extension.onRequest.addListener(onRequest);
+//chrome.extension.onRequest.addListener(onRequest);
 chrome.tabs.onCreated.addListener(newTab);
 chrome.tabs.onUpdated.addListener(updateTab);
 chrome.tabs.onRemoved.addListener(destroyTab);
@@ -135,6 +135,27 @@ function viewTimeMarks(){
 }
 
 
+//reopen timemark
+function reopenTimemark(id){
+   windows = [];
+   database.db.transaction(function(tx){
+      //insert timemark
+      tx.executeSql("SELECT * FROM page WHERE timemark_id=?",[id],function(tx,result){
+         for(i=0;i<result.rows.length;i++){
+            var row = result.rows.item(i);
+            if(typeof windows[row.window]  === 'undefined' || windows[row.window]  === null){
+               windows[row.window] = [];
+            }
+            windows[row.window].push(row.url);
+         }
+         for(i in windows){
+            var w = windows[i];
+            chrome.windows.create({url:w});
+         }
+      });
+   });
+}
+
 //request handler
 function onRequest(request, sender, callback){
    switch(request.action){
@@ -151,6 +172,9 @@ function onRequest(request, sender, callback){
          break;
       case "destroySync":
          destroySync();
+         break;
+      case "reopenTimemark":
+         reopenTimemark(request.id);
          break;
    }
 }
