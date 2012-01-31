@@ -1,4 +1,6 @@
 // JavaScript Document
+
+
 function getAllTimeMarks(){
    database.db.transaction(function(tx){
       tx.executeSql("SELECT * FROM timemark ORDER BY timestamp DESC",[],printTimeMarks);
@@ -9,6 +11,45 @@ function getColorTimeMarks(color){
    database.db.transaction(function(tx){
       tx.executeSql("SELECT * FROM timemark WHERE color=? ORDER BY timestamp DESC",[color],printTimeMarks);
    });
+}
+
+function toggleTimemarksEdit(){
+   if($("#timemarksEditButton input").prop('value') == "Edit"){
+      $(".deletePage").show();
+      $("#timemarksEditButton input").prop('value', 'Done');
+   }else{
+      $(".deletePage").hide();
+      $("#timemarksEditButton input").prop('value', 'Edit');
+   }
+}
+
+function deleteTimeMarkPage(id){
+   database.db.transaction(function(tx){
+      tx.executeSql("DELETE FROM page WHERE id=?",[id],function(tx,results){
+         $("#timemark-page-"+id).remove();
+      });
+   });
+}
+
+function deleteTimeMark(id){
+   database.db.transaction(function(tx){
+      tx.executeSql("DELETE FROM page WHERE timemark_id=?",[id],function(tx,results){
+         tx.executeSql("DELETE FROM timemark where id=?",[id],function(tx,results){
+            $("#timemark-"+id).remove();
+         });
+      });
+   });
+}
+
+function reopenTimemark(id){
+   console.log("reopen: "+id);
+   chrome.extension.sendRequest({
+         'action' : 'reopenTimemark',
+         'id': id
+     },function(response){
+         
+   });
+     
 }
 
 
@@ -42,7 +83,10 @@ function printTimeMark(item,rows){
   if(item.latitude != null){
      string += "<span class='timeMarkLocation'>"+ item.latitude + ", " + item.longitude+"</span>";
   }
-  string += "</a></div>";//timeMarkHeader
+  string += "</a>";//timeMarkHeader
+  string += " <span class='deletePage'><a href='javascript:deleteTimeMark(\"" + item.id + "\");'>Delete</a></span>";
+  string += "<a href='javascript:reopenTimemark(\"" + item.id + "\");'>Reopen</a></span>"
+  string += "</div>";
   string += "<div class='pages-box'>";
   string += "<div class='timemark-window'>";
   var currentWindow = rows.item(0).window;
@@ -56,11 +100,14 @@ function printTimeMark(item,rows){
       if(favicon=="undefined"){
          favicon = "http://www.google.com/s2/favicons?domain=" + item.url
       }
-      string += "<div class='title'><a href='" + item.url + "' style=\"background-image:url('" + favicon + "')\" class='title'>" + item.title + "</a>";
+      
+      var domain = getDomain(item.url);
+      string += "<div class='title domain-"+domain+"' id='timemark-page-"+item.id+"'><a href='" + item.url + "' style=\"background-image:url('" + favicon + "')\" class='title'>" + item.title + "</a>";
 
       var timeOpen = new Date(item.timeOpen);
 
       string += " <span class='timeOpen'> - open " + timeOpen.getMinutes() + " minutes";
+      string += " <span class='deletePage'><a href='javascript:deleteTimeMarkPage(\"" + item.id + "\");'>Delete</a></span>";
       string += "</div>";
    }
    string += "</div>";
@@ -79,4 +126,9 @@ function formatTime(date){
 
 function openPageBox(id){
    $(id).toggleClass("open");
+}
+
+function getDomain(url)
+{
+   return url.match(/:\/\/(www\.)?(.[^/:]+)/)[2];
 }
