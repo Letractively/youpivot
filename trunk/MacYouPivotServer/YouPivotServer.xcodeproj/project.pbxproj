@@ -15,6 +15,8 @@
 		469D507D148E0D0800BB50FE /* Responder.rb in Resources */ = {isa = PBXBuildFile; fileRef = 469D507C148E0D0800BB50FE /* Responder.rb */; };
 		469D5084148E235300BB50FE /* MainWindowController.rb in Resources */ = {isa = PBXBuildFile; fileRef = 469D5083148E235300BB50FE /* MainWindowController.rb */; };
 		46B8C306149830FE00946832 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B8C304149830F100946832 /* Security.framework */; };
+		46BCE99E14D85ADD00C609D3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BCE99D14D85ADD00C609D3 /* Sparkle.framework */; };
+		46BCE99F14D85AE600C609D3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 46BCE99D14D85ADD00C609D3 /* Sparkle.framework */; };
 		46FB3C841485863B00A27254 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FB3C831485863B00A27254 /* Cocoa.framework */; };
 		46FB3C8D1485863B00A27254 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46FB3C8B1485863B00A27254 /* InfoPlist.strings */; };
 		46FB3C8F1485863B00A27254 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FB3C8E1485863B00A27254 /* main.m */; };
@@ -26,6 +28,19 @@
 		46FB3CA81485872A00A27254 /* CouchDBManager.rb in Resources */ = {isa = PBXBuildFile; fileRef = 46FB3CA71485872A00A27254 /* CouchDBManager.rb */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		46BCE99B14D8558B00C609D3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				46BCE99F14D85AE600C609D3 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		468E55A0148E3BC80074A055 /* CouchDBSetupTool.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = CouchDBSetupTool.rb; sourceTree = "<group>"; };
 		468E55A2148E41930074A055 /* setup.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
@@ -35,6 +50,7 @@
 		469D507C148E0D0800BB50FE /* Responder.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = Responder.rb; sourceTree = "<group>"; };
 		469D5083148E235300BB50FE /* MainWindowController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = MainWindowController.rb; sourceTree = "<group>"; };
 		46B8C304149830F100946832 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		46BCE99D14D85ADD00C609D3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		46FB3C7F1485863B00A27254 /* YouPivotServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouPivotServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46FB3C831485863B00A27254 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		46FB3C8A1485863B00A27254 /* YouPivotServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YouPivotServer-Info.plist"; sourceTree = "<group>"; };
@@ -57,6 +73,7 @@
 				46FB3C841485863B00A27254 /* Cocoa.framework in Frameworks */,
 				46FB3CA41485865E00A27254 /* MacRuby.framework in Frameworks */,
 				46B8C306149830FE00946832 /* Security.framework in Frameworks */,
+				46BCE99E14D85ADD00C609D3 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +100,7 @@
 		46FB3C821485863B00A27254 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46BCE99D14D85ADD00C609D3 /* Sparkle.framework */,
 				46B8C304149830F100946832 /* Security.framework */,
 				46FB3CA21485865700A27254 /* MacRuby.framework */,
 				46FB3C831485863B00A27254 /* Cocoa.framework */,
@@ -164,6 +182,7 @@
 				46FB3C7B1485863B00A27254 /* Sources */,
 				46FB3C7C1485863B00A27254 /* Frameworks */,
 				46FB3C7D1485863B00A27254 /* Resources */,
+				46BCE99B14D8558B00C609D3 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -307,6 +326,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -324,6 +344,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
