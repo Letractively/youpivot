@@ -13,6 +13,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "46FB3C7E1485863B00A27254"
+               BuildableName = "YouPivotServer.app"
+               BlueprintName = "YouPivotServer"
+               ReferencedContainer = "container:YouPivotServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "46FB3C871485863B00A27254"
                BuildableName = "Deployment"
                BlueprintName = "Deployment"
