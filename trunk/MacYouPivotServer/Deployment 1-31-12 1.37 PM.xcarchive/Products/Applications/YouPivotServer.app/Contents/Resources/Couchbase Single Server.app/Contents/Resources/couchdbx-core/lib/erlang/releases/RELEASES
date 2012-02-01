@@ -1,5 +1,0 @@
-[{release,"OTP  APN 181 01","R14B01","5.8.2",
-          [{kernel,"2.14.2","/Users/farshid/jenkins/jobs/couchbase-single-x/workspace/build/lib/erlang/lib/kernel-2.14.2"},
-           {stdlib,"1.17.2","/Users/farshid/jenkins/jobs/couchbase-single-x/workspace/build/lib/erlang/lib/stdlib-1.17.2"},
-           {sasl,"2.1.9.2","/Users/farshid/jenkins/jobs/couchbase-single-x/workspace/build/lib/erlang/lib/sasl-2.1.9.2"}],
-          permanent}].
