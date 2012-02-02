@@ -39,7 +39,7 @@ var Popup = new (function _Popup(){
             'description': description,
             'color' : color
         },function(response){
-            $("#popup_notice").text("TimeMark added!");
+            $("#popup_notice").text("TimeMark added!").show();
             setTimeout(function(){ window.close(); }, 1500);
         });
 

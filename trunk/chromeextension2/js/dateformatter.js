@@ -1,17 +1,15 @@
 // Helper class for format a date using PHP style date formatters. 
 
-var DateFormatter = {};
+var DateFormatter = new (function _DateFormatter(){
+    var self = this;
 
-(function(){
-    var m = DateFormatter;
-
-	m.formatDate = function(date, format){
+	self.formatDate = function(date, format){
         if(typeof date == "number")
             date = new Date(date);
 		if(!format){
 			return date.toLocaleDateString();
 		}else{
-            var output = _DateFormatter.format(date, format);
+            var output = __DateFormatter.format(date, format);
 			return output;
 		}
 	}
@@ -23,7 +21,7 @@ var DateFormatter = {};
 		return {apm: apm, hour: hour};
 	}
 
-	m.formatTime = function(date, f12_24){
+	self.formatTime = function(date, f12_24){
 		if(typeof date == "object"){
 			throw "Format time only accepts unix epoch time";
 			return "format error";
@@ -41,12 +39,12 @@ var DateFormatter = {};
 			h = hObj.hour;
 		}
 		h = h;
-		min = m.padZero(d.getMinutes(), 2);
+		min = self.padZero(d.getMinutes(), 2);
 		var string = h+":"+min+apm;
 		return string;
 	}
 
-	m.padZero = function(string, len){
+	self.padZero = function(string, len){
 		var output = string+"";
 		for(var i=output.length; i<len; i++){
 			output = "0"+output;
@@ -56,16 +54,16 @@ var DateFormatter = {};
     
     /*** Date formatter (PHP style) ***/
 	//usage: <Date object>.format(-format-);
-	var _DateFormatter = {};
+	var __DateFormatter = {};
 
-	_DateFormatter.format = function(d, form){
+	__DateFormatter.format = function(d, form){
 		var fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		var shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 		var fullWeeks = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		var shortWeeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 		var formats = {
 			//day of month
-			d: function(d){return m.padZero(d.getDate(),2);},
+			d: function(d){return self.padZero(d.getDate(),2);},
 			j: function(d){return d.getDate();},
 			//day of week
 			l: function(d){return fullWeeks[d.getDay()];},
@@ -77,7 +75,11 @@ var DateFormatter = {};
 			F: function(d){return fullMonths[d.getMonth()];},
 			M: function(d){return shortMonths[d.getMonth()];},
 			n: function(d){return d.getMonth()+1; },
-			m: function(d){return m.padZero(d.getMonth+1,2);}
+			m: function(d){return self.padZero(d.getMonth+1,2);},
+            // time
+            H: function(d){return d.getHours();},
+            h: function(d){return d.getHours()%12;},
+            a: function(d){return (d.getHours/12 < 1) ? "am" : "pm";}
 		};
 
 		var namespace = "";
@@ -86,7 +88,7 @@ var DateFormatter = {};
 		}
 
 		var regex = new RegExp("(["+namespace+"])", "g");
-		form = form.replace(regex, function(m){ return formats[m](d); });
+		form = form.replace(regex, function(a){ return formats[a](d); });
 		return form;
 	};
     /*** End Date formatter ***/

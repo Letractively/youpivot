@@ -5,15 +5,16 @@ var HistoryModel = new (function _HistoryModel(){
     
     var validTransitions = ["link", "typed", "auto_bookmark", "manual_subframe", "generated", "start_page", "form_submit", "keyword", "keyword_generated"];
 
-    self.getDayVisits = function(date, callback_quick, callback_full){
-        var midnight = DateUtilities.getMidnightDay(date);
-        var startTime = midnight.getTime();
-        var endTime = midnight.getTime()+86399999;
-        chrome.history.search({text: "", maxResults: 65535, startTime: startTime, endTime: endTime}, function(historyItems){
+    self.getNumVisits = function(oldestDate, newestDate, num, callback){
+        chrome.history.search({text: "", maxResults: num, startTime: oldestDate, endTime: newestDate}, function(historyItems){
             var results = [];
             var resultCounter = 0;
 
             var history = [];
+
+            if(historyItems.length == 0){
+                callback(results);
+            }
 
             for(var i = 0; i < historyItems.length; i++){
                 history[historyItems[i].id] = {url: historyItems[i].url, title: historyItems[i].title};
@@ -22,7 +23,7 @@ var HistoryModel = new (function _HistoryModel(){
                     
                     for(var j in visitItems){
                         var hItem = history[visitItems[j].id];
-                        if(visitItems[j].visitTime >= startTime && visitItems[j].visitTime <= endTime 
+                        if(visitItems[j].visitTime >= oldestDate && visitItems[j].visitTime <= newestDate 
                             && isTransitionValid(visitItems[j].transition) && hItem.title != ""){
                             visitItems[j].url = hItem.url;
                             visitItems[j].title = hItem.title;
@@ -32,13 +33,10 @@ var HistoryModel = new (function _HistoryModel(){
                         }
                     }
                     resultCounter++;
-                    if(resultCounter == 30){
-                        results.sort(sortByTime);
-                        callback_quick(results);
-                    }
                     if(resultCounter == historyItems.length){
                         results.sort(sortByTime);
-                        callback_full(results);
+                        results.splice(num, results.length - num);
+                        callback(results);
                     }
                 });
             }

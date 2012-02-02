@@ -7,22 +7,42 @@ var HistoryList = new (function _HistoryList(){
 
     var list = [];
 
-    var showingDate = new Date().getTime();
+    var newestDate = new Date().getTime();
+    var oldestDate = new Date().getTime() - 21599999;
     var dateSchema = {"left": "normal", "name": "normal"};
 
-    self.changeDate = function(date){
-        showingDate = date;
+    self.setNewest = function(date){
+        oldestDate = date - 21599999;
+        newestDate = date;
+        populateHistoryList();
+    }
+
+    self.setOldest = function(date){
+        oldestDate = date;
+        newestDate = date + 21599999;
         populateHistoryList();
     }
 
     function populateHistoryList(){
         THDomainManager.clearDomains();
         self.itemTable.clear();
-        HistoryModel.getDayVisits(showingDate, function(results){
+        /*HistoryModel.getDayVisits(newestDate, function(results){
             showResults(results, 0);
         }, 
         function(results){
             showResults(results, 100);
+            oldestDate = results[results.length-1].visitTime;
+            console.log("oldestDate", new Date(oldestDate));
+        });*/
+        HistoryModel.getNumVisits(oldestDate, newestDate, 1000, function(results){
+            if(results.length > 0){
+                showResults(results, 0);
+                newestDate = results[0].visitTime;
+                oldestDate = results[results.length-1].visitTime;
+                $("#th-message").hide();
+            }else{
+                $("#th-message").html("No entries found between " + DateFormatter.formatDate(oldestDate, "M j ") + DateFormatter.formatTime(oldestDate, 12) + " and " + DateFormatter.formatDate(newestDate, "M j ") + DateFormatter.formatTime(newestDate, 12)).show();
+            }
         });
         function showResults(results, start){
             list = results;
@@ -87,17 +107,17 @@ var HistoryList = new (function _HistoryList(){
         populateHistoryList();
 
         $("#th-historyList_older a").click(function(e){
-            self.changeDate(showingDate - 86400000);
+            self.setNewest(oldestDate - 1);
             e.preventDefault();
         });
 
         $("#th-historyList_newer a").click(function(e){
-            self.changeDate(showingDate + 86400000);
+            self.setOldest(newestDate + 1);
             e.preventDefault();
         });
 
         $("#th-historyList_today a").click(function(e){
-            self.changeDate(new Date().getTime());
+            self.setNewest(new Date().getTime());
             e.preventDefault();
         });
 

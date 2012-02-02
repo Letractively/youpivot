@@ -12,9 +12,9 @@ form { padding: 0px; margin: 0px; display: inline; }
 
 #popup_logo { width: 100px; margin: 0px 10px; }
 #popup_left, #popup_content { display: inline-block; vertical-align: top; width: 120px; }
-.popup_title { font-size: 28px; font-weight: bold; font-family: 'Myriad Pro', 'Telex', sans-serif; color: #666666; }
+.popup_title { font-size: 28px; font-weight: bold; font-family: 'Myriad Pro', 'Telex', sans-serif; color: #666666; margin-bottom: 20px; }
 
-#popup_notice { height: 20px; color: #999; }
+#popup_notice { display: none; background-color: #FFF; opacity: 0.9; color: #666; position: absolute; text-align: center; line-height: 100px; width: 100%; z-index: 20; font-size: 20px; }
 
 .popup_nav_button { color: #666; text-decoration: none; outline: none; font-size: 13px; -webkit-border-radius: 20px; display: block; padding: 0px 5px; text-align: center; margin: 8px 0px; }
 .popup_nav_button:hover { background-color: #AAA; color: #FFF; }
@@ -50,32 +50,3 @@ input[type="button"],input[type="submit"]{
 input[type="button"]:hover,input[type="submit"]:hover{
     background-color: #EEE;
 }
-
-/*input[type="button"],input[type="submit"]{
-   width:150px;
-   background:#4892cb;
-   border:1px solid #333333;
-   display:inline-block;
-   padding:3px;
-   text-align:center;
-   text-decoration:none;
-   color:#ffffff;
-   -webkit-border-radius:5px;
-   font-size:14px;
-   margin-top:5px;
-   margin-left:5px;
-}
-
-input[type="button"],input[type="submit"]:hover{
-	background:#346a93;
-}
-
-input[type="button"].cancel{
-   margin-left:0px;
-   width:120px;
-   background:#5c9bcc;
-}
-
-input[type="button"].cancel:hover{
-	background:#457599;
-}*/
