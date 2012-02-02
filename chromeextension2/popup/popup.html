@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="popup.css">
         <script src="/include/jquery-1.7.min.js"></script>
         <script src="popup.js"></script>
+        <script src="/js/views/radiopreview.js"></script>
         <script src="/js/views/radioset.js"></script>
         <script src="/js/standard.js"></script>
     </head>
@@ -21,7 +22,7 @@
                     <div class="popup_title">Make a TimeMark</div>
                     <div id="popup_notice"></div>
                     <div id="popup_input_wrap">
-                        <img src="/images/timeMarkMarks/timemark_32_red.png" id="popup_input_timemark" />
+                        <img class="view_RadioPreview" id="popup_input_timemark" data-radiosetid="popup_timemark_color" />
                         <input name="popup_input" id="popup_input" type="text" placeholder="Please describe this moment" />
                     </div>
                     <div id="popup_timemark_color" class="view_RadioSet" data-imageurl="/images/timeMarkMarks/timemark_32_%s.png">
