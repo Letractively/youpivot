@@ -6,20 +6,21 @@ var HistoryList = new (function _HistoryList(){
     var self = this;
 
     var list = [];
+    var timeInterval = 86400000;
 
     var newestDate = new Date().getTime();
-    var oldestDate = new Date().getTime() - 21599999;
+    var oldestDate = new Date().getTime() - (timeInterval-1);
     var dateSchema = {"left": "normal", "name": "normal"};
 
     self.setNewest = function(date){
-        oldestDate = date - 21599999;
+        oldestDate = date - (timeInterval-1);
         newestDate = date;
         populateHistoryList();
     }
 
     self.setOldest = function(date){
         oldestDate = date;
-        newestDate = date + 21599999;
+        newestDate = date + (timeInterval-1);
         populateHistoryList();
     }
 
@@ -28,7 +29,7 @@ var HistoryList = new (function _HistoryList(){
         self.itemTable.clear();
         HistoryModel.getNumVisits(oldestDate, newestDate, 1000, function(results){
             if(results.length > 0){
-                showResults(results, 0);
+                showResults(results);
                 newestDate = results[0].visitTime;
                 oldestDate = results[results.length-1].visitTime;
                 $("#th-message").hide();
@@ -36,14 +37,24 @@ var HistoryList = new (function _HistoryList(){
                 $("#th-message").html("No entries found between " + DateFormatter.formatDate(oldestDate, "M j ") + DateFormatter.formatTime(oldestDate, 12) + " and " + DateFormatter.formatDate(newestDate, "M j ") + DateFormatter.formatTime(newestDate, 12)).show();
             }
         });
-        function showResults(results, start){
-            list = results;
-            for(var i=start; i<results.length; i++){
-                displayVisit(results[i]);
-                THDomainManager.addDomain("chrome://favicon/"+results[i].url, results[i].domain);
-            }
-            THDomainManager.display();
+    }
+
+    function showResults(results, start, count){
+        if(start === undefined || count === undefined){
+            start = 0;
+            count = 10;
         }
+        if(count == 0) throw "Count cannot be 0";
+
+        list = results;
+        for(var i=start; i<start+count; i++){
+            if(i >= results.length)
+                return;
+            displayVisit(results[i]);
+            THDomainManager.addDomain("chrome://favicon/"+results[i].url, results[i].domain);
+        }
+        THDomainManager.display();
+        setTimeout(function(){ showResults(results, start+count, count); }, 50); 
     }
 
     self.getItem = function(id){
@@ -122,7 +133,7 @@ var HistoryList = new (function _HistoryList(){
             }else{
                 $("#th-historyList .edit").hide();
             }
-            
+
         });
     });
 
