@@ -116,13 +116,17 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 	#y-searchResults { padding-bottom: 10px; display: none; -webkit-user-select: none; }
 	/*** end search results ***/
 
-	.pageFlipper { width: 680px; height: 70px; text-align: center; color: #BECAD8; cursor: pointer; padding: 10px; box-sizing: border-box; }
+/*	.pageFlipper { width: 680px; height: 70px; text-align: center; color: #BECAD8; cursor: pointer; padding: 10px; box-sizing: border-box; }
 	.pageFlipper:hover, .pageFlipper.active { background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(245,246,250)), color-stop(0.97, rgb(235,242,245))); color: #3870AD; }
 	.pageFlipper.active { color: #555555; font-weight: bold; }
 	#bottomPageFlipper { border-top: 1px solid #E1E4EB; }
-	#topPageFlipper { border-bottom: 1px solid #E1E4EB; }
+	#topPageFlipper { border-bottom: 1px solid #E1E4EB; }*/
 	/*** text contents ***/
 	#textContent { padding-bottom: 10px; -webkit-user-select: none; }
+    #textContent .edit { display: none; }
+
+    #yp-editButton { position: relative; left: 600px; top: 10px; height: 20px; }
+
 	.contentHeader { font-weight: bold; }
 	.contentHeader img { vertical-align: middle; }
     .pivotBtn { width: 60px; display: none; }
