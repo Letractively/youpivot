@@ -1,9 +1,9 @@
-include("js/dateformatter.js");
-include("js/views/arrowbox/arrowbox.js");
-include("include/jui/jquery-ui-1.8.10.custom.min.js");
+O_O.include("js/dateformatter.js");
+O_O.include("js/views/arrowbox/arrowbox.js");
+O_O.include("include/jui/jquery-ui-1.8.10.custom.min.js");
 
-style("include/jui/jquery-ui-1.8.10.custom.css");
-style("js/views/datebox.css");
+O_O.style("include/jui/jquery-ui-1.8.10.custom.css");
+O_O.style("js/views/datebox.css");
 
 // uses arrowBox to implement a calendar implementation for dateBox
 

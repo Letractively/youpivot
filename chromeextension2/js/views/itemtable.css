@@ -10,7 +10,7 @@
 .itemTable .item_date .grey { color: #999999; }
 .itemTable .item_time { display: inline-block; color: #919194; width: 60px; text-align: center; }
 .itemTable .item_left { padding: 0px 8px; width: 70px; height: 100%; }
-.itemTable a { overflow: hidden; text-overflow: ellipsis; color: #000000 !important; display: block; white-space: nowrap; }
+.itemTable a { overflow: hidden; text-overflow: ellipsis; color: #000000 !important; white-space: nowrap; }
 .pivotBtn { width: 60px; display: none; }
 
 .item_color { width: 0px; padding: 0px 3px 0px 0px !important; }

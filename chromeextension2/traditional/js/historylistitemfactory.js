@@ -25,7 +25,7 @@ var HistoryListItemFactory = new (function _HistoryListItemFactory(){
 	}
     self.createName = function(item){
 		var icon = IconFactory.createTextIcon("chrome://favicon/"+item.url, item.title, "item_icon");
-		var output = "<a href='"+item.url+"' target='_blank'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
+		var output = "<button class='edit deleteBtn' data-id='"+item.visitId+"'>Delete</button><a href='"+item.url+"' target='_blank'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
 		return output;
 	}
 	self.createLeft = function(item){
