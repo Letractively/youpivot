@@ -17,6 +17,8 @@
 #th-historyList_today { margin: auto; }
 #th-historyList_newer { float: right; }
 
+#th-historyList .edit { display: none; }
+
 .th-historyListControl { display: inline-block; }
 
 #th-contentFilters { padding-top: 5px; }
@@ -26,3 +28,4 @@
 #th-filtersWrap { display: none; padding: 20px 2px 2px 2px; }
 
 #th-message { color: #666; padding: 20px; display: none; }
+#th-editButton { height: 20px; position: relative; left: 620px; top: 18px; }

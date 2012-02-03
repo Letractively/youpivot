@@ -26,14 +26,6 @@ var HistoryList = new (function _HistoryList(){
     function populateHistoryList(){
         THDomainManager.clearDomains();
         self.itemTable.clear();
-        /*HistoryModel.getDayVisits(newestDate, function(results){
-            showResults(results, 0);
-        }, 
-        function(results){
-            showResults(results, 100);
-            oldestDate = results[results.length-1].visitTime;
-            console.log("oldestDate", new Date(oldestDate));
-        });*/
         HistoryModel.getNumVisits(oldestDate, newestDate, 1000, function(results){
             if(results.length > 0){
                 showResults(results, 0);
@@ -64,7 +56,8 @@ var HistoryList = new (function _HistoryList(){
     }
 
     var deleteentry = function(obj){
-        var id = $(obj).data("id");
+        var id = $(obj).data("id"); // for context menu
+        if(id === undefined) id = $(this).attr("data-id"); // for edit mode
         self.itemTable.deleteItem(id);
         var item = self.getItem(id);
         // hack to remove only that one visit from history
@@ -97,6 +90,8 @@ var HistoryList = new (function _HistoryList(){
         }, 
         { title: icon + "<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+visit.title+"</div>" });
 
+        row.find(".deleteBtn").click(deleteentry);
+
         row.data("id", visit.visitId); //store the item with the DOM object
 
         return row;
@@ -121,6 +116,14 @@ var HistoryList = new (function _HistoryList(){
             e.preventDefault();
         });
 
+        $("#th-editButton").bind("togglechanged", function(e, state){
+            if(state){
+                $("#th-historyList .edit").show();
+            }else{
+                $("#th-historyList .edit").hide();
+            }
+            
+        });
     });
 
 })();
