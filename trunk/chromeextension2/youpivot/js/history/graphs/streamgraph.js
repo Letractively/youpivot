@@ -332,6 +332,7 @@ var StreamGraph = {};
             P.pushStyle();
             P.fill();
             P.noStroke();
+            //console.log("layer", i, layers.length, layers[i]);
             drawLayer(layers[i], [111, 111, 111, 255], false, true);
             var hit = P.get(P.mouseX, P.mouseY-($("body").scrollTop()));
             var match1 = P.red(hit)==111 && P.green(hit)==111 && P.blue(hit)==111;
@@ -377,8 +378,9 @@ var StreamGraph = {};
 
             // return if mouse is on the same layer
             if(lastHit!==-1){
-                if(trueMatch(lastHit)){
-                    return lastHit;
+                var i = layerTable[lastHit];
+                if(trueMatch(i)){
+                    return i;
                 }
             }
 

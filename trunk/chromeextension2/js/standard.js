@@ -4,8 +4,8 @@ O_O.include = function(jsfile, baseurl){
     include(jsfile, baseurl);
 }
 
-O_O.style = function(jsfile, baseurl){
-    include(jsfile, baseurl);
+O_O.style = function(cssfile){
+    style(cssfile);
 }
 
 var _inclusions = {};
