@@ -51,8 +51,9 @@ O_O.style("js/views/datebox.css");
             });
 
             $(document).click(function(e){
-                if(e.target.className != "ABDisplay")
+                if(!$(e.target).hasClass("ABDisplay")){
                     self.element.find(".DBCalendar").slideUp(100);
+                }
             });
             self.element.find(".DBCalendar").click(function(e){
                 e.stopPropagation();
@@ -79,7 +80,7 @@ O_O.style("js/views/datebox.css");
 
         function moveToDayAfter(){
             var referenceDate = dateAtMidnight(self.endDate);
-            if(self.endDate == referenceDate+86400000)
+            if(self.endDate >= referenceDate+86399999)
                 setDate(referenceDate + 86400001, referenceDate + (86400000*2) -1 );
             else
                 setDate(referenceDate, referenceDate + 86400000);

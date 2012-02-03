@@ -2,24 +2,25 @@ include("/js/urlhash.js");
 
 function initView(){
     var currentView = URLHash.getHashValue("options");
-   if(currentView == "timemarks"){
-      navBar_clickTimeMarks();
-   }else if(currentView == "history"){
-      navBar_clickTraditionalHistory();
-   }else if(currentView == "geolocation"){
-      navBar_clickGeo();
-   }else if(currentView == "general"){
-      navBar_clickGeneral();
-   }else if(currentView == "changelog"){
-	  navBar_clickChangeLog();
-   }else if(currentView == "youpivot"){
-      navBar_clickYouPivot();
-   }
-   
-   favicon.change("images/box0.png");
+    if(currentView == "timemarks"){
+        navBar_clickTimeMarks();
+    }else if(currentView == "history"){
+        navBar_clickTraditionalHistory();
+    }else if(currentView == "geolocation"){
+        navBar_clickGeo();
+    }else if(currentView == "changelog"){
+        navBar_clickChangeLog();
+    }else if(currentView == "youpivot"){
+        navBar_clickYouPivot();
+    }else{
+        // default
+        navBar_clickGeneral();
+    }
+
+    favicon.change("images/box0.png");
 }
-$(window).bind( 'hashchange', function(e) {
-   initView();
+$(window).bind('hashchange', function(e) {
+    initView();
 });
 
 

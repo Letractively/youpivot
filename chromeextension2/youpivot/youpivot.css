@@ -1,13 +1,5 @@
 .anchor { cursor: pointer; }
-a.app:link, .anchor { color: #919191; text-decoration: none; }
-a.app:visited { color: #919191; text-decoration: none; }
-a.app:active { color: #919191; text-decoration: none; }
-a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
-.app { -webkit-user-select: none; }
 .hidden { display: none; }	
-.left { float: left; }
-.right { float: right; }
-.pointer { cursor: pointer; }
 
 .hItem.active { cursor: default; color: #3870AD; }
 
