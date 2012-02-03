@@ -68,7 +68,9 @@ var TableManager = {};
 	}
 
     var deleteentry = function(obj){
-        var id = $(obj).data("id");
+        var id = $(obj).data("id"); // for context menu
+        if(id === undefined)
+            id = $(this).attr("data-id"); // for edit mode
         itemTable.deleteItem(id);
         Connector.send("delete", {eventid: ItemManager.list[id].eventId}, {
             onSuccess: function(data){
@@ -98,6 +100,7 @@ var TableManager = {};
             }
         }, 
         { title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
+        row.find(".deleteBtn").click(deleteentry);
 	}
 
 	//clear all items from the table
@@ -131,5 +134,13 @@ var TableManager = {};
 		DomainManager.display();
 		TermManager.display();
 		StreamManager.display();
+
+        $("#yp-editButton").bind("togglechanged", function(e, state){
+            if(state){
+                $("#textContent .edit").show();
+            }else{
+                $("#textContent .edit").hide();
+            }
+        });
 	}
 })();

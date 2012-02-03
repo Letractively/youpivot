@@ -29,7 +29,7 @@ var TableRowFactory = {};
 	}
     m.createName = function(item){
 		var icon = IconFactory.createTextIcon(item.domain.favUrl, item.name, "item_icon");
-		var output = "<a href='"+item.url+"' target='_blank'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
+		var output = "<button class='edit deleteBtn' data-id='"+item.id+"'>Delete</button><a href='"+item.url+"' target='_blank'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
 		return output;
 	}
 	m.createLeft = function(item){
