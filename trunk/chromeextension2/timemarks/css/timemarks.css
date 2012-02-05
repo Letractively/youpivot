@@ -177,6 +177,6 @@
    margin-left:15px;
 }
 
-.timeMarkHeader:hover .reopen{
+.entry:hover .timeMarkHeader .reopen{
    display:inline;
 }
