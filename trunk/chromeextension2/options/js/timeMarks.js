@@ -85,7 +85,7 @@ function printTimeMark(item,rows){
   }
   string += "</a>";//timeMarkHeader
   string += " <span class='deletePage'><a href='javascript:deleteTimeMark(\"" + item.id + "\");'>Delete</a></span>";
-  string += "<a href='javascript:reopenTimemark(\"" + item.id + "\");'>Reopen</a></span>"
+  string += "<a href='javascript:reopenTimemark(\"" + item.id + "\");' class='reopen'>Reopen</a></span>"
   string += "</div>";
   string += "<div class='pages-box'>";
   string += "<div class='timemark-window'>";

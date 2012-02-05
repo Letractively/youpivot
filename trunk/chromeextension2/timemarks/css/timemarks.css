@@ -49,10 +49,7 @@
 }
 
 .entry .title {
-  max-width: 600px;
-  overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
   text-decoration: none;
 }
 
@@ -173,4 +170,13 @@
 
 .deletePage a{
    color:red !important;
+}
+
+.timeMarkHeader .reopen {
+   display:none;
+   margin-left:15px;
+}
+
+.timeMarkHeader:hover .reopen{
+   display:inline;
 }
