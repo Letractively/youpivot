@@ -20,7 +20,7 @@ a.app:hover, .anchor:hover { color: #888888; text-decoration: none; }
 .disabled { pointer-events: none; }
 
 /*** top bar ***/
-#m-topbar { position: fixed; top: 0px; left: 0px; height: 35px; width: 100%; background: -webkit-linear-gradient(top, #e5e5e5 0%,#f9f9f9 100%); border-bottom: 1px solid #CCCCCC; box-sizing: border-box; }
+#m-topbar { position: fixed; top: 0px; left: 0px; height: 35px; width: 100%; background: -webkit-linear-gradient(top, #e5e5e5 0%,#f9f9f9 100%); border-bottom: 1px solid #CCCCCC; box-sizing: border-box; z-index: 1000; }
 #m-topbarTabs { width: 281px; float: left; text-align: center; table-layout: auto; }
 #m-topbarContents { width: 100%; }
 
