@@ -22,6 +22,7 @@
   </script>
   <script src="timemarks/js/timeMarks.js">
   </script>
+  <script src="timemarks/js/domain.js"></script>
 <script>
 function initView(){
       navBar_clickTimeMarks();
@@ -32,6 +33,10 @@ database.open();
 <body>
   <div id="bodyCopy">
 	<div id="timemarksEditButton"><input type='button' onclick="toggleTimemarksEdit();" value="Edit"></div>
+	<div id="tm-filtersWrap" style="display:none;">
+        <div class="contentHeader app">Active filters</div>
+        <div id="tm-filters"></div>
+    </div>
   	<div id="bodyCopy_timeMarks"></div>
   </div> 
 </body>
