@@ -1,3 +1,7 @@
+///THIS ISNT THE REAL ONE!!!!!!
+///use options/js/timemarks.js
+
+
 // JavaScript Document
 function getAllTimeMarks(){
    database.db.transaction(function(tx){
@@ -21,6 +25,7 @@ function deleteTimeMarkPage(id){
 
 
 function printTimeMarks(tx,result){
+   THDomainManager.clearDomains();
    $("#bodyCopy_timeMarks").html("");
    var lastdate = null;
    for(i=0;i<result.rows.length;i++){
@@ -34,6 +39,8 @@ function printTimeMarks(tx,result){
             }
             var string = printTimeMark(item,result.rows);
             $("#bodyCopy_timeMarks").append(string);
+            console.log("display thing");
+            THDomainManager.display();
          });
       })(item);
    }
@@ -56,6 +63,7 @@ function printTimeMark(item,rows){
   var currentWindow = rows.item(0).window;
   for(i=0;i<rows.length;i++){
      var item = rows.item(i);
+     THDomainManager.addDomain("chrome://favicon/"+item.url, item.domain);
      if(item.window != currentWindow){
         string += "</div><div class='timemark-window'>";
         currentWindow = item.window;

@@ -1,5 +1,5 @@
 // JavaScript Document
-
+include('/youpivot/js/background/domainextractor.js');
 
 function getAllTimeMarks(){
    database.db.transaction(function(tx){
@@ -54,6 +54,7 @@ function reopenTimemark(id){
 
 
 function printTimeMarks(tx,result){
+   TMDomainManager.clearDomains();
    $("#bodyCopy_timeMarks").html("");
    var lastdate = null;
    for(i=0;i<result.rows.length;i++){
@@ -67,9 +68,11 @@ function printTimeMarks(tx,result){
             }
             var string = printTimeMark(item,result.rows);
             $("#bodyCopy_timeMarks").append(string);
+            TMDomainManager.display();
          });
       })(item);
    }
+   
 }
 
 
@@ -92,6 +95,8 @@ function printTimeMark(item,rows){
   var currentWindow = rows.item(0).window;
   for(i=0;i<rows.length;i++){
      var item = rows.item(i);
+     var domain = DomainExtractor.getName(item.url);
+     TMDomainManager.addDomain("chrome://favicon/"+item.url, domain);
      if(item.window != currentWindow){
         string += "</div><div class='timemark-window'>";
         currentWindow = item.window;
@@ -101,8 +106,7 @@ function printTimeMark(item,rows){
          favicon = "http://www.google.com/s2/favicons?domain=" + item.url
       }
       
-      var domain = getDomain(item.url);
-      string += "<div class='title domain-"+domain+"' id='timemark-page-"+item.id+"'><a href='" + item.url + "' style=\"background-image:url('" + favicon + "')\" class='title'>" + item.title + "</a>";
+      string += "<div class='title' id='timemark-page-"+item.id+"' data-domain='" + domain +"'><a href='" + item.url + "' style=\"background-image:url('" + favicon + "')\" class='title'>" + item.title + "</a>";
 
       var timeOpen = new Date(item.timeOpen);
 
