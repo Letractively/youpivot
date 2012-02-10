@@ -9,6 +9,12 @@
 class AppDelegate
     attr_accessor :window, :button
     def applicationDidFinishLaunching(a_notification)
+        #backround_image = NSImage.alloc.initByReferencingFile(installScreen.png)
+        #[window setBackgroundColor:[NSColor colorWithPatternImage:[NSImage imageNamed:@"myImage.png"]]];
+        
+        window.setBackgroundColor(NSColor.colorWithPatternImage(NSImage.imageNamed("installScreen.png")))
+        
+        #        window.setBackgroundColor.colorWithPatternImage.imageNamed(installScreen.png)
         @couchDBManager = CouchDBManager.alloc.init
         @couchDBManager.startServer
         

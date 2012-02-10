@@ -6,6 +6,7 @@
 #  Copyright 2011 __MyCompanyName__. All rights reserved.
 #
 
+#require 'CherryPySetup.m'
 
 class CouchDBSetupTool
     
@@ -14,10 +15,12 @@ class CouchDBSetupTool
     end
     
     def self.perform_setup
+
         setup_tool_path = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("setup.py")
         @task = NSTask.alloc.init
         @task.setLaunchPath("/usr/bin/python")
         @task.setArguments([setup_tool_path])
+        @task.setCurrentDirectoryPath(NSBundle.mainBundle.resourcePath)
         @task.launch
         
 
@@ -28,6 +31,7 @@ class CouchDBSetupTool
         @task2 = NSTask.alloc.init
         @task2.setLaunchPath("/usr/bin/python")
         @task2.setArguments([setup_tool_path2])
+        @task2.setCurrentDirectoryPath(NSBundle.mainBundle.resourcePath)
         @task2.launch
     end
     

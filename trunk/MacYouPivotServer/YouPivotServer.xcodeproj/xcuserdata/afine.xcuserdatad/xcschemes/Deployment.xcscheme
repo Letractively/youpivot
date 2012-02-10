@@ -42,6 +42,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "46FB3C7E1485863B00A27254"
+            BuildableName = "YouPivotServer.app"
+            BlueprintName = "YouPivotServer"
+            ReferencedContainer = "container:YouPivotServer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
@@ -51,6 +60,15 @@
       buildConfiguration = "Debug"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "46FB3C7E1485863B00A27254"
+            BuildableName = "YouPivotServer.app"
+            BlueprintName = "YouPivotServer"
+            ReferencedContainer = "container:YouPivotServer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
