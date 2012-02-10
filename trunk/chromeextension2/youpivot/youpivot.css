@@ -35,7 +35,7 @@
 	#streamFilters img:hover { opacity: 1 !important; }
 
 .favicon { width: 16px; height: 16px; }
-.favicon.wrap { margin: 0px 3px; }
+.favicon.wrap { padding: 0px 3px 6px; }
 /*** end left sidebar ***/
 
 /*** top bar ***/

@@ -21,7 +21,7 @@
 
 .th-historyListControl { display: inline-block; }
 
-#th-contentFilters { padding-top: 5px; }
+#th-contentFilters { padding-top: 5px; line-height:10px;}
 #th-contentFilters img { cursor: pointer; }
 #th-contentFilters img:hover { opacity: 1 !important; }
 

@@ -1,6 +1,6 @@
 {
-  "name": "YouPivot & TimeMarks (alpha)",
-  "version": "0.1",
+  "name": "YouPivot & TimeMarks (Beta)",
+  "version": "0.2.0",
   "description": "YouPivot & TimeMarks is more than a history page replacement allowing you to navigate through your digital history with ease.",
   "background_page": "background.html", 
   "options_page": "optionsredirect.html",
