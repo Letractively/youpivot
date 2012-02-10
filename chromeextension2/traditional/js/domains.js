@@ -84,11 +84,11 @@ var THDomainManager = new (function _THDomainManager(){
 		}, 
 		{ title: tImg+"<span>"+title+"<span>" });
 		function includeFilter(obj){
-			var label = IconFactory.createTextIcon($(obj).attr("src"), "click to remove", "wrap");
+			var label = IconFactory.createTextIcon($(obj).attr("src"), $(obj).data("title")+" (click to remove)", "wrap");
 			THFilterManager.addFilter("domain", $(obj).data("title"), label);
 		}
 		function excludeFilter(obj){
-			var label = IconFactory.createTextIcon($(obj).attr("src"), "click to remove", "wrap");
+			var label = IconFactory.createTextIcon($(obj).attr("src"), $(obj).data("title")+" (click to remove)", "wrap");
 			THFilterManager.addOutcast("domain", $(obj).data("title"), label);
 		}
 	}

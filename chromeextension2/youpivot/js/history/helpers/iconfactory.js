@@ -1,9 +1,7 @@
-var IconFactory = {};
+var IconFactory = new (function _IconFactory(){
+    var self = this;
 
-(function(){
-	var m = IconFactory;
-
-	m.createFavicon = function(url, name){
+	self.createFavicon = function(url, name){
 		if(!name) name = url;
 		return this.createIcon(getFavicon(url), name);
 	}
@@ -12,13 +10,14 @@ var IconFactory = {};
 		return "chrome://favicon/"+url;
 	}
 
-	m.createIcon = function(src, name){
+	self.createIcon = function(src, name){
 		var output;
-		output = $(m.createTextIcon(src, name));
+		output = $(self.createTextIcon(src, name));
 		return output;
 	}
 
-	m.createTextIcon = function(src, name, clss){
+    // slight performance improvement over createIcon if concatenated with other HTML strings before use
+	self.createTextIcon = function(src, name, clss){
 		var classString = (clss) ? clss : "";
 		if(!name) name = src;
 		var error = (src) ? "onerror='this.src=\""+getFavicon(src)+"\"'" : "";

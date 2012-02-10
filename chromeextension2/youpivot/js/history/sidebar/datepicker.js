@@ -1,17 +1,16 @@
-var DatePicker = {};
+var DatePicker = new (function _DatePicker(){
+    var self = this;
 
-(function(){
-	var m = DatePicker;
 	var dateValues = ["now", "today", "yesterday"];
 	var def = "now";
 
-	m.pickDate = function(date){
+	self.pickDate = function(date){
 		var label = (typeof date == "string") ? date : "";
 		$("#datePickers").hList("select", {name: label});
 		pickDate(date);
 	}
 
-    m.setDateDisplay = function(startDate, endDate){
+    self.setDateDisplay = function(startDate, endDate){
         var label = "";
         var todayNoon = noonDay(new Date()).getTime();
         if(Math.abs(endDate - new Date().getTime()) < 30000){
@@ -51,7 +50,8 @@ var DatePicker = {};
 				return noonDay(d);
 				break;
 			case "yesterday":
-				d.setDate(d.getDate()-1);
+				//d.setDate(d.getDate()-1); // this does not work when it gets past a month
+                d = new Date(d.getTime() - 86400000);
 				return noonDay(d);
 				break;
 		}
@@ -62,16 +62,6 @@ var DatePicker = {};
 		d.setSeconds(0);
 		d.setMilliseconds(0);
 		return d;
-	}
-	function toggleCalendar(){
-		if($("#calendar").is(":visible")){
-			$("#calendar").slideUp(100);
-		}else{
-			$("#calendar").slideDown(100);
-		}
-	}
-	function hideCalendar(){
-		$("#calendar").slideUp(100);
 	}
 
 	$("#m-tabView_youpivot").bind("tabready", function(){
@@ -86,7 +76,7 @@ var DatePicker = {};
         });
 
 		$("#datePickers").hList("loadArray", {items: dateValues, callback: pickDate});
-		m.pickDate(def);
+		self.pickDate(def);
 	});
 
 })();
