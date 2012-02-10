@@ -1,10 +1,8 @@
-var FilterTimeManager = {};
-
-(function(){
-	var m = FilterTimeManager;
+var FilterTimeManager = new (function _FilterTimeManager(){
+    var self = this;
 
 	var lastTime;
-	m.filterTime = function(time){
+	self.filterTime = function(time){
 		if(typeof time == "undefined" && lastTime){
 			time = lastTime;
 		}else if(time){

@@ -1,10 +1,8 @@
-var Translator = {};
-
-(function(){
-	var m = Translator;
+var Translator = new (function _Translator(){
+    var self = this;
 
 	//translate the item from "server-side" language to "client side" language
-	m.translateItem = function(server){
+	self.translateItem = function(server){
 		var output = {};
 		output.startTime = server.starttime*1000;
 		output.endTime = server.endtime*1000;

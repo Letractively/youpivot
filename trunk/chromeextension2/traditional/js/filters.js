@@ -185,7 +185,7 @@ var THFilterManager = new (function _THFilterManager(){
 		return addFilterLabel(type, value, lbl, true);
 	}
 	function addFilterLabel(type, value, lbl, out){
-		var label = $("<div class='filterLabel app' title='click to remove'></div>");
+		var label = $("<div class='filterLabel app' title='"+value+" (click to remove)'></div>");
 		label.click(function(){
 			if(out){
 				removeOutcast(type, value);

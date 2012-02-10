@@ -10,10 +10,10 @@ $(function(){
     // get the hash value before Master.changeTab changes it
     var hashTab = URLHash.getHashValue("tab");
 
-    Master.changeTab("traditionalhistory");
-
     if(typeof hashTab == "string")
         Master.changeTab(hashTab);
+    else
+        Master.changeTab("traditionalhistory");
 
 	//listen for hash change
     URLHash.onHashValueChange("tab", function(tabId){

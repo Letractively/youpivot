@@ -1,15 +1,14 @@
-var Connector = {};
-
 //A middle-man to help communicating with the server
-(function(){
-	var m = Connector;
+var Connector = new (function _Connector(){
+    var self = this;
 
+	//var serverUrl = "http://127.0.0.1:8391/";
 	var serverUrl = "http://127.0.0.1:8080/";
 	var developerId = "e34c5ee0d846e882ae1014294b002a14";
 	var userId = -1;
 
     // callback = {onSuccess(data), onError(data)}
-	m.send = function(eventType, info, callback){
+	self.send = function(eventType, info, callback){
 		if(typeof info != "object"){
 			throw "info is not an object";
 			console.log("Send info to server failed");

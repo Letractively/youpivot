@@ -66,11 +66,11 @@ var DomainManager = {};
 		}, 
 		{ title: tImg+"<span>"+title+"<span>" });
 		function includeFilter(obj){
-			var label = IconFactory.createTextIcon($(obj).attr("src"), "click to remove", "wrap");
+			var label = IconFactory.createTextIcon($(obj).attr("src"), $(obj).data("title")+" (click to remove)", "wrap");
 			FilterManager.addFilter("domain", $(obj).data("title"), label);
 		}
 		function excludeFilter(obj){
-			var label = IconFactory.createTextIcon($(obj).attr("src"), "click to remove", "wrap");
+			var label = IconFactory.createTextIcon($(obj).attr("src"), $(obj).data("title") + " (click to remove)", "wrap");
 			FilterManager.addOutcast("domain", $(obj).data("title"), label);
 		}
 	}
