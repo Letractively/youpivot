@@ -6,8 +6,11 @@
 
 import couchdb
 import urllib
+import os
+os.system("""osascript -e 'do shell script "sudo easy_install cherrypy \\"%s\\" " with administrator privileges'""")
 
-DB_SERVER_URL = 'http://admin:admin@localhost:5984'
+
+DB_SERVER_URL = 'http://localhost:5984'
 couch = couchdb.Server(DB_SERVER_URL)
 
 def createDB(dbname):

@@ -12,9 +12,11 @@ class CouchDBManager
 
     def init
         if super
-            @couchPath = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("Couchbase Single Server.app/Contents/MacOS/Couchbase Single Server")
+            @couchPath = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("couchdbx-core/bin/couchdb")
             @task = NSTask.alloc.init
             @task.setLaunchPath(@couchPath)
+            @task.setCurrentDirectoryPath(NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("couchdbx-core"))
+            print "test"
             self
         end
     end

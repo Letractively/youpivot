@@ -1,0 +1,699 @@
+[Tue, 20 Sep 2011 01:47:00 GMT] [info] [<0.104.0>] MC daemon: starting: json_mode=true.
+
+[Tue, 20 Sep 2011 01:47:00 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Tue, 20 Sep 2011 01:47:00 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 01:47:00 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 01:47:00 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 01:47:00 GMT] [info] [<0.121.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 01:47:17 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'PUT' /_config/admins/admin 200
+
+[Tue, 20 Sep 2011 01:47:17 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'POST' /_session 200
+
+[Tue, 20 Sep 2011 01:47:17 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 01:47:17 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 01:47:17 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'PUT' /_users/org.couchdb.user%3Aadmin 201
+
+[Tue, 20 Sep 2011 01:47:32 GMT] [info] [<0.123.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 01:47:32 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 01:47:32 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 02:37:41 GMT] [info] [<0.3172.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 02:37:41 GMT] [info] [<0.3173.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 02:37:41 GMT] [info] [<0.163.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 02:37:41 GMT] [info] [<0.163.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 02:37:43 GMT] [info] [<0.163.0>] 127.0.0.1 - - 'GET' /_config/ 401
+
+[Tue, 20 Sep 2011 02:37:43 GMT] [info] [<0.3172.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 02:37:43 GMT] [info] [<0.3173.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:34:23 GMT] [info] [<0.3174.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:34:23 GMT] [info] [<0.3174.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:34:23 GMT] [info] [<0.3174.0>] 127.0.0.1 - - 'PUT' /events/ 302
+
+[Tue, 20 Sep 2011 03:35:45 GMT] [info] [<0.6577.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:35:45 GMT] [info] [<0.6577.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:35:45 GMT] [info] [<0.6666.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:35:45 GMT] [info] [<0.6667.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 03:35:52 GMT] [info] [<0.6577.0>] 127.0.0.1 - - 'POST' /_session 200
+
+[Tue, 20 Sep 2011 03:35:53 GMT] [info] [<0.6577.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:36:04 GMT] [info] [<0.6668.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:36:04 GMT] [info] [<0.6668.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:36:04 GMT] [info] [<0.6668.0>] 127.0.0.1 - - 'PUT' /events/ 302
+
+[Tue, 20 Sep 2011 03:36:21 GMT] [info] [<0.6688.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:36:21 GMT] [info] [<0.6688.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:36:21 GMT] [info] [<0.6688.0>] 127.0.0.1 - - 'PUT' /events/ 302
+
+[Tue, 20 Sep 2011 03:37:51 GMT] [info] [<0.6712.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:38:12 GMT] [info] [<0.6809.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:38:12 GMT] [info] [<0.6809.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:38:12 GMT] [info] [<0.6809.0>] 127.0.0.1 - - 'PUT' /events/ 302
+
+[Tue, 20 Sep 2011 03:41:51 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:41:51 GMT] [info] [<0.7058.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:41:51 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:41:51 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 03:41:54 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/org.couchdb.user%3Aadmin?revs_info=true 200
+
+[Tue, 20 Sep 2011 03:41:54 GMT] [info] [<0.7064.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:41:54 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:41:55 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/org.couchdb.user%3Aadmin?revs_info=true 200
+
+[Tue, 20 Sep 2011 03:41:55 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:41:55 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:41:56 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'DELETE' /_session 200
+
+[Tue, 20 Sep 2011 03:41:56 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:00 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:42:00 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:00 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:01 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_active_tasks 401
+
+[Tue, 20 Sep 2011 03:42:01 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:01 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:05 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_config/ 401
+
+[Tue, 20 Sep 2011 03:42:05 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:05 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:12 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'POST' /_session 200
+
+[Tue, 20 Sep 2011 03:42:12 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:25 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_config/ 200
+
+[Tue, 20 Sep 2011 03:42:25 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:25 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:33 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:42:33 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:33 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:34 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 03:42:35 GMT] [info] [<0.7065.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Tue, 20 Sep 2011 03:42:35 GMT] [info] [<0.7109.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:35 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Tue, 20 Sep 2011 03:42:35 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' /_users/_all_docs?limit=11 200
+
+[Tue, 20 Sep 2011 03:42:35 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:35 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Tue, 20 Sep 2011 03:42:39 GMT] [info] [<0.7065.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:39 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:39 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/_design/_auth?revs_info=true 200
+
+[Tue, 20 Sep 2011 03:42:44 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/org.couchdb.user%3Aadmin?revs_info=true 200
+
+[Tue, 20 Sep 2011 03:42:44 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:44 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:49 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'DELETE' /_users/org.couchdb.user%3Aadmin?rev=1-b8767f0228e22a1d3fe10e12e6d3d656 200
+
+[Tue, 20 Sep 2011 03:42:50 GMT] [info] [<0.7065.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Tue, 20 Sep 2011 03:42:50 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Tue, 20 Sep 2011 03:42:50 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' /_users/_all_docs?limit=11 200
+
+[Tue, 20 Sep 2011 03:42:50 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:50 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:50 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Tue, 20 Sep 2011 03:42:52 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'DELETE' /_session 200
+
+[Tue, 20 Sep 2011 03:42:52 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:59 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:42:59 GMT] [info] [<0.7065.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:42:59 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:42:59 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 03:43:06 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'POST' /_session 200
+
+[Tue, 20 Sep 2011 03:43:06 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:43:12 GMT] [info] [<0.7065.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:43:12 GMT] [info] [<0.7110.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:43:14 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:43:14 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:43:15 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_active_tasks 200
+
+[Tue, 20 Sep 2011 03:43:15 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:43:15 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:43:16 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:43:16 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:43:16 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:43:18 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_config/ 200
+
+[Tue, 20 Sep 2011 03:43:18 GMT] [info] [<0.6831.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:43:18 GMT] [info] [<0.7057.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:46:29 GMT] [info] [<0.7306.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:46:29 GMT] [info] [<0.7306.0>] 127.0.0.1 - - 'HEAD' /events/ 404
+
+[Tue, 20 Sep 2011 03:46:29 GMT] [info] [<0.7306.0>] 127.0.0.1 - - 'PUT' /events/ 201
+
+[Tue, 20 Sep 2011 03:46:29 GMT] [info] [<0.7351.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:46:55 GMT] [info] [<0.7365.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:46:55 GMT] [info] [<0.7391.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:47:30 GMT] [info] [<0.7393.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:47:30 GMT] [info] [<0.7393.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:47:30 GMT] [info] [<0.7429.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:47:30 GMT] [info] [<0.7393.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 03:47:30 GMT] [info] [<0.7430.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Tue, 20 Sep 2011 03:47:33 GMT] [info] [<0.7393.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Tue, 20 Sep 2011 03:47:33 GMT] [info] [<0.7429.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Tue, 20 Sep 2011 03:47:33 GMT] [info] [<0.7430.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Tue, 20 Sep 2011 03:47:33 GMT] [info] [<0.7393.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:47:33 GMT] [info] [<0.7429.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:47:33 GMT] [info] [<0.7393.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /developers/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /developers/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'PUT' /developers/ 201
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /domain/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /domain/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'PUT' /domain/ 201
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'PUT' /eventconstants/ 201
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /users/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'HEAD' /users/ 404
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7431.0>] 127.0.0.1 - - 'PUT' /users/ 201
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7651.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7651.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7651.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7651.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:51:09 GMT] [info] [<0.7651.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7725.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7726.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7704.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7704.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7725.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7726.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7727.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7728.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Tue, 20 Sep 2011 03:51:29 GMT] [info] [<0.7729.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7730.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7730.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7730.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7730.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7730.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7950.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7950.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7950.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7950.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:55:08 GMT] [info] [<0.7950.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.7951.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.7951.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.7951.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.7951.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.7951.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.8182.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.8182.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.8182.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.8182.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:58:58 GMT] [info] [<0.8182.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8183.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8183.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8183.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8183.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8183.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8217.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8217.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8217.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8217.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 03:59:31 GMT] [info] [<0.8217.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8218.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8218.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8218.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8218.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8218.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 04:01:36 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8344.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8344.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8344.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8344.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8344.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8388.0>] 127.0.0.1 - - 'HEAD' /events/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8388.0>] 127.0.0.1 - - 'HEAD' /developers/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8388.0>] 127.0.0.1 - - 'HEAD' /domain/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8388.0>] 127.0.0.1 - - 'HEAD' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 04:02:18 GMT] [info] [<0.8388.0>] 127.0.0.1 - - 'HEAD' /users/ 200
+
+[Tue, 20 Sep 2011 22:01:39 GMT] [info] [<0.5566.2>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 22:01:39 GMT] [info] [<0.5567.2>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 22:01:39 GMT] [info] [<0.8389.0>] 127.0.0.1 - - 'GET' /_config/ 401
+
+[Fri, 10 Feb 2012 00:48:10 GMT] [info] [<0.101.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 00:48:10 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Fri, 10 Feb 2012 01:32:23 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 01:32:23 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 01:32:23 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 01:32:23 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 01:32:23 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 01:32:47 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'HEAD' /users/e34c5ee0d846e882ae1014294b000990 200
+
+[Fri, 10 Feb 2012 01:32:47 GMT] [info] [<0.2767.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid/_view/temp_search?startkey=%5B%22query%22,%22e34c5ee0d846e882ae1014294b000990%22%5D&endkey=%5B%22query%5CuFF00%22,%22e34c5ee0d846e882ae1014294b000990%22%5D&limit=100 200
+
+[Fri, 10 Feb 2012 02:53:14 GMT] [info] [<0.2828.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 02:53:14 GMT] [info] [<0.2828.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 02:53:14 GMT] [info] [<0.2828.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 02:53:14 GMT] [info] [<0.2828.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 02:53:14 GMT] [info] [<0.2828.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 02:58:57 GMT] [info] [<0.7665.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 02:58:57 GMT] [info] [<0.7665.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 02:58:57 GMT] [info] [<0.7665.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 02:58:57 GMT] [info] [<0.7665.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 02:58:57 GMT] [info] [<0.7665.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 03:04:31 GMT] [info] [<0.8009.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 03:04:31 GMT] [info] [<0.8009.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 03:04:31 GMT] [info] [<0.8009.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 03:04:31 GMT] [info] [<0.8009.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 03:04:31 GMT] [info] [<0.8009.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 03:05:42 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 03:05:42 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 03:05:42 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 03:05:42 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 03:05:42 GMT] [info] [<0.8343.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 03:08:02 GMT] [info] [<0.8415.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 03:08:02 GMT] [info] [<0.8415.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 03:08:02 GMT] [info] [<0.8415.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 03:08:02 GMT] [info] [<0.8415.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 03:08:02 GMT] [info] [<0.8415.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 03:08:15 GMT] [info] [<0.8557.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 03:08:15 GMT] [info] [<0.8557.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 03:08:15 GMT] [info] [<0.8557.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 03:08:15 GMT] [info] [<0.8557.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 03:08:15 GMT] [info] [<0.8557.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 03:15:59 GMT] [info] [<0.8571.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Fri, 10 Feb 2012 03:15:59 GMT] [info] [<0.8571.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Fri, 10 Feb 2012 03:15:59 GMT] [info] [<0.8571.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Fri, 10 Feb 2012 03:15:59 GMT] [info] [<0.8571.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Fri, 10 Feb 2012 03:15:59 GMT] [info] [<0.8571.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Fri, 10 Feb 2012 16:31:53 GMT] [info] [<0.101.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:31:53 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.117.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.121.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.119.0>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.120.0>] 127.0.0.1 - - 'GET' /_replicator/ 400
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.119.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.117.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.121.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Fri, 10 Feb 2012 16:31:56 GMT] [info] [<0.120.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Fri, 10 Feb 2012 16:32:04 GMT] [info] [<0.120.0>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 16:37:51 GMT] [info] [<0.101.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:37:51 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Fri, 10 Feb 2012 16:38:03 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [info] [<0.100.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [emulator] Error in process <0.101.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.99.0>] {error_report,<0.30.0>,
+    {<0.99.0>,supervisor_report,
+     [{supervisor,{local,mc_sup}},
+      {errorContext,child_terminated},
+      {reason,{{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}},
+      {offender,
+          [{pid,<0.101.0>},
+           {name,mc_tcp_listener},
+           {mfargs,{mc_tcp_listener,start_link,[11213,mc_daemon]}},
+           {restart_type,permanent},
+           {shutdown,2000},
+           {child_type,worker}]}]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [info] [<0.104.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [emulator] Error in process <0.106.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.99.0>] {error_report,<0.30.0>,
+    {<0.99.0>,supervisor_report,
+     [{supervisor,{local,mc_sup}},
+      {errorContext,child_terminated},
+      {reason,{{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}},
+      {offender,
+          [{pid,<0.106.0>},
+           {name,mc_tcp_listener},
+           {mfargs,{mc_tcp_listener,start_link,[11213,mc_daemon]}},
+           {restart_type,permanent},
+           {shutdown,2000},
+           {child_type,worker}]}]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [info] [<0.108.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [emulator] Error in process <0.111.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.99.0>] {error_report,<0.30.0>,
+    {<0.99.0>,supervisor_report,
+     [{supervisor,{local,mc_sup}},
+      {errorContext,child_terminated},
+      {reason,{{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}},
+      {offender,
+          [{pid,<0.111.0>},
+           {name,mc_tcp_listener},
+           {mfargs,{mc_tcp_listener,start_link,[11213,mc_daemon]}},
+           {restart_type,permanent},
+           {shutdown,2000},
+           {child_type,worker}]}]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [info] [<0.113.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [emulator] Error in process <0.117.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.99.0>] {error_report,<0.30.0>,
+    {<0.99.0>,supervisor_report,
+     [{supervisor,{local,mc_sup}},
+      {errorContext,child_terminated},
+      {reason,{{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}},
+      {offender,
+          [{pid,<0.117.0>},
+           {name,mc_tcp_listener},
+           {mfargs,{mc_tcp_listener,start_link,[11213,mc_daemon]}},
+           {restart_type,permanent},
+           {shutdown,2000},
+           {child_type,worker}]}]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [info] [<0.119.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.99.0>] {error_report,<0.30.0>,
+    {<0.99.0>,supervisor_report,
+     [{supervisor,{local,mc_sup}},
+      {errorContext,child_terminated},
+      {reason,{{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}},
+      {offender,
+          [{pid,<0.120.0>},
+           {name,mc_tcp_listener},
+           {mfargs,{mc_tcp_listener,start_link,[11213,mc_daemon]}},
+           {restart_type,permanent},
+           {shutdown,2000},
+           {child_type,worker}]}]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [emulator] Error in process <0.120.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [info] [<0.122.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.123.0>] {error_report,<0.30.0>,
+              {<0.123.0>,crash_report,
+               [[{initial_call,{mochiweb_socket_server,init,['Argument__1']}},
+                 {pid,<0.123.0>},
+                 {registered_name,[]},
+                 {error_info,{exit,eaddrinuse,
+                                   [{gen_server,init_it,6},
+                                    {proc_lib,init_p_do_apply,3}]}},
+                 {ancestors,[couch_secondary_services,couch_server_sup,
+                             <0.31.0>]},
+                 {messages,[]},
+                 {links,[<0.85.0>]},
+                 {dictionary,[]},
+                 {trap_exit,true},
+                 {status,running},
+                 {heap_size,1597},
+                 {stack_size,24},
+                 {reductions,436}],
+                []]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.85.0>] {error_report,<0.30.0>,
+              {<0.85.0>,supervisor_report,
+               [{supervisor,{local,couch_secondary_services}},
+                {errorContext,start_error},
+                {reason,eaddrinuse},
+                {offender,[{pid,undefined},
+                           {name,httpd},
+                           {mfargs,{couch_httpd,start_link,[]}},
+                           {restart_type,permanent},
+                           {shutdown,1000},
+                           {child_type,worker}]}]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [emulator] Error in process <0.124.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.99.0>] {error_report,<0.30.0>,
+    {<0.99.0>,supervisor_report,
+     [{supervisor,{local,mc_sup}},
+      {errorContext,shutdown_error},
+      {reason,{{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}},
+      {offender,
+          [{pid,<0.124.0>},
+           {name,mc_tcp_listener},
+           {mfargs,{mc_tcp_listener,start_link,[11213,mc_daemon]}},
+           {restart_type,permanent},
+           {shutdown,2000},
+           {child_type,worker}]}]}}
+
+[Fri, 10 Feb 2012 16:40:31 GMT] [error] [<0.77.0>] {error_report,<0.30.0>,
+    {<0.77.0>,supervisor_report,
+     [{supervisor,{local,couch_server_sup}},
+      {errorContext,start_error},
+      {reason,shutdown},
+      {offender,
+          [{pid,undefined},
+           {name,couch_secondary_services},
+           {mfargs,{couch_server_sup,start_secondary_services,[]}},
+           {restart_type,permanent},
+           {shutdown,infinity},
+           {child_type,supervisor}]}]}}
+
+[Fri, 10 Feb 2012 16:41:00 GMT] [info] [<0.97.0>] MC daemon: starting: json_mode=true.
+
+[Fri, 10 Feb 2012 16:41:00 GMT] [info] [<0.31.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Fri, 10 Feb 2012 16:41:03 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' / 200
+
