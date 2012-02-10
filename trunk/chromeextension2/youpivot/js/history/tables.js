@@ -57,6 +57,20 @@ var TableManager = {};
         });
 
         itemTable = $("#textContent").pivotTable();
+
+        $("#yp-editButton").bind("togglechanged", function(e, state){
+            if(!SearchManager.getState()){
+                if(state){
+                    $("#textContent .edit").show();
+                }else{
+                    $("#textContent .edit").hide();
+                }
+            }
+        });
+    }
+
+    m.getItem = function(id){
+        return ItemManager.getItem(id);
     }
 
 	//reload the items in the table. Basically clearing all the items and add it back. 
@@ -135,12 +149,5 @@ var TableManager = {};
 		TermManager.display();
 		StreamManager.display();
 
-        $("#yp-editButton").bind("togglechanged", function(e, state){
-            if(state){
-                $("#textContent .edit").show();
-            }else{
-                $("#textContent .edit").hide();
-            }
-        });
 	}
 })();

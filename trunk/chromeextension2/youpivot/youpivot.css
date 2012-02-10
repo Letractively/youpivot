@@ -106,6 +106,7 @@
 
 	/*** search results ***/
 	#y-searchResults { padding-bottom: 10px; display: none; -webkit-user-select: none; }
+    #y-searchResults .edit { display: none; }
 	/*** end search results ***/
 
 /*	.pageFlipper { width: 680px; height: 70px; text-align: center; color: #BECAD8; cursor: pointer; padding: 10px; box-sizing: border-box; }
