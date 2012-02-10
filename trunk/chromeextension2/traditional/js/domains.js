@@ -74,7 +74,7 @@ var THDomainManager = new (function _THDomainManager(){
 				includeFilter(this);
 			}
 		});
-		img.contextMenu("domain_menu", {
+		img.contextMenu("th_domain_menu", {
 			"Include this domain": {
 				click: includeFilter
 			},
