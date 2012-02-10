@@ -6,7 +6,7 @@ var HistoryList = new (function _HistoryList(){
     var self = this;
 
     var list = [];
-    var timeInterval = 86400000;
+    var timeInterval = 21600000;
 
     var newestDate = new Date().getTime();
     var oldestDate = new Date().getTime() - (timeInterval-1);
