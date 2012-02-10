@@ -10,7 +10,7 @@ var HistoryList = new (function _HistoryList(){
 
     var newestDate = new Date().getTime();
     var oldestDate = new Date().getTime() - (timeInterval-1);
-    var dateSchema = {"left": "normal", "name": "normal"};
+    var dateSchema = {"left": "toprow", "name": "normal"};
 
     self.setNewest = function(date){
         oldestDate = date - (timeInterval-1);

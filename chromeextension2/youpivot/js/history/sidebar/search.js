@@ -70,6 +70,16 @@ var SearchManager = new (function _SearchManager(){
 		});
 
         itemTable = $("#y-searchResults").pivotTable();
+
+        $("#yp-editButton").bind("togglechanged", function(e, state){
+            if(SearchManager.getState()){
+                if(state){
+                    $("#y-searchResults .edit").show();
+                }else{
+                    $("#y-searchResults .edit").hide();
+                }
+            }
+        });
     }
 
 	self.getState = function(){
@@ -80,6 +90,10 @@ var SearchManager = new (function _SearchManager(){
         itemTable.resetToSortMode(sortBy);
         self.reload();
 	}
+
+    self.getItem = function(id){
+        return self.results[id];
+    }
 
 	function search(needle){
 		if(needle==""){ antiSearch(); return; }

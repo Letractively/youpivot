@@ -121,7 +121,7 @@ var FilterManager = {};
 
 	function filterGeneral(value, dir, test){
 		activeTable().find(".itemTable .item").each(function(){
-			var item = ItemManager.getItem($(this).data("id"));
+			var item = activeTableManager().getItem($(this).data("id"));
 			if(test(value, item)){
 				if(dir == "positive")
 					showFilterRow($(this));
