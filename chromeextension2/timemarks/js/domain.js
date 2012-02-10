@@ -77,10 +77,10 @@ var TMDomainManager = new (function _TMDomainManager(){
 		img.contextMenu("domain_menu", {
 			"Include this domain": {
 				click: includeFilter
-			},
+			}/*,
 			"Exclude this domain": {
 				click: excludeFilter
-			}
+			}*/
 		}, 
 		{ title: tImg+"<span>"+title+"<span>" });
 		function includeFilter(obj){

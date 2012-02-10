@@ -112,11 +112,9 @@ var TMFilterManager = new (function _THFilterManager(){
 	}
 
 	function showFilterRow(obj){
-	   console.log(obj);
 		obj.show();
 	}
 	function hideFilterRow(obj){
-	   console.log(obj);
 		obj.hide();
 	}
 
