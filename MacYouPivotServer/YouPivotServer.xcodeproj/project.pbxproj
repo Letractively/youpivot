@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		4631A2D414E5CF02007FF9FA /* youpivot.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4631A2D314E5CF02007FF9FA /* youpivot.icns */; };
 		4631A2D614E5D634007FF9FA /* installScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 4631A2D514E5D634007FF9FA /* installScreen.png */; };
+		4631A2DC14E60412007FF9FA /* couchdbx-core in Resources */ = {isa = PBXBuildFile; fileRef = 4631A2DB14E60412007FF9FA /* couchdbx-core */; };
 		468E55A1148E3BC80074A055 /* CouchDBSetupTool.rb in Resources */ = {isa = PBXBuildFile; fileRef = 468E55A0148E3BC80074A055 /* CouchDBSetupTool.rb */; };
 		468E55A3148E41930074A055 /* setup.py in Resources */ = {isa = PBXBuildFile; fileRef = 468E55A2148E41930074A055 /* setup.py */; };
 		468E577F148E486E0074A055 /* Responder.py in Resources */ = {isa = PBXBuildFile; fileRef = 468E577E148E486E0074A055 /* Responder.py */; };
 		468E5781148E49270074A055 /* png_colors.py in Resources */ = {isa = PBXBuildFile; fileRef = 468E5780148E49270074A055 /* png_colors.py */; };
-		4693A44214E595E300D7CAA0 /* couchdbx-core in Resources */ = {isa = PBXBuildFile; fileRef = 4693A44114E595E300D7CAA0 /* couchdbx-core */; };
 		4693A44414E59C5F00D7CAA0 /* png.py in Resources */ = {isa = PBXBuildFile; fileRef = 4693A44314E59C5F00D7CAA0 /* png.py */; };
 		4693A46A14E5A24D00D7CAA0 /* couchdb in Resources */ = {isa = PBXBuildFile; fileRef = 4693A46914E5A24D00D7CAA0 /* couchdb */; };
 		469D507D148E0D0800BB50FE /* Responder.rb in Resources */ = {isa = PBXBuildFile; fileRef = 469D507C148E0D0800BB50FE /* Responder.rb */; };
@@ -47,11 +47,11 @@
 /* Begin PBXFileReference section */
 		4631A2D314E5CF02007FF9FA /* youpivot.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = youpivot.icns; sourceTree = "<group>"; };
 		4631A2D514E5D634007FF9FA /* installScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = installScreen.png; path = YouPivotServer/installScreen.png; sourceTree = "<group>"; };
+		4631A2DB14E60412007FF9FA /* couchdbx-core */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "couchdbx-core"; sourceTree = "<group>"; };
 		468E55A0148E3BC80074A055 /* CouchDBSetupTool.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = CouchDBSetupTool.rb; sourceTree = "<group>"; };
 		468E55A2148E41930074A055 /* setup.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
 		468E577E148E486E0074A055 /* Responder.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Responder.py; sourceTree = "<group>"; };
 		468E5780148E49270074A055 /* png_colors.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = png_colors.py; sourceTree = "<group>"; };
-		4693A44114E595E300D7CAA0 /* couchdbx-core */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "couchdbx-core"; sourceTree = "<group>"; };
 		4693A44314E59C5F00D7CAA0 /* png.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = png.py; sourceTree = "<group>"; };
 		4693A46914E5A24D00D7CAA0 /* couchdb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = couchdb; sourceTree = "<group>"; };
 		469D507C148E0D0800BB50FE /* Responder.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = Responder.rb; sourceTree = "<group>"; };
@@ -124,6 +124,7 @@
 				46FB3C951485863B00A27254 /* Other Sources */,
 				46FB3C891485863B00A27254 /* Supporting Files */,
 				46FB3CA71485872A00A27254 /* CouchDBManager.rb */,
+				46FB3C901485863B00A27254 /* YouPivotServer-Prefix.pch */,
 				469D507C148E0D0800BB50FE /* Responder.rb */,
 				469D5083148E235300BB50FE /* MainWindowController.rb */,
 				468E55A0148E3BC80074A055 /* CouchDBSetupTool.rb */,
@@ -137,7 +138,6 @@
 				46FB3C8A1485863B00A27254 /* YouPivotServer-Info.plist */,
 				46FB3C8B1485863B00A27254 /* InfoPlist.strings */,
 				46FB3C8E1485863B00A27254 /* main.m */,
-				46FB3C901485863B00A27254 /* YouPivotServer-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -145,9 +145,9 @@
 		46FB3C911485863B00A27254 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4631A2DB14E60412007FF9FA /* couchdbx-core */,
 				4693A46914E5A24D00D7CAA0 /* couchdb */,
 				4693A44314E59C5F00D7CAA0 /* png.py */,
-				4693A44114E595E300D7CAA0 /* couchdbx-core */,
 				468E5780148E49270074A055 /* png_colors.py */,
 				468E577E148E486E0074A055 /* Responder.py */,
 				468E55A2148E41930074A055 /* setup.py */,
@@ -244,11 +244,11 @@
 				468E55A3148E41930074A055 /* setup.py in Resources */,
 				468E577F148E486E0074A055 /* Responder.py in Resources */,
 				468E5781148E49270074A055 /* png_colors.py in Resources */,
-				4693A44214E595E300D7CAA0 /* couchdbx-core in Resources */,
 				4693A44414E59C5F00D7CAA0 /* png.py in Resources */,
 				4693A46A14E5A24D00D7CAA0 /* couchdb in Resources */,
 				4631A2D414E5CF02007FF9FA /* youpivot.icns in Resources */,
 				4631A2D614E5D634007FF9FA /* installScreen.png in Resources */,
+				4631A2DC14E60412007FF9FA /* couchdbx-core in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
