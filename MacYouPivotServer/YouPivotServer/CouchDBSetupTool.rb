@@ -39,6 +39,6 @@ class CouchDBSetupTool
     end
     
     def self.kill
-        @task2.terminate
+        @task2.interrupt
     end
 end
