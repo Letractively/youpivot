@@ -9,6 +9,24 @@
 class AppDelegate
     attr_accessor :window, :button
     def applicationDidFinishLaunching(a_notification)
+        
+        config_file = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("couchdbx-core/etc/couchdb/local.ini")
+        directory = "~/Library/Application Support/YouPivotServer/CouchData"
+        directory = directory.stringByExpandingTildeInPath
+        
+        lines = IO.readlines(config_file)
+        last = lines.last
+
+        if (!last.include?("view_index_dir = " + directory)) then
+            puts last
+            File.open(config_file, 'a') do |f|  
+                f.puts ""
+                f.puts "[couchdb]"  
+                f.puts "database_dir = " + directory
+                f.puts "view_index_dir = " + directory
+            end 
+        end
+        
         #backround_image = NSImage.alloc.initByReferencingFile(installScreen.png)
         #[window setBackgroundColor:[NSColor colorWithPatternImage:[NSImage imageNamed:@"myImage.png"]]];
         

@@ -7,6 +7,7 @@ Created on Feb 21, 2011
 import cherrypy
 import couchdb
 import urllib
+from png_colors import GetFaviconColors
 
 from uuid import uuid4
 
@@ -47,7 +48,7 @@ class Responder(object):
         #Check that the user exists
         if not self.userExists(args):
             return 'Bad User'
-        #args['color'] = png_colors.GetFaviconColors(args['eventtypename'], 2)
+        args['color'] = GetFaviconColors(args['eventtypename'], 2)
         id = self.createDoc(args)
         args['eventid'] = id
         self.addImpVal(args)
