@@ -1,0 +1,680 @@
+[Sat, 11 Feb 2012 02:00:07 GMT] [info] [<0.107.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:00:07 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+[Sat, 11 Feb 2012 02:00:11 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET /_utils/ 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET /_utils/style/layout.css?0.11.0 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.132.0>] 127.0.0.1 - - GET /_utils/script/json2.js 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.134.0>] 127.0.0.1 - - GET /_utils/script/jquery.js?1.4.2 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.133.0>] 127.0.0.1 - - GET /_utils/script/sha1.js 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.136.0>] 127.0.0.1 - - GET /_utils/script/jquery.dialog.js?0.11.0 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.135.0>] 127.0.0.1 - - GET /_utils/script/jquery.couch.js?0.11.0 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.133.0>] 127.0.0.1 - - GET /_utils/script/futon.browse.js?0.11.0 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET /_utils/script/futon.js?0.11.0 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.136.0>] 127.0.0.1 - - GET /_utils/script/futon.format.js?0.11.0 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.134.0>] 127.0.0.1 - - GET /_utils/_sidebar.html 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.134.0>] 127.0.0.1 - - GET /_all_dbs 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.134.0>] 127.0.0.1 - - GET /_utils/image/bg.png 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.133.0>] 127.0.0.1 - - GET /_utils/image/add.png 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET /_utils/image/thead.gif 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.136.0>] 127.0.0.1 - - GET /_utils/image/spinner_33.gif 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET / 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.136.0>] 127.0.0.1 - - GET /_session 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.133.0>] 127.0.0.1 - - GET /_utils/image/sidebar-toggle.png 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.134.0>] 127.0.0.1 - - GET /_utils/image/logo.png 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET /_users/ 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.135.0>] 127.0.0.1 - - GET /_replicator/ 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.136.0>] 127.0.0.1 - - GET /domain/ 200
+[Sat, 11 Feb 2012 02:00:12 GMT] [info] [<0.133.0>] 127.0.0.1 - - GET /developers/ 200
+[Sat, 11 Feb 2012 02:00:13 GMT] [info] [<0.132.0>] 127.0.0.1 - - GET /eventconstants/ 200
+[Sat, 11 Feb 2012 02:00:13 GMT] [info] [<0.134.0>] 127.0.0.1 - - GET /events/ 200
+[Sat, 11 Feb 2012 02:00:13 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET /users/ 200
+[Sat, 11 Feb 2012 02:00:13 GMT] [info] [<0.131.0>] 127.0.0.1 - - GET /favicon.ico 200
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.110.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.111.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.111.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.119.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.123.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.123.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.126.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.130.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.130.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.132.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.133.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.133.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.135.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.136.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.136.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.138.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.139.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.139.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.141.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.142.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.142.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.144.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.146.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.146.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.148.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.151.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.151.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.153.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.155.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.155.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.157.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.159.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.159.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.161.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.162.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.162.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.164.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.165.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.165.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.167.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.168.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.168.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.170.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.172.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.172.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.174.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.177.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.177.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.179.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.180.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.182.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.180.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.185.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.185.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.187.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.188.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.188.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.190.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.191.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.191.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.193.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.194.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.194.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.196.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.198.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.198.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.200.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.202.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.202.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.205.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.206.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.206.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.208.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.209.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.209.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.211.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.212.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.212.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.214.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.215.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.215.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.217.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.218.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.218.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.220.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.222.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.222.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.224.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.221.0>] {error_report,<0.30.0>,
+                        {<0.221.0>,crash_report,
+                         [[{initial_call,
+                               {mochiweb_socket_server,init,['Argument__1']}},
+                           {pid,<0.221.0>},
+                           {registered_name,[]},
+                           {error_info,
+                               {exit,eaddrinuse,
+                                   [{gen_server,init_it,6},
+                                    {proc_lib,init_p_do_apply,3}]}},
+                           {ancestors,
+                               [couch_secondary_services,couch_server_sup,
+                                <0.31.0>]},
+                           {messages,[]},
+                           {links,[<0.88.0>]},
+                           {dictionary,[]},
+                           {trap_exit,true},
+                           {status,running},
+                           {heap_size,987},
+                           {stack_size,24},
+                           {reductions,449}],
+                          []]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.88.0>] {error_report,<0.30.0>,
+                       {<0.88.0>,supervisor_report,
+                        [{supervisor,{local,couch_secondary_services}},
+                         {errorContext,start_error},
+                         {reason,eaddrinuse},
+                         {offender,
+                             [{pid,undefined},
+                              {name,httpd},
+                              {mfargs,{couch_httpd,start_link,[]}},
+                              {restart_type,permanent},
+                              {shutdown,brutal_kill},
+                              {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [emulator] Error in process <0.225.0> with exit value: {{badmatch,{error,eaddrinuse}},[{mc_tcp_listener,init,2}]}
+
+
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.109.0>] {error_report,<0.30.0>,
+                        {<0.109.0>,supervisor_report,
+                         [{supervisor,{local,mc_sup}},
+                          {errorContext,child_terminated},
+                          {reason,
+                              {{badmatch,{error,eaddrinuse}},
+                               [{mc_tcp_listener,init,2}]}},
+                          {offender,
+                              [{pid,<0.225.0>},
+                               {name,mc_tcp_listener},
+                               {mfargs,
+                                   {mc_tcp_listener,start_link,
+                                       [11213,mc_daemon]}},
+                               {restart_type,permanent},
+                               {shutdown,2000},
+                               {child_type,worker}]}]}}
+[Sat, 11 Feb 2012 02:01:31 GMT] [info] [<0.227.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:31 GMT] [error] [<0.77.0>] {error_report,<0.30.0>,
+                       {<0.77.0>,supervisor_report,
+                        [{supervisor,{local,couch_server_sup}},
+                         {errorContext,start_error},
+                         {reason,shutdown},
+                         {offender,
+                             [{pid,undefined},
+                              {name,couch_secondary_services},
+                              {mfargs,{couch_secondary_sup,start_link,[]}},
+                              {restart_type,permanent},
+                              {shutdown,infinity},
+                              {child_type,supervisor}]}]}}
+[Sat, 11 Feb 2012 02:01:44 GMT] [info] [<0.104.0>] MC daemon: starting: json_mode=true.
+[Sat, 11 Feb 2012 02:01:44 GMT] [info] [<0.31.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+[Sat, 11 Feb 2012 02:01:58 GMT] [info] [<0.138.0>] 127.0.0.1 - - GET / 200
