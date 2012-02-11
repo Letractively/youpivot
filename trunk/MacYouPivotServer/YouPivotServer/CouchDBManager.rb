@@ -28,7 +28,9 @@ class CouchDBManager
     end
     
     def startServer
-        @task.launch
+        if ! @task.isRunning then
+            @task.launch
+        end
     end
     
     def killServer
