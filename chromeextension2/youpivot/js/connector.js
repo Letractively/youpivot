@@ -2,8 +2,8 @@
 var Connector = new (function _Connector(){
     var self = this;
 
-	//var serverUrl = "http://127.0.0.1:8391/";
-	var serverUrl = "http://127.0.0.1:8080/";
+	var serverUrl = "http://127.0.0.1:8391/";
+	//var serverUrl = "http://127.0.0.1:8080/";
 	var developerId = "e34c5ee0d846e882ae1014294b002a14";
 	var userId = -1;
 
