@@ -1,0 +1,1534 @@
+[Sat, 26 Mar 2011 04:55:06 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Sat, 26 Mar 2011 04:55:12 GMT] [info] [<0.120.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Sat, 26 Mar 2011 04:55:12 GMT] [info] [<0.121.0>] 127.0.0.1 - - 'GET' / 200
+
+[Sat, 26 Mar 2011 04:55:12 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Sat, 26 Mar 2011 04:55:12 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 04:47:52 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Mon, 09 May 2011 04:47:53 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:47:53 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_utils 301
+
+[Mon, 09 May 2011 04:47:53 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:47:53 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 04:47:53 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:47:53 GMT] [error] [<0.111.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:47:53 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 04:47:53 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 04:47:53 GMT] [error] [<0.111.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:47:53 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 04:51:20 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Mon, 09 May 2011 04:51:21 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:51:21 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 04:51:22 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:51:22 GMT] [error] [<0.111.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:51:22 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 04:51:22 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 04:51:22 GMT] [error] [<0.111.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 04:51:22 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /events 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /events 201
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /eventconstants 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /eventconstants 201
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /users 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /users 201
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /domain 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /domain 201
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /developers 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /developers 201
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /users/e34c5ee0d846e882ae1014294b000990 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /users/e34c5ee0d846e882ae1014294b000990 201
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /developers/e34c5ee0d846e882ae1014294b002a14 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /developers/e34c5ee0d846e882ae1014294b002a14 201
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /events/_design%2Fendtimeuserid 301
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'HEAD' /events/_design/endtimeuserid 404
+
+[Mon, 09 May 2011 04:51:53 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'PUT' /events/_design/endtimeuserid 201
+
+[Mon, 09 May 2011 04:52:06 GMT] [info] [<0.149.0>] 127.0.0.1 - - 'HEAD' /events 200
+
+[Mon, 09 May 2011 04:52:06 GMT] [info] [<0.149.0>] 127.0.0.1 - - 'HEAD' /eventconstants 200
+
+[Mon, 09 May 2011 04:52:06 GMT] [info] [<0.149.0>] 127.0.0.1 - - 'HEAD' /users 200
+
+[Mon, 09 May 2011 04:52:06 GMT] [info] [<0.149.0>] 127.0.0.1 - - 'HEAD' /domain 200
+
+[Mon, 09 May 2011 04:52:06 GMT] [info] [<0.149.0>] 127.0.0.1 - - 'HEAD' /developers 200
+
+[Mon, 09 May 2011 05:24:23 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Mon, 09 May 2011 05:24:24 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:24 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 05:24:24 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:24 GMT] [error] [<0.111.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:24 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:24:24 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:24:25 GMT] [error] [<0.111.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:25 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:25 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 05:24:25 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 05:24:25 GMT] [error] [<0.108.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:25 GMT] [error] [<0.111.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:25 GMT] [error] [<0.112.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:25 GMT] [error] [<0.113.0>] cookie auth secret is not set
+
+[Mon, 09 May 2011 05:24:25 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 05:24:25 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 05:24:25 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 05:24:25 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_utils 301
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 05:47:37 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 05:47:42 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:47:42 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:47:42 GMT] [info] [<0.1546.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:47:42 GMT] [info] [<0.1552.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:47:42 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 05:47:42 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.1552.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.1553.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 05:47:46 GMT] [info] [<0.1546.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 05:47:48 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:47:48 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 05:47:48 GMT] [info] [<0.1544.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 304
+
+[Mon, 09 May 2011 05:47:48 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:47:48 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:47:48 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:47:52 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:47:52 GMT] [info] [<0.1552.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 05:47:52 GMT] [info] [<0.1546.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 200
+
+[Mon, 09 May 2011 05:47:52 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:47:52 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:47:52 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:47:55 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid 200
+
+[Mon, 09 May 2011 05:47:55 GMT] [info] [<0.1545.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 05:47:55 GMT] [info] [<0.1553.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:47:55 GMT] [info] [<0.1568.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:47:55 GMT] [info] [<0.1569.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:47:55 GMT] [info] [<0.1570.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:47:55 GMT] [info] [<0.1546.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid/_view/temp_search?limit=11 200
+
+[Mon, 09 May 2011 05:48:00 GMT] [info] [<0.1546.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid 304
+
+[Mon, 09 May 2011 05:48:00 GMT] [info] [<0.1553.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:48:00 GMT] [info] [<0.1558.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 05:48:00 GMT] [info] [<0.1553.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:48:01 GMT] [info] [<0.1569.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:48:01 GMT] [info] [<0.1553.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:48:01 GMT] [info] [<0.1568.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid/_view/endtimeuserid?limit=11 200
+
+[Mon, 09 May 2011 05:48:05 GMT] [info] [<0.1553.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 05:48:05 GMT] [info] [<0.1568.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:48:05 GMT] [info] [<0.1570.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:48:05 GMT] [info] [<0.1569.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:48:05 GMT] [info] [<0.1568.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:48:06 GMT] [info] [<0.1568.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:48:06 GMT] [info] [<0.1569.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 05:48:06 GMT] [info] [<0.1570.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 05:48:06 GMT] [info] [<0.1571.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:48:06 GMT] [info] [<0.1594.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:48:06 GMT] [info] [<0.1568.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:48:07 GMT] [info] [<0.1571.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:48:07 GMT] [info] [<0.1594.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:48:07 GMT] [info] [<0.1568.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 05:50:05 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:50:05 GMT] [info] [<0.1716.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 05:50:05 GMT] [info] [<0.1595.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 05:50:05 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:50:05 GMT] [info] [<0.1717.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:50:05 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1717.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1718.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1717.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1723.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1722.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1721.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 05:50:06 GMT] [info] [<0.1718.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 05:50:08 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /developers/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 05:50:08 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 05:50:08 GMT] [info] [<0.1718.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 05:50:08 GMT] [info] [<0.1717.0>] 127.0.0.1 - - 'GET' /developers/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 05:50:08 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:50:08 GMT] [info] [<0.1717.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 05:50:09 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /developers/e34c5ee0d846e882ae1014294b002a14?revs_info=true 200
+
+[Mon, 09 May 2011 05:50:09 GMT] [info] [<0.1715.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 05:50:09 GMT] [info] [<0.1717.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:48:40 GMT] [info] [<0.1724.0>] 127.0.0.1 - - 'GET' /_utils 301
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.20817.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.20820.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.1724.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.20820.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.1724.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.20817.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.20823.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.20821.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 19:48:41 GMT] [info] [<0.20822.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 19:48:52 GMT] [info] [<0.20824.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:48:52 GMT] [info] [<0.20836.0>] 127.0.0.1 - - 'GET' /developers/_all_docs?limit=11 304
+
+[Mon, 09 May 2011 19:48:52 GMT] [info] [<0.20835.0>] 127.0.0.1 - - 'GET' /developers/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:48:52 GMT] [info] [<0.20837.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:48:52 GMT] [info] [<0.20824.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:48:52 GMT] [info] [<0.20824.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20824.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20824.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20835.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20824.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20837.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20838.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20842.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20835.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 19:48:54 GMT] [info] [<0.20843.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 19:48:56 GMT] [info] [<0.20837.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:48:56 GMT] [info] [<0.20824.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:48:56 GMT] [info] [<0.20835.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:48:56 GMT] [info] [<0.20837.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:48:56 GMT] [info] [<0.20837.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:48:56 GMT] [info] [<0.20837.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:00 GMT] [info] [<0.20837.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid 304
+
+[Mon, 09 May 2011 19:49:00 GMT] [info] [<0.20838.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:00 GMT] [info] [<0.20843.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:00 GMT] [info] [<0.20842.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid/_view/endtimeuserid?limit=11 200
+
+[Mon, 09 May 2011 19:49:00 GMT] [info] [<0.20838.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:00 GMT] [info] [<0.20844.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:00 GMT] [info] [<0.20850.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:07 GMT] [info] [<0.20838.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid 304
+
+[Mon, 09 May 2011 19:49:07 GMT] [info] [<0.20842.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid/_view/temp_search?limit=11 200
+
+[Mon, 09 May 2011 19:49:07 GMT] [info] [<0.20842.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:07 GMT] [info] [<0.20844.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:07 GMT] [info] [<0.20842.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:07 GMT] [info] [<0.20850.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:07 GMT] [info] [<0.20842.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:12 GMT] [info] [<0.20842.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:12 GMT] [info] [<0.20850.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:12 GMT] [info] [<0.20851.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:49:12 GMT] [info] [<0.20864.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:12 GMT] [info] [<0.20865.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:12 GMT] [info] [<0.20850.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:14 GMT] [info] [<0.20864.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:14 GMT] [info] [<0.20850.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:14 GMT] [info] [<0.20864.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 304
+
+[Mon, 09 May 2011 19:49:14 GMT] [info] [<0.20865.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:14 GMT] [info] [<0.20866.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:15 GMT] [info] [<0.20865.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:17 GMT] [info] [<0.20865.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:17 GMT] [info] [<0.20865.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:17 GMT] [info] [<0.20866.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:17 GMT] [info] [<0.20870.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:17 GMT] [info] [<0.20875.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:20 GMT] [info] [<0.20866.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:20 GMT] [info] [<0.20870.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:20 GMT] [info] [<0.20875.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 304
+
+[Mon, 09 May 2011 19:49:20 GMT] [info] [<0.20866.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:20 GMT] [info] [<0.20876.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:20 GMT] [info] [<0.20880.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:22 GMT] [info] [<0.20876.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:22 GMT] [info] [<0.20880.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:22 GMT] [info] [<0.20866.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 19:49:27 GMT] [info] [<0.20876.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:27 GMT] [info] [<0.20866.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 304
+
+[Mon, 09 May 2011 19:49:27 GMT] [info] [<0.20876.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:27 GMT] [info] [<0.20880.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:27 GMT] [info] [<0.20881.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:27 GMT] [info] [<0.20888.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:32 GMT] [info] [<0.20881.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:49:32 GMT] [info] [<0.20880.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:49:32 GMT] [info] [<0.20888.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:49:32 GMT] [info] [<0.20889.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:49:32 GMT] [info] [<0.20896.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:33 GMT] [info] [<0.20881.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:49:35 GMT] [info] [<0.20881.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 19:49:35 GMT] [info] [<0.20881.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:49:35 GMT] [info] [<0.20896.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:01 GMT] [info] [<0.20897.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:01 GMT] [info] [<0.20926.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:01 GMT] [info] [<0.20927.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:50:01 GMT] [info] [<0.20928.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:01 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:01 GMT] [info] [<0.20926.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:05 GMT] [info] [<0.20926.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 19:50:05 GMT] [info] [<0.20926.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:05 GMT] [info] [<0.20928.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:07 GMT] [info] [<0.20926.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:50:07 GMT] [info] [<0.20928.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:07 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:07 GMT] [info] [<0.20930.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:07 GMT] [info] [<0.20937.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:07 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:09 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_uuids?count=1 200
+
+[Mon, 09 May 2011 19:50:09 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:09 GMT] [info] [<0.20930.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:14 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:14 GMT] [info] [<0.20937.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:14 GMT] [info] [<0.20930.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:50:14 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:14 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:14 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:22 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 19:50:22 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:22 GMT] [info] [<0.20938.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:24 GMT] [info] [<0.20929.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:24 GMT] [info] [<0.20938.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:50:24 GMT] [info] [<0.20956.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:24 GMT] [info] [<0.20956.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:24 GMT] [info] [<0.20958.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:24 GMT] [info] [<0.20956.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:24 GMT] [info] [<0.20956.0>] 127.0.0.1 - - 'GET' /_uuids?count=1 200
+
+[Mon, 09 May 2011 19:50:25 GMT] [info] [<0.20956.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:25 GMT] [info] [<0.20958.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:28 GMT] [info] [<0.20956.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:50:28 GMT] [info] [<0.20959.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:28 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:28 GMT] [info] [<0.20958.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:28 GMT] [info] [<0.20959.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:28 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:31 GMT] [info] [<0.20959.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:31 GMT] [info] [<0.20959.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:31 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:31 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:31 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20970.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20974.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 19:50:34 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 19:50:35 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:35 GMT] [info] [<0.20970.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:35 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:35 GMT] [info] [<0.20964.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:36 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20974.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20976.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20970.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 19:50:44 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 19:50:46 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:46 GMT] [info] [<0.20970.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:46 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:46 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:46 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:52 GMT] [info] [<0.20965.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 304
+
+[Mon, 09 May 2011 19:50:52 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:50:52 GMT] [info] [<0.20974.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:50:52 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:52 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:52 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:50:56 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_uuids?count=1 200
+
+[Mon, 09 May 2011 19:50:56 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:56 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:50:56 GMT] [info] [<0.20976.0>] 127.0.0.1 - - 'PUT' /events/506d6d58e1330578207fd44a95002469 201
+
+[Mon, 09 May 2011 19:50:56 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /events/506d6d58e1330578207fd44a95002469?revs_info=true 200
+
+[Mon, 09 May 2011 19:50:56 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:50:56 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:51:04 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'DELETE' /events/506d6d58e1330578207fd44a95002469?rev=1-967a00dff5e02add41819138abb3284d 200
+
+[Mon, 09 May 2011 19:51:04 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:51:04 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:51:04 GMT] [info] [<0.20988.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:51:04 GMT] [info] [<0.20976.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:51:04 GMT] [info] [<0.21008.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:51:04 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 200
+
+[Mon, 09 May 2011 19:51:06 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_uuids?count=1 200
+
+[Mon, 09 May 2011 19:51:06 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:51:06 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:51:15 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11&startkey=%22_design%22&endkey=%22_design0%22 200
+
+[Mon, 09 May 2011 19:51:15 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:51:15 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:51:15 GMT] [info] [<0.20973.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:51:15 GMT] [info] [<0.20975.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:51:15 GMT] [info] [<0.20976.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.21009.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid 304
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.21050.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.21052.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.21050.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.21053.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.21056.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.1572.0>] checkpointing view update at seq 3 for events _design/endtimeuserid
+
+[Mon, 09 May 2011 19:51:43 GMT] [info] [<0.21051.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid/_view/endtimeuserid?limit=11 200
+
+[Mon, 09 May 2011 19:51:51 GMT] [info] [<0.21050.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:51:51 GMT] [info] [<0.21050.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:51:51 GMT] [info] [<0.21051.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:51:51 GMT] [info] [<0.21051.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:51:51 GMT] [info] [<0.21051.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:51:51 GMT] [info] [<0.21051.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:54:57 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 19:54:58 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 19:55:02 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:55:02 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:55:02 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:55:03 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:03 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:03 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:55:04 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 19:55:04 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:04 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:07 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:55:07 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:55:07 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:55:07 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:07 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:07 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:55:08 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 19:55:08 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:08 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:11 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'DELETE' /events/_design/endtimeuserid?rev=1-1e50af21e8a906cc7d68848bfb268c61 200
+
+[Mon, 09 May 2011 19:55:11 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:55:11 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:55:11 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:55:11 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:11 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:11 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 19:55:13 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 19:55:14 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:55:14 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:55:14 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:55:14 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:14 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:14 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Mon, 09 May 2011 19:55:15 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Mon, 09 May 2011 19:56:14 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:56:14 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:56:14 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:56:14 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:14 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:14 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:56:15 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_uuids?count=1 200
+
+[Mon, 09 May 2011 19:56:15 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:15 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:25 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'PUT' /events/_design/endtimeuserid 201
+
+[Mon, 09 May 2011 19:56:25 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /events/2241e6b9b4df8e8d9c0ad95b6f000325?revs_info=true 404
+
+[Mon, 09 May 2011 19:56:25 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:25 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:29 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:56:29 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:56:29 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:56:29 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:29 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:29 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:56:31 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Mon, 09 May 2011 19:56:31 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:31 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:35 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Mon, 09 May 2011 19:56:35 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:56:35 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 304
+
+[Mon, 09 May 2011 19:56:35 GMT] [info] [<0.118.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:35 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:35 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:56:37 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /_uuids?count=1 200
+
+[Mon, 09 May 2011 19:56:37 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:37 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:55 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'PUT' /events/_design/foo 201
+
+[Mon, 09 May 2011 19:56:55 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /events/2241e6b9b4df8e8d9c0ad95b6f0007e0?revs_info=true 404
+
+[Mon, 09 May 2011 19:56:55 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:55 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:58 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Mon, 09 May 2011 19:56:58 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Mon, 09 May 2011 19:56:58 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Mon, 09 May 2011 19:56:58 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:58 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' / 200
+
+[Mon, 09 May 2011 19:56:58 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Mon, 09 May 2011 19:56:59 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /events/_design/foo?revs_info=true 200
+
+[Mon, 09 May 2011 19:56:59 GMT] [info] [<0.231.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Mon, 09 May 2011 19:56:59 GMT] [info] [<0.230.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 01:53:27 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_utils 301
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Tue, 20 Sep 2011 01:53:28 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Tue, 20 Sep 2011 01:53:50 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Tue, 20 Sep 2011 01:53:51 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 01:53:51 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Tue, 20 Sep 2011 01:53:51 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 01:53:51 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Tue, 20 Sep 2011 01:53:51 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 200
+
+[Tue, 20 Sep 2011 03:50:15 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /users/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Tue, 20 Sep 2011 03:50:15 GMT] [info] [<0.7159.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Tue, 20 Sep 2011 03:50:15 GMT] [info] [<0.7158.0>] 127.0.0.1 - - 'GET' /users/_all_docs?limit=11 200
+
+[Tue, 20 Sep 2011 03:50:15 GMT] [info] [<0.7158.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:50:15 GMT] [info] [<0.7159.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:50:15 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Tue, 20 Sep 2011 03:50:17 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /users/e34c5ee0d846e882ae1014294b000990?revs_info=true 200
+
+[Tue, 20 Sep 2011 03:50:17 GMT] [info] [<0.7159.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:50:17 GMT] [info] [<0.7158.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:50:22 GMT] [info] [<0.7158.0>] 127.0.0.1 - - 'GET' /_users/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 200
+
+[Tue, 20 Sep 2011 03:50:22 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Tue, 20 Sep 2011 03:50:22 GMT] [info] [<0.7159.0>] 127.0.0.1 - - 'GET' /_users/_all_docs?limit=11 200
+
+[Tue, 20 Sep 2011 03:50:22 GMT] [info] [<0.116.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Tue, 20 Sep 2011 03:50:22 GMT] [info] [<0.7158.0>] 127.0.0.1 - - 'GET' / 200
+
+[Tue, 20 Sep 2011 03:50:22 GMT] [info] [<0.7160.0>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2319.1>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2318.1>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2316.1>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2319.1>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Fri, 10 Feb 2012 01:21:47 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Fri, 10 Feb 2012 01:21:53 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /_config/ 200
+
+[Fri, 10 Feb 2012 01:21:53 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:21:53 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:21:54 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Fri, 10 Feb 2012 01:21:54 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:21:54 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:21:56 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /_active_tasks 200
+
+[Fri, 10 Feb 2012 01:21:56 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:21:56 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.2316.1>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.2318.1>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.2319.1>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Fri, 10 Feb 2012 01:21:57 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Fri, 10 Feb 2012 01:21:59 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /events/_all_docs?startkey=%22_design%2F%22&endkey=%22_design0%22&include_docs=true 304
+
+[Fri, 10 Feb 2012 01:21:59 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' /_config/query_servers/ 200
+
+[Fri, 10 Feb 2012 01:21:59 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /events/_all_docs?limit=11 304
+
+[Fri, 10 Feb 2012 01:21:59 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:21:59 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:21:59 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' /_config/native_query_servers/ 200
+
+[Fri, 10 Feb 2012 01:22:00 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /events/_design/endtimeuserid?revs_info=true 200
+
+[Fri, 10 Feb 2012 01:22:00 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:22:00 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:22:08 GMT] [info] [<0.2317.1>] 127.0.0.1 - - 'GET' /events/_design/foo?revs_info=true 200
+
+[Fri, 10 Feb 2012 01:22:08 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:22:08 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' / 200
+
+[Fri, 10 Feb 2012 01:22:32 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /events/_design/foo?revs_info=true 200
+
+[Fri, 10 Feb 2012 01:22:32 GMT] [info] [<0.7168.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Fri, 10 Feb 2012 01:22:32 GMT] [info] [<0.2315.1>] 127.0.0.1 - - 'GET' / 200
+
+[Sat, 11 Feb 2012 03:21:44 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_utils 301
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' / 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.112.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.108.0>] 127.0.0.1 - - 'GET' /domain/ 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /developers/ 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.113.0>] 127.0.0.1 - - 'GET' /eventconstants/ 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.114.0>] 127.0.0.1 - - 'GET' /events/ 200
+
+[Sat, 11 Feb 2012 03:21:45 GMT] [info] [<0.115.0>] 127.0.0.1 - - 'GET' /users/ 200
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.95.0>] {error_report,<0.34.0>,
+    {<0.95.0>,crash_report,
+     [[{initial_call,{couch_db_updater,init,['Argument__1']}},
+       {pid,<0.95.0>},
+       {registered_name,[]},
+       {error_info,
+           {exit,
+               {bad_return_value,
+                   {database_disk_version_error,
+                       "Incorrect disk header version"}},
+               [{gen_server,init_it,6},{proc_lib,init_p_do_apply,3}]}},
+       {ancestors,[<0.94.0>,<0.92.0>]},
+       {messages,[]},
+       {links,[<0.94.0>]},
+       {dictionary,[]},
+       {trap_exit,true},
+       {status,running},
+       {heap_size,610},
+       {stack_size,24},
+       {reductions,146}],
+      [{neighbour,
+           [{pid,<0.92.0>},
+            {registered_name,[]},
+            {initial_call,{erlang,apply,2}},
+            {current_function,{proc_lib,sync_wait,2}},
+            {ancestors,[]},
+            {messages,[]},
+            {links,[<0.93.0>,<0.94.0>,<0.87.0>]},
+            {dictionary,[]},
+            {trap_exit,false},
+            {status,waiting},
+            {heap_size,377},
+            {stack_size,9},
+            {reductions,66}]},
+       {neighbour,
+           [{pid,<0.94.0>},
+            {registered_name,[]},
+            {initial_call,{couch_db,init,['Argument__1']}},
+            {current_function,{proc_lib,sync_wait,2}},
+            {ancestors,[<0.92.0>]},
+            {messages,
+                [{ack,<0.95.0>,
+                     {error,
+                         {bad_return_value,
+                             {database_disk_version_error,
+                                 "Incorrect disk header version"}}}}]},
+            {links,[<0.92.0>,<0.95.0>]},
+            {dictionary,[]},
+            {trap_exit,false},
+            {status,runnable},
+            {heap_size,233},
+            {stack_size,16},
+            {reductions,60}]}]]}}
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.87.0>] Unexpected message, restarting couch_server: {'EXIT',<0.92.0>,
+                                              {bad_return_value,
+                                               {database_disk_version_error,
+                                                "Incorrect disk header version"}}}
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.93.0>] ** Generic server <0.93.0> terminating 
+** Last message in was {'EXIT',<0.92.0>,
+                           {bad_return_value,
+                               {database_disk_version_error,
+                                   "Incorrect disk header version"}}}
+** When Server state == {file,{file_descriptor,prim_file,{#Port<0.995>,10}},
+                              0,4194}
+** Reason for termination == 
+** {bad_return_value,
+       {database_disk_version_error,"Incorrect disk header version"}}
+
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.93.0>] {error_report,<0.34.0>,
+    {<0.93.0>,crash_report,
+     [[{initial_call,{couch_file,init,['Argument__1']}},
+       {pid,<0.93.0>},
+       {registered_name,[]},
+       {error_info,
+           {exit,
+               {bad_return_value,
+                   {database_disk_version_error,
+                       "Incorrect disk header version"}},
+               [{gen_server,terminate,6},{proc_lib,init_p_do_apply,3}]}},
+       {ancestors,[<0.92.0>]},
+       {messages,[]},
+       {links,[#Port<0.995>]},
+       {dictionary,[]},
+       {trap_exit,true},
+       {status,running},
+       {heap_size,377},
+       {stack_size,24},
+       {reductions,1410}],
+      []]}}
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.87.0>] ** Generic server couch_server terminating 
+** Last message in was {'EXIT',<0.92.0>,
+                           {bad_return_value,
+                               {database_disk_version_error,
+                                   "Incorrect disk header version"}}}
+** When Server state == {server,
+                            "/Users/afine/Library/Application Support/CouchbaseServer",
+                            {re_pattern,0,0,
+                                <<69,82,67,80,124,0,0,0,16,0,0,0,1,0,0,0,0,0,
+                                  0,0,0,0,0,0,48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                  0,0,0,0,0,0,0,0,0,93,0,72,25,77,0,0,0,0,0,0,
+                                  0,0,0,0,0,0,254,255,255,7,0,0,0,0,0,0,0,0,0,
+                                  0,0,0,0,0,0,0,77,0,0,0,0,16,171,255,3,0,0,0,
+                                  128,254,255,255,7,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                  0,0,0,69,26,84,0,72,0>>},
+                            100,0,"Sat, 11 Feb 2012 03:26:24 GMT"}
+** Reason for termination == 
+** kill
+
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.87.0>] {error_report,<0.34.0>,
+              {<0.87.0>,crash_report,
+               [[{initial_call,{couch_server,init,['Argument__1']}},
+                 {pid,<0.87.0>},
+                 {registered_name,couch_server},
+                 {error_info,{exit,kill,
+                                   [{gen_server,terminate,6},
+                                    {proc_lib,init_p_do_apply,3}]}},
+                 {ancestors,[couch_primary_services,couch_server_sup,
+                             <0.35.0>]},
+                 {messages,[]},
+                 {links,[<0.82.0>]},
+                 {dictionary,[]},
+                 {trap_exit,true},
+                 {status,running},
+                 {heap_size,1597},
+                 {stack_size,24},
+                 {reductions,1760}],
+                []]}}
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.82.0>] {error_report,<0.34.0>,
+              {<0.82.0>,supervisor_report,
+               [{supervisor,{local,couch_primary_services}},
+                {errorContext,child_terminated},
+                {reason,kill},
+                {offender,[{pid,<0.87.0>},
+                           {name,couch_server},
+                           {mfargs,{couch_server,sup_start_link,[]}},
+                           {restart_type,permanent},
+                           {shutdown,1000},
+                           {child_type,worker}]}]}}
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.91.0>] {error_report,<0.34.0>,
+    {<0.91.0>,crash_report,
+     [[{initial_call,{couch_auth_cache,init,['Argument__1']}},
+       {pid,<0.91.0>},
+       {registered_name,[]},
+       {error_info,
+           {exit,
+               {kill,
+                   {gen_server,call,
+                       [couch_server,
+                        {open,<<"_users">>,
+                            [{user_ctx,
+                                 {user_ctx,null,[<<"_admin">>],undefined}},
+                             sys_db]},
+                        infinity]}},
+               [{gen_server,init_it,6},{proc_lib,init_p_do_apply,3}]}},
+       {ancestors,[couch_secondary_services,couch_server_sup,<0.35.0>]},
+       {messages,[]},
+       {links,[<0.89.0>]},
+       {dictionary,[]},
+       {trap_exit,false},
+       {status,running},
+       {heap_size,233},
+       {stack_size,24},
+       {reductions,135}],
+      []]}}
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.89.0>] {error_report,<0.34.0>,
+    {<0.89.0>,supervisor_report,
+     [{supervisor,{local,couch_secondary_services}},
+      {errorContext,start_error},
+      {reason,
+          {kill,
+              {gen_server,call,
+                  [couch_server,
+                   {open,<<"_users">>,
+                       [{user_ctx,{user_ctx,null,[<<"_admin">>],undefined}},
+                        sys_db]},
+                   infinity]}}},
+      {offender,
+          [{pid,undefined},
+           {name,auth_cache},
+           {mfargs,{couch_auth_cache,start_link,[]}},
+           {restart_type,permanent},
+           {shutdown,1000},
+           {child_type,worker}]}]}}
+
+[Sat, 11 Feb 2012 03:26:24 GMT] [error] [<0.81.0>] {error_report,<0.34.0>,
+    {<0.81.0>,supervisor_report,
+     [{supervisor,{local,couch_server_sup}},
+      {errorContext,start_error},
+      {reason,shutdown},
+      {offender,
+          [{pid,undefined},
+           {name,couch_secondary_services},
+           {mfargs,{couch_server_sup,start_secondary_services,[]}},
+           {restart_type,permanent},
+           {shutdown,infinity},
+           {child_type,supervisor}]}]}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.91.0>] {error_report,<0.30.0>,
+    {<0.91.0>,crash_report,
+     [[{initial_call,{couch_db_updater,init,['Argument__1']}},
+       {pid,<0.91.0>},
+       {registered_name,[]},
+       {error_info,
+           {exit,
+               {bad_return_value,
+                   {database_disk_version_error,
+                       "Incorrect disk header version"}},
+               [{gen_server,init_it,6},{proc_lib,init_p_do_apply,3}]}},
+       {ancestors,[<0.90.0>,<0.88.0>]},
+       {messages,[]},
+       {links,[<0.90.0>]},
+       {dictionary,[]},
+       {trap_exit,true},
+       {status,running},
+       {heap_size,610},
+       {stack_size,24},
+       {reductions,146}],
+      [{neighbour,
+           [{pid,<0.88.0>},
+            {registered_name,[]},
+            {initial_call,{erlang,apply,2}},
+            {current_function,{proc_lib,sync_wait,2}},
+            {ancestors,[]},
+            {messages,[]},
+            {links,[<0.89.0>,<0.90.0>,<0.83.0>]},
+            {dictionary,[]},
+            {trap_exit,false},
+            {status,waiting},
+            {heap_size,377},
+            {stack_size,9},
+            {reductions,66}]},
+       {neighbour,
+           [{pid,<0.90.0>},
+            {registered_name,[]},
+            {initial_call,{couch_db,init,['Argument__1']}},
+            {current_function,{proc_lib,sync_wait,2}},
+            {ancestors,[<0.88.0>]},
+            {messages,
+                [{ack,<0.91.0>,
+                     {error,
+                         {bad_return_value,
+                             {database_disk_version_error,
+                                 "Incorrect disk header version"}}}}]},
+            {links,[<0.88.0>,<0.91.0>]},
+            {dictionary,[]},
+            {trap_exit,false},
+            {status,runnable},
+            {heap_size,233},
+            {stack_size,16},
+            {reductions,60}]}]]}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.83.0>] Unexpected message, restarting couch_server: {'EXIT',<0.88.0>,
+                                              {bad_return_value,
+                                               {database_disk_version_error,
+                                                "Incorrect disk header version"}}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.89.0>] ** Generic server <0.89.0> terminating 
+** Last message in was {'EXIT',<0.88.0>,
+                           {bad_return_value,
+                               {database_disk_version_error,
+                                   "Incorrect disk header version"}}}
+** When Server state == {file,{file_descriptor,prim_file,{#Port<0.936>,10}},
+                              0,4194}
+** Reason for termination == 
+** {bad_return_value,
+       {database_disk_version_error,"Incorrect disk header version"}}
+
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.89.0>] {error_report,<0.30.0>,
+    {<0.89.0>,crash_report,
+     [[{initial_call,{couch_file,init,['Argument__1']}},
+       {pid,<0.89.0>},
+       {registered_name,[]},
+       {error_info,
+           {exit,
+               {bad_return_value,
+                   {database_disk_version_error,
+                       "Incorrect disk header version"}},
+               [{gen_server,terminate,6},{proc_lib,init_p_do_apply,3}]}},
+       {ancestors,[<0.88.0>]},
+       {messages,[]},
+       {links,[#Port<0.936>]},
+       {dictionary,[]},
+       {trap_exit,true},
+       {status,running},
+       {heap_size,377},
+       {stack_size,24},
+       {reductions,1410}],
+      []]}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.83.0>] ** Generic server couch_server terminating 
+** Last message in was {'EXIT',<0.88.0>,
+                           {bad_return_value,
+                               {database_disk_version_error,
+                                   "Incorrect disk header version"}}}
+** When Server state == {server,
+                            "/Users/afine/Library/Application Support/CouchbaseServer",
+                            {re_pattern,0,0,
+                                <<69,82,67,80,124,0,0,0,16,0,0,0,1,0,0,0,0,0,
+                                  0,0,0,0,0,0,48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                  0,0,0,0,0,0,0,0,0,93,0,72,25,77,0,0,0,0,0,0,
+                                  0,0,0,0,0,0,254,255,255,7,0,0,0,0,0,0,0,0,0,
+                                  0,0,0,0,0,0,0,77,0,0,0,0,16,171,255,3,0,0,0,
+                                  128,254,255,255,7,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                  0,0,0,69,26,84,0,72,0>>},
+                            100,0,"Sat, 11 Feb 2012 03:27:21 GMT"}
+** Reason for termination == 
+** kill
+
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.83.0>] {error_report,<0.30.0>,
+              {<0.83.0>,crash_report,
+               [[{initial_call,{couch_server,init,['Argument__1']}},
+                 {pid,<0.83.0>},
+                 {registered_name,couch_server},
+                 {error_info,{exit,kill,
+                                   [{gen_server,terminate,6},
+                                    {proc_lib,init_p_do_apply,3}]}},
+                 {ancestors,[couch_primary_services,couch_server_sup,
+                             <0.31.0>]},
+                 {messages,[]},
+                 {links,[<0.78.0>]},
+                 {dictionary,[]},
+                 {trap_exit,true},
+                 {status,running},
+                 {heap_size,1597},
+                 {stack_size,24},
+                 {reductions,1760}],
+                []]}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.78.0>] {error_report,<0.30.0>,
+              {<0.78.0>,supervisor_report,
+               [{supervisor,{local,couch_primary_services}},
+                {errorContext,child_terminated},
+                {reason,kill},
+                {offender,[{pid,<0.83.0>},
+                           {name,couch_server},
+                           {mfargs,{couch_server,sup_start_link,[]}},
+                           {restart_type,permanent},
+                           {shutdown,1000},
+                           {child_type,worker}]}]}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.87.0>] {error_report,<0.30.0>,
+    {<0.87.0>,crash_report,
+     [[{initial_call,{couch_auth_cache,init,['Argument__1']}},
+       {pid,<0.87.0>},
+       {registered_name,[]},
+       {error_info,
+           {exit,
+               {kill,
+                   {gen_server,call,
+                       [couch_server,
+                        {open,<<"_users">>,
+                            [{user_ctx,
+                                 {user_ctx,null,[<<"_admin">>],undefined}},
+                             sys_db]},
+                        infinity]}},
+               [{gen_server,init_it,6},{proc_lib,init_p_do_apply,3}]}},
+       {ancestors,[couch_secondary_services,couch_server_sup,<0.31.0>]},
+       {messages,[]},
+       {links,[<0.85.0>]},
+       {dictionary,[]},
+       {trap_exit,false},
+       {status,running},
+       {heap_size,233},
+       {stack_size,24},
+       {reductions,135}],
+      []]}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.85.0>] {error_report,<0.30.0>,
+    {<0.85.0>,supervisor_report,
+     [{supervisor,{local,couch_secondary_services}},
+      {errorContext,start_error},
+      {reason,
+          {kill,
+              {gen_server,call,
+                  [couch_server,
+                   {open,<<"_users">>,
+                       [{user_ctx,{user_ctx,null,[<<"_admin">>],undefined}},
+                        sys_db]},
+                   infinity]}}},
+      {offender,
+          [{pid,undefined},
+           {name,auth_cache},
+           {mfargs,{couch_auth_cache,start_link,[]}},
+           {restart_type,permanent},
+           {shutdown,1000},
+           {child_type,worker}]}]}}
+
+[Sat, 11 Feb 2012 03:27:21 GMT] [error] [<0.77.0>] {error_report,<0.30.0>,
+    {<0.77.0>,supervisor_report,
+     [{supervisor,{local,couch_server_sup}},
+      {errorContext,start_error},
+      {reason,shutdown},
+      {offender,
+          [{pid,undefined},
+           {name,couch_secondary_services},
+           {mfargs,{couch_server_sup,start_secondary_services,[]}},
+           {restart_type,permanent},
+           {shutdown,infinity},
+           {child_type,supervisor}]}]}}
+
+[Sat, 11 Feb 2012 03:33:46 GMT] [info] [<0.35.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
+[Sat, 11 Feb 2012 03:33:52 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_utils 301
+
+[Sat, 11 Feb 2012 03:33:53 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_all_dbs 200
+
+[Sat, 11 Feb 2012 03:33:53 GMT] [info] [<0.111.0>] 127.0.0.1 - - 'GET' /_session 200
+
+[Sat, 11 Feb 2012 03:33:53 GMT] [info] [<0.120.0>] 127.0.0.1 - - 'GET' / 200
+
+[Sat, 11 Feb 2012 03:33:53 GMT] [info] [<0.121.0>] 127.0.0.1 - - 'GET' /_users/ 200
+
+[Sat, 11 Feb 2012 03:34:07 GMT] [info] [<0.31.0>] Apache CouchDB has started on http://127.0.0.1:5984/
+
