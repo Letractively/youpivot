@@ -21,16 +21,7 @@ class CouchDBSetupTool
     
     def self.perform_setup
 
-        directory = "~/Library/Application Support/YouPivotServer/CouchData"
-        directory = directory.stringByExpandingTildeInPath
-
-        File.open(NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("couchdbx-core/etc/couchdb/local.ini"), 'a') do |f|  
-            f.puts ""
-            f.puts "[couchdb]"  
-            f.puts "database_dir = " + directory
-            f.puts "view_index_dir = " + directory
-        end 
-        
+       
         @couchDBManager.startServer
 
         setup_tool_path = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("setup.py")
