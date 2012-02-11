@@ -15,8 +15,7 @@ class AppDelegate
         window.setBackgroundColor(NSColor.colorWithPatternImage(NSImage.imageNamed("installScreen.png")))
         
         #        window.setBackgroundColor.colorWithPatternImage.imageNamed(installScreen.png)
-        @couchDBManager = CouchDBManager.alloc.init
-        @couchDBManager.startServer
+        
         
         #Start the web server
         #@web_server = Thread.new{
@@ -25,7 +24,7 @@ class AppDelegate
     end
     
     def applicationWillTerminate(notification)
-        @couchDBManager.killServer
+        
         CouchDBSetupTool.kill
         #@web_server.kill
     end
