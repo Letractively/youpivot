@@ -1,7 +1,0 @@
-<script>
-    if(!localStorage["obsolete"]) localStorage["obsolete"] = 0;
-    if(new Date().getTime() - localStorage["obsolete"] > 86400000){
-        localStorage["obsolete"] = new Date().getTime();
-        window.open("switch.html", "_blank", "menubar=no,resizable=no,width=620,height=400,location=no");
-    }
-</script>
