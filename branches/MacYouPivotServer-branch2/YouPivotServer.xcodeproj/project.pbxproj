@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4631A2D414E5CF02007FF9FA /* youpivot.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4631A2D314E5CF02007FF9FA /* youpivot.icns */; };
+		4631A2D614E5D634007FF9FA /* installScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 4631A2D514E5D634007FF9FA /* installScreen.png */; };
+		463FCC3A14E61A4800417DF9 /* couchdbx-core in Resources */ = {isa = PBXBuildFile; fileRef = 463FCC3914E61A4800417DF9 /* couchdbx-core */; };
+		463FCC3C14E6204600417DF9 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 463FCC3B14E6204600417DF9 /* dsa_pub.pem */; };
+		468E55A1148E3BC80074A055 /* CouchDBSetupTool.rb in Resources */ = {isa = PBXBuildFile; fileRef = 468E55A0148E3BC80074A055 /* CouchDBSetupTool.rb */; };
+		468E55A3148E41930074A055 /* setup.py in Resources */ = {isa = PBXBuildFile; fileRef = 468E55A2148E41930074A055 /* setup.py */; };
+		468E577F148E486E0074A055 /* Responder.py in Resources */ = {isa = PBXBuildFile; fileRef = 468E577E148E486E0074A055 /* Responder.py */; };
+		468E5781148E49270074A055 /* png_colors.py in Resources */ = {isa = PBXBuildFile; fileRef = 468E5780148E49270074A055 /* png_colors.py */; };
+		4693A44414E59C5F00D7CAA0 /* png.py in Resources */ = {isa = PBXBuildFile; fileRef = 4693A44314E59C5F00D7CAA0 /* png.py */; };
+		4693A46A14E5A24D00D7CAA0 /* couchdb in Resources */ = {isa = PBXBuildFile; fileRef = 4693A46914E5A24D00D7CAA0 /* couchdb */; };
+		469D507D148E0D0800BB50FE /* Responder.rb in Resources */ = {isa = PBXBuildFile; fileRef = 469D507C148E0D0800BB50FE /* Responder.rb */; };
+		469D5084148E235300BB50FE /* MainWindowController.rb in Resources */ = {isa = PBXBuildFile; fileRef = 469D5083148E235300BB50FE /* MainWindowController.rb */; };
+		46B8C306149830FE00946832 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B8C304149830F100946832 /* Security.framework */; };
+		46BCE99E14D85ADD00C609D3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BCE99D14D85ADD00C609D3 /* Sparkle.framework */; };
+		46BCE99F14D85AE600C609D3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 46BCE99D14D85ADD00C609D3 /* Sparkle.framework */; };
+		46FB3C841485863B00A27254 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FB3C831485863B00A27254 /* Cocoa.framework */; };
+		46FB3C8D1485863B00A27254 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46FB3C8B1485863B00A27254 /* InfoPlist.strings */; };
+		46FB3C8F1485863B00A27254 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FB3C8E1485863B00A27254 /* main.m */; };
+		46FB3C941485863B00A27254 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46FB3C921485863B00A27254 /* MainMenu.xib */; };
+		46FB3C971485863B00A27254 /* rb_main.rb in Resources */ = {isa = PBXBuildFile; fileRef = 46FB3C961485863B00A27254 /* rb_main.rb */; };
+		46FB3C991485863B00A27254 /* AppDelegate.rb in Resources */ = {isa = PBXBuildFile; fileRef = 46FB3C981485863B00A27254 /* AppDelegate.rb */; };
+		46FB3CA41485865E00A27254 /* MacRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FB3CA21485865700A27254 /* MacRuby.framework */; };
+		46FB3CA81485872A00A27254 /* CouchDBManager.rb in Resources */ = {isa = PBXBuildFile; fileRef = 46FB3CA71485872A00A27254 /* CouchDBManager.rb */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		46BCE99B14D8558B00C609D3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				46BCE99F14D85AE600C609D3 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4631A2D314E5CF02007FF9FA /* youpivot.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = youpivot.icns; sourceTree = "<group>"; };
+		4631A2D514E5D634007FF9FA /* installScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = installScreen.png; path = YouPivotServer/installScreen.png; sourceTree = "<group>"; };
+		463FCC3914E61A4800417DF9 /* couchdbx-core */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "couchdbx-core"; sourceTree = "<group>"; };
+		463FCC3B14E6204600417DF9 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		468E55A0148E3BC80074A055 /* CouchDBSetupTool.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = CouchDBSetupTool.rb; sourceTree = "<group>"; };
+		468E55A2148E41930074A055 /* setup.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
+		468E577E148E486E0074A055 /* Responder.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Responder.py; sourceTree = "<group>"; };
+		468E5780148E49270074A055 /* png_colors.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = png_colors.py; sourceTree = "<group>"; };
+		4693A44314E59C5F00D7CAA0 /* png.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = png.py; sourceTree = "<group>"; };
+		4693A46914E5A24D00D7CAA0 /* couchdb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = couchdb; sourceTree = "<group>"; };
+		469D507C148E0D0800BB50FE /* Responder.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = Responder.rb; sourceTree = "<group>"; };
+		469D5083148E235300BB50FE /* MainWindowController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = MainWindowController.rb; sourceTree = "<group>"; };
+		46B8C304149830F100946832 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		46BCE99D14D85ADD00C609D3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		46FB3C7F1485863B00A27254 /* YouPivotServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouPivotServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		46FB3C831485863B00A27254 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		46FB3C8A1485863B00A27254 /* YouPivotServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YouPivotServer-Info.plist"; sourceTree = "<group>"; };
+		46FB3C8C1485863B00A27254 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		46FB3C8E1485863B00A27254 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		46FB3C901485863B00A27254 /* YouPivotServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YouPivotServer-Prefix.pch"; sourceTree = "<group>"; };
+		46FB3C931485863B00A27254 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		46FB3C961485863B00A27254 /* rb_main.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
+		46FB3C981485863B00A27254 /* AppDelegate.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = AppDelegate.rb; sourceTree = "<group>"; };
+		46FB3CA21485865700A27254 /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = Library/Frameworks/MacRuby.framework; sourceTree = SDKROOT; };
+		46FB3CA71485872A00A27254 /* CouchDBManager.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = CouchDBManager.rb; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		46FB3C7C1485863B00A27254 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46FB3C841485863B00A27254 /* Cocoa.framework in Frameworks */,
+				46FB3CA41485865E00A27254 /* MacRuby.framework in Frameworks */,
+				46B8C306149830FE00946832 /* Security.framework in Frameworks */,
+				46BCE99E14D85ADD00C609D3 /* Sparkle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		46FB3C741485863B00A27254 = {
+			isa = PBXGroup;
+			children = (
+				4631A2D514E5D634007FF9FA /* installScreen.png */,
+				4631A2D314E5CF02007FF9FA /* youpivot.icns */,
+				46FB3C881485863B00A27254 /* YouPivotServer */,
+				46FB3C821485863B00A27254 /* Frameworks */,
+				46FB3C801485863B00A27254 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		46FB3C801485863B00A27254 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46FB3C7F1485863B00A27254 /* YouPivotServer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		46FB3C821485863B00A27254 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46BCE99D14D85ADD00C609D3 /* Sparkle.framework */,
+				46B8C304149830F100946832 /* Security.framework */,
+				46FB3CA21485865700A27254 /* MacRuby.framework */,
+				46FB3C831485863B00A27254 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46FB3C881485863B00A27254 /* YouPivotServer */ = {
+			isa = PBXGroup;
+			children = (
+				46FB3C981485863B00A27254 /* AppDelegate.rb */,
+				46FB3C911485863B00A27254 /* Resources */,
+				46FB3C951485863B00A27254 /* Other Sources */,
+				46FB3C891485863B00A27254 /* Supporting Files */,
+				46FB3CA71485872A00A27254 /* CouchDBManager.rb */,
+				46FB3C901485863B00A27254 /* YouPivotServer-Prefix.pch */,
+				469D507C148E0D0800BB50FE /* Responder.rb */,
+				469D5083148E235300BB50FE /* MainWindowController.rb */,
+				468E55A0148E3BC80074A055 /* CouchDBSetupTool.rb */,
+			);
+			path = YouPivotServer;
+			sourceTree = "<group>";
+		};
+		46FB3C891485863B00A27254 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				46FB3C8A1485863B00A27254 /* YouPivotServer-Info.plist */,
+				46FB3C8B1485863B00A27254 /* InfoPlist.strings */,
+				46FB3C8E1485863B00A27254 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		46FB3C911485863B00A27254 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				463FCC3B14E6204600417DF9 /* dsa_pub.pem */,
+				463FCC3914E61A4800417DF9 /* couchdbx-core */,
+				4693A46914E5A24D00D7CAA0 /* couchdb */,
+				4693A44314E59C5F00D7CAA0 /* png.py */,
+				468E5780148E49270074A055 /* png_colors.py */,
+				468E577E148E486E0074A055 /* Responder.py */,
+				468E55A2148E41930074A055 /* setup.py */,
+				46FB3C921485863B00A27254 /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		46FB3C951485863B00A27254 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				46FB3C961485863B00A27254 /* rb_main.rb */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		46FB3C871485863B00A27254 /* Deployment */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "--embed";
+			buildConfigurationList = 46FB3C9F1485863B00A27254 /* Build configuration list for PBXLegacyTarget "Deployment" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/local/bin/macruby_deploy;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = Deployment;
+			passBuildSettingsInEnvironment = 1;
+			productName = Deployment;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXNativeTarget section */
+		46FB3C7E1485863B00A27254 /* YouPivotServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46FB3C9C1485863B00A27254 /* Build configuration list for PBXNativeTarget "YouPivotServer" */;
+			buildPhases = (
+				46FB3C7B1485863B00A27254 /* Sources */,
+				46FB3C7C1485863B00A27254 /* Frameworks */,
+				46FB3C7D1485863B00A27254 /* Resources */,
+				46BCE99B14D8558B00C609D3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YouPivotServer;
+			productName = YouPivotServer;
+			productReference = 46FB3C7F1485863B00A27254 /* YouPivotServer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46FB3C761485863B00A27254 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 46FB3C791485863B00A27254 /* Build configuration list for PBXProject "YouPivotServer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 46FB3C741485863B00A27254;
+			productRefGroup = 46FB3C801485863B00A27254 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				46FB3C7E1485863B00A27254 /* YouPivotServer */,
+				46FB3C871485863B00A27254 /* Deployment */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		46FB3C7D1485863B00A27254 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46FB3C8D1485863B00A27254 /* InfoPlist.strings in Resources */,
+				46FB3C941485863B00A27254 /* MainMenu.xib in Resources */,
+				46FB3C971485863B00A27254 /* rb_main.rb in Resources */,
+				46FB3C991485863B00A27254 /* AppDelegate.rb in Resources */,
+				46FB3CA81485872A00A27254 /* CouchDBManager.rb in Resources */,
+				469D507D148E0D0800BB50FE /* Responder.rb in Resources */,
+				469D5084148E235300BB50FE /* MainWindowController.rb in Resources */,
+				468E55A1148E3BC80074A055 /* CouchDBSetupTool.rb in Resources */,
+				468E55A3148E41930074A055 /* setup.py in Resources */,
+				468E577F148E486E0074A055 /* Responder.py in Resources */,
+				468E5781148E49270074A055 /* png_colors.py in Resources */,
+				4693A44414E59C5F00D7CAA0 /* png.py in Resources */,
+				4693A46A14E5A24D00D7CAA0 /* couchdb in Resources */,
+				4631A2D414E5CF02007FF9FA /* youpivot.icns in Resources */,
+				4631A2D614E5D634007FF9FA /* installScreen.png in Resources */,
+				463FCC3A14E61A4800417DF9 /* couchdbx-core in Resources */,
+				463FCC3C14E6204600417DF9 /* dsa_pub.pem in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		46FB3C7B1485863B00A27254 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46FB3C8F1485863B00A27254 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		46FB3C8B1485863B00A27254 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46FB3C8C1485863B00A27254 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		46FB3C921485863B00A27254 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46FB3C931485863B00A27254 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		46FB3C9A1485863B00A27254 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		46FB3C9B1485863B00A27254 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+		46FB3C9D1485863B00A27254 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YouPivotServer/YouPivotServer-Prefix.pch";
+				INFOPLIST_FILE = "YouPivotServer/YouPivotServer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/erts-5.8.4/lib/internal\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/erts-5.8.4/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/lib/erl_interface-3.7.4/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/lib/ic-4.2.26/priv/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/usr/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/memcached\"",
+					"\"$(SRCROOT)/YouPivotServer/couchdbx-core/lib/erlang/erts-5.8.2/lib/internal\"",
+					"\"$(SRCROOT)/YouPivotServer/couchdbx-core/lib/erlang/erts-5.8.2/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchdbx-core/lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		46FB3C9E1485863B00A27254 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YouPivotServer/YouPivotServer-Prefix.pch";
+				INFOPLIST_FILE = "YouPivotServer/YouPivotServer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/erts-5.8.4/lib/internal\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/erts-5.8.4/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/lib/erl_interface-3.7.4/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/lib/ic-4.2.26/priv/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/erlang/usr/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchbase-core/lib/memcached\"",
+					"\"$(SRCROOT)/YouPivotServer/couchdbx-core/lib/erlang/erts-5.8.2/lib/internal\"",
+					"\"$(SRCROOT)/YouPivotServer/couchdbx-core/lib/erlang/erts-5.8.2/lib\"",
+					"\"$(SRCROOT)/YouPivotServer/couchdbx-core/lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		46FB3CA01485863B00A27254 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		46FB3CA11485863B00A27254 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		46FB3C791485863B00A27254 /* Build configuration list for PBXProject "YouPivotServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46FB3C9A1485863B00A27254 /* Debug */,
+				46FB3C9B1485863B00A27254 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46FB3C9C1485863B00A27254 /* Build configuration list for PBXNativeTarget "YouPivotServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46FB3C9D1485863B00A27254 /* Debug */,
+				46FB3C9E1485863B00A27254 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46FB3C9F1485863B00A27254 /* Build configuration list for PBXLegacyTarget "Deployment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46FB3CA01485863B00A27254 /* Debug */,
+				46FB3CA11485863B00A27254 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46FB3C761485863B00A27254 /* Project object */;
+}
