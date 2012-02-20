@@ -7,6 +7,7 @@ var KeyTable = function(){
 
     // sort the table. must be called before the other functions can be used. 
     function sort(sortFunction){
+        keyTable = [];
         var k=0;
         for(var i in self){
             keyTable[k++] = i;
@@ -17,6 +18,15 @@ var KeyTable = function(){
         });
     }
     Object.defineProperty(self, 'sort', {value: sort, writable: false, enumerable: false, configurable: false});
+
+    function copy(){
+        var output = new KeyTable();
+        for(var i in self){
+            output[i] = self[i];
+        }
+        return output;
+    }
+    Object.defineProperty(self, 'copy', {value: copy, writable: false, enumerable: false, configurable: false});
 
     // returns the item at index, in the order as it is sorted
     function itemAtIndex(index){

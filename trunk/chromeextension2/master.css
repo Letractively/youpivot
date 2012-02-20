@@ -61,3 +61,7 @@ html[dir='rtl'] #m-leftSidebar {
 
 /*** contents ***/
 #m-content { margin-top: 35px; width: 100%; height: 100%; background-color: #FFFFFF; }
+
+
+/*** Reusable components across tabs ***/
+.m-topsearch { float: right; width: 200px; margin: 8px; }

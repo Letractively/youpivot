@@ -108,7 +108,7 @@ var PivotManager = {};
 	}
 
     var errorMessage = "Error loading information. Please make sure the background daemon is running and try again. ";
-    var youpivotdisabled = "In the current Alpha Release, YouPivot is not enabled. This feature will be enabled when the server binary is completed. Please check for updates regularly. This functionality will be integrated by the Beta release.";
+    var youpivotdisabled = "YouPivot is unable to connect to the local server. You need to install / run it before you can access YouPivot history. ";
     var errorIcon = "<div id='errorIcon' />";
 	// Displays an error message if the server cannot be connected
 	function pivotOnError(response){

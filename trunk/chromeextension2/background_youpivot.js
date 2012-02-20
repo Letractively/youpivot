@@ -14,7 +14,7 @@ $(function(){
 				break;
             case "ping":
                 // use AJAX to get info from manifest.json?
-                sendResponse({name: "YouPivot & Timemarks (alpha)", version: "0.1"});
+                sendResponse({name: "YouPivot & Timemarks (beta)", version: "0.2"});
                 break;
 			default:
 				onRequest(request, sender, sendResponse);

@@ -1,9 +1,7 @@
-var Color = {};
-
-(function(){
-    var m = Color;
+var Color = new (function _Color(){
+    var self = this;
     
-    m.toRGBArray = function(hexString){
+    self.toRGBArray = function(hexString){
         var r = parseInt(hexString.substr(1,2),16);
         var g = parseInt(hexString.substr(3,2),16);
         var b = parseInt(hexString.substr(5,2),16);
