@@ -1,88 +1,39 @@
-include("js/utilities.js");
-var TermManager = {};
+include("/js/views/filterlist.js");
+include("/js/utilities.js");
 
-(function(){
-	var m = TermManager;
+var TermManager = new (function _TermManager(){
+    var self = this;
 
-	var terms = new Array();
+    var filterList;
+
+    $(function(){
+        filterList = $("#terms").FilterList();
+        filterList.addScaleStyle("font-size", function(scale){ return scale * 20 + "px"; });
+        filterList.setMenuTitle(function(html, title, value){
+            return value;
+        });
+        $("#terms").bind("includefilter", function(e, obj, value){
+            FilterManager.addFilter("name", value, value);
+        }).bind("excludefilter", function(e, obj, value){
+            FilterManager.addOutcast("name", value, value);
+        });
+    });
+
 	//add an array of terms
-	m.addTerms = function(texts){
+	self.addTerms = function(texts){
 		for(var i in texts){
-			m.addTerm(texts[i]);
+			self.addTerm(texts[i]);
 		}
 	}
-	m.addTerm = function(text){
-		var index = getTermIndex(text);
-		if(index==-1){
-			terms[terms.length] = {text: text, rating: 1};
-		}else{
-			var term = terms[index];
-			terms[index] = {text: text, rating: term.rating+1};
-			if(term.rating+1>best) best = term.rating+1;
-		}
+	self.addTerm = function(text){
+        var html = '<div class="term"><a href="javascript:filter" class="termAnchor">'+Utilities.htmlEntities(text)+'</a></div>';
+        filterList.addItem(html, "", text.toLowerCase(), true);
 	}
-	m.display = function(){
-		terms.sort(sortFunction);
-		$("#terms").html("");
-		for(var i in terms){
-			if(i>17) break;
-			displayTerm(terms[i].text, terms[i].rating);
-		}
-	}
-	function getTermIndex(term){
-		for(var i in terms){
-			if(terms[i].text.toLowerCase() == term.toLowerCase()){
-				return i;
-			}
-		}
-		return -1;
+	self.display = function(){
+        filterList.display();
 	}
 
-	var best = 1; //dummy. Should be overwritten before first call. 
-
-	function displayTerm(text, rating){
-		var anchor = $("<a href='' class='termAnchor'></a>").text(text);
-		anchor.attr("href", "javascript: filter");
-		anchor.css("font-size", 20*Utilities.decay(rating, 1, best)+"px");
-		anchor.css("opacity", Utilities.decay(rating, 1, best));
-		anchor.click(function(){
-			FilterManager.addFilter("name", text, text);
-			includeFilter(this);
-			return false;
-		});
-		anchor.data("title", text);
-		var term = $("<div class='term'></div>").append(anchor);
-		$("#terms").append(term);
-		anchor.contextMenu("term_menu", {
-			"Include this keyword": {
-				click: includeFilter
-			},
-			"Exclude this keyword": {
-				click: excludeFilter
-			}
-		}, 
-		{ title: text });
-
-		function includeFilter(obj){
-			FilterManager.addFilter("name", $(obj).data("title"), $(obj).data("title"));
-		}
-		function excludeFilter(obj){
-			FilterManager.addOutcast("name", $(obj).data("title"), $(obj).data("title"));
-		}
-	}
-	function sortFunction(a, b){
-		return b.rating-a.rating;
-	}
-
-	m.clearTerms = function(retainOrder){
-		if(!retainOrder){
-			terms = [];
-		}else{
-			for(var i in terms){
-				terms[i].rating = 0;
-			}
-		}
-		best = 1;
-		m.display();
+	self.clearTerms = function(retainOrder){
+        filterList.clearFilters(retainOrder);
 	}
 })();

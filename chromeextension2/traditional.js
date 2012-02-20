@@ -7,6 +7,8 @@ var TraditionalHistory = new (function _TraditionalHistory(){
     }
 
     self.populateTopbar = function(bar){
+        var searchBox = $('<input type="search" id="th-searchBox" class="m-topsearch" />');
+        bar.append(searchBox);
     }
 
     self.tabImage = function(){

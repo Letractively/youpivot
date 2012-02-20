@@ -23,7 +23,7 @@ style("/js/views/itemtable.css");
         // private ivars
         var schema = _schema;
         var table;
-        var rows = {};
+        //var rows = {};
         var headers = {};
 
         // initializer
@@ -35,12 +35,9 @@ style("/js/views/itemtable.css");
         // item is an object of { (String) name : (DOM) element, (String) name : (DOM) element, ...}
         // header is a DOM element
         this.addItem = function(item, headerInfo, refresh){
-            var row = rows[item.id];
-            var returnValue = null; // return null if merely attaching
-            if(!row){
-                row = buildItem(item); // buildItem stores the created item into rows object as well
-                returnValue = row;
-            }
+            //var row = rows[item.id];
+            var row = buildItem(item); // buildItem stores the created item into rows object as well
+            var returnValue = row;
 
             //header creation
             if(headerInfo){
@@ -56,7 +53,7 @@ style("/js/views/itemtable.css");
                 nextHeader.before(row); // attach below the right header
             }
 
-            rows[item.id] = row;
+            //rows[item.id] = row;
 
             if(refresh == undefined || refresh) self.refreshTopRows();
 
@@ -100,7 +97,7 @@ style("/js/views/itemtable.css");
             }
 
             item.remove();
-            delete rows[id];
+            //delete rows[id];
 
             if(refresh === undefined || refresh) self.refreshTopRows();
         }
@@ -184,14 +181,14 @@ style("/js/views/itemtable.css");
         // clears everything in the table, returning to initial state
         this.clear = function(){
             self.element.find(".itemTable").html("");
-            rows = {};
+            //rows = {};
             headers = {};
         }
 
         // destroy the table, as if this itemTable has never been created
         this.destroy = function(){
             self.element.html("");
-            rows = {};
+            //rows = {};
             headers = {};
         }
 
@@ -215,12 +212,12 @@ style("/js/views/itemtable.css");
             headers[key] = new HeaderItem(header, table);
         }
 
-        // actually builds the DOM item to prepare showing on screen
-        function buildItem(item){
-            var tr = $("<tr />").addClass("item").attr("id", "item_"+item.id);
+        function buildTextItem(item){
+            //var tr = $("<tr />").addClass("item").attr("id", "item_"+item.id);
 
             var rowarr = new Array();
             var k = 0;
+            rowarr[k++] = '<tr class="item" id="item_'+item.id+'">';
             for(var i in schema){
                 // not top row
                 var col = "<td class='item_"+i+"'>"+item[i]+"</td>";
@@ -229,9 +226,14 @@ style("/js/views/itemtable.css");
                 }
                 rowarr[k++] = col;
             }
+            rowarr[k++] = '</tr>';
             var row = rowarr.join();
-            tr.append(row);
-            return tr;
+            return row;
+        }
+
+        // actually builds the DOM item to prepare showing on screen
+        function buildItem(item){
+            return $(buildTextItem(item));
         }
 
         /*** additonal functions ***/

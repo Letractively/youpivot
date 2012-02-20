@@ -16,7 +16,7 @@ var YouPivot = {};
         var datePicker = $('<div id="datePickers" />');
         bar.append(datePicker);
 
-        var searchBox = $('<input type="search" id="searchBox" />');
+        var searchBox = $('<input type="search" id="searchBox" class="m-topsearch" />');
         bar.append(searchBox);
     }
 
