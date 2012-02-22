@@ -30,7 +30,7 @@ class CouchDBSetupTool
         @task.setArguments([setup_tool_path])
         @task.setCurrentDirectoryPath(NSBundle.mainBundle.resourcePath)
         @task.launch
-        
+        @task.waitUntilExit
 
     end
     

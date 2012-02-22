@@ -121,10 +121,10 @@
 		46FB3C881485863B00A27254 /* YouPivotServer */ = {
 			isa = PBXGroup;
 			children = (
-				46FB3C981485863B00A27254 /* AppDelegate.rb */,
 				46FB3C911485863B00A27254 /* Resources */,
 				46FB3C951485863B00A27254 /* Other Sources */,
 				46FB3C891485863B00A27254 /* Supporting Files */,
+				46FB3C981485863B00A27254 /* AppDelegate.rb */,
 				46FB3CA71485872A00A27254 /* CouchDBManager.rb */,
 				46FB3C901485863B00A27254 /* YouPivotServer-Prefix.pch */,
 				469D507C148E0D0800BB50FE /* Responder.rb */,
