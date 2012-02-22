@@ -7,7 +7,7 @@
 #
 
 class AppDelegate
-    attr_accessor :window, :button
+    attr_accessor :window, :configurebutton, :startbutton
     def applicationDidFinishLaunching(a_notification)
         
         config_file = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("couchdbx-core/etc/couchdb/local.ini")
@@ -27,19 +27,17 @@ class AppDelegate
             end 
         end
         
-        #backround_image = NSImage.alloc.initByReferencingFile(installScreen.png)
-        #[window setBackgroundColor:[NSColor colorWithPatternImage:[NSImage imageNamed:@"myImage.png"]]];
-        
         window.setBackgroundColor(NSColor.colorWithPatternImage(NSImage.imageNamed("installScreen.png")))
         
-        #        window.setBackgroundColor.colorWithPatternImage.imageNamed(installScreen.png)
-        
-        
-        #Start the web server
-        #@web_server = Thread.new{
-        #    Rack::Handler::ControlTower::Server.new(Responder.new, {:port => 2122, :host => 'localhost', :concurrent => true }).start
-        #}
+        #Check to see if the server has been configured
+        file_manager = NSFileManager.alloc.init
+        file_exists = file_manager.fileExistsAtPath(directory, true)
+        if file_exists then
+            configurebutton.setEnabled(false)
+        end
     end
+        
+
     
     def applicationWillTerminate(notification)
         
