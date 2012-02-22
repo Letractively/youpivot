@@ -62,9 +62,9 @@ database.createTable();
 
 
 //change the icon if developer mode
-/*if(chrome.extension.getURL("/") != "chrome-extension://ojlhmjdbcecjagnlhignlhkoplpfpjop/"){
+if(chrome.extension.getURL("/") != "chrome-extension://bhojlafenkipmbhpfhoojcflnplpohoo/"){
    chrome.browserAction.setIcon({"path":"timemarks/images/timeMarkMarks/timemark_32_blue.png"});
-}*/
+}
  
 
 
