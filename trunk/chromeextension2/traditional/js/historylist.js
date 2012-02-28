@@ -39,6 +39,12 @@ var HistoryList = new (function _HistoryList(){
         });
     }
 
+    self.showResults = function(results, start, count){
+        THDomainManager.clearDomains();
+        self.itemTable.clear();
+        showResults(results, start, count);
+    }
+
     function showResults(results, start, count){
         if(start === undefined || count === undefined){
             start = 0;
@@ -97,7 +103,7 @@ var HistoryList = new (function _HistoryList(){
 
 
     function displayVisit(visit){
-    var MAXINT = Math.pow(2, 50);
+        var MAXINT = Math.pow(2, 50);
         var obj = {
             left        : HistoryListItemFactory.createLeft(visit),
             name        : HistoryListItemFactory.createName(visit),
