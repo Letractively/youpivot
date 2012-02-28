@@ -5,8 +5,16 @@ var HistoryModel = new (function _HistoryModel(){
     
     var validTransitions = ["link", "typed", "auto_bookmark", "manual_subframe", "generated", "start_page", "form_submit", "keyword", "keyword_generated"];
 
+    self.searchVisits = function(needle, num, callback){
+        getChromeVisits(needle, 0, new Date().getTime(), num, callback);
+    }
+
     self.getNumVisits = function(oldestDate, newestDate, num, callback){
-        chrome.history.search({text: "", maxResults: num, startTime: oldestDate, endTime: newestDate}, function(historyItems){
+        getChromeVisits("", oldestDate, newestDate, num, callback);
+    }
+
+    function getChromeVisits(needle, oldestDate, newestDate, num, callback){
+        chrome.history.search({text: needle, maxResults: num, startTime: oldestDate, endTime: newestDate}, function(historyItems){
             var results = [];
             var resultCounter = 0;
 
