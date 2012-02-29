@@ -2,7 +2,7 @@ var THSearch = new (function _THSearch(){
     var self = this;
 
     var lastSearch = ""; // attempt to "synchronize" the results (not displaying if result is old)
-    var NUMRESULTS = 1000;
+    var NUMRESULTS = 500;
 
     function displayResults(results, needle){
         if(needle != lastSearch)

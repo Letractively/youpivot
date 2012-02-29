@@ -53,7 +53,7 @@ var PivotManager = new (function _PivotManager(){
 		var forceReload = Helper.getOptions(options, "forceReload", true);
 		var selection = Helper.getOptions(options, "selection", [time-pivotInterval/2, time+pivotInterval/2]);
 
-		FilterManager.clearFilters();
+		//FilterManager.filter.clearFilters();
 		SearchManager.antiSearch();
 		var range = GraphManager.getLoadedRange();
 		var midPoint = (range.start+range.end)/2;

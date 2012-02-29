@@ -56,7 +56,7 @@ var TopGraph = {};
         delegateFunctions["selectionEdge"] = func;
     }
 
-    var DRAGFLIPMARGIN = 20; // the margin out of boundary before page flip while dragging
+    var DRAGFLIPMARGIN = 40; // the margin out of boundary before page flip while dragging
     // actual draw algorithm
 
 	m.draw = function(data, max){
@@ -100,7 +100,15 @@ var TopGraph = {};
 			.cursor("crosshair")
 			.events("all")
 			.event("mousedown", pv.Behavior.select())
-			.event("select", function(d){ dragged = true; moveScale(d); })
+			.event("select", function(d){
+                if(this.mouse().x < -DRAGFLIPMARGIN){
+                    edge("left");
+                } else if(this.mouse().x > this.root.width() + DRAGFLIPMARGIN){
+                    edge("right");
+                }
+                dragged = true;
+                moveScale(d);
+            })
 			.event("selectstart", function(d){ startScale(d); })
 			.event("selectend", function(d){
 				if(dragged){

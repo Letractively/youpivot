@@ -37,6 +37,8 @@ var HistoryModel = new (function _HistoryModel(){
                             visitItems[j].title = hItem.title;
                             visitItems[j].domain = extractDomain(hItem.url);
                             visitItems[j].visitTime = Math.round(visitItems[j].visitTime);
+                            visitItems[j].groupId = visitItems[j].id;
+                            visitItems[j].id = visitItems[j].visitId;
                             results.push(visitItems[j]);
                         }
                     }

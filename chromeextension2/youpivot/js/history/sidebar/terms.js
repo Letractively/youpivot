@@ -17,9 +17,9 @@ var TermManager = new (function _TermManager(){
             return value;
         });
         $("#terms").bind("includefilter", function(e, obj, value){
-            FilterManager.addFilter("name", value, value);
+            FilterManager.filter.addFilter("name", value, value);
         }).bind("excludefilter", function(e, obj, value){
-            FilterManager.addOutcast("name", value, value);
+            FilterManager.filter.addOutcast("name", value, value);
         });
     });
 

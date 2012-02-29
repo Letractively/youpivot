@@ -106,6 +106,10 @@ var ItemManager = {};
         delete m.list[id];
     }
 
+    m.getList = function(){
+        return m.list;
+    }
+
 	function addItem(id, item){
 		var domain = item.domain;
 		item.id = id;
