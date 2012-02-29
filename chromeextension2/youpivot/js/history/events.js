@@ -18,21 +18,24 @@ var EventManager = {};
 		$("#events").append(img);
 		img.mouseover(function(){
 			$(this).addClass("active");
-			HighlightManager.highlightDomain(id, {persistent: false});
-			HighlightManager.scrollToItem(id, 500);
-		});
-		img.mouseout(function(){
+            HighlightManager.mouseEnterGraph(id);
+			//HighlightManager.highlightDomain(id, {persistent: false});
+			//HighlightManager.scrollToItem(id, 500);
+		})
+        .mouseout(function(){
 			if(!$(this).hasClass("highlight")){
 				$(this).removeClass("active");
 			}
-			HighlightManager.lowlightDomain(id, {clearPersistent: false});
-			HighlightManager.cancelScroll(id);
-		});
-		img.click(function(){
-			$(this).toggleClass("highlight");
-			var toggle = $(this).hasClass("highlight");
-			toggleItemHighlight(id, toggle);
-			HighlightManager.scrollToItem(id, 0);
+            HighlightManager.mouseLeaveGraph(id);
+			//HighlightManager.lowlightDomain(id, {clearPersistent: false});
+			//HighlightManager.cancelScroll(id);
+		})
+        .click(function(){
+            HighlightManager.clickOnGraph(id);
+			//$(this).toggleClass("highlight");
+			//var toggle = $(this).hasClass("highlight");
+			//toggleItemHighlight(id, toggle);
+			//HighlightManager.scrollToItem(id, 0);
 		});
 		m.scaleIcons();
 	}

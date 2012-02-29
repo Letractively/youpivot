@@ -7,6 +7,7 @@ var THDomainManager = new (function _THDomainManager(){
 
     $(function(){
         filterList = $("#th-contentFilters").FilterList();
+        filterList.addScaleStyle("opacity");
         filterList.setMenuTitle(function(html, title, value){ return html+"<span>"+title+"</span>"; });
         $("#th-contentFilters").bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");

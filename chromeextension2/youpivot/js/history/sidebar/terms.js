@@ -8,7 +8,11 @@ var TermManager = new (function _TermManager(){
 
     $(function(){
         filterList = $("#terms").FilterList();
-        filterList.addScaleStyle("font-size", function(scale){ return scale * 20 + "px"; });
+        filterList.onAttached(function(item, scale){
+            item.css("font-size", scale * 20 + "px");
+            item.find("a").css("opacity", scale);
+        });
+        //filterList.addScaleStyle("font-size", function(scale){ return scale * 20 + "px"; });
         filterList.setMenuTitle(function(html, title, value){
             return value;
         });
@@ -26,7 +30,7 @@ var TermManager = new (function _TermManager(){
 		}
 	}
 	self.addTerm = function(text){
-        var html = '<div class="term"><a href="javascript:filter" class="termAnchor">'+Utilities.htmlEntities(text)+'</a></div>';
+        var html = '<div class="term"><a href="javascript:filter" class="termAnchor filterHandle">'+Utilities.htmlEntities(text)+'</a></div>';
         filterList.addItem(html, "", text.toLowerCase(), true);
 	}
 	self.display = function(){

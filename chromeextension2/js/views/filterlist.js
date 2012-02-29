@@ -24,7 +24,7 @@ include("/js/utilities.js");
         var filters = [];
         var best = 1;
         var id;
-        var scaleStyle = {"opacity": function(scale){ return scale; }};
+        var scaleStyle = {};
         var menuTitle = function(html, title, value){ return title; };
 
         (function init(){
@@ -70,19 +70,27 @@ include("/js/utilities.js");
         }
 
         function displayFilter(html, title, value, rating){
-            var img = $(html);
+            var label = $(html);
+            var handle = label.find(".filterHandle");
+            if(handle.length == 0)
+                handle = label;
+
+            var val = Utilities.decay(rating, 1, best);
             for(var i in scaleStyle){
-                img.css(i, scaleStyle[i](Utilities.decay(rating, 1, best)));
+                label.css(i, scaleStyle[i](val));
             }
-            self.element.append(img);
-            img.mouseover(onmouseover).mouseout(onmouseout);
-            img.data("value", value);
-            img.click(function(e){
+            if(onAttached != undefined){
+                onAttached(label, val);
+            }
+            self.element.append(label);
+            handle.mouseover(onmouseover).mouseout(onmouseout);
+            label.data("value", value);
+            handle.click(function(e){
                 if(e.which!==3){ // not right click
-                    oninclude(img);
+                    oninclude(label);
                 }
             });
-            img.contextMenu("filtermenu_"+id, {
+            handle.contextMenu("filtermenu_"+id, {
                 "Include this domain": {
                     click: oninclude
                 },
@@ -129,8 +137,18 @@ include("/js/utilities.js");
             self.element.trigger("excludefilter", [obj, value]);
         }
 
+        var onAttached;
+
+        self.onAttached = function(func){
+            onAttached = func;
+        }
+
         self.addScaleStyle = function(style, scaleFunction){
-            scaleStyle[style] = scaleFunction;
+            if(scaleFunction === undefined){
+                scaleStyle[style] = function(s) {return s;};
+            }else{
+                scaleStyle[style] = scaleFunction;
+            }
         }
 
         self.setMenuTitle = function(func){

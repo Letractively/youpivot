@@ -52,6 +52,11 @@ var TopGraph = {};
         delegateFunctions["selectionMove"] = func;
     }
 
+    m.onSelectionEdge = function(func){
+        delegateFunctions["selectionEdge"] = func;
+    }
+
+    var DRAGFLIPMARGIN = 20; // the margin out of boundary before page flip while dragging
     // actual draw algorithm
 
 	m.draw = function(data, max){
@@ -122,6 +127,11 @@ var TopGraph = {};
 			.cursor("move")
 			.event("mousedown", pv.Behavior.drag())
 			.event("drag", function(d){
+                if(this.mouse().x < -DRAGFLIPMARGIN){
+                    edge("left");
+                } else if(this.mouse().x > this.root.width() + DRAGFLIPMARGIN){
+                    edge("right");
+                }
 				dragged = true;
                 moveScale(d);
 				return this.parent;
@@ -176,7 +186,10 @@ var TopGraph = {};
             var currentPos = {offset: d.x/w, scale: d.dx/w};
             callDelegate("selectionMove", [startPos, currentPos]);
         }
-	}
+        function edge(direction){
+            callDelegate("selectionEdge", [direction]);
+        }
+    }
 
 	function addImportance(data, index){
 		var output = 0;
