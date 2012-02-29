@@ -39,19 +39,11 @@ style("/js/views/itemtable.css");
 
         // item is an object of { (String) name : (DOM) element, (String) name : (DOM) element, ...}
         // plus the field id and sortIndex
-        this.batchAddItem = function(item, headerInfo, onDisplay){
-            /*if(stringRows["h"+headerInfo.key] === undefined){
-                var header = createTextHeader(headerInfo);
-                stringRows["h"+headerInfo.key] = {"sortIndex": item.sortIndex - 1, "row": header};
-            }else if(item.sortIndex < stringRows["h"+headerInfo.key].sortIndex){
-                stringRows["h"+headerInfo.key].sortIndex = item.sortIndex - 1;
-            }*/
-
+        self.addItem = function(item, headerInfo, onDisplay){
             var header = createTextHeader(headerInfo);
             var row = buildTextItem(item); // buildItem stores the created item into rows object as well
-            stringRows["i"+item.id] = {"sortIndex": item.sortIndex, "row": row, "header": header};
-            //rowMetadata["i"+item.id] = {"headerInfo": headerInfo, "onDisplay": onDisplay};
-            callbacks["i"+item.id] = onDisplay;
+            stringRows[item.id] = {"sortIndex": item.sortIndex, "row": row, "header": header};
+            callbacks[item.id] = onDisplay;
         }
 
         function sortFunction(a, b){
@@ -77,9 +69,7 @@ style("/js/views/itemtable.css");
 
             // make the callbacks
             for(var i in callbacks){
-                var itemid = i.substr(1);
-                var onDisplay = callbacks[i];
-                onDisplay($("#item_"+itemid));
+                callbacks[i]($("#item_"+i));
             }
         }
 
@@ -90,13 +80,14 @@ style("/js/views/itemtable.css");
             }else{
                 for(var i in filterIn){
                     var id = filterIn[i];
-                    displayRows["i" + id] = stringRows["i" + id];
+                    if(stringRows[id])
+                        displayRows[id] = stringRows[id];
                 }
             }
             if(filterOut != Infinity){
                 for(var i in filterOut){
                     var id = filterOut[i];
-                    delete displayRows["i" + id];
+                    delete displayRows[id];
                 }
             }
             return displayRows;
@@ -114,7 +105,7 @@ style("/js/views/itemtable.css");
 
         // Remove an item in the table from memory. 
         this.deleteItem = function(id, refresh){
-            delete stringRows["i"+id];
+            delete stringRows[id];
 
             if(refresh === undefined || refresh) self.display();
         }

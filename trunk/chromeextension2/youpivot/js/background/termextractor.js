@@ -30,6 +30,8 @@ function addWord(word){
     for(var s in STOPWORDS){
         if(key == STOPWORDS[s])
             return;
+        if(key.match(/^[0-9]*$/))
+            return;
     }
 
     if(!set[key]) set[key] = 0;

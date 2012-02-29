@@ -9,8 +9,9 @@ include("/youpivot/js/history/helpers/pivottable.js");
  */
 var TableManager = {};
 (function(){
-	var m = TableManager;
+    var m = TableManager;
     var itemTable;
+    m.itemTable = itemTable;
 
     /********* Transitional functions **************/
 
@@ -27,10 +28,6 @@ var TableManager = {};
     }
     m.show = function(obj, className){
         itemTable.show(obj, className);
-    }
-
-    m.detachAll = function(){
-        itemTable.detachAll();
     }
 
     m.highlight = function(id, level){
@@ -52,11 +49,12 @@ var TableManager = {};
                 $("#textContent").hide();
             }else{
                 $("#textContent").show();
-                m.loadFilters();
+                m.loadFilters(ItemManager.list);
             }
         });
 
         itemTable = $("#textContent").pivotTable();
+        m.itemTable = itemTable;
 
         $("#yp-editButton").bind("togglechanged", function(e, state){
             if(!SearchManager.getState()){
@@ -73,13 +71,13 @@ var TableManager = {};
         return ItemManager.getItem(id);
     }
 
-	//reload the items in the table. Basically clearing all the items and add it back. 
-	//This operation takes time
-	m.reload = function(){
-		m.clearItems();
-		SortManager.sortItems(ItemManager.list);
+    //reload the items in the table. Basically clearing all the items and add it back. 
+    //This operation takes time
+    m.reload = function(){
+        m.clearItems();
+        SortManager.sortItems(ItemManager.list);
         FilterTimeManager.filterTime();
-	}
+    }
 
     var deleteentry = function(obj){
         var id = $(obj).data("id"); // for context menu
@@ -97,57 +95,55 @@ var TableManager = {};
         ItemManager.deleteItem(id);
     };
 
-	//add an item to the table
-	m.addItem = function(item){
-        var row = itemTable.addItem(item);
-        if(row === null) return;
-        row.mouseenter(function(){
-            HighlightManager.mouseEnterHistoryListItem(item.id);
+    //add an item to the table
+    m.addItem = function(item){
+        itemTable.addItem(item, function(row){
+            row.mouseenter(function(){
+                HighlightManager.mouseEnterHistoryListItem(item.id);
+            });
+            row.mouseleave(function(){
+                HighlightManager.mouseLeaveHistoryListItem(item.id);
+            });
+            var icon = IconFactory.createTextIcon(item.domain.favUrl, item.title, "item_icon");
+            row.contextMenu("table_menu", {
+                "Delete this entry": {
+                    click: deleteentry
+                }
+            }, 
+            { title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
+            row.find(".deleteBtn").click(deleteentry);
         });
-        row.mouseleave(function(){
-            HighlightManager.mouseLeaveHistoryListItem(item.id);
-        });
-        var icon = IconFactory.createTextIcon(item.domain.favUrl, item.title, "item_icon");
-        row.contextMenu("table_menu", {
-            "Delete this entry": {
-                click: deleteentry
-            }
-        }, 
-        { title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
-        row.find(".deleteBtn").click(deleteentry);
-	}
+    }
 
-	//clear all items from the table
-	m.clearItems = function(){
+    //clear all items from the table
+    m.clearItems = function(){
         if(itemTable)
             itemTable.clear();
-	}
+    }
 
-	//change the schema of the table. Requires complete rebuilding of the table
-	//The operation takes time and freezes the tab during loading
-	m.changeSchema = function(sortBy){
+    //change the schema of the table. Requires complete rebuilding of the table
+    //The operation takes time and freezes the tab during loading
+    m.changeSchema = function(sortBy){
         itemTable.resetToSortMode(sortBy);
         m.reload();
-	}
+    }
 
-	//load the filters back from this items list. Called when switching back from search results. 
-	m.loadFilters = function(){
-		// load back filters from pivot view
-		DomainManager.clearDomains();
-		TermManager.clearTerms();
-		StreamManager.clearStreams();
-		$("#textContent .itemTable .item").each(function(){
-            var id = $(this).data("id");
-            var item = ItemManager.getItem(id);
+    //load the filters back from this items list. Called when switching back from search results. 
+    m.loadFilters = function(timeList){
+        // load back filters from pivot view
+        DomainManager.clearDomains();
+        TermManager.clearTerms();
+        StreamManager.clearStreams();
+        for(var id in timeList){
+            var item = timeList[id];
             if(!item)
                 console.log(item, id, $(this), $(this).data("id"));
-			DomainManager.addDomain(item.domain.favUrl, item.domain.name);
-			TermManager.addTerms(item.keywords);
-			StreamManager.addStream(item.stream);
-		});
-		DomainManager.display();
-		TermManager.display();
-		StreamManager.display();
-
-	}
+            DomainManager.addDomain(item.domain.favUrl, item.domain.name);
+            TermManager.addTerms(item.keywords);
+            StreamManager.addStream(item.stream);
+        }
+        DomainManager.display();
+        TermManager.display();
+        StreamManager.display();
+    }
 })();

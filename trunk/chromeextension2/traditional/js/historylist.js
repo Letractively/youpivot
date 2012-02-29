@@ -70,7 +70,7 @@ var HistoryList = new (function _HistoryList(){
 
     self.getItemIndex = function(id){
         for(var i in list){
-            if(list[i].visitId == id){
+            if(list[i].id == id){
                 return i;
             }
         }
@@ -108,12 +108,12 @@ var HistoryList = new (function _HistoryList(){
             left        : HistoryListItemFactory.createLeft(visit),
             name        : HistoryListItemFactory.createName(visit),
             date        : HistoryListItemFactory.createDate(visit),
-            id          : visit.visitId,
-            sortIndex   : (MAXINT - visit.visitTime) * 2
+            id          : visit.id,
+            sortIndex   : (MAXINT - visit.visitTime)
         }
 
         var headerInfo = HistoryListItemFactory.createHeader(visit);
-        self.itemTable.batchAddItem(obj, headerInfo, function(row){
+        self.itemTable.addItem(obj, headerInfo, function(row){
             var icon = IconFactory.createTextIcon("chrome://favicon/"+visit.url, visit.title, "item_icon");
 
             row.contextMenu("th_historylist_menu", {
@@ -125,7 +125,7 @@ var HistoryList = new (function _HistoryList(){
 
             row.find(".deleteBtn").click(deleteentry);
 
-            row.data("id", visit.visitId); //store the item with the DOM object
+            row.data("id", visit.id); //store the item with the DOM object
         });
     }
 

@@ -10,10 +10,10 @@ var StreamManager = new (function _StreamManager(){
         filterList.setMenuTitle(function(html, title, value){ return html+"<span>"+title+"</span>"; });
         $("#streamFilters").bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
-            FilterManager.addFilter("stream", value, label);
+            FilterManager.filter.addFilter("stream", value, label);
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
-            FilterManager.addOutcast("stream", value, label);
+            FilterManager.filter.addOutcast("stream", value, label);
         });
     });
 

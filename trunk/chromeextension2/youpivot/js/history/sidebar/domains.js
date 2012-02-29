@@ -15,10 +15,10 @@ var DomainManager = new (function _DomainManager(){
             HighlightManager.lowlightActiveTableDomain(value);
         }).bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
-            FilterManager.addFilter("domain", value, label);
+            FilterManager.filter.addFilter("domain", value, label);
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
-            FilterManager.addOutcast("domain", value, label);
+            FilterManager.filter.addOutcast("domain", value, label);
         });
     });
 
@@ -38,12 +38,6 @@ var DomainManager = new (function _DomainManager(){
 
 	self.display = function(){
         filterList.display();
-	}
-
-	self.addUrlDomain = function(url, name){
-        throw "deprecated";
-		var img = IconFactory.createFavicon(url, name);
-		$("#contentFilters").append(img.addClass("favicon"));
 	}
 
 	self.clearDomains = function(retainOrder){

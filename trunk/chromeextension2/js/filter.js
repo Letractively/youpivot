@@ -49,7 +49,7 @@ var Filter = function(activeFilter, getList){
 
     self.triggerFilter = function(){
         var ids = self.getFilterIds();
-        $(window).trigger("filterChanged", [ids]);
+        filterWrap.trigger("filterChanged", [ids]);
     }
 
 	function removeOutcast(type, value){
@@ -67,13 +67,18 @@ var Filter = function(activeFilter, getList){
 
 	self.clearFilters = function(){
 		filters = [];
-		self.filter();
-        self.triggerFilter();
+		//self.filter();
+        //self.triggerFilter();
 		filterContainer.html("");
 		filterWrap.hide();
 	}
 
-    var tests = {"name": nameTest, "domain": domainTest, "stream": streamTest};
+    var tests = {};
+
+    self.addTestType = function(type, test){
+        tests[type] = test;
+    }
+    //var tests = {"name": nameTest, "domain": domainTest, "stream": streamTest};
 
     self.getFilterIds = function(){
         var includeIds = [];
@@ -88,7 +93,7 @@ var Filter = function(activeFilter, getList){
                     var filter = filters[i];
                     if(tests[filter.type](filter.value, item)){
                         // include
-                        includeIds.push(item.visitId);
+                        includeIds.push(item.id);
                     }
                 }
             }
@@ -98,31 +103,12 @@ var Filter = function(activeFilter, getList){
                 var item = list[k];
                 var outcast = outcasts[i];
                 if(tests[outcast.type](outcast.value, item)){
-                    excludeIds.push(item.visitId);
+                    excludeIds.push(item.id);
                 }
             }
         }
         return {"include": includeIds, "exclude": excludeIds};
     }
-
-	function nameTest(value, item){
-		return matchKeywords(value, item.keywords);
-	}
-	function domainTest(domain, item){
-		return item.domain == domain;
-	}
-	function streamTest(stream, item){
-		return item.stream == stream;
-	}
-
-	function matchKeywords(needle, keywords){
-		for(var i in keywords){
-			if(keywords[i].toLowerCase().indexOf(needle.toLowerCase())!=-1){
-				return true;
-			}
-		}
-		return false;
-	}
 
 	function getFilterIndex(type, value){
 		for(var i in filters){

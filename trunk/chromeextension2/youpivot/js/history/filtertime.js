@@ -13,25 +13,24 @@ var FilterTimeManager = new (function _FilterTimeManager(){
 		}
 		var startTime = time[0];
 		var endTime = time[1];
-        TableManager.detachAll();
-        var items = ItemManager.list;
+        //TableManager.detachAll();
+        TableManager.itemTable.clear();
 
-		var tc = $("#textContent");
-
+        var timeList = {};
         ItemManager.list.iterate(function(item){
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
-				showTimeRow(item);
+                timeList[item.id] = item;
+                TableManager.addItem(item);
 			}
         });
 
 		if(!SearchManager.getState()){
-			TableManager.loadFilters();
+			TableManager.loadFilters(timeList);
 		}
-        FilterManager.filter();
-	}
-
-	function showTimeRow(item){
-        TableManager.addItem(item);
+        if(TableManager.itemTable)
+            TableManager.itemTable.display();
+        else
+            console.log("no table");
 	}
 
 })();
