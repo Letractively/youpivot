@@ -1,13 +1,12 @@
 include("/js/urlhash.js");
 
-var PivotManager = {};
-
-(function(){
-	var m = PivotManager;
+var PivotManager = new (function _PivotManager(){
+    var self = this;
 
 	var pivotInterval = pref("pivotInterval");
+    self.pivoting = false;
 
-	m.pivotItem = function(eventId){
+	self.pivotItem = function(eventId){
         pivotItem(eventId);
         URLHash.setHash("pivotitem", eventId);
 	}
@@ -19,7 +18,7 @@ var PivotManager = {};
             return;
         }
 		var pivotTime = (item.startTime + item.endTime) / 2;
-		m.pivot(pivotTime, {"forceReload": false, "callback": function(){
+		self.pivot(pivotTime, {"forceReload": false, "callback": function(){
 			HighlightManager.clearHighlight();
             var id = ItemManager.getItemByEventId(item.eventId).id;
             HighlightManager.clickOnGraph(id);
@@ -42,13 +41,14 @@ var PivotManager = {};
         return false;
 	}
 
-	m.pivotUrl = function(time){
-        m.pivotItem(item);
+	self.pivotUrl = function(time){
+        self.pivotItem(item);
         URLHash.setHash("pivot", time);
 	}
 
-	m.pivot = function(time, options){
+	self.pivot = function(time, options){
 		//extract options
+        self.pivoting = true;
 		var callback = Helper.getOptions(options, "callback", function(){});
 		var forceReload = Helper.getOptions(options, "forceReload", true);
 		var selection = Helper.getOptions(options, "selection", [time-pivotInterval/2, time+pivotInterval/2]);
@@ -66,19 +66,21 @@ var PivotManager = {};
 		}
 	}
 
-	m.pivotRange = function(startRange, endRange){
+	self.pivotRange = function(startRange, endRange){
 		console.log("pivot range is not yet implemented");
 		console.log(startRange +" ::: "+ endRange);
 	}
 
-	m.pageFlip = function(direction){
+	self.pageFlip = function(direction){
 		//FIXME use pivotRange should be better
+        if(self.pivoting)
+            return;
 		var range = GraphManager.getLoadedRange();
 		var midpoint = Math.floor((range.end+range.start)/2);
 		if(direction>0){
-			m.pivot(midpoint+pref("pageFlipRange"), {"forceReload": true});
+			self.pivot(midpoint+pref("pageFlipRange"), {"forceReload": true});
 		}else{
-			m.pivot(midpoint-pref("pageFlipRange"), {"forceReload": true});
+			self.pivot(midpoint-pref("pageFlipRange"), {"forceReload": true});
 		}
 	}
 
@@ -87,6 +89,7 @@ var PivotManager = {};
 		time = Math.floor(time/1000);
 		Connector.send("get", {pivottime: time}, {onSuccess: function(data){
             console.log("success");
+            self.pivoting = false;
 			pivotOnSuccess(data, time, range); 
 			callback();
 		}, onError: pivotOnError});
@@ -130,23 +133,17 @@ var PivotManager = {};
 	}
 
 	$("#graphMoveLeft").click(function(){
-		m.pageFlip(-1);
+		self.pageFlip(-1);
 	});
 	$("#graphMoveRight").click(function(){
-		m.pageFlip(1);
-	});
-	$("#moveLeftRow").click(function(){
-		m.pageFlip(-1);
-	});
-	$("#moveRightRow").click(function(){
-		m.pageFlip(1);
+		self.pageFlip(1);
 	});
 
     URLHash.onHashValueChange("pivot", function(time){
-        m.pivot(time, {"forceReload": false});
+        self.pivot(time, {"forceReload": false});
     });
     URLHash.onHashValueChange("pivotitem", function(item){
-        m.pivotItem(item);
+        self.pivotItem(item);
     });
 
 })();

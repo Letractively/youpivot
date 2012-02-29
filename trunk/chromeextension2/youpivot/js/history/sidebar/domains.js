@@ -7,6 +7,7 @@ var DomainManager = new (function _DomainManager(){
 
     $(function(){
         filterList = $("#contentFilters").FilterList();
+        filterList.addScaleStyle("opacity");
         filterList.setMenuTitle(function(html, title, value){ return html+"<span>"+title+"</span>"; });
         $("#contentFilters").bind("mouseoverfilter", function(e, obj, value){
             HighlightManager.highlightActiveTableDomain(value);

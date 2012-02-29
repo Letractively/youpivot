@@ -47,6 +47,13 @@ var GraphManager = {};
         TopGraph.onSelectionMove(function(startPos, currentPos){
             setSelection(currentPos.offset, currentPos.scale, true);
         });
+        TopGraph.onSelectionEdge(function(direction){
+            if(direction == "left"){
+                PivotManager.pageFlip(-1);
+            }else if(direction == "right"){
+                PivotManager.pageFlip(1);
+            }
+        });
     }
 
     function handleStreamGraphEvents(){
@@ -178,19 +185,6 @@ var GraphManager = {};
         TopGraph.draw(dataArray, getMaxData(totalArray));
     }
 
-	/*m._getData = function(i){
-		return dataArray[i];
-	}
-
-	m.getDataIndex = function(id){
-		for(var i in dataArray){
-			if(dataArray[i].id === id){
-				return i;
-			}
-		}
-		return false;
-	}*/
-
     function getDataIndex(id){
 		for(var i in dataArray){
 			if(dataArray[i].id === id){
@@ -238,7 +232,7 @@ var GraphManager = {};
 		$("#graphDate .dash").toggle();
 		$("#eventsWrap").toggle();
 		$("#collapseGraph").animate({"rotate": (hiding) ? 180 : 0}, 150);
-		ShadowManager.animate((hiding) ? 83 : 270, 200);
+		ShadowManager.animate( (hiding ? 83 : 270) , 200);
 		$("#streamGraph").animate({height: (hiding) ? 0 : 150}, 200); //block display to prevent it from occupying an extra row
 	}
 
