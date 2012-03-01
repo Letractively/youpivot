@@ -44,18 +44,16 @@ include("/youpivot/js/history/helpers/tablerowfactory.js");
             var schema = dateSchema;
             if(sortBy=="by type") schema = typeSchema;
             else if(sortBy=="chronological") schema = dateSchema;
-            itemTable.destroy();
-            itemTable = self.element.itemTable2(schema);
+            itemTable.resetToSchema(schema);
         }
 
         this.addItem = function(item, _onDisplay){
-            var MAXINT = Math.pow(2, 50);
             var obj = {
                 left        : TableRowFactory.createLeft(item),
                 color       : "",
                 name        : TableRowFactory.createName(item),
                 date        : TableRowFactory.createDate(item),
-                sortIndex   : MAXINT - item.startTime,
+                sortIndex   : TableRowFactory.getSortIndex(item),
                 id          : item.id
             }
             var headerInfo = TableRowFactory.createHeader(item);

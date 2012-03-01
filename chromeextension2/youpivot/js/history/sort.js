@@ -1,33 +1,31 @@
-var SortManager = {};
-
-(function(){
-	var m = SortManager;
-	m.sortBy = "chronological";
+var SortManager = new (function _SortManager(){
+    var self = this;
+	self.sortBy = "chronological";
 
 	var sorts = ["chronological", "by type"];
 	var def = "chronological"; //default value;
 
-    m.init = function(){
+    self.init = function(){
 		$("#sortItems").hList("loadArray", {items: sorts, callback: sort});
 		$("#sortItems").hList("select", {name: "chronological"});
-		//m.sort(def);
+		//self.sort(def);
     }
 
-	m.getSortMethod = function(){
-		if(m.sortBy == "chronological") return "date";
-		if(m.sortBy == "by type") return "domain";
-		return m.sortBy;
+	self.getSortMethod = function(){
+		if(self.sortBy == "chronological") return "date";
+		if(self.sortBy == "by type") return "domain";
+		return self.sortBy;
 	}
-	m.sortItems = function(items){
+	self.sortItems = function(items){
 		if(!items) return [];
 		items.sort(sortFunction);
 	}
 	function sortFunction(a, b){
-		if(m.sortBy == "by type"){
+		if(self.sortBy == "by type"){
 			var str = subtractStr(a.domain.name, b.domain.name);
 			if(str!=0) return str;
 			return b.startTime-a.startTime;
-		}else if(m.sortBy == "chronological")
+		}else if(self.sortBy == "chronological")
 			return b.startTime-a.startTime;
 	}
 	function subtractStr(a, b){
@@ -35,17 +33,18 @@ var SortManager = {};
 		else return (a.toLowerCase()>b.toLowerCase()) ? 1 : -1;
 	}
 	//wrapper
-	m.sort = function(name){
+	self.sort = function(name){
 		$("#sortItems").hList("select", {name: name});
 		sort(name);
 	}
 	function sort(name){
-		m.sortBy = name;
+		self.sortBy = name;
 		//Helper.showLoading();
 		TableManager.changeSchema(name);
 		SearchManager.changeSchema(name);
-		FilterTimeManager.filterTime();
-		FilterManager.filter();
+		//FilterTimeManager.filterTime();
+		//FilterManager.filter.triggerFilter();
+        //TableManager.itemTable.display();
 		//Helper.hideLoading();
 		return true;
 	}

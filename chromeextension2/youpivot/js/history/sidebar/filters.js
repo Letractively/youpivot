@@ -15,7 +15,6 @@ var FilterManager = new (function _FilterManager(){
     }
     
     $("#filtersWrap").bind("filterChanged", function(e, ids){
-        console.log("haha", ids);
         TableManager.itemTable.filter(ids.include, ids.exclude);
         TableManager.itemTable.display();
     });
