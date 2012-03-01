@@ -8,6 +8,8 @@ var TermManager = new (function _TermManager(){
 
     $(function(){
         filterList = $("#terms").FilterList();
+        filterList.setTypeName("term");
+        filterList.addScaleStyle("opacity");
         filterList.onAttached(function(item, scale){
             item.css("font-size", scale * 20 + "px");
             item.find("a").css("opacity", scale);

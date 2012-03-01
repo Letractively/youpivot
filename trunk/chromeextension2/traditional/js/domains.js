@@ -7,6 +7,7 @@ var THDomainManager = new (function _THDomainManager(){
 
     $(function(){
         filterList = $("#th-contentFilters").FilterList();
+        filterList.setTypeName("domain");
         filterList.addScaleStyle("opacity");
         filterList.setMenuTitle(function(html, title, value){ return html+"<span>"+title+"</span>"; });
         $("#th-contentFilters").bind("includefilter", function(e, obj, value){

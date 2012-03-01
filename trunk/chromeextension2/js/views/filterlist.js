@@ -26,6 +26,7 @@ include("/js/utilities.js");
         var id;
         var scaleStyle = {};
         var menuTitle = function(html, title, value){ return title; };
+        var type = "item";
 
         (function init(){
             id = self.element.attr("id");
@@ -46,6 +47,10 @@ include("/js/utilities.js");
 
             if(!batch)
                 self.display();
+        }
+
+        self.setTypeName = function(typename){
+            type = typename;
         }
 
         self.display = function(){
@@ -88,17 +93,13 @@ include("/js/utilities.js");
             handle.click(function(e){
                 if(e.which!==3){ // not right click
                     oninclude(label);
+                    e.preventDefault();
                 }
             });
-            handle.contextMenu("filtermenu_"+id, {
-                "Include this domain": {
-                    click: oninclude
-                },
-                "Exclude this domain": {
-                    click: onexclude
-                }
-            }, 
-            { title: menuTitle(html, title, value) });
+            var menuItems = {};
+            menuItems["Include this "+type] = oninclude;
+            menuItems["Exclude this "+type] = onexclude;
+            handle.contextMenu("filtermenu_"+id, menuItems, { title: menuTitle(html, title, value) });
         }
 
         self.clearFilters = function(retainOrder){

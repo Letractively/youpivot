@@ -29,8 +29,6 @@ var FilterTimeManager = new (function _FilterTimeManager(){
 		}
         if(TableManager.itemTable)
             TableManager.itemTable.display();
-        else
-            console.log("no table");
 	}
 
 })();

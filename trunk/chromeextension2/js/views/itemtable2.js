@@ -24,7 +24,6 @@ style("/js/views/itemtable.css");
         // private ivars
         var schema = _schema;
         var table;
-        //var rows = {};
         var headers = {};
         var stringRows = new KeyTable();
         var callbacks = {};
@@ -37,29 +36,38 @@ style("/js/views/itemtable.css");
             self.element.html(table);
         })();
 
+        function reinit(_schema){
+            schema = _schema;
+            headers = {};
+            stringRows = new KeyTable();
+            callbacks = {};
+            filterIn = Infinity;
+            filterOut = [];
+        }
+
         // item is an object of { (String) name : (DOM) element, (String) name : (DOM) element, ...}
         // plus the field id and sortIndex
         self.addItem = function(item, headerInfo, onDisplay){
             var header = createTextHeader(headerInfo);
             var row = buildTextItem(item); // buildItem stores the created item into rows object as well
-            stringRows[item.id] = {"sortIndex": item.sortIndex, "row": row, "header": header};
+            stringRows[item.id] = {"sortIndex": item.sortIndex, "row": row, "headerId": headerInfo.key, "header": header};
             callbacks[item.id] = onDisplay;
         }
 
         function sortFunction(a, b){
-            return a.sortIndex - b.sortIndex;
+            return (a.sortIndex < b.sortIndex) ? -1 : 1;
         }
 
-        this.display = function(){
+        self.display = function(){
             var displayRows = makeDisplayRows();
             var arr = [];
             var k = 0;
             displayRows.sort(sortFunction);
             var lastHeader = "";
             displayRows.iterate(function(dRow){
-                if(dRow.header != lastHeader){
+                if(dRow.headerId != lastHeader){
                     arr[k++] = dRow.header;
-                    lastHeader = dRow.header;
+                    lastHeader = dRow.headerId;
                 }
                 arr[k++] = dRow.row;
             });
@@ -110,7 +118,7 @@ style("/js/views/itemtable.css");
             if(refresh === undefined || refresh) self.display();
         }
 
-        // returns DOM entry of the row. A more objective approach than simply $("item_"+id)
+        // returns DOM entry of the row. A more objective approach than simply $("#item_"+id)
         this.getDOM = function(id){
             return table.find("#item_"+id);
         }
@@ -125,7 +133,7 @@ style("/js/views/itemtable.css");
                     self.element.find(".itemTable tr:visible").each(function(){ 
                         // this iteration includes the header row
                         // to trick the system into renewing lastText so the top row is shown
-                        // skip invisible items
+                        // this skips invisible items
 
                         var column = $(this).find(".item_"+i+">span");
                         if(column.text() != lastText){
@@ -148,11 +156,14 @@ style("/js/views/itemtable.css");
             filterOut = [];
         }
 
+        self.resetToSchema = function(_schema){
+            reinit(_schema);
+        }
+
         // destroy the table, as if this itemTable has never been created
         this.destroy = function(){
             self.element.html("");
-            //rows = {};
-            headers = {};
+            console.log("destroy");
         }
 
         /*** secondary functions ***/

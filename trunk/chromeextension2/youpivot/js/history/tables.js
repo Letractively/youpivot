@@ -7,35 +7,27 @@ include("/youpivot/js/history/helpers/pivottable.js");
  *		Search results table also uses itemtable.js
  *	table.js implements only features specific to the items list
  */
-var TableManager = {};
-(function(){
-    var m = TableManager;
+var TableManager = new (function _TableManager(){
+    var self = this;
     var itemTable;
-    m.itemTable = itemTable;
+    self.itemTable = itemTable;
 
     /********* Transitional functions **************/
 
-    m.hideAll = function(className){
+    self.hideAll = function(className){
         itemTable.hideAll(className);
     }
 
-    m.refreshTopRows = function(){
+    self.refreshTopRows = function(){
         itemTable.refreshTopRows();
     }
 
-    m.hide = function(obj, className){
-        itemTable.hide(obj, className);
-    }
-    m.show = function(obj, className){
-        itemTable.show(obj, className);
-    }
-
-    m.highlight = function(id, level){
+    self.highlight = function(id, level){
         var item = ItemManager.getItem(id);
         if(!item) return;
         itemTable.highlight(id, item.domain.color, level);
     }
-    m.lowlight = function(id){
+    self.lowlight = function(id){
         var item = ItemManager.getItem(id);
         if(!item) return;
         itemTable.lowlight(id, item.domain.color);
@@ -43,18 +35,18 @@ var TableManager = {};
 
     /********* end transitional functions ***********/
 
-    m.init = function(){
+    self.init = function(){
         $("#y-searchResults").bind("search", function(e, active){
             if(active){
                 $("#textContent").hide();
             }else{
                 $("#textContent").show();
-                m.loadFilters(ItemManager.list);
+                self.loadFilters(ItemManager.list);
             }
         });
 
         itemTable = $("#textContent").pivotTable();
-        m.itemTable = itemTable;
+        self.itemTable = itemTable;
 
         $("#yp-editButton").bind("togglechanged", function(e, state){
             if(!SearchManager.getState()){
@@ -67,14 +59,14 @@ var TableManager = {};
         });
     }
 
-    m.getItem = function(id){
+    self.getItem = function(id){
         return ItemManager.getItem(id);
     }
 
     //reload the items in the table. Basically clearing all the items and add it back. 
     //This operation takes time
-    m.reload = function(){
-        m.clearItems();
+    self.reload = function(){
+        //self.clearItems();
         SortManager.sortItems(ItemManager.list);
         FilterTimeManager.filterTime();
     }
@@ -96,7 +88,7 @@ var TableManager = {};
     };
 
     //add an item to the table
-    m.addItem = function(item){
+    self.addItem = function(item){
         itemTable.addItem(item, function(row){
             row.mouseenter(function(){
                 HighlightManager.mouseEnterHistoryListItem(item.id);
@@ -116,20 +108,20 @@ var TableManager = {};
     }
 
     //clear all items from the table
-    m.clearItems = function(){
+    self.clearItems = function(){
         if(itemTable)
             itemTable.clear();
     }
 
     //change the schema of the table. Requires complete rebuilding of the table
     //The operation takes time and freezes the tab during loading
-    m.changeSchema = function(sortBy){
+    self.changeSchema = function(sortBy){
         itemTable.resetToSortMode(sortBy);
-        m.reload();
+        self.reload();
     }
 
     //load the filters back from this items list. Called when switching back from search results. 
-    m.loadFilters = function(timeList){
+    self.loadFilters = function(timeList){
         // load back filters from pivot view
         DomainManager.clearDomains();
         TermManager.clearTerms();

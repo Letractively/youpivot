@@ -6,6 +6,7 @@ var StreamManager = new (function _StreamManager(){
 
     $(function(){
         filterList = $("#streamFilters").FilterList();
+        filterList.setTypeName("stream");
         filterList.addScaleStyle("opacity");
         filterList.setMenuTitle(function(html, title, value){ return html+"<span>"+title+"</span>"; });
         $("#streamFilters").bind("includefilter", function(e, obj, value){
