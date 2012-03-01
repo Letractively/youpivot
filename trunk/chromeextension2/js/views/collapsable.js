@@ -11,14 +11,14 @@
                 var handleSelector = $(this).attr("data-handle");
                 var handle = $(handleSelector);
                 var indicator = ($(this).attr("data-indicator") == "true");
-                var collapsable = $(this).collapsable("create", {"handle": handle, "indicator": indicator});
+                var collapsable = $(this).collapsable({"handle": handle, "indicator": indicator});
                 $(this).data("view_collapsable", collapsable);
             });
             return this;
         }
     }
 
-	$.fn.collapsable = function(action, options){
+	$.fn.collapsable = function(options){
         var existing = this.data("view_collapsable");
         if(existing){
             return existing;

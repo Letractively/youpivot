@@ -54,6 +54,8 @@ var HistoryList = new (function _HistoryList(){
         }
         if(count == 0) throw "Count cannot be 0";
 
+        THFilterManager.filter.clearFilters();
+
         list = results;
         for(var i=start; i<start+count; i++){
             if(i >= results.length)
@@ -137,6 +139,7 @@ var HistoryList = new (function _HistoryList(){
         self.itemTable = $("#th-historyList").itemTable2(dateSchema);
         populateHistoryList();
 
+        /*
         $("#th-historyList_older a").click(function(e){
             self.setNewest(oldestDate - 1);
             e.preventDefault();
@@ -151,12 +154,13 @@ var HistoryList = new (function _HistoryList(){
             self.setNewest(new Date().getTime());
             e.preventDefault();
         });
+        */
 
         $("#th-editButton").bind("togglechanged", function(e, state){
             if(state){
-                $("#th-historyList .edit").show();
+                $("head").append('<style id="th-showEditStyle">#th-historyList .edit { display: inline-block !important; }</style>');
             }else{
-                $("#th-historyList .edit").hide();
+                $("#th-showEditStyle").remove();
             }
 
         });

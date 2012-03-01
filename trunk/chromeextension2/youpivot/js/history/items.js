@@ -36,6 +36,7 @@ var ItemManager = new (function _ItemManager(){
 		EventManager.clear();
 		DomainManager.clearDomains();
 		TermManager.clearTerms();
+        domains = [];
 	}
 
     self.getItem = function(id){
