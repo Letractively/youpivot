@@ -1,13 +1,13 @@
 include("/js/views/filterlist.js");
 include("/js/utilities.js");
 
-var TermManager = new (function _TermManager(){
+var THTermManager = new (function _THTermManager(){
     var self = this;
 
     var filterList;
 
     $(function(){
-        filterList = $("#terms").FilterList();
+        filterList = $("#th-termFilters").FilterList();
         filterList.setTypeName("term");
         filterList.addScaleStyle("opacity");
         filterList.onAttached(function(item, scale){
@@ -18,10 +18,10 @@ var TermManager = new (function _TermManager(){
         filterList.setMenuTitle(function(html, title, value){
             return value;
         });
-        $("#terms").bind("includefilter", function(e, obj, value){
-            FilterManager.filter.addFilter("name", value, value);
+        $("#th-termFilters").bind("includefilter", function(e, obj, value){
+            THFilterManager.filter.addFilter("term", value, value);
         }).bind("excludefilter", function(e, obj, value){
-            FilterManager.filter.addOutcast("name", value, value);
+            THFilterManager.filter.addOutcast("term", value, value);
         });
     });
 
@@ -32,6 +32,7 @@ var TermManager = new (function _TermManager(){
 		}
 	}
 	self.addTerm = function(text){
+        if(!text || text == "") return;
         var html = '<div class="term"><a href="javascript:filter" class="termAnchor filterHandle">'+Utilities.htmlEntities(text)+'</a></div>';
         filterList.addItem(html, "", text.toLowerCase(), true);
 	}

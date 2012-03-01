@@ -7,6 +7,10 @@ var TraditionalHistory = new (function _TraditionalHistory(){
     }
 
     self.populateTopbar = function(bar){
+        O_O.include("/traditional/js/datebox.js");
+        var dateBox = THDateBoxController.createDateBox();
+        bar.append(dateBox);
+
         var searchBox = $('<input type="search" id="th-searchBox" class="m-topsearch" />');
         bar.append(searchBox);
     }
@@ -25,10 +29,8 @@ var TraditionalHistory = new (function _TraditionalHistory(){
         var bar = Master.createSidebar("traditionalhistory");
         bar.attr("id", "h-leftSidebar");
         bar.find(".m-sidebarTitle span").text("Traditional History");
-        bar.append('<div class="sidebarGroup"><div class="sidebarLabel">Content</div><div id="th-contentFilters" class="collapse"></div></div>');
-        include("js/views/collapsable.js");
-        var contentHandle = $("#th-contentFilters").parent().find(".sidebarLabel");
-        $("#th-contentFilters").collapsable("create", {handle: contentHandle, indicator: true});
+        bar.append('<div class="sidebarGroup"><div class="sidebarLabel" id="th-contentLabel">Content</div><div id="th-contentFilters" class="collapse view_Collapsable" data-indicator="true" data-handle="#th-contentLabel"></div></div>');
+        bar.append('<div class="sidebarGroup"><div class="sidebarLabel" id="th-termsLabel">Terms</div><div id="th-termFilters" class="collapse view_Collapsable" data-indicator="true" data-handle="#th-termsLabel"></div></div>');
     }
 })();
 

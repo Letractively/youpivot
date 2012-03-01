@@ -9,6 +9,8 @@
 
 #activeFilters_label { display: none; padding: 5px 0px; }
 
+#th-dateBox { padding: 2px; float: left; }
+
 #th-wrap { padding: 15px; }
 #th-historyListWrap { width: 680px; }
 #th-historyList { width: 100%; }

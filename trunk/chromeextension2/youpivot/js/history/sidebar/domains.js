@@ -38,10 +38,12 @@ var DomainManager = new (function _DomainManager(){
 	}
 
 	self.display = function(){
-        filterList.display();
+        if(filterList)
+            filterList.display();
 	}
 
 	self.clearDomains = function(retainOrder){
-        filterList.clearFilters(retainOrder);
+        if(filterList)
+            filterList.clearFilters(retainOrder);
 	}
 })();

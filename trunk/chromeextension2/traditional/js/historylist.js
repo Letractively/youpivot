@@ -26,6 +26,7 @@ var HistoryList = new (function _HistoryList(){
 
     function populateHistoryList(){
         THDomainManager.clearDomains();
+        THTermManager.clearTerms();
         self.itemTable.clear();
         HistoryModel.getNumVisits(oldestDate, newestDate, 1000, function(results){
             if(results.length > 0){
@@ -41,6 +42,7 @@ var HistoryList = new (function _HistoryList(){
 
     self.showResults = function(results, start, count){
         THDomainManager.clearDomains();
+        THTermManager.clearTerms();
         self.itemTable.clear();
         showResults(results, start, count);
     }
@@ -58,9 +60,11 @@ var HistoryList = new (function _HistoryList(){
                 break;
             displayVisit(results[i]);
             THDomainManager.addDomain("chrome://favicon/"+results[i].url, results[i].domain);
+            THTermManager.addTerms(results[i].title.split(/[^a-zA-Z0-9]+/g));
         }
         self.itemTable.display();
         THDomainManager.display();
+        THTermManager.display();
         //setTimeout(function(){ showResults(results, start+count, count); }, 50); 
     }
 

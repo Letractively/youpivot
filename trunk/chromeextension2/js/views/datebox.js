@@ -73,17 +73,17 @@ O_O.style("js/views/datebox.css");
         function moveToDayBefore(){
             var referenceDate = dateAtMidnight(self.startDate);
             if(self.startDate == referenceDate)
-                setDate(referenceDate - 86399999, referenceDate-1);
+                setDate(referenceDate - 86400000, referenceDate-1);
             else
-                setDate(referenceDate, referenceDate + 86400000);
+                setDate(referenceDate, referenceDate + 86399999);
         }
 
         function moveToDayAfter(){
             var referenceDate = dateAtMidnight(self.endDate);
             if(self.endDate >= referenceDate+86399999)
-                setDate(referenceDate + 86400001, referenceDate + (86400000*2) -1 );
+                setDate(referenceDate + 86400000, referenceDate + (86400000*2) -1 );
             else
-                setDate(referenceDate, referenceDate + 86400000);
+                setDate(referenceDate, referenceDate + 86399999);
         }
 
         function showCalendar(){

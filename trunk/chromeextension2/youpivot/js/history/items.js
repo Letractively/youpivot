@@ -1,38 +1,36 @@
 include("js/keytable.js");
 include("js/color.js");
 
-var ItemManager = {};
-
-(function(){
-	var m = ItemManager;
-	m.list = new KeyTable();
+var ItemManager = new (function _ItemManager(){
+	var self = this;
+	self.list = new KeyTable();
 	var counter = 0;
 
-    m.init = function(){
+    self.init = function(){
         TableManager.init();
         SearchManager.init();
     }
 
-	m.addItems = function(items){
+	self.addItems = function(items){
                 //var ttt = new Date().getTime();
                 //console.log("time to sort: ", new Date().getTime() - ttt);
 		for(var i in items){
 			var id = counter++;
 			addItem(id, items[i]);
-			m.list[id] = items[i];
+			self.list[id] = items[i];
 		}
-		SortManager.sortItems(m.list);
+		SortManager.sortItems(self.list);
                 //console.log("time to create item: ", new Date().getTime() - ttt);
-		DomainManager.display();
-		TermManager.display();
-		StreamManager.display();
+		//DomainManager.display();
+		//TermManager.display();
+		//StreamManager.display();
                 //console.log("time to display item: ", new Date().getTime() - ttt);
 		$(window).trigger("itemsLoaded");
 	}
 
-	m.clear = function(){
+	self.clear = function(){
 		counter = 0;
-		m.list = new KeyTable();
+		self.list = new KeyTable();
 		TableManager.clearItems();
 		GraphManager.clear();
 		EventManager.clear();
@@ -40,19 +38,19 @@ var ItemManager = {};
 		TermManager.clearTerms();
 	}
 
-    m.getItem = function(id){
-        return m.list[id];
+    self.getItem = function(id){
+        return self.list[id];
     }
 
-    m.getItemByEventId = function(eventId){
-        for(var i in m.list){
-            if(m.list[i].eventId == eventId)
-                return m.list[i];
+    self.getItemByEventId = function(eventId){
+        for(var i in self.list){
+            if(self.list[i].eventId == eventId)
+                return self.list[i];
         }
     }
 
-    m.getDomain = function(itemId){
-        var item = m.list[itemId];
+    self.getDomain = function(itemId){
+        var item = self.list[itemId];
         if(!item)
             return null;
         var id = item.domain.id;
@@ -73,27 +71,11 @@ var ItemManager = {};
         var graphColor = Helper.createLighterColor(color, pref("normalGraph"));
         newDomain.graphColor = Color.toRGBArray(graphColor);
 
-        //var graphHighlightColor = Helper.createLighterColor(color, pref("highlightGraph"));
-        //newDomain.graphHighlightColor = [1, 255].concat(Color.toRGBArray(graphHighlightColor));
-
-        //addToDomainData(newDomain, data);
         domains[output] = newDomain;
 		return output;
 	}
 
-    /*function addToDomainData(domain, data){
-        var size = data.length;
-        if(size == 0) return; // return if data is empty
-        if(!domain.data) domain.data = [];
-        for(var i=0; i<size; i++){
-            if(typeof domain.data[i] == "undefined")
-                domain.data[i] = data[i];
-            else
-                domain.data[i] += data[i];
-        }
-    }*/
-
-	m.getDomainId = function(domain){
+	self.getDomainId = function(domain){
 		for(var i in domains){
 			if(domains[i].name == domain){
 				return i;
@@ -101,12 +83,12 @@ var ItemManager = {};
 		}
 	}
 
-    m.deleteItem = function(id){
-        m.list.remove(id);
+    self.deleteItem = function(id){
+        self.list.remove(id);
     }
 
-    m.getList = function(){
-        return m.list;
+    self.getList = function(){
+        return self.list;
     }
 
 	function addItem(id, item){
