@@ -43,6 +43,7 @@ var TableManager = new (function _TableManager(){
                 $("#textContent").show();
                 self.loadFilters(ItemManager.list);
             }
+            $("#yp-editButton").view().setState(false);
         });
 
         itemTable = $("#textContent").pivotTable();
@@ -51,9 +52,11 @@ var TableManager = new (function _TableManager(){
         $("#yp-editButton").bind("togglechanged", function(e, state){
             if(!SearchManager.getState()){
                 if(state){
-                    $("#textContent .edit").show();
+                    $("head").append('<style id="tableEditStyle">#textContent .edit { display: inline-block !important; }</style>');
+                    //$("#textContent .edit").show();
                 }else{
-                    $("#textContent .edit").hide();
+                    $("#tableEditStyle").remove();
+                    //$("#textContent .edit").hide();
                 }
             }
         });
@@ -85,6 +88,7 @@ var TableManager = new (function _TableManager(){
             }
         });
         ItemManager.deleteItem(id);
+        itemTable.display();
     };
 
     //add an item to the table

@@ -31,7 +31,6 @@ var ItemManager = {};
 	}
 
 	m.clear = function(){
-        console.log("clear");
 		counter = 0;
 		m.list = new KeyTable();
 		TableManager.clearItems();
@@ -103,7 +102,7 @@ var ItemManager = {};
 	}
 
     m.deleteItem = function(id){
-        delete m.list[id];
+        m.list.remove(id);
     }
 
     m.getList = function(){

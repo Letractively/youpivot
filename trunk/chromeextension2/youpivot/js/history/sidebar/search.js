@@ -19,10 +19,6 @@ var SearchManager = new (function _SearchManager(){
         itemTable.show(obj, className);
     }
 
-    self.hideAll = function(className){
-        itemTable.hideAll(className);
-    }
-
     self.refreshTopRows = function(){
         itemTable.refreshTopRows();
     }
@@ -74,9 +70,11 @@ var SearchManager = new (function _SearchManager(){
         $("#yp-editButton").bind("togglechanged", function(e, state){
             if(SearchManager.getState()){
                 if(state){
-                    $("#y-searchResults .edit").show();
+                    $("head").append('<style id="searchEditStyle">#y-searchResults .edit { display: inline-block !important; }</style>');
+                    //$("#y-searchResults .edit").show();
                 }else{
-                    $("#y-searchResults .edit").hide();
+                    $("#searchEditStyle").remove();
+                    //$("#y-searchResults .edit").hide();
                 }
             }
         });
@@ -173,7 +171,7 @@ var SearchManager = new (function _SearchManager(){
 		TermManager.display();
 		DomainManager.display();
 		StreamManager.display();
-        itemTable.refreshTopRows();
+        itemTable.display();
 	}
 
     // loads the rest of the result from the server query
@@ -191,7 +189,7 @@ var SearchManager = new (function _SearchManager(){
 		TermManager.display();
 		DomainManager.display();
 		StreamManager.display();
-        itemTable.refreshTopRows();
+        itemTable.display();
 	}
 
 	function loadSortedResults(){
@@ -199,7 +197,7 @@ var SearchManager = new (function _SearchManager(){
         self.results.iterate(function(item){
 			displayItem(item);
 		});
-        itemTable.refreshTopRows();
+        itemTable.display();
 	}
 
 	self.reload = function(){
@@ -216,6 +214,8 @@ var SearchManager = new (function _SearchManager(){
     };
     var deleteentry = function(obj){
         var id = $(obj).data("id");
+        if(id === undefined)
+            id = $(this).attr("data-id"); // for edit mode
         itemTable.deleteItem(id);
         Connector.send("delete", {eventid: self.results[id].eventId}, {
             onSuccess: function(data){
@@ -225,24 +225,26 @@ var SearchManager = new (function _SearchManager(){
                 console.log("item delete error -- ", data);
             }
         });
-        var item = ItemManager.getItemByEventId(self.results[id].eventId);
-        ItemManager.deleteItem(item.id);
+        self.results.remove(id);
+        //var item = ItemManager.getItemByEventId(self.results[id].eventId);
+        //ItemManager.deleteItem(item.id);
+        itemTable.display();
     };
 
 	function displayItem(item){
-        var row = itemTable.addItem(item);
-        if(row === null) return;
-
-		//add mouseover events
-		row.mouseenter(mouseenterrow);
-		row.mouseleave(mouseleaverow);
-		var icon = IconFactory.createTextIcon(item.domain.favUrl, item.title, "item_icon");
-		row.contextMenu("table_menu", {
-			"Delete this entry": {
-				click: deleteentry
-			}
-		}, 
-		{ title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
+        var row = itemTable.addItem(item, function(row){
+            //add mouseover events
+            row.mouseenter(mouseenterrow);
+            row.mouseleave(mouseleaverow);
+            var icon = IconFactory.createTextIcon(item.domain.favUrl, item.title, "item_icon");
+            row.contextMenu("searchtable_menu", {
+                "Delete this entry": {
+                    click: deleteentry
+                }
+            }, 
+            { title: icon+"<div style='display: inline-block; max-width: 200px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; '>"+item.title+"</div>" });
+            row.find(".deleteBtn").click(deleteentry);
+        });
 	}
 
     // both public and private function? 

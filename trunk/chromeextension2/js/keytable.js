@@ -40,6 +40,18 @@ var KeyTable = function(){
     }
     Object.defineProperty(self, 'length', {value: length, writable: false, enumerable: false, configurable: false});
 
+    // remove element with id
+    function remove(id){
+        delete self[id];
+        for(var i in keyTable){
+            if(keyTable[i] == id){
+                keyTable.splice(i, 1);
+                return;
+            }
+        }
+    }
+    Object.defineProperty(self, 'remove', {value: remove, writable: false, enumerable: false, configurable: false});
+
     // iterate through the table by the order it is sorted
     function iterate(func){
         if(typeof func != "function") return;

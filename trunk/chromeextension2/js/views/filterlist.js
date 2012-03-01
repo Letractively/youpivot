@@ -97,8 +97,8 @@ include("/js/utilities.js");
                 }
             });
             var menuItems = {};
-            menuItems["Include this "+type] = oninclude;
-            menuItems["Exclude this "+type] = onexclude;
+            menuItems["Include this "+type] = {"click": oninclude};
+            menuItems["Exclude this "+type] = {"click": onexclude};
             handle.contextMenu("filtermenu_"+id, menuItems, { title: menuTitle(html, title, value) });
         }
 
