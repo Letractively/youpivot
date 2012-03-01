@@ -124,7 +124,7 @@ var HighlightManager = {};
 
     m.highlightDomain = function(domainId, controller, list){
         list.iterate(function(item){
-            if(item.domain.id == domainId){
+            if(item && item.domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, item.id, 1);
                 // domain must be highlighted here before the actual item
                 controller.highlight(item.id, "related");
@@ -137,7 +137,7 @@ var HighlightManager = {};
 
     m.lowlightDomain = function(domainId, controller, list){
         list.iterate(function(item){
-            if(item.domain.id == domainId){
+            if(item && item.domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, item.id, -1);
 
                 if(tableHighlightPool[item.id] > 0){
