@@ -7,6 +7,7 @@ var THSearch = new (function _THSearch(){
     function displayResults(results, needle){
         if(needle != lastSearch)
             return;
+        THFilterManager.filter.clearFilters();
         HistoryList.showResults(results, 0, NUMRESULTS);
         console.log(needle);
     }
@@ -23,6 +24,7 @@ var THSearch = new (function _THSearch(){
     }
 
     function antiSearch(){
+        console.log("antiSearch");
         HistoryList.setNewest(new Date().getTime());
     }
     
@@ -34,6 +36,10 @@ var THSearch = new (function _THSearch(){
             timer = setTimeout(function(){
                 search($("#th-searchBox").val());
             }, REFRACTORYPERIOD);
+        }).click(function(){
+            if(lastSearch.length > 0 && $(this).val()==""){
+                search("");
+            }
         });
     });
 })();
