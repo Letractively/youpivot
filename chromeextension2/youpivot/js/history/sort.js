@@ -39,13 +39,9 @@ var SortManager = new (function _SortManager(){
 	}
 	function sort(name){
 		self.sortBy = name;
-		//Helper.showLoading();
 		TableManager.changeSchema(name);
 		SearchManager.changeSchema(name);
-		//FilterTimeManager.filterTime();
-		//FilterManager.filter.triggerFilter();
-        //TableManager.itemTable.display();
-		//Helper.hideLoading();
+		FilterManager.filter.triggerFilter();
 		return true;
 	}
 })();

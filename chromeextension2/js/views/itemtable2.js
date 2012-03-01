@@ -125,15 +125,14 @@ style("/js/views/itemtable.css");
 
         // refresh the top rows. "toprow" in the schema means it only shows the first occurence of that row for adjacent rows
         // i.e. If 10 consecutive rows have the same date, only the first date is shown (assuming date is a toprow)
-        this.refreshTopRows = function(){
+        self.refreshTopRows = function(){
             self.element.find(".item_"+i+" span").addClass("hidden");
             for(var i in schema){
                 if(schema[i] == "toprow"){
                     var lastText = "";
-                    self.element.find(".itemTable tr:visible").each(function(){ 
+                    self.element.find(".itemTable tr").each(function(){ 
                         // this iteration includes the header row
                         // to trick the system into renewing lastText so the top row is shown
-                        // this skips invisible items
 
                         var column = $(this).find(".item_"+i+">span");
                         if(column.text() != lastText){

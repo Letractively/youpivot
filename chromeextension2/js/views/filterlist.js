@@ -89,10 +89,10 @@ include("/js/utilities.js");
             }
             self.element.append(label);
             handle.mouseover(onmouseover).mouseout(onmouseout);
-            label.data("value", value);
+            handle.data("value", value);
             handle.click(function(e){
                 if(e.which!==3){ // not right click
-                    oninclude(label);
+                    oninclude(handle);
                     e.preventDefault();
                 }
             });

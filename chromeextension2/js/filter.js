@@ -128,7 +128,7 @@ var Filter = function(activeFilter, getList){
 	}
 
 	function addOutcastLabel(type, value, lbl){
-		if(type=="name"){
+		if(type=="name" || type=="term"){
 			lbl = "<div class='outcastText'>"+lbl+"</div>";
 		}else if(type=="domain" || type=="stream"){
 			lbl = "<div class='outcastIcon'><div class='outcastCross'></div>"+lbl+"</div>";

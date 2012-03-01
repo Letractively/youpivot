@@ -4,12 +4,12 @@ style("/youpivot/controls.css");
 var YouPivot = {};
 
 (function(){
-    var m = YouPivot;
+    var self = YouPivot;
 
-    m.onAttached = function(){
+    self.onAttached = function(){
     }
 
-    m.populateTopbar = function(bar){
+    self.populateTopbar = function(bar){
         var dateBox = DateBoxController.createDateBox();
         bar.append(dateBox);
 
@@ -20,7 +20,7 @@ var YouPivot = {};
         bar.append(searchBox);
     }
 
-    m.titleIcon = function(){
+    self.titleIcon = function(){
         return "images/large/youpivot.png";
     }
 
