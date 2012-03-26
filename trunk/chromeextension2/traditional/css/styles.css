@@ -12,12 +12,14 @@
 #th-dateBox { padding: 2px; float: left; }
 
 #th-wrap { padding: 15px; }
-#th-historyListWrap { width: 680px; }
+#th-historyListWrap { width: 100%; }
 #th-historyList { width: 100%; }
 #th-historyListControls { width: 100%; text-align: center; }
 #th-historyList_older { float: left; }
 #th-historyList_today { margin: auto; }
 #th-historyList_newer { float: right; }
+
+#th-historyList .item:hover { background-color: #EEE; }
 
 #th-historyList .edit { display: none; }
 

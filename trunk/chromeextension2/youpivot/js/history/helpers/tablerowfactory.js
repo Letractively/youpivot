@@ -9,7 +9,7 @@ var TableRowFactory = new (function _TableRowFactory(){
 	//convenient wrapper function for DateFormatter.formatDate for specific use in this class
 	//Output date format: "April 1, 2011"
 	self.createDate = function(item){
-		var output = DateFormatter.formatDate(item.startTime, "F j, Y");
+		var output = '<div class="item_date hidden toprowonly">'+DateFormatter.formatDate(item.startTime, "F j, Y")+'</div><div class="item_date"';
 		return output;
 	}
 	self.createHeader = function(item){
@@ -31,8 +31,12 @@ var TableRowFactory = new (function _TableRowFactory(){
 		return output;
 	}
 	self.createLeft = function(item){
+		var sortBy = SortManager.getSortMethod();
         var button = '<button class="pivotBtn">Pivot</button>';
-        var time = '<div class="item_time">'+DateFormatter.formatTime(item.startTime, 12)+'</div>';
+        var topClass = "";
+        if(sortBy == "date")
+            topClass = " hidden toprowonly";
+        var time = '<div class="item_time '+topClass+'">'+DateFormatter.formatTime(item.startTime, 12)+'</div><div class="item_time hidden toprowhide">|</div>';
 		return button+time;
 	}
 

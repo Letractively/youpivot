@@ -6,37 +6,94 @@ var HistoryList = new (function _HistoryList(){
     var self = this;
 
     var list = [];
-    var timeInterval = 86400000;
+    var timeInterval = 43200000;
+    self.itemsReady = true;
 
     var newestDate = new Date().getTime();
     var oldestDate = new Date().getTime() - (timeInterval-1);
     var dateSchema = {"left": "toprow", "name": "normal"};
 
-    self.setNewest = function(date){
+    function refreshDateBox(){
+        THDateBoxController.setDate(oldestDate, newestDate);
+    }
+
+    self.setNewest = function(date, callback){
         oldestDate = date - (timeInterval-1);
         newestDate = date;
-        populateHistoryList();
+        refreshDateBox();
+        populateHistoryList(callback);
     }
 
-    self.setOldest = function(date){
+    self.setOldest = function(date, callback){
         oldestDate = date;
         newestDate = date + (timeInterval-1);
-        populateHistoryList();
+        refreshDateBox();
+        populateHistoryList(callback);
     }
 
-    function populateHistoryList(){
-        THDomainManager.clearDomains();
-        THTermManager.clearTerms();
-        self.itemTable.clear();
+    self.flipPage = function(fraction, maxFlipNumber){
+        if(fraction > 0 && newestDate >= new Date().getTime()){
+            console.log("no flipping needed");
+            return;
+        }
+        self.itemsReady = false;
+        var lastId = $("#th-historyList .item").last().attr("id");
+        var firstId = $("#th-historyList .item").first().attr("id");
+        var callback = (fraction > 0) ? flipUpCallback : flipDownCallback;
+        self.setOldest(oldestDate + timeInterval * fraction, callback);
+        function flipDownCallback(){
+            var item = $("#th-historyList #"+lastId);
+            if(maxFlipNumber && item.nextAll().length < 5){
+                console.log("flip again");
+                self.flipPage(fraction, maxFlipNumber-1);
+            }
+            if(item.length != 0){
+                var offset = item.offset().top;
+                //console.log("lastItem bottom space", $(document).outerHeight() - offset);
+                $(document).scrollTop(offset - $(window).height() + 65);
+            }else{
+                console.log("item not found");
+            }
+            setTimeout(function(){
+                self.itemsReady = true;
+            }, 100);
+        }
+
+        function flipUpCallback(){
+            var item = $("#th-historyList #"+firstId);
+            if(maxFlipNumber && item.prevAll().length < 5){
+                console.log("flip again");
+                self.flipPage(fraction, maxFlipNumber-1);
+            }
+            if(item.length != 0){
+                var offset = item.offset().top;
+                //console.log("lastItem bottom space", $(document).outerHeight() - offset);
+                $(document).scrollTop(offset - 65);
+            }else{
+                console.log("item not found");
+            }
+            setTimeout(function(){
+                self.itemsReady = true;
+            }, 100);
+        }
+    }
+
+    function populateHistoryList(callback){
         HistoryModel.getNumVisits(oldestDate, newestDate, 1000, function(results){
+            THDomainManager.clearDomains();
+            THTermManager.clearTerms();
+            self.itemTable.clear();
+
             if(results.length > 0){
                 showResults(results);
-                newestDate = results[0].visitTime;
-                oldestDate = results[results.length-1].visitTime;
+                //newestDate = results[0].visitTime;
+                //oldestDate = results[results.length-1].visitTime;
                 $("#th-message").hide();
             }else{
                 $("#th-message").html("No entries found between " + DateFormatter.formatDate(oldestDate, "M j ") + DateFormatter.formatTime(oldestDate, 12) + " and " + DateFormatter.formatDate(newestDate, "M j ") + DateFormatter.formatTime(newestDate, 12)).show();
             }
+            if(callback)
+                callback();
         });
     }
 
@@ -138,23 +195,6 @@ var HistoryList = new (function _HistoryList(){
     $(function(){
         self.itemTable = $("#th-historyList").itemTable2(dateSchema);
         populateHistoryList();
-
-        /*
-        $("#th-historyList_older a").click(function(e){
-            self.setNewest(oldestDate - 1);
-            e.preventDefault();
-        });
-
-        $("#th-historyList_newer a").click(function(e){
-            self.setOldest(newestDate + 1);
-            e.preventDefault();
-        });
-
-        $("#th-historyList_today a").click(function(e){
-            self.setNewest(new Date().getTime());
-            e.preventDefault();
-        });
-        */
 
         $("#th-editButton").bind("togglechanged", function(e, state){
             if(state){

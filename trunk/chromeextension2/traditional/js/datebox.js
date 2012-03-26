@@ -25,7 +25,7 @@ var THDateBoxController = new (function _THDateBoxController(){
     }
 
     function onDateChanged(event, startDate, endDate){
-        HistoryList.setNewest(endDate);
+        HistoryList.setOldest(startDate);
         console.log(new Date(startDate), new Date(endDate));
     }
 

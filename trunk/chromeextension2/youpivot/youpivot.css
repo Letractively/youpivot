@@ -1,5 +1,4 @@
 .anchor { cursor: pointer; }
-.hidden { display: none; }	
 
 .hItem.active { cursor: default; color: #3870AD; }
 

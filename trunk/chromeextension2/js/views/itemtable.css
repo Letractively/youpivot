@@ -6,6 +6,7 @@
 .itemTable td { height: 26px; padding: 0px 2px; }
 .itemTable th { height: 26px; text-align: left; padding-top: 10px; }
 .itemTable .item_name { width: 100%; padding: 0px 5px; }
+.itemTable .item_name a { text-overflow: ellipsis; display: inline-block; width: 650px; }
 .itemTable .item_date { white-space: nowrap; }
 .itemTable .item_date .grey { color: #999999; }
 .itemTable .item_time { display: inline-block; color: #919194; width: 60px; text-align: center; }

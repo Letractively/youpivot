@@ -35,6 +35,13 @@ function pref(label){
 	return PrefManager.getOption(label);
 }
 
+function debug_warn(message){
+    if(_debug){
+        alert(warn);
+    }
+    console.warn(message);
+}
+
 O_O.include("js/pref.js");
 
 (function($){

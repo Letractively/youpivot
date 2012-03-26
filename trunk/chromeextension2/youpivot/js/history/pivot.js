@@ -111,7 +111,7 @@ var PivotManager = new (function _PivotManager(){
 	}
 
     var errorMessage = "Error loading information. Please make sure the background daemon is running and try again. ";
-    var youpivotdisabled = "YouPivot is unable to connect to the local server. You need to install / run it before you can access YouPivot history. ";
+    var youpivotdisabled = "<font style='font-size: 20px'>YouPivot is unable to connect to the local server. </font><p>You need to install / run it before you can access YouPivot history. <br /> Download the server at <a href='http://youpivot.com/downloads/#getFull' target='installyoupivot'>http://youpivot.com/downloads</a></p>";
     var errorIcon = "<div id='errorIcon' />";
 	// Displays an error message if the server cannot be connected
 	function pivotOnError(response){

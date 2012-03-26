@@ -1,8 +1,8 @@
 var Monitor = {};
 
 (function(){
-	var m = Monitor;
-	var arr = m.tabs = {};
+	var self = Monitor;
+	var arr = self.tabs = {};
 	var timerId = -1;
 
 	//constants
@@ -62,8 +62,10 @@ var Monitor = {};
 		if(urlValid(tab.url)){
 			addToTabs(tab.id, createItemFromTab(tab));
             extractKeywords(tab.id, function(terms){
-                console.log(arr[tab.id]);
-                arr[tab.id].keywords = terms;
+                if(terms.length > 0){
+                    if(arr[tab.id])
+                        arr[tab.id].keywords = terms;
+                }
                 uploadOpenInfo(tab.id);
             });
 		}
@@ -78,7 +80,7 @@ var Monitor = {};
 				if(data.length>0){
 					console.log("remove successful, response: ", data);
 				}else{
-					alert("Error uploading remove tab info: "+data);
+                    debug_warn("Error uploading remove tab info: "+data);
 				}
 			}, 
 			onError: function(data){
@@ -104,15 +106,16 @@ var Monitor = {};
 		var item = createOpenItem(info);
 		Connector.send("add", item, {
 			onSuccess: function(data){
-				if(data.length>0){
+				if(data.length>0 && data != "Missing Fields"){
 					arr[tabId].eid = data;
 					console.log("upload successful, event id: ", data);
 				}else{
-					alert("Error uploading open tab info: "+data);
+                    removeFromTabs(tabId);
+					debug_warn("Error uploading open tab info: "+data);
 				}
 			}, 
 			onError: function(data){
-				console.log("error uploading open information. ", data);
+				debug_warn("error uploading open information. ", data);
 			}
 		});
 	}
@@ -123,7 +126,7 @@ var Monitor = {};
 		obj.url = info.url;
 		obj.eventtypename = info.domain;
 		obj.favicon = info.favUrl;
-		obj.keyword = info.keywords; //FIXME extract from document instead
+		obj.keyword = info.keywords;
 		obj.starttime = Math.floor(new Date().getTime()/1000);
 		obj.endtime = Math.floor((new Date().getTime())/1000 + 1);
 		obj.time0 = Math.floor(new Date().getTime()/1000);
@@ -149,11 +152,15 @@ var Monitor = {};
 
 	//send updated info about all tabs to server, every 114 seconds
 	function uploadUpdateInfo(){
-		console.log("update tab");
+		console.log("update tab", arr);
 		//var batch = [];
 		for(var i in arr){
 			var info = arr[i].getInfo();
-			uploadUpdate(info);
+            console.log("arr: ", arr);
+            console.log("info:", info);
+			if(!uploadUpdate(info)){
+                removeFromTabs(i);
+            }
 			//batch[batch.length] = info;
 		}
 		//uploadBatch(batch);
@@ -164,22 +171,18 @@ var Monitor = {};
 		var item = createUpdateItem(info);
 		if(item === false){
 			console.log("Update unsuccessful. Item is not created. ");
-			return;
+			return false;
 		}
 		Connector.send("update", item, {
 			onSuccess: function(data){
 				if(data.length>0){
 					console.log("update successful");
 				}else{
-					alert("Error uploading open tab info: "+data);
+					debug_warn("Error uploading open tab info: "+data);
 				}
 			}
 		});
-	}
-
-	//function currently not in use
-	function uploadBatch(batch){
-        throw "Upload batch is deprecated";
+        return true;
 	}
 
 	function createUpdateItem(info){
@@ -188,6 +191,8 @@ var Monitor = {};
 			return false;
 		}
 		var obj = {};
+        if(!info.importance)
+            info.importance = 0;
 		obj.val0 = info.importance;
 		obj.time0 = Math.floor(new Date().getTime()/1000);
 		obj.eventid = info.eid;
@@ -210,17 +215,23 @@ var Monitor = {};
         });
     }
 
-    m.saveKeywords = function(keywords){
+    self.saveKeywords = function(keywords){
         item.keywords = keywords;
         return item;
     }
 
+    var unsupported = [".gif", ".jpg", ".jpeg", ".pdf", ".bmp", ".svg"];
 	//check if the URL is valid for logging
 	function urlValid(url){
 		if(url.indexOf("chrome")===0)
 			return false;
 		if(url.indexOf("about")===0)
             return false;
+        for(var i in unsupported){
+            if(url.lastIndexOf(unsupported[i])===url.length - unsupported[i].length){
+                return false;
+            }
+        }
 		return true;
 	}
 
@@ -231,24 +242,25 @@ var Monitor = {};
 					var tab = windows[i].tabs[j];
 					if(urlValid(tab.url)){
 						addToTabs(tab.id, createItemFromTab(tab));
-					}
+                    }
 				}
 			}
 		});
 	}
 
-	m.getSelectedId = function(){
+	self.getSelectedId = function(){
 		return selected;
 	}
 
 	//change name to getInfo?
-	m.getTabById = function(id){
+	self.getTabById = function(id){
 		var output = arr[id].getInfo();
 		return output;
 	}
 
 	function addToTabs(id, createObj){
 		arr[id] = createTabInfo(createObj);
+        console.log("arr:", arr);
 	}
 
 	function removeFromTabs(id){
@@ -281,8 +293,7 @@ var Monitor = {};
 		return favIconUrl;
 	}
 
-	//poor man's keyword generator
-	//FIXME doesn't work for non-english alphabets
+	// poor man's keyword generator
     // this is fallback method to create keywords when it's not extracted from the body text
 	function getKeywords(title){
 		title = title.replace(/[^a-zA-Z0-9]/g, " ").replace(/\s+/g, " ");

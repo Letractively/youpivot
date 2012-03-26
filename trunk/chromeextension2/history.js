@@ -13,7 +13,7 @@ $(function(){
     if(typeof hashTab == "string")
         Master.changeTab(hashTab);
     else
-        Master.changeTab("traditionalhistory");
+        Master.changeTab(pref("defaultTab"));
 
 	//listen for hash change
     URLHash.onHashValueChange("tab", function(tabId){

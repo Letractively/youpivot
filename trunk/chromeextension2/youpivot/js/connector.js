@@ -3,7 +3,6 @@ var Connector = new (function _Connector(){
     var self = this;
 
 	var serverUrl = "http://127.0.0.1:8391/";
-	//var serverUrl = "http://127.0.0.1:8080/";
 	var developerId = "e34c5ee0d846e882ae1014294b002a14";
 	var userId = -1;
 
@@ -92,10 +91,10 @@ var Connector = new (function _Connector(){
 					}
 					arr[arr.length] = keys.join("&");
 				}else{ //FIXME send up JSON array instead (needs backend cooperation)
-					arr[arr.length] = i+"="+escape(JSON.stringify(obj[i]));
+					arr[arr.length] = i+"="+escape(JSON.stringify(obj[i])).replace(/%[Aa]0/g, "%20");
 				}
 			}else{
-				arr[arr.length] = i+"="+escape(obj[i]);
+				arr[arr.length] = i+"="+escape(obj[i]).replace(/%[Aa]0/g, "%20");;
 			}
 		}
 		return arr.join("&");
