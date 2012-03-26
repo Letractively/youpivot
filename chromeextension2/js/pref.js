@@ -2,6 +2,10 @@ var PrefManager = new (function _PrefManager(){
     var self = this;
 	var defaults = {
 
+        /*** General ***/
+
+        "defaultTab": "traditionalhistory",
+
         /*** YouPivot ***/
 
 		"collapseGraph": false,

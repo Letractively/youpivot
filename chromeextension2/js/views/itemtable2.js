@@ -1,13 +1,19 @@
 include("/js/keytable.js");
 style("/js/views/itemtable.css");
 
-// schema: 
-//  toprow - only visible when it's the first row possessing that value
-//  normal - normal row
+/***
+A table that can easily be manipulated in javascript. It relies on a schema to add those items. 
+A schema is the columns of the table, which is a JSON string in the form { (String) name : (ColumnType) type, name : type .. }
+
+A column type is either "toprow" or "normal"
+
+"toprow" means the column is only visible when it has different content from the one before it. 
+The content is drawn from the text of the element with class "toprowonly" inside that cell. 
+An element inside the cell with class "toprowhide" is shown only when it is not the top row
+***/
 
 (function($){
     $.fn.itemTable2 = function(schema){
-        // schema is an object of { (String) name : (ItemTableType) type, name : type, name : type .... }
         if(this.find(".itemTable").length == 0){
             if(!schema) throw "Schema is not provided";
             return new ItemTable2(this, schema);
@@ -21,7 +27,7 @@ style("/js/views/itemtable.css");
         
         self.element = element;
 
-        // private ivars
+        // private instance variables
         var schema = _schema;
         var table;
         var headers = {};
@@ -106,11 +112,6 @@ style("/js/views/itemtable.css");
             filterOut = excludeIds;
         }
 
-        this.resetFilters = function(){
-            filterIn = Infinity;
-            filterOut = [];
-        }
-
         // Remove an item in the table from memory. 
         this.deleteItem = function(id, refresh){
             delete stringRows[id];
@@ -134,9 +135,12 @@ style("/js/views/itemtable.css");
                         // this iteration includes the header row
                         // to trick the system into renewing lastText so the top row is shown
 
-                        var column = $(this).find(".item_"+i+">span");
+                        var item = $(this).find(".item_"+i);
+                        var column = item.find(".toprowonly");
                         if(column.text() != lastText){
                             column.removeClass("hidden");
+                        }else{
+                            item.find(".toprowhide").removeClass("hidden");
                         }
                         lastText = column.text();
                     });
@@ -145,7 +149,7 @@ style("/js/views/itemtable.css");
         }
 
         // clears everything in the table, returning to initial state
-        this.clear = function(){
+        self.clear = function(){
             self.element.find(".itemTable").html("");
             //rows = {};
             headers = {};
@@ -157,12 +161,6 @@ style("/js/views/itemtable.css");
 
         self.resetToSchema = function(_schema){
             reinit(_schema);
-        }
-
-        // destroy the table, as if this itemTable has never been created
-        this.destroy = function(){
-            self.element.html("");
-            console.log("destroy");
         }
 
         /*** secondary functions ***/
@@ -181,11 +179,7 @@ style("/js/views/itemtable.css");
             var k = 0;
             rowarr[k++] = '<tr class="item" id="item_'+item.id+'">';
             for(var i in schema){
-                // not top row
                 var col = "<td class='item_"+i+"'>"+item[i]+"</td>";
-                if(schema[i]=="toprow"){
-                    col = "<td class='item_"+i+"'><span class='hidden'>"+item[i]+"</span></td>";
-                }
                 rowarr[k++] = col;
             }
             rowarr[k++] = '</tr>';

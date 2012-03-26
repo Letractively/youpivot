@@ -1,22 +1,20 @@
 // Helper class for detecting and managing changes in the URL hash (stuff after #) 
 
-var URLHash = {};
-
-(function(){
-    var m = URLHash;
+var URLHash = new (function _URLHash(){
+    var self = this;
 
     var hashTable = {};
     var delegateFunctions = {};
 
-    m.onHashValueChange = function(hashKey, func){
+    self.onHashValueChange = function(hashKey, func){
         delegateFunctions[hashKey] = func;
     }
 
-    m.getHashValue = function(hashKey){
+    self.getHashValue = function(hashKey){
         return hashTable[hashKey];
     }
 
-    m.setHash = function(key, value){
+    self.setHash = function(key, value){
         hashTable[key] = value;
         generateURL();
     }

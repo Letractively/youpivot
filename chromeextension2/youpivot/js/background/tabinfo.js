@@ -32,24 +32,24 @@ var TabInfo_output = ["title", "url", "domain", "favUrl", "index", "win", "impor
 
 //Object
 function TabInfo(t){
-	var ti = this;
+	var self = this;
 	//General information
-	this.title = t.title;
-	this.url = t.url;
-	this.domain = t.domain;
-	this.favUrl = t.favUrl;
-	this.index = t.index; //tab position index
-	this.win = t.win; //window ID - unique within a browser session
-	this.importance = 0.01;
-	this.keywords = t.keywords; //JSON array of keywords in the page
-	this.parentTab = t.parentTab; //index of the parent tab. This is unique only for the moment event when combined with parentWindow
-	this.parentWindow = t.parentWindow; 
-	this.eid = t.eid; //event id returned from server
+	self.title = t.title;
+	self.url = t.url;
+	self.domain = t.domain;
+	self.favUrl = t.favUrl;
+	self.index = t.index; //tab position index
+	self.win = t.win; //window ID - unique within a browser session
+	self.importance = 0.01;
+	self.keywords = t.keywords; //JSON array of keywords in the page
+	self.parentTab = t.parentTab; //index of the parent tab. This is unique only for the moment event when combined with parentWindow
+	self.parentWindow = t.parentWindow; 
+	self.eid = t.eid; //event id returned from server
 
-	this.lastActive = 0; //the number of times getInfo is called after the last user input detected
+	self.lastActive = 0; //the number of times getInfo is called after the last user input detected
 
 	//one way flags - true if it is true for any instant after the last getInfo
-	this.flags = {
+	self.flags = {
 		topTab: false, //top tab of the window
 		focusTab: false, //top tab of the focused window
 		focusWindow: false, //focused window
@@ -57,50 +57,54 @@ function TabInfo(t){
 	};
 
 	function calculateImportance(){
-		ti.importance = 0;
-		var discount = TabInfo_discounts[ti.lastActive];
+        console.log("calculateImportance");
+		self.importance = 0;
+		var discount = TabInfo_discounts[self.lastActive];
+        console.log("discount:", discount);
 		if(!discount){
-			ti.importance = TabInfo.minImportance;
+			self.importance = TabInfo.minImportance;
 			return;
 		}
-		for(var i in ti.flags){
-			var value = (ti.flags[i]) ? 1.0 : 0.0;
+		for(var i in self.flags){
+			var value = (self.flags[i]) ? 1.0 : 0.0;
 			var weight = TabInfo_weights[i];
-			ti.importance += (value*weight);
+			self.importance += (value*weight);
 		}
 		//cap the points before discounting
-		if(ti.importance > TabInfo_maxImportance) ti.importance = TabInfo_maxImportance;
-		ti.importance /= discount;
+		if(self.importance > TabInfo_maxImportance) self.importance = TabInfo_maxImportance;
+		self.importance /= discount;
+        console.log("importance:", self.importance);
 	}
 
 	function lowerFlags(){
-		for(var i in ti.flags){
-			ti.flags[i] = false;
+		for(var i in self.flags){
+			self.flags[i] = false;
 		}
 	}
 
-	this.setFocus = function(tFocus, wFocus){
+	self.setFocus = function(tFocus, wFocus){
 		//var wFocus = (focus.window == this.window);
 		//var tFocus = (focus.index == this.index);
-		ti.lastActive = 0;
-		if(wFocus){ ti.flags["focusWindow"] = true; }
-		if(tFocus){ ti.flags["topTab"] = true; }
-		if(wFocus && tFocus){ ti.flags["focusTab"] = true; }
+		self.lastActive = 0;
+		if(wFocus){ self.flags["focusWindow"] = true; }
+		if(tFocus){ self.flags["topTab"] = true; }
+		if(wFocus && tFocus){ self.flags["focusTab"] = true; }
 	}
 
 	function compileOutput(){
 		var output = {};
 		for(var i in TabInfo_output){
 			var key = TabInfo_output[i];
-			output[key] = ti[key];
+			output[key] = self[key];
 		}
 		return output;
 	}
 
-	this.getInfo = function(){
+	self.getInfo = function(){
+        console.log("getInfo");
 		calculateImportance();
 		lowerFlags();
-		ti.lastActive++;
+		self.lastActive++;
 		var output = compileOutput();
 		return output;
 	}

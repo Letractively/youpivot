@@ -11,17 +11,8 @@ var HistoryListItemFactory = new (function _HistoryListItemFactory(){
 		return output;
 	}
 	self.createHeader = function(item){
-		//var sortBy = SortManager.getSortMethod();
-		//if(sortBy=="date"){
-			var output = DateFormatter.formatDate(item.visitTime);
-			return {key: output, html: output};
-		//}
-		/*if(sortBy=="domain"){
-			var key = item.domain.name;
-			var icon = IconFactory.createTextIcon(item.domain.favUrl, item.domain.name, "wrap");
-			var html = icon + key;
-			return {key: key, html: html};
-		}*/
+        var output = DateFormatter.formatDate(item.visitTime);
+        return {key: output, html: output};
 	}
     self.createName = function(item){
 		var icon = IconFactory.createTextIcon("chrome://favicon/"+item.url, item.title, "item_icon");
@@ -29,7 +20,7 @@ var HistoryListItemFactory = new (function _HistoryListItemFactory(){
 		return output;
 	}
 	self.createLeft = function(item){
-        var time = '<div class="item_time">'+DateFormatter.formatTime(item.visitTime, 12)+'</div>';
+        var time = '<div class="item_time hidden toprowonly">'+DateFormatter.formatTime(item.visitTime, 12)+'</div><div class="item_time hidden toprowhide">|</div>';
 		return time;
 	}
 })();
