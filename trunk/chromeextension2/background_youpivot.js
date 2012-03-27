@@ -1,3 +1,5 @@
+O_O.include("/youpivot/js/timemark.js");
+
 $(function(){
 	/*** chrome event listeners ***/
 	chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
@@ -14,7 +16,10 @@ $(function(){
 				break;
             case "ping":
                 // use AJAX to get info from manifest.json?
-                sendResponse({name: "YouPivot & Timemarks (beta)", version: "0.2"});
+                sendResponse({name: "YouPivot & Timemarks (beta)", version: "0.4"});
+                break;
+            case "addTimeMark":
+                TimeMarkManager.add(request.description, request.color);
                 break;
 			default:
 				onRequest(request, sender, sendResponse);

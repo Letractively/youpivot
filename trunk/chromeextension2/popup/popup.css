@@ -12,9 +12,10 @@ form { padding: 0px; margin: 0px; display: inline; }
 
 #popup_logo { width: 100px; margin: 0px 10px; }
 #popup_left, #popup_content { display: inline-block; vertical-align: top; width: 120px; }
-.popup_title { font-size: 28px; font-weight: bold; font-family: 'Myriad Pro', 'Telex', sans-serif; color: #666666; margin-bottom: 20px; }
+.popup_title { font-size: 28px; font-weight: bold; font-family: 'Myriad Pro', 'Telex', sans-serif; color: #666666; }
 
 #popup_notice { display: none; background-color: #FFF; opacity: 0.9; color: #666; position: absolute; text-align: center; line-height: 100px; width: 100%; z-index: 20; font-size: 20px; }
+#popup_notice_inline { color: #666; font-size: 14px; height: 14px; padding: 5px; }
 
 .popup_nav_button { color: #666; text-decoration: none; outline: none; font-size: 13px; -webkit-border-radius: 20px; display: block; padding: 0px 5px; text-align: center; margin: 8px 0px; }
 .popup_nav_button:hover { background-color: #AAA; color: #FFF; }

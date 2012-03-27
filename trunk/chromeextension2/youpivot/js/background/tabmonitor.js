@@ -102,6 +102,10 @@ var Monitor = {};
 
 	function uploadOpenInfo(tabId){
 		console.log("open", tabId);
+        if(!arr[tabId]){
+            debug_warn("arr[tabId] does not exist", tabId);
+            return;
+        }
 		var info = arr[tabId].getInfo();
 		var item = createOpenItem(info);
 		Connector.send("add", item, {

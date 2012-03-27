@@ -32,6 +32,11 @@ var Popup = new (function _Popup(){
     function submitForm(){
         //get the description
         var description = $("#popup_input").val();
+        if(!description || description == ""){
+            $("#popup_notice_inline").html("<font style='color: #AA0000'>Please enter a description</font>").css("opacity", 1);
+            setTimeout(function(){ $("#popup_notice_inline").animate({opacity: 0}, 1000); }, 3000);
+            return false;
+        }
         var color = $("#popup_timemark_color").view().getValue();
 
         chrome.extension.sendRequest({
