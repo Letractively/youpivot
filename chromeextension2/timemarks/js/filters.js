@@ -1,4 +1,4 @@
-var TMFilterManager = new (function _THFilterManager(){
+var TMFilterManager = new (function _TMFilterManager(){
     var self = this;
 
 	var filters = new Array();

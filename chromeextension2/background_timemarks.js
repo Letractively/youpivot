@@ -71,7 +71,7 @@ if(chrome.extension.getURL("/") != "chrome-extension://bhojlafenkipmbhpfhoojcfln
 
 
 //add a listener to listen for requests
-//chrome.extension.onRequest.addListener(onRequest);
+chrome.extension.onRequest.addListener(onRequest);
 chrome.tabs.onCreated.addListener(newTab);
 chrome.tabs.onUpdated.addListener(updateTab);
 chrome.tabs.onRemoved.addListener(destroyTab);
@@ -164,6 +164,7 @@ function onRequest(request, sender, callback){
          createNewTimeMark(request.description,request.color);
          callback({});
          break;
+         /*
       case "viewTimeMarks":
          viewTimeMarks();
          callback({});
@@ -177,6 +178,7 @@ function onRequest(request, sender, callback){
       case "reopenTimemark":
          reopenTimemark(request.id);
          break;
+         */
    }
 }
 
