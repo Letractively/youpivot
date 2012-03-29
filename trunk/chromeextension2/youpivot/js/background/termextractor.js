@@ -22,7 +22,7 @@ for(var i in set){
         }
     }
 }
-console.log("set", set, max);
+//console.log("set", set, max);
 chrome.extension.sendRequest({action: "saveTerms", terms: max});
 
 function addWord(word){
