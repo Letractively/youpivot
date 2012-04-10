@@ -1,5 +1,7 @@
-include("/js/views/itemtable.js");
-include("/youpivot/js/history/helpers/tablerowfactory.js");
+include_("ItemTable");
+include_("TableRowFactory");
+include_("Helper");
+//include_("PivotManager");
 
 (function($){
 

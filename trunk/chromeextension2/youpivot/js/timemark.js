@@ -1,4 +1,4 @@
-var TimeMarkManager = new (function _TimeMarkManager (){
+var YPTimeMarkManager = new (function _YPTimeMarkManager (){
     var self = this;
 
 	var timeMarkIcon = "images/timemark.png";

@@ -1,5 +1,5 @@
-include("/js/iconfactory.js");
-include("/js/utilities.js");
+include_("IconFactory");
+include_("Utilities");
 include("/timemarks/js/filters.js");
 
 var TMDomainManager = new (function _TMDomainManager(){

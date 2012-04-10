@@ -1,7 +1,16 @@
+include_("SearchManager");
+include_("TableManager");
+
 var FilterTimeManager = new (function _FilterTimeManager(){
     var self = this;
 
 	var lastTime;
+    var manager;
+
+    self.init = function(_manager){
+        manager = _manager;
+    }
+
 	self.filterTime = function(time){
 		if(typeof time == "undefined" && lastTime){
 			time = lastTime;
@@ -13,11 +22,10 @@ var FilterTimeManager = new (function _FilterTimeManager(){
 		}
 		var startTime = time[0];
 		var endTime = time[1];
-        //TableManager.detachAll();
         TableManager.itemTable.clear();
 
         var timeList = {};
-        ItemManager.list.iterate(function(item){
+        manager.list.iterate(function(item){
 			if(item.endTime>=startTime && item.startTime<=endTime+1000){
                 timeList[item.id] = item;
                 TableManager.addItem(item);
@@ -27,8 +35,10 @@ var FilterTimeManager = new (function _FilterTimeManager(){
 		if(!SearchManager.getState()){
 			TableManager.loadFilters(timeList);
 		}
-        if(TableManager.itemTable)
+        if(TableManager.itemTable){
+            FilterManager.filter.triggerFilter();
             TableManager.itemTable.display();
+        }
 	}
 
 })();

@@ -1,8 +1,26 @@
+include_("HList");
+include_("PivotManager");
+
 var DatePicker = new (function _DatePicker(){
     var self = this;
 
 	var dateValues = ["now", "today", "yesterday"];
 	var def = "now";
+
+    self.init = function(){
+        $("#y-searchResults").bind("search", function(e, active){
+            if(active){
+                $("#datePickers").addClass("dim");
+                $("#datePickers a").addClass("disabled");
+            }else{
+                $("#datePickers").removeClass("dim");
+                $("#datePickers a").removeClass("disabled");
+            }
+        });
+
+        $("#datePickers").hList("loadArray", {items: dateValues, callback: pickDate});
+        self.pickDate(def);
+    }
 
 	self.pickDate = function(date){
 		var label = (typeof date == "string") ? date : "";
@@ -63,20 +81,5 @@ var DatePicker = new (function _DatePicker(){
 		d.setMilliseconds(0);
 		return d;
 	}
-
-	$("#m-tabView_youpivot").bind("tabready", function(){
-        $("#y-searchResults").bind("search", function(e, active){
-            if(active){
-                $("#datePickers").addClass("dim");
-                $("#datePickers a").addClass("disabled");
-            }else{
-                $("#datePickers").removeClass("dim");
-                $("#datePickers a").removeClass("disabled");
-            }
-        });
-
-		$("#datePickers").hList("loadArray", {items: dateValues, callback: pickDate});
-		self.pickDate(def);
-	});
 
 })();

@@ -1,3 +1,5 @@
+include_("HList");
+
 var SortManager = new (function _SortManager(){
     var self = this;
 	self.sortBy = "chronological";
@@ -8,7 +10,6 @@ var SortManager = new (function _SortManager(){
     self.init = function(){
 		$("#sortItems").hList("loadArray", {items: sorts, callback: sort});
 		$("#sortItems").hList("select", {name: "chronological"});
-		//self.sort(def);
     }
 
 	self.getSortMethod = function(){
@@ -42,6 +43,7 @@ var SortManager = new (function _SortManager(){
 		TableManager.changeSchema(name);
 		SearchManager.changeSchema(name);
 		FilterManager.filter.triggerFilter();
+        analytics("sort", "sort youpivot", name);
 		return true;
 	}
 })();

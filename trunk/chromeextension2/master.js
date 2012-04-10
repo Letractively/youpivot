@@ -1,4 +1,19 @@
-include("/js/urlhash.js");
+include_("URLHash");
+
+/***
+
+  interface TabItem
+    - onCreate() 
+        Called when the tab is created
+    - onAttached()
+        Called when the tab is displayed (i.e. the user selected the tab)
+    - populateTopbar(bar)
+        Called to populate the top bar with elements
+        <HTMLElement> bar - the HTML element of the bar (populatable section)
+    - titleIcon()
+        Should return the URL of title icon, for use in default sidebar
+
+***/
 
 var Master = new (function _Master(){
     var self = this;
@@ -13,6 +28,9 @@ var Master = new (function _Master(){
         // create tab content view
         var div = $("<div />").addClass("m-tabViews").attr("id", attrid).load(htmlfile, function(){
             $("#m-tabView_"+id).trigger("tabready");
+            if(typeof tabs[id].obj.onCreate == "function"){
+                tabs[id].obj.onCreate();
+            }
         });
         $("#m-content").append(div.hide());
 
@@ -33,6 +51,7 @@ var Master = new (function _Master(){
             deactivateTab(activeTab);
         activateTab(id);
         URLHash.setHash("tab", id);
+        analytics("navigation", "change tab", id); // GA, need from tab?
     }
 
     self.changeTabHandle = function(id, newHandle){
@@ -123,8 +142,6 @@ var Master = new (function _Master(){
 })();
 
 $(function(){
-	//initialize
-
     //create settings button
     var settings = $("<img />").attr("src", "images/tab_settings.png").addClass("m-tabimg");
     var btn = $("<div />").html(settings).attr("id", "m-settings").css("float", "right");

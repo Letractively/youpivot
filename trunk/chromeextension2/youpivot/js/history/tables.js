@@ -1,5 +1,7 @@
-include("/js/iconfactory.js");
-include("/youpivot/js/history/helpers/pivottable.js");
+include_("PivotTable");
+include_("jQuery_contextmenu");
+include_("IconFactory");
+include_("Connector");
 
 /**
  *	TableManager manages the items list on the main content, below the visualizations. 
@@ -11,12 +13,6 @@ var TableManager = new (function _TableManager(){
     var self = this;
     var itemTable;
     self.itemTable = itemTable;
-
-    /********* Transitional functions **************/
-
-    self.hideAll = function(className){
-        itemTable.hideAll(className);
-    }
 
     self.refreshTopRows = function(){
         itemTable.refreshTopRows();
@@ -33,8 +29,6 @@ var TableManager = new (function _TableManager(){
         itemTable.lowlight(id, item.domain.color);
     }
 
-    /********* end transitional functions ***********/
-
     self.init = function(){
         $("#y-searchResults").bind("search", function(e, active){
             if(active){
@@ -43,7 +37,7 @@ var TableManager = new (function _TableManager(){
                 $("#textContent").show();
                 self.loadFilters(ItemManager.list);
             }
-            $("#yp-editButton").view().setState(false);
+            $("#yp-editButton").ToggleButton().setState(false);
         });
 
         itemTable = $("#textContent").pivotTable();
@@ -79,9 +73,11 @@ var TableManager = new (function _TableManager(){
         if(id === undefined)
             id = $(this).attr("data-id"); // for edit mode
         itemTable.deleteItem(id);
-        Connector.send("delete", {eventid: ItemManager.list[id].eventId}, {
+        var eventId = ItemManager.list[id].eventId;
+        Connector.send("delete", {eventid: eventId}, {
             onSuccess: function(data){
                 console.log("item deleted -- ", data);
+                analytics("delete", "delete youpivot", eventId);
             }, 
             onError: function(data){
                 console.log("item delete error -- ", data);
@@ -127,9 +123,7 @@ var TableManager = new (function _TableManager(){
     //load the filters back from this items list. Called when switching back from search results. 
     self.loadFilters = function(timeList){
         // load back filters from pivot view
-        DomainManager.clearDomains();
-        TermManager.clearTerms();
-        StreamManager.clearStreams();
+        $(window).trigger("clearFilters");
         for(var id in timeList){
             var item = timeList[id];
             if(!item)

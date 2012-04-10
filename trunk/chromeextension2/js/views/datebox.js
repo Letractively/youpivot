@@ -1,9 +1,9 @@
-O_O.include("js/dateformatter.js");
-O_O.include("js/views/arrowbox/arrowbox.js");
-O_O.include("include/jui/jquery-ui-1.8.10.custom.min.js");
+include_("DateFormatter");
+include_("ArrowBox");
+include_("jUI");
 
-O_O.style("include/jui/jquery-ui-1.8.10.custom.css");
-O_O.style("js/views/datebox.css");
+style("include/jui/jquery-ui-1.8.10.custom.css");
+style("js/views/datebox.css");
 
 // uses arrowBox to implement a calendar implementation for dateBox
 
@@ -20,6 +20,8 @@ O_O.style("js/views/datebox.css");
         self.element = obj;
         self.startDate = 0;
         self.endDate = 0;
+        self.interval = 86400000;
+        self.roundOff = false;
 
         // private instance variables
         var arrowBox;
@@ -71,19 +73,29 @@ O_O.style("js/views/datebox.css");
 
         // private methods
         function moveToDayBefore(){
-            var referenceDate = dateAtMidnight(self.startDate);
+            var referenceDate = dateAtInterval(self.startDate, self.interval);
+            if(!self.roundOff){
+                setDate(self.startDate-self.interval, self.startDate-1);
+                return;
+            }
             if(self.startDate == referenceDate)
-                setDate(referenceDate - 86400000, referenceDate-1);
+                setDate(referenceDate - self.interval, referenceDate - 1);
             else
-                setDate(referenceDate, referenceDate + 86399999);
+                setDate(referenceDate, referenceDate + self.interval - 1);
         }
 
         function moveToDayAfter(){
-            var referenceDate = dateAtMidnight(self.endDate);
-            if(self.endDate >= referenceDate+86399999)
-                setDate(referenceDate + 86400000, referenceDate + (86400000*2) -1 );
-            else
-                setDate(referenceDate, referenceDate + 86399999);
+            var referenceDate = dateAtInterval(self.endDate, self.interval);
+            if(!self.roundOff){
+                setDate(self.endDate+1, self.endDate+self.interval);
+                return;
+            }
+            if(self.endDate >= referenceDate+self.interval-1){
+                setDate(referenceDate + self.interval, referenceDate + (self.interval*2) -1 );
+            }else{
+                setDate(referenceDate, referenceDate + self.interval - 1);
+                console.log("day", new Date(self.endDate), new Date(referenceDate));
+            }
         }
 
         function showCalendar(){
@@ -168,6 +180,12 @@ O_O.style("js/views/datebox.css");
                 return endText;
             }
 
+        }
+
+        function dateAtInterval(date, interval){
+            var midnight = dateAtMidnight(date);
+            var numInterval = Math.floor((date - midnight) / interval);
+            return midnight += interval * numInterval;
         }
 
         function dateAtMidnight(date){

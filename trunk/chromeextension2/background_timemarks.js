@@ -60,15 +60,10 @@ function TabTrack(time){
 database.open();
 database.createTable();
 
-_debug = false;
 //change the icon if developer mode
-if(chrome.extension.getURL("/") != "chrome-extension://bhojlafenkipmbhpfhoojcflnplpohoo/"){
+if(_debug){
    chrome.browserAction.setIcon({"path":"timemarks/images/timeMarkMarks/timemark_32_blue.png"});
-   _debug = true;
 }
- 
-
-
 
 //add a listener to listen for requests
 chrome.extension.onRequest.addListener(onRequest);

@@ -1,5 +1,8 @@
-include("js/keytable.js");
-include("js/color.js");
+include_("KeyTable");
+include_("Color");
+include_("Helper");
+include_("GraphManager");
+include_("PrefManager");
 
 var ItemManager = new (function _ItemManager(){
 	var self = this;
@@ -9,6 +12,7 @@ var ItemManager = new (function _ItemManager(){
     self.init = function(){
         TableManager.init();
         SearchManager.init();
+        FilterTimeManager.init(self);
     }
 
 	self.addItems = function(items){
@@ -33,9 +37,7 @@ var ItemManager = new (function _ItemManager(){
 		self.list = new KeyTable();
 		TableManager.clearItems();
 		GraphManager.clear();
-		EventManager.clear();
-		DomainManager.clearDomains();
-		TermManager.clearTerms();
+        $(window).trigger("clearFilters");
         domains = [];
 	}
 
@@ -101,7 +103,7 @@ var ItemManager = new (function _ItemManager(){
 		if(importance && importance.length>0){ 
 			GraphManager.loadData(domains[domain.id].graphColor, item.importance, item.id, item.startTime, domain.id);
 		}else{
-			EventManager.add(item.startTime, domain.favUrl, domain.color, item.title, item.id);
+            GraphManager.addEvent(item.startTime, domain.favUrl, domain.color, item.title, item.id);
 		}
 	}
 })();

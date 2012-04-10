@@ -1,15 +1,76 @@
-var O_O = {};
+include_("jQuery");
 
-O_O.include = function(jsfile, baseurl){
-    include(jsfile, baseurl);
-}
+/***
+  
+  Library of standard functions used to build this JavaScript programming model. 
+  
+  - include_(name)
+    Signals that the calling javascript files requires another JavaScript file. It checks for whether the necessary file is there by looking at the "name" attribute of all the <script> tags in the HTML. 
+    <String> name - name of the JavaScript file that is dependent upon
 
-O_O.style = function(cssfile){
-    style(cssfile);
-}
+  - style_(name) [not yet functioning]
+    Signals that the calling javascript file requires support of a CSS file. Works the same way as include_(name)
 
+  - include(jsfile) [Deprecated]
+    Old version of include which does not need <script> tag. Deprecated because this obscures the debug trace and reduces performance. 
+
+  - style(cssfile)
+
+  - debug_warn(message, extra)
+    Convenience function for console.warn(message, extra). 
+    Additionally give an alert(message) if in debug mode (i.e. loaded from unpacked extension)
+
+  - analytics(category, action, label, value, nonInteraction)
+    <String>    category - Highest level label in Google Analytics
+    <String>    action - Second level label in Google Analytics
+    <String>    label - Lowest level label in Google Analytics
+    <Int>       value - Integer value assocaited to the event
+    <Boolean>   nonInteraction - whether this event affects the bounce rate (See Analytics docs for more info)
+
+***/
+
+// Globals
+var _checkProvides = 5000;
 var _inclusions = {};
+var _debug = (chrome.extension.getURL("/") != "chrome-extension://bhojlafenkipmbhpfhoojcflnplpohoo/");
+
+function include_(name){
+    //include(jsfile, baseurl);
+    var script = $("script[name="+name+"]");
+    if(script.length == 0){
+        debug_warn(name + " is not provided");
+        console.trace();
+    }else{
+        script.attr("data-included", true);
+        //console.log("included "+name);
+    }
+}
+
+function style_(cssfile){
+    //style(cssfile);
+}
+
+$(function(){
+    // check integrity of scripts
+    if(_checkProvides){
+        setTimeout(function(){
+            // check if provides are used
+            $("script").each(function(){
+                var sName = $(this).attr("name");
+                if(!sName || sName == ""){
+                    console.log("illegal script tag", $(this));
+                }else{
+                    if(!$(this).attr("data-included")){
+                        console.log("provide " + sName + " is not used");
+                    }
+                }
+            });
+        }, _checkProvides);
+    }
+});
+
 function include(jsfile, baseurl){
+    console.trace();
     var url;
     if(baseurl){
         url = baseurl + jsfile;
@@ -31,18 +92,22 @@ function style(cssfile){
     return css;
 }
 
-function pref(label){
-	return PrefManager.getOption(label);
-}
-
-function debug_warn(message){
+function debug_warn(message, extra){
     if(_debug){
-        alert(warn);
+        alert(message);
     }
-    console.warn(message);
+    console.warn(message, extra);
+    console.trace();
 }
 
-O_O.include("js/pref.js");
+function analytics(category, action, label, value, nonInteraction){
+    console.log("analytics", {category: category, action: action, label: label, value: value, nonInteraction: nonInteraction});
+    if(analyticsReady){
+        _gaq.push(['_trackEvent', category, action, label, value, nonInteraction]);
+    }else{
+        console.log("Analytics not ready");
+    }
+}
 
 (function($){
     $.fn.view = function(){

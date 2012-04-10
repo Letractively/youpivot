@@ -1,11 +1,15 @@
-include("/js/urlhash.js");
+include_("URLHash");
+include_("TimeMarks");
+include_("Options");
+include_("TraditionalHistory");
+include_("YouPivot");
 
 $(function(){
     // the order determines the order of the tabs on the left
-    include("traditional.js");
-    include("youpivot.js");
-    include("timemarks.js");
-    include("options.js");
+    TraditionalHistory.init();
+    YouPivot.init();
+    TimeMarks.init();
+    Options.init();
 
     // get the hash value before Master.changeTab changes it
     var hashTab = URLHash.getHashValue("tab");

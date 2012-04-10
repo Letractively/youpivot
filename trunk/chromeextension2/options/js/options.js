@@ -1,4 +1,4 @@
-include("/js/urlhash.js");
+include_("URLHash");
 
 function initView(){
     var currentView = URLHash.getHashValue("options");
@@ -193,4 +193,6 @@ $(function(){
     setVersionNumber();
     initOptions();
     initView();
+
+    $("#o-analyticsid").val(pref("analyticsid"));
 });

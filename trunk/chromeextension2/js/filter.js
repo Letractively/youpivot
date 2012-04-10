@@ -73,6 +73,11 @@ var Filter = function(activeFilter, getList){
 		filterWrap.hide();
 	}
 
+    $(window).bind("clearFilters", function(){
+        console.log("clear filters");
+        self.clearFilters();
+    });
+
     var tests = {};
 
     self.addTestType = function(type, test){

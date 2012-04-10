@@ -1,4 +1,5 @@
-include("/js/filter.js");
+include_("Filter");
+include_("TableManager");
 
 var FilterManager = new (function _FilterManager(){
     var self = this;

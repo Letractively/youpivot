@@ -1,10 +1,19 @@
-include("youpivot/js/history/filtertime.js");
-include("js/dateformatter.js");
+include_("jQuery_rotate");
+include_("DateFormatter");
+include_("PrefManager");
 
-var GraphManager = {};
+include_("Helper");
 
-(function(){
-	var m = GraphManager;
+include_("FilterTimeManager");
+include_("ShadowManager");
+include_("TopGraph");
+include_("StreamGraph");
+include_("EventManager");
+include_("HighlightManager");
+//include_("PivotManager");
+
+var GraphManager = new (function _GraphManager(){
+	var self = this;
 
 	var startTime = -86400000; // meaningless initialization value (for easier debugging)
 	var endTime = -1;
@@ -13,14 +22,14 @@ var GraphManager = {};
 	var maxArrLength = 758; // 758 = 86400 / 114
 
 	var displayRange = {offset: 0, scale: 0}; // {offset, scale}
-	m.width = 680; //width of the graphs
+	var width = 680; //width of the graphs
 
     /************** init *************/
 
-    m.init = function(){
+    self.init = function(){
 		refreshTimeDisplay([startTime, endTime]);
 		refreshDateDisplay();
-        m.addCollapseGraphBtn();
+        self.addCollapseGraphBtn();
         $("#y-searchResults").bind("search", function(e, active){
             if(active){
                 dimGraphs(false);
@@ -28,7 +37,7 @@ var GraphManager = {};
                 dimGraphs(true);
             }
         });
-        TopGraph.init();
+        TopGraph.init(width);
         handleTopGraphEvents();
 
         StreamGraph.init();
@@ -62,7 +71,7 @@ var GraphManager = {};
         StreamGraph.onMouseClickLayer(HighlightManager.clickOnGraph);
     }
 
-    m.addCollapseGraphBtn = function(){
+    self.addCollapseGraphBtn = function(){
         var btn = $("<div />").attr("id", "collapseGraph");
         $("#graphInfo").append(btn);
         btn.click(function(){
@@ -79,15 +88,16 @@ var GraphManager = {};
 
     /************* display range handling *************/
 
-	m.getDisplayRange = function(){
+	self.getDisplayRange = function(){
+        // possibly unused
 		return displayRange;
 	}
 
-	m.getLoadedRange = function(){
+	self.getLoadedRange = function(){
 		return {start: startTime, end: endTime};
 	}
 
-	m.setDisplayRange = function(startTime, endTime){
+	self.setDisplayRange = function(startTime, endTime){
 		var scale = getTimeScale(startTime, endTime);
 		setSelectionScale(scale[0], scale[1], true);
         finishSelection();
@@ -124,7 +134,7 @@ var GraphManager = {};
 
         // scale the single event icons
 		xScale = 0.1/cap; //0.1 is the smallest value coz the graph is rendered at 10x width
-		$("#events").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*m.width*10)+"px)");
+		$("#events").css("-webkit-transform", "scaleX("+xScale+") translateX("+(-offset*width*10)+"px)");
 		EventManager.scaleIcons(displayRange);
 		//reload the time label on top of the streamGraph
 		var time = getScaleTime(offset, cap);
@@ -144,7 +154,11 @@ var GraphManager = {};
 
     /************ graph data handling ************/
 
-	m.startLoadingData = function(_startTime, _endTime){
+    self.addEvent = function(startTime, favUrl, color, title, id){
+        EventManager.add(startTime, favUrl, color, title, id, self.getLoadedRange(), displayRange);
+    }
+
+	self.startLoadingData = function(_startTime, _endTime){
         dataArray = [];
         startTime = _startTime;
         endTime = _endTime;
@@ -152,35 +166,36 @@ var GraphManager = {};
 		refreshDateDisplay();
 	}
 
-	m.loadData = function(color, arr, id, startTime, domain){
+	self.loadData = function(color, arr, id, startTime, domain){
         var offset = getArrayOffset(startTime);
         if(offset+arr.length >= 0 && offset < maxArrLength)
             dataArray[dataArray.length] = {offset: offset, array: arr, color: color, id: id, domain: domain};
 	}
 
-	m.clear = function(){
+	self.clear = function(){
 		dataArray = [];
+        EventManager.clear();
 	}
 
-    m.finishLoadingData = function(displayRangeStart, displayRangeEnd){
+    self.finishLoadingData = function(displayRangeStart, displayRangeEnd){
         setDisplayRangeWithoutRedraw(displayRangeStart, displayRangeEnd);
-        m.draw();
+        self.draw();
     }
 
     /************* misc ******************/
 
-	m.draw = function(){
+	self.draw = function(){
                                             var ttt = new Date().getTime(); // debug
                                             console.log("Start drawing graphs"); // debug
         var totalArray = getTotalArrayAndCalculateDomainData(dataArray);
-		TopGraph.draw(totalArray, getMaxData(totalArray));
+		TopGraph.draw(totalArray, getMaxData(totalArray), displayRange);
                                             console.log("Top graph drawn: ", new Date().getTime() - ttt); // debug
                                             ttt = new Date().getTime();
 		StreamGraph.draw(dataArray, displayRange.offset, displayRange.scale);
                                             console.log("Stream graph drawn: ", new Date().getTime() - ttt); // debug
 	}
 
-    m.drawTopGraph = function(){
+    self.drawTopGraph = function(){
         var totalArray = getTotalArrayAndCalculateDomainData(dataArray);
         TopGraph.draw(dataArray, getMaxData(totalArray));
     }
@@ -194,7 +209,7 @@ var GraphManager = {};
 		return false;
     }
 
-	m.highlightLayer = function(id, persistent){
+	self.highlightLayer = function(id, persistent){
 		var index = getDataIndex(id);
 		if(!index) return;
 
@@ -217,7 +232,7 @@ var GraphManager = {};
 		return output;
 	}
 
-	m.lowlightLayer = function(id, clearPersistent){
+	self.lowlightLayer = function(id, clearPersistent){
         var color = ItemManager.getDomain(id).graphColor;
 		//color = Helper.createLighterColor(color, PrefManager.getOption("normalGraph"));
         StreamGraph.changeColor(id, color);

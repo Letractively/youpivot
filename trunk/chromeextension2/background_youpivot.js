@@ -1,4 +1,4 @@
-O_O.include("/youpivot/js/timemark.js");
+include_("YPTimeMarkManager");
 
 $(function(){
 	/*** chrome event listeners ***/
@@ -19,7 +19,7 @@ $(function(){
                 sendResponse({name: "YouPivot & Timemarks (beta)", version: "0.4"});
                 break;
             case "addTimeMark":
-                TimeMarkManager.add(request.description, request.color);
+                YPTimeMarkManager.add(request.description, request.color);
                 break;
 			default:
 				onRequest(request, sender, sendResponse);

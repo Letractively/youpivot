@@ -25,7 +25,7 @@ function deleteTimeMarkPage(id){
 
 
 function printTimeMarks(tx,result){
-   THDomainManager.clearDomains();
+   TMDomainManager.clearDomains();
    $("#bodyCopy_timeMarks").html("");
    var lastdate = null;
    for(i=0;i<result.rows.length;i++){
@@ -40,7 +40,7 @@ function printTimeMarks(tx,result){
             var string = printTimeMark(item,result.rows);
             $("#bodyCopy_timeMarks").append(string);
             console.log("display thing");
-            THDomainManager.display();
+            TMDomainManager.display();
          });
       })(item);
    }

@@ -1,11 +1,13 @@
-include("/js/utilities.js");
-include("/traditional/js/historyfilter.js");
+include_("Utilities");
+include_("THFilterManager");
+include_("IconFactory");
+include_("FilterList");
 
 var THDomainManager = new (function _THDomainManager(){
     var self = this;
     var filterList;
 
-    $(function(){
+    self.init = function(){
         filterList = $("#th-contentFilters").FilterList();
         filterList.setTypeName("domain");
         filterList.addScaleStyle("opacity");
@@ -13,11 +15,13 @@ var THDomainManager = new (function _THDomainManager(){
         $("#th-contentFilters").bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             THFilterManager.filter.addFilter("domain", value, label);
+            analytics("filter", "filter in history domain", value);
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             THFilterManager.filter.addOutcast("domain", value, label);
+            analytics("filter", "filter out history domain", value);
         });
-    });
+    }
 
     // add a batch of domains in one function call. For convenience
 	self.addDomains = function(input){

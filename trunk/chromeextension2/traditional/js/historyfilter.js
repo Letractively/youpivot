@@ -1,4 +1,4 @@
-include("/js/filter.js");
+include_("Filter");
 
 var THFilterManager = new (function _THFilterManager(){
     var self = this;

@@ -3,6 +3,21 @@ var THSearch = new (function _THSearch(){
 
     var lastSearch = ""; // attempt to "synchronize" the results (not displaying if result is old)
     var NUMRESULTS = 300;
+    
+    var REFRACTORYPERIOD = 300;
+    var timer = 0;
+    self.init = function(){
+        $("#th-searchBox").keyup(function(){
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                search($("#th-searchBox").val());
+            }, REFRACTORYPERIOD);
+        }).click(function(){
+            if(lastSearch.length > 0 && $(this).val()==""){
+                search("");
+            }
+        });
+    }
 
     function displayResults(results, needle){
         if(needle != lastSearch)
@@ -27,19 +42,4 @@ var THSearch = new (function _THSearch(){
         console.log("antiSearch");
         HistoryList.setNewest(new Date().getTime());
     }
-    
-    var REFRACTORYPERIOD = 300;
-    var timer = 0;
-    $(function(){
-        $("#th-searchBox").keyup(function(){
-            clearTimeout(timer);
-            timer = setTimeout(function(){
-                search($("#th-searchBox").val());
-            }, REFRACTORYPERIOD);
-        }).click(function(){
-            if(lastSearch.length > 0 && $(this).val()==""){
-                search("");
-            }
-        });
-    });
 })();
