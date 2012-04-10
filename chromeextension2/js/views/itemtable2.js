@@ -1,4 +1,4 @@
-include("/js/keytable.js");
+include_("KeyTable");
 style("/js/views/itemtable.css");
 
 /***

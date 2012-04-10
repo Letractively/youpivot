@@ -1,6 +1,6 @@
-include("/js/views/itemtable2.js");
-include("/traditional/js/historymodel.js");
-include("/traditional/js/historylistitemfactory.js");
+include_("ItemTable");
+include_("HistoryModel");
+include_("HistoryListItemFactory");
 
 var HistoryList = new (function _HistoryList(){
     var self = this;
@@ -13,6 +13,20 @@ var HistoryList = new (function _HistoryList(){
     var oldestDate = new Date().getTime() - (timeInterval-1);
     var dateSchema = {"left": "toprow", "name": "normal"};
 
+    self.init = function(){
+        self.itemTable = $("#th-historyList").itemTable2(dateSchema);
+        populateHistoryList();
+
+        $("#th-editButton").bind("togglechanged", function(e, state){
+            if(state){
+                $("head").append('<style id="th-showEditStyle">#th-historyList .edit { display: inline-block !important; }</style>');
+            }else{
+                $("#th-showEditStyle").remove();
+            }
+
+        });
+    }
+
     function refreshDateBox(){
         THDateBoxController.setDate(oldestDate, newestDate);
     }
@@ -22,6 +36,7 @@ var HistoryList = new (function _HistoryList(){
         newestDate = date;
         refreshDateBox();
         populateHistoryList(callback);
+        analytics("history navigation", "set newest", new Date(date).toString());
     }
 
     self.setOldest = function(date, callback){
@@ -29,6 +44,7 @@ var HistoryList = new (function _HistoryList(){
         newestDate = date + (timeInterval-1);
         refreshDateBox();
         populateHistoryList(callback);
+        analytics("history navigation", "set oldest", new Date(date).toString());
     }
 
     self.flipPage = function(fraction, maxFlipNumber){
@@ -111,7 +127,7 @@ var HistoryList = new (function _HistoryList(){
         }
         if(count == 0) throw "Count cannot be 0";
 
-        THFilterManager.filter.clearFilters();
+        //THFilterManager.filter.clearFilters();
 
         list = results;
         for(var i=start; i<start+count; i++){
@@ -121,6 +137,7 @@ var HistoryList = new (function _HistoryList(){
             THDomainManager.addDomain("chrome://favicon/"+results[i].url, results[i].domain);
             THTermManager.addTerms(results[i].title.split(/[^a-zA-Z0-9]+/g));
         }
+        THFilterManager.filter.triggerFilter();
         self.itemTable.display();
         THDomainManager.display();
         THTermManager.display();
@@ -159,6 +176,7 @@ var HistoryList = new (function _HistoryList(){
         // chrome API mysteriously does not support that action
         chrome.history.deleteRange({startTime: item.visitTime-1, endTime: item.visitTime+1}, function(){
             console.log("history item deleted");
+            analytics("delete", "delete traditional history item");
         });
 
         delete list[self.getItemIndex(id)];
@@ -191,19 +209,5 @@ var HistoryList = new (function _HistoryList(){
             row.data("id", visit.id); //store the item with the DOM object
         });
     }
-
-    $(function(){
-        self.itemTable = $("#th-historyList").itemTable2(dateSchema);
-        populateHistoryList();
-
-        $("#th-editButton").bind("togglechanged", function(e, state){
-            if(state){
-                $("head").append('<style id="th-showEditStyle">#th-historyList .edit { display: inline-block !important; }</style>');
-            }else{
-                $("#th-showEditStyle").remove();
-            }
-
-        });
-    });
 
 })();

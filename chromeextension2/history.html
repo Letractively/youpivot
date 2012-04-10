@@ -3,7 +3,12 @@
 	<head>
 		<title>YouPivot</title>
 		<link rel="stylesheet" type="text/css" href="master.css" />
-	</head>
+        <link rel="stylesheet" type="text/css" href="include/jui/jquery-ui-1.8.10.custom.css" />
+        <script src="/include/jquery-1.7.min.js" name="jQuery"></script>
+        <script src="/js/standard.js" name="standard" data-included="true"></script>
+        <script src="/js/pref.js" name="PrefManager"></script>
+        <script src="/js/analytics.js" name="analytics"></script>
+     </head>
 	<body>
         <div id="m-topbar">
             <div id="m-topbarTabs"><div class="m-topTabDivider"></div></div>
@@ -12,8 +17,89 @@
 		<div id="m-content"></div>
 	</body>
 </html>
-<script src="include/jquery-1.7.min.js"></script>
-<script src="js/standard.js"></script>
 
-<script src="master.js"></script>
-<script src="history.js"></script>
+<!-- Includes -->
+<script src="/include/jui/jquery-ui-1.8.10.custom.min.js" name="jUI"></script>
+<script src="/include/jquery_rotate.js" name="jQuery_rotate"></script>
+<script src="/include/jquery.mousewheel.min.js" name="jQuery_mousewheel"></script>
+<script src="/include/jquery.contextmenu.js" name="jQuery_contextmenu"></script>
+<script src="/include/protovis-r3.2.js" name="Protovis"></script>
+<script src="/include/streamgraph.js" name="ProcessingJS"></script>
+<script src="/include/processing-1.3.0.min.js" name="PJS_streamgraph"></script>
+
+<!-- Built Libraries -->
+<script src="/js/urlhash.js" name="URLHash"></script>
+<script src="/js/dateformatter.js" name="DateFormatter"></script>
+<script src="/js/keytable.js" name="KeyTable"></script>
+<script src="/js/iconfactory.js" name="IconFactory"></script>
+<script src="/js/color.js" name="Color"></script>
+<script src="/js/utilities.js" name="Utilities"></script>
+<script src="/js/filter.js" name="Filter"></script>
+<script src="/js/dateutils.js" name="DateUtilities"></script>
+<script src="/js/domainextractor.js" name="DomainExtractor"></script>
+
+<!-- Custom Views -->
+<script src="/js/views/arrowbox/arrowbox.js" name="ArrowBox"></script>
+<script src="/js/views/datebox.js" name="DateBox"></script>
+<script src="/js/views/horizontallist.js" name="HList"></script>
+<script src="/js/views/itemtable2.js" name="ItemTable"></script>
+<script src="/js/views/filterlist.js" name="FilterList"></script>
+<script src="/js/views/collapsable.js" name="Collapsable" data-included="true"></script>
+<script src="/js/views/togglebutton.js" name="ToggleButton" data-included="true"></script>
+
+<!-- Traditional History -->
+<script src="/traditional/js/datebox.js" name="THDateBoxController"></script>
+<script src="/traditional/js/historymodel.js" name="HistoryModel"></script>
+<script src="/traditional/js/historylistitemfactory.js" name="HistoryListItemFactory"></script>
+
+<script src="/traditional/js/historylist.js" name="HistoryList"></script>
+<script src="/traditional/js/historyfilter.js" name="THFilterManager"></script>
+<script src="/traditional/js/domains.js" name="THDomainManager"></script>
+<script src="/traditional/js/terms.js" name="THTermManager"></script>
+<script src="/traditional/js/search.js" name="THSearch"></script>
+<script src="/traditional/js/autopager.js" name="AutoPager"></script>
+
+<!-- YouPivot -->
+<script src="/youpivot/js/connector.js" name="Connector"></script>
+
+<script src="/youpivot/js/history/helpers/helper.js" name="Helper"></script>
+
+<script src="/youpivot/js/history/translator.js" name="Translator"></script>
+<script src="/youpivot/js/history/highlight.js" name="HighlightManager"></script>
+<!--<script type="text/javascript" src="youpivot/js/history/pageflipper.js"></script>-->
+
+<script src="/youpivot/js/history/shadow.js" name="ShadowManager"></script>
+<script src="/youpivot/js/history/graphs/topgraph.js" name="TopGraph"></script>
+<script src="/youpivot/js/history/graphs/streamgraph.js" name="StreamGraph"></script>
+<script src="/youpivot/js/history/events.js" name="EventManager"></script>
+
+<script src="/youpivot/js/history/sort.js" name="SortManager"></script>
+
+<script src="/youpivot/js/history/helpers/tablerowfactory.js" name="TableRowFactory"></script>
+<script src="/youpivot/js/history/helpers/pivottable.js" name="PivotTable"></script>
+
+<script src="/youpivot/js/history/tables.js" name="TableManager"></script>
+<script src="/youpivot/js/history/search.js" name="SearchManager"></script>
+
+<script src="/youpivot/js/history/filtertime.js" name="FilterTimeManager"></script>
+<script src="/youpivot/js/history/graph.js" name="GraphManager"></script>
+<script src="/youpivot/js/history/items.js" name="ItemManager"></script>
+<script src="/youpivot/js/history/pivot.js" name="PivotManager"></script>
+
+<script src="/youpivot/js/history/sidebar/filters.js" name="FilterManager"></script>
+<script src="/youpivot/js/history/sidebar/terms.js" name="TermManager"></script>
+<script src="/youpivot/js/history/sidebar/domains.js" name="DomainManager"></script>
+<script src="/youpivot/js/history/sidebar/streams.js" name="StreamManager"></script>
+<script src="/youpivot/js/history/sidebar/datepicker.js" name="DatePicker"></script>
+<script src="/youpivot/js/history/sidebar/sidebar.js" name="SidebarManager"></script>
+
+<script src="/youpivot/js/history/datebox_controller.js" name="DateBoxController"></script>
+
+<!-- Other -->
+<script src="youpivot.js" name="YouPivot"></script>
+<script src="traditional.js" name="TraditionalHistory"></script>
+<script src="timemarks.js" name="TimeMarks"></script>
+<script src="options.js" name="Options"></script>
+
+<script src="master.js" name="Master" data-included="true"></script>
+<script src="history.js" name="History" data-included="true"></script>

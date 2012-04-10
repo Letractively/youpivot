@@ -1,3 +1,5 @@
+include_("Helper");
+
 var Translator = new (function _Translator(){
     var self = this;
 

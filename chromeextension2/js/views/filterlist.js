@@ -1,4 +1,4 @@
-include("/js/utilities.js");
+include_("Utilities");
 
 (function($){
     $(function(){

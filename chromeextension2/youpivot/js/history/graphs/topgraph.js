@@ -1,28 +1,28 @@
-include("include/protovis-r3.2.js");
+include_("Protovis");
 
-var TopGraph = {};
-
-(function(){
-	var m = TopGraph;
+var TopGraph = new (function _TopGraph(){
+	var self = this;
 
 	var hPanel; //highlight panel from protovis (the brighter color area when item hovered)
 	var sPanel; //selection panel (the grey overlay)
 
 	var defSelect = 28; //default selection width (when clicked)
+    var graphWidth = 0;
 
-    m.init = function(){
+    self.init = function(width){
+        graphWidth = width;
     }
 
-	m.drawHighlight = function(array, color){
+	self.drawHighlight = function(array, color){
 		hPanel.children[0].data(array);
 		hPanel.children[0].fillStyle(color);
 		hPanel.render();
 	}
 
     // Note: no callback fired for this function
-	m.setSelection = function(selectionStart, selectionEnd){
+	self.setSelection = function(selectionStart, selectionEnd){
 		if(selectionEnd>1) selectionEnd = 1;
-		var selection = {x: (selectionStart*(GraphManager.width-20)), dx: (selectionEnd*(GraphManager.width-20))};
+		var selection = {x: (selectionStart*(graphWidth-20)), dx: (selectionEnd*(graphWidth-20))};
         if(sPanel){
             sPanel.data([selection]);
             sPanel.render();
@@ -40,33 +40,33 @@ var TopGraph = {};
         }
     }
 
-    m.onSelectionStart = function(func){
+    self.onSelectionStart = function(func){
         delegateFunctions["selectionStart"] = func;
     }
 
-    m.onSelectionEnd = function(func){
+    self.onSelectionEnd = function(func){
         delegateFunctions["selectionEnd"] = func;
     }
 
-    m.onSelectionMove = function(func){
+    self.onSelectionMove = function(func){
         delegateFunctions["selectionMove"] = func;
     }
 
-    m.onSelectionEdge = function(func){
+    self.onSelectionEdge = function(func){
         delegateFunctions["selectionEdge"] = func;
     }
 
     var DRAGFLIPMARGIN = 40; // the margin out of boundary before page flip while dragging
     // actual draw algorithm
 
-	m.draw = function(data, max){
+	self.draw = function(data, max, displayRange){
 		data = pv.range(0, 758, 1).map(function(x) {
 			return {x: x, y: data[x]};
 		});
 
 		var box = $("#topGraph");
 
-		var w = GraphManager.width-20;
+		var w = graphWidth-20;
 			h = box.height(),
 			x = pv.Scale.linear(0, 758).range(0, w),
 			y = pv.Scale.linear(0, max).range(0, h);
@@ -93,7 +93,6 @@ var TopGraph = {};
 			.fillStyle("rgb(130,140,255)")
 
 		var dragged = false;
-		var displayRange = GraphManager.getDisplayRange();
 		var selection = {x: (displayRange.offset*w), dx: (displayRange.scale*w)};
 		sPanel = tg.add(pv.Panel);
 		sPanel.data([selection])
@@ -180,7 +179,7 @@ var TopGraph = {};
 			.event("resizestart", function(d){ startScale(d); })
 			.event("resizeend", function(d){ endScale(d); });
 		tg.render();
-		m.obj = tg;
+		self.obj = tg;
 
         function startScale(d){
             startPos = {offset: d.x/w, scale: d.dx/w};

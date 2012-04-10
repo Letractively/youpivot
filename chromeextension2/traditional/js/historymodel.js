@@ -1,4 +1,4 @@
-include("/js/dateutils.js");
+include_("DateUtilities");
 
 var HistoryModel = new (function _HistoryModel(){
     var self = this;

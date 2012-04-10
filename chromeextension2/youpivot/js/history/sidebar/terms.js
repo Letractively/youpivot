@@ -1,12 +1,13 @@
-include("/js/views/filterlist.js");
-include("/js/utilities.js");
+include_("FilterList");
+include_("Utilities");
+include_("FilterManager");
 
 var TermManager = new (function _TermManager(){
     var self = this;
 
     var filterList;
 
-    $(function(){
+    self.init = function(){
         filterList = $("#terms").FilterList();
         filterList.setTypeName("term");
         filterList.addScaleStyle("opacity");
@@ -20,10 +21,12 @@ var TermManager = new (function _TermManager(){
         });
         $("#terms").bind("includefilter", function(e, obj, value){
             FilterManager.filter.addFilter("name", value, value);
+            analytics("filter", "filter in youpivot term", value);
         }).bind("excludefilter", function(e, obj, value){
             FilterManager.filter.addOutcast("name", value, value);
+            analytics("filter", "filter in youpivot term", value);
         });
-    });
+    }
 
 	//add an array of terms
 	self.addTerms = function(texts){
@@ -40,6 +43,7 @@ var TermManager = new (function _TermManager(){
 	}
 
 	self.clearTerms = function(retainOrder){
+        // possibly unused
         if(filterList)
             filterList.clearFilters(retainOrder);
 	}

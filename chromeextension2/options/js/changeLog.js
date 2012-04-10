@@ -35,8 +35,8 @@ function changeLog_showAll(){
 
 	
 	navBar_show_ChangeLog_empty();
-	changeLog_addVersion("Alpha 0.0.??","Friday, ?? ??, 2011");
-	changeLog_addFix("history","Fixed Bug where visits to files online didn't show up in history");
+    changeLog_addVersion("Beta 0.3", "Wednesday, Feb 29, 2012");
+	changeLog_addChange("history","History page now supports terms filters");
 	
 	changeLog_addVersion("Alpha 0.0.11","Friday, May 20, 2011");
 	changeLog_addChange("general","TimeMarks now replaces chrome's default history");

@@ -1,10 +1,11 @@
-include("/js/iconfactory.js");
-include("/js/views/filterlist.js");
+include_("IconFactory");
+include_("FilterList");
+
 var StreamManager = new (function _StreamManager(){
     var self = this;
     var filterList;
 
-    $(function(){
+    self.init = function(){
         filterList = $("#streamFilters").FilterList();
         filterList.setTypeName("stream");
         filterList.addScaleStyle("opacity");
@@ -12,11 +13,13 @@ var StreamManager = new (function _StreamManager(){
         $("#streamFilters").bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addFilter("stream", value, label);
+            analytics("filter", "filter in youpivot stream", value);
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addOutcast("stream", value, label);
+            analytics("filter", "filter in youpivot stream", value);
         });
-    });
+    }
 
 	self.addStreams = function(input){
 		for(var i in input){

@@ -103,7 +103,7 @@ var Connector = new (function _Connector(){
 	function updateUserId(callback){
 		if(typeof UserManager != "undefined"){
 			//try accessing UserManager directly first
-			console.log("Using UserManager");
+			//console.log("Using UserManager");
 			userId = UserManager.getId();
 			callback();
 		}else{

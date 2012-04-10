@@ -1,3 +1,5 @@
+include_("DomainExtractor");
+
 var Monitor = {};
 
 (function(){
@@ -61,6 +63,7 @@ var Monitor = {};
 		}
 		if(urlValid(tab.url)){
 			addToTabs(tab.id, createItemFromTab(tab));
+            console.log("add to tabs", arr);
             extractKeywords(tab.id, function(terms){
                 if(terms.length > 0){
                     if(arr[tab.id])
@@ -174,7 +177,7 @@ var Monitor = {};
 	function uploadUpdate(info){
 		var item = createUpdateItem(info);
 		if(item === false){
-			console.log("Update unsuccessful. Item is not created. ");
+			debug_warn("Update unsuccessful. Item is not created. ");
 			return false;
 		}
 		Connector.send("update", item, {
@@ -240,7 +243,8 @@ var Monitor = {};
 	}
 
 	function registerOpenTabs(){
-		chrome.windows.getAll({populate: true}, function(windows){
+		/*
+        chrome.windows.getAll({populate: true}, function(windows){
 			for(var i in windows){
 				for(var j in windows[i].tabs){
 					var tab = windows[i].tabs[j];
@@ -250,6 +254,7 @@ var Monitor = {};
 				}
 			}
 		});
+        */
 	}
 
 	self.getSelectedId = function(){
@@ -264,10 +269,11 @@ var Monitor = {};
 
 	function addToTabs(id, createObj){
 		arr[id] = createTabInfo(createObj);
-        console.log("arr:", arr);
+        console.log("Tab created, arr:", arr);
 	}
 
 	function removeFromTabs(id){
+        console.log("remove from tabs: ", id, arr);
 		if(arr[id]) delete arr[id];
 	}
 

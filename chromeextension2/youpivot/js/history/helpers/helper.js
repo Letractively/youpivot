@@ -1,28 +1,26 @@
 // helper class providing miscellaneous helper functions
 
-var Helper = {};
+var Helper = new (function _Helper(){
+	var self = this;
 
-(function(){
-	var m = Helper;
-
-	m.showLoading = function(){
+	self.showLoading = function(){
 		$("#y-spinner").show();
 		$("#content").parent().prepend("<div id='blocker' style='z-index: 999999; position: fixed; height: 100%; width: 100%; top: 35px; left: 0px; cursor: progress'></div>");
 	}
 
-	m.hideLoading = function(){
+	self.hideLoading = function(){
 		$("#y-spinner").hide();
 		$("#blocker").remove();
 	}
 
-	m.getOptions = function(options, label, defaultValue){
+	self.getOptions = function(options, label, defaultValue){
 		if(!options || options[label] == undefined){
 			return defaultValue;
 		}
 		return options[label];
 	}
 
-	m.createLighterColor = function(color, level){
+	self.createLighterColor = function(color, level){
 		if(level == "same"){
 			return color;
 		}
@@ -51,11 +49,11 @@ var Helper = {};
 		return "#"+toCode(rgb[0])+toCode(rgb[1])+toCode(rgb[2]);
 
 		function toCode(num){
-			return m.padZero(Math.floor(num).toString(16), 2);
+			return self.padZero(Math.floor(num).toString(16), 2);
 		}
 	}
 
-	m.padZero = function(string, len){
+	self.padZero = function(string, len){
 		var output = string+"";
 		for(var i=output.length; i<len; i++){
 			output = "0"+output;

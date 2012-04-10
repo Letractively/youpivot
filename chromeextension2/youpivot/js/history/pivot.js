@@ -1,10 +1,31 @@
-include("/js/urlhash.js");
+include_("URLHash");
+include_("Connector");
+include_("analytics");
+include_("Helper");
+include_("GraphManager");
+include_("Translator");
+include_("HighlightManager");
 
 var PivotManager = new (function _PivotManager(){
     var self = this;
 
 	var pivotInterval = pref("pivotInterval");
     self.pivoting = false;
+
+    self.init = function(){
+        $("#graphMoveLeft").click(function(){
+            self.pageFlip(-1);
+        });
+        $("#graphMoveRight").click(function(){
+            self.pageFlip(1);
+        });
+        URLHash.onHashValueChange("pivot", function(time){
+            self.pivot(time, {"forceReload": false});
+        });
+        URLHash.onHashValueChange("pivotitem", function(item){
+            self.pivotItem(item);
+        });
+    }
 
 	self.pivotItem = function(eventId){
         pivotItem(eventId);
@@ -23,6 +44,7 @@ var PivotManager = new (function _PivotManager(){
             var id = ItemManager.getItemByEventId(item.eventId).id;
             HighlightManager.clickOnGraph(id);
 		}, "selection": [item.startTime, item.endTime]});
+        analytics("Pivot", "Pivot by item", item.url, eventId);
 	}
 
 	function findItemByEventId(eventId){
@@ -60,6 +82,7 @@ var PivotManager = new (function _PivotManager(){
 		if(Math.abs(time-midPoint)>(range.end-range.start)/4 || forceReload){
 			pivotServer(time, selection, callback);
 		}else{
+            analytics("Pivot", "Pivot no Update", new Date(selection[0]) + " - " + new Date(selection[1]));
 			GraphManager.setDisplayRange(selection[0], selection[1]);
 			callback();
             $(window).trigger("pivot");
@@ -87,6 +110,7 @@ var PivotManager = new (function _PivotManager(){
 	function pivotServer(time, range, callback){
 		Helper.showLoading();
 		time = Math.floor(time/1000);
+        analytics("Pivot", "Pivot server", new Date(time).toString());
 		Connector.send("get", {pivottime: time}, {onSuccess: function(data){
             console.log("success");
             self.pivoting = false;
@@ -131,19 +155,5 @@ var PivotManager = new (function _PivotManager(){
 		}
 		return output;
 	}
-
-	$("#graphMoveLeft").click(function(){
-		self.pageFlip(-1);
-	});
-	$("#graphMoveRight").click(function(){
-		self.pageFlip(1);
-	});
-
-    URLHash.onHashValueChange("pivot", function(time){
-        self.pivot(time, {"forceReload": false});
-    });
-    URLHash.onHashValueChange("pivotitem", function(item){
-        self.pivotItem(item);
-    });
 
 })();

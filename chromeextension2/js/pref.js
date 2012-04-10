@@ -1,3 +1,8 @@
+// shorthand function
+function pref(label){
+	return PrefManager.getOption(label);
+}
+
 var PrefManager = new (function _PrefManager(){
     var self = this;
 	var defaults = {
@@ -28,6 +33,9 @@ var PrefManager = new (function _PrefManager(){
 		"relatedFg": "+0.2",
 		"lowlightFg": "+0.15",
 		"lowlightBg": "transparent",
+
+        // intrumentation
+        "analyticsid": "",
 	};
 
 	function getDefault(label){

@@ -1,11 +1,12 @@
-include("/js/iconfactory.js");
-include("/js/views/filterlist.js");
+include_("IconFactory");
+include_("FilterList");
+include_("HighlightManager");
 
 var DomainManager = new (function _DomainManager(){
     var self = this;
     var filterList;
 
-    $(function(){
+    self.init = function(){
         filterList = $("#contentFilters").FilterList();
         filterList.setTypeName("domain");
         filterList.addScaleStyle("opacity");
@@ -17,11 +18,13 @@ var DomainManager = new (function _DomainManager(){
         }).bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addFilter("domain", value, label);
+            analytics("filter", "filter in youpivot domain", value);
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addOutcast("domain", value, label);
+            analytics("filter", "filter out youpivot domain", value);
         });
-    });
+    }
 
     // add a batch of domains in one function call. For convenience
 	self.addDomains = function(input){

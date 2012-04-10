@@ -1,18 +1,23 @@
-<script type="text/javascript" src="include/jquery-1.7.min.js"></script>
-<script type="text/javascript" src="js/standard.js"></script>
-<script type="text/javascript" src="js/pref.js"></script>
+<script src="include/jquery-1.7.min.js" name="jQuery"></script>
+<script src="js/standard.js" name="standard" data-included="true"></script>
+<script src="js/pref.js" name="PrefManager"></script>
+
+<!-- Built libraries -->
+<script src="/js/domainextractor.js" name="DomainExtractor"></script>
 
 <!--************* YouPivot *************-->
-<script type="text/javascript" src="youpivot/js/connector.js"></script>
-<script type="text/javascript" src="youpivot/js/background/domainextractor.js"></script>
-<script type="text/javascript" src="youpivot/js/background/tabmonitor.js"></script>
-<script type="text/javascript" src="youpivot/js/background/tabinfo.js"></script>
-<script type="text/javascript" src="youpivot/js/background/user.js"></script>
-<script type="text/javascript" src="background_youpivot.js"></script>
+<script src="youpivot/js/connector.js" name="Connector"></script>
+<script src="youpivot/js/background/tabmonitor.js" name="TabMonitor"></script>
+<script src="youpivot/js/background/tabinfo.js" name="TabInfo"></script>
+<script src="youpivot/js/background/user.js" name="UserManager"></script>
+<script src="youpivot/js/timemark.js" name="YPTimeMarkManager"></script>
+<script src="background_youpivot.js" name="background_youpivot" data-included="true"></script>
 
 <!--************* TimeMarks *************-->
-<script type="text/javascript" src="timemarks/js/database.js"></script>
-<script type="text/javascript" src="timemarks/js/jquery.js"></script>
-<script type="text/javascript" src="timemarks/js/jquery.uuid.js"></script>
-<script type="text/javascript" src="timemarks/js/timeMarks.js"></script>
-<script type="text/javascript" src="background_timemarks.js"></script>
+<script src="timemarks/js/database.js"></script>
+<script src="timemarks/js/jquery.js"></script>
+<script src="timemarks/js/jquery.uuid.js"></script>
+<script src="timemarks/js/timeMarks.js"></script>
+<script src="background_timemarks.js"></script>
+
+<script src="/js/analytics.js" name="analytics"></script>

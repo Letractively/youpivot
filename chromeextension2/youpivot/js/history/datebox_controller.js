@@ -1,4 +1,6 @@
-include("js/views/datebox.js");
+include_("DateBox");
+include_("DatePicker");
+include_("PivotManager");
 
 /********** API ***********
 
@@ -15,6 +17,7 @@ var DateBoxController = new (function _DateBoxController(){
 
     self.createDateBox = function(){
         dateBox = $('<div id="dateBox" />').dateBox();
+        dateBox.roundOff = true;
         dateBox.onDateChanged(onDateChanged);
         return dateBox.element;
     }

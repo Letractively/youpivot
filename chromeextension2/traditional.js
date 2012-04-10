@@ -1,14 +1,36 @@
 style("/traditional/css/controls.css");
+include_("THDateBoxController");
+include_("THDomainManager");
+include_("THTermManager");
+include_("HistoryList");
+include_("THSearch");
 
 var TraditionalHistory = new (function _TraditionalHistory(){
     var self = this;
+
+    // initialization
+    self.init = function(){
+        Master.addTab("traditionalhistory", self, "History", "traditional/history.html");
+    }
+    
+    self.onCreate = function(){
+        var bar = Master.createSidebar("traditionalhistory");
+        bar.attr("id", "h-leftSidebar");
+        bar.find(".m-sidebarTitle span").text("Traditional History");
+        bar.append('<div class="sidebarGroup"><div class="sidebarLabel" id="th-contentLabel">Content</div><div id="th-contentFilters" class="collapse view_Collapsable" data-indicator="true" data-handle="#th-contentLabel"></div></div>');
+        bar.append('<div class="sidebarGroup"><div class="sidebarLabel" id="th-termsLabel">Terms</div><div id="th-termFilters" class="collapse view_Collapsable" data-indicator="true" data-handle="#th-termsLabel"></div></div>');
+
+        HistoryList.init();
+        THDomainManager.init();
+        THTermManager.init();
+        THSearch.init();
+    }
 
     self.onAttached = function(){
     }
 
     self.populateTopbar = function(bar){
-        O_O.include("/traditional/js/datebox.js");
-        var dateBox = THDateBoxController.createDateBox();
+        var dateBox = THDateBoxController.getDateBox();
         bar.append(dateBox);
 
         var searchBox = $('<input type="search" id="th-searchBox" class="m-topsearch" />');
@@ -23,14 +45,5 @@ var TraditionalHistory = new (function _TraditionalHistory(){
         return "images/large/traditional.png";
     }
 
-    // initialization
-    if(Master){
-        Master.addTab("traditionalhistory", self, "History", "traditional/history.html");
-        var bar = Master.createSidebar("traditionalhistory");
-        bar.attr("id", "h-leftSidebar");
-        bar.find(".m-sidebarTitle span").text("Traditional History");
-        bar.append('<div class="sidebarGroup"><div class="sidebarLabel" id="th-contentLabel">Content</div><div id="th-contentFilters" class="collapse view_Collapsable" data-indicator="true" data-handle="#th-contentLabel"></div></div>');
-        bar.append('<div class="sidebarGroup"><div class="sidebarLabel" id="th-termsLabel">Terms</div><div id="th-termFilters" class="collapse view_Collapsable" data-indicator="true" data-handle="#th-termsLabel"></div></div>');
-    }
 })();
 

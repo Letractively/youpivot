@@ -1,6 +1,6 @@
-include("js/color.js");
-
-var StreamGraph = {};
+include_("Color");
+include_("ProcessingJS");
+include_("PJS_streamgraph");
 
 /***************** API *********************
   
@@ -16,16 +16,16 @@ var StreamGraph = {};
 
 ********************************************/
 
-(function(){
-    var m = StreamGraph;
+var StreamGraph = new (function _StreamGraph(){
+    var self = this;
     var pjs;
 
-    m.DrawModes = {
+    self.DrawModes = {
         all : 0,
         scale : 1,
         color : 2
     };
-    var DrawModes = m.DrawModes;
+    var DrawModes = self.DrawModes;
     var drawMode = DrawModes.all;
     var settings = {
         w: 680,
@@ -41,7 +41,7 @@ var StreamGraph = {};
     var startPoint = 0;
     var endPoint = -1;
 
-    m.init = function(){
+    self.init = function(){
         initPJS();
     }
 
@@ -50,24 +50,24 @@ var StreamGraph = {};
         pjs = new Processing(canvas, stream);
     }
 
-    m.draw = function(data, offset, scale){
+    self.draw = function(data, offset, scale){
         processData(data);
         pjs.stream.setScale(offset, scale);
         pjs.stream.draw();
     }
 
-    m.redraw = function(mode){
+    self.redraw = function(mode){
         drawMode = mode;
         pjs.redraw();
     }
 
-    m.changeColor = function(id, color){
+    self.changeColor = function(id, color){
         pjs.stream.changeColor(id, color);
     }
 
-    m.scale = function(offset, scale){
+    self.scale = function(offset, scale){
         pjs.stream.setScale(offset, scale);
-        m.redraw(DrawModes.scale);
+        self.redraw(DrawModes.scale);
     }
 
     function processData(data){
@@ -309,11 +309,6 @@ var StreamGraph = {};
             //    P.vertex(x, y);
         }
 
-        /*function getData(id){
-            var index = GraphManager.getDataIndex(id);
-            return GraphManager.getData(index);
-        }*/
-
         // Return colorMode, range, color triplet (either in rgb or hsb, specified by colorMode)
         function getColor(layer){
             return layer.color;
@@ -455,15 +450,15 @@ var StreamGraph = {};
 
     var delegateFunctions = {};
 
-    m.onMouseEnterLayer = function(func){
+    self.onMouseEnterLayer = function(func){
         delegateFunctions["mouseEnter"] = func;
     }
 
-    m.onMouseLeaveLayer = function(func){
+    self.onMouseLeaveLayer = function(func){
         delegateFunctions["mouseLeave"] = func;
     }
 
-    m.onMouseClickLayer = function(func){
+    self.onMouseClickLayer = function(func){
         delegateFunctions["mouseClick"] = func;
     }
 

@@ -1,5 +1,5 @@
 // JavaScript Document
-include('/youpivot/js/background/domainextractor.js');
+include_("DomainExtractor");
 
 function getAllTimeMarks(){
    database.db.transaction(function(tx){

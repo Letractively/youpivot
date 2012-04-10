@@ -1,4 +1,4 @@
-include("js/views/datebox.js");
+include_("DateBox");
 
 /********** API ***********
 
@@ -16,6 +16,12 @@ var THDateBoxController = new (function _THDateBoxController(){
     self.createDateBox = function(){
         dateBox = $('<div id="th-dateBox" />').dateBox();
         dateBox.onDateChanged(onDateChanged);
+    }
+
+    self.getDateBox = function(){
+        if(!dateBox){
+            self.createDateBox();
+        }
         return dateBox.element;
     }
 
@@ -30,9 +36,12 @@ var THDateBoxController = new (function _THDateBoxController(){
     }
 
     $(function(){
+        if(!dateBox)
+            self.createDateBox();
         var endDate = new Date().getTime();
         var startDate = endDate - 86399999;
         dateBox.setDateDisplay(startDate, endDate);
+        dateBox.interval = 43200000;
     });
 
 })();

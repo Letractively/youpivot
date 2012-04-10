@@ -1,7 +1,14 @@
+//include_("GraphManager");
+//include_("ItemManager");
+//include_("EventManager");
+//include_("SearchManager");
+//include_("TableManager");
+//include_("EventManager");
+
 var HighlightManager = {};
 
 (function(){
-	var m = HighlightManager;
+	var self = HighlightManager;
     var domainHighlightPool = {};
     var tableHighlightPool = {};
     var graphHighlightPool = {};
@@ -9,72 +16,72 @@ var HighlightManager = {};
 
     /************* Highlight event handles (routing) *******************/
 
-    m.mouseEnterGraph = function(id){
+    self.mouseEnterGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.highlightHistoryListDomain(domainId);
-        m.highlightHistoryListItem(id);
-        m.highlightLayer(id);
-        m.scrollToItem(id, 500);
+        self.highlightHistoryListDomain(domainId);
+        self.highlightHistoryListItem(id);
+        self.highlightLayer(id);
+        self.scrollToItem(id, 500);
     }
 
-    m.mouseLeaveGraph = function(id){
+    self.mouseLeaveGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.lowlightHistoryListDomain(domainId);
-        m.lowlightHistoryListItem(id);
-        m.lowlightLayer(id);
-        m.cancelScroll(id);
+        self.lowlightHistoryListDomain(domainId);
+        self.lowlightHistoryListItem(id);
+        self.lowlightLayer(id);
+        self.cancelScroll(id);
     }
 
     var graphToggleState = {};
 
-    m.clickOnGraph = function(id){
+    self.clickOnGraph = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
         if(!graphToggleState[id]){
-            m.highlightHistoryListDomain(domainId);
-            m.highlightHistoryListItem(id);
-            m.highlightLayer(id);
-            m.cancelScroll(id);
-            m.scrollToItem(id, 0);
+            self.highlightHistoryListDomain(domainId);
+            self.highlightHistoryListItem(id);
+            self.highlightLayer(id);
+            self.cancelScroll(id);
+            self.scrollToItem(id, 0);
             graphToggleState[id] = true;
         }else{
-            m.lowlightHistoryListDomain(domainId);
-            m.lowlightHistoryListItem(id);
-            m.lowlightLayer(id);
+            self.lowlightHistoryListDomain(domainId);
+            self.lowlightHistoryListItem(id);
+            self.lowlightLayer(id);
             graphToggleState[id] = false;
         }
     }
 
-    m.mouseEnterHistoryListItem = function(id){
+    self.mouseEnterHistoryListItem = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.highlightHistoryListDomain(domainId);
-        m.highlightHistoryListItem(id);
-        m.highlightLayer(id);
+        self.highlightHistoryListDomain(domainId);
+        self.highlightHistoryListItem(id);
+        self.highlightLayer(id);
     }
 
-    m.mouseLeaveHistoryListItem = function(id){
+    self.mouseLeaveHistoryListItem = function(id){
         var domainId = ItemManager.getItem(id).domain.id;
-        m.lowlightHistoryListDomain(domainId);
-        m.lowlightHistoryListItem(id);
-        m.lowlightLayer(id);
+        self.lowlightHistoryListDomain(domainId);
+        self.lowlightHistoryListItem(id);
+        self.lowlightLayer(id);
     }
 
-    m.mouseEnterSearchTableItem = function(id){
+    self.mouseEnterSearchTableItem = function(id){
         var domainId = SearchManager.results[id].domain.id;
-        m.highlightSearchTableDomain(domainId);
-        m.highlightSearchTableItem(id);
+        self.highlightSearchTableDomain(domainId);
+        self.highlightSearchTableItem(id);
     }
 
-    m.mouseLeaveSearchTableItem = function(id){
+    self.mouseLeaveSearchTableItem = function(id){
         var domainId = SearchManager.results[id].domain.id;
-        m.lowlightSearchTableDomain(domainId);
-        m.lowlightSearchTableItem(id);
+        self.lowlightSearchTableDomain(domainId);
+        self.lowlightSearchTableItem(id);
     }
 
     /*********** Highlight implementations *************/
 
     // highlights the domain on the table that is currently visible to the user
     // domain ID cannot be used here because it's different for search results and normal history items
-    m.highlightActiveTableDomain = function(title){
+    self.highlightActiveTableDomain = function(title){
         var domainId, controller, list;
 
         if(SearchManager.getState()){
@@ -86,12 +93,12 @@ var HighlightManager = {};
             controller = TableManager;
             list = ItemManager.list;
         }
-        m.highlightDomain(domainId, controller, list);
+        self.highlightDomain(domainId, controller, list);
     }
 
     // lowlights the domain on the table that is currently visible to the user
     // domain ID cannot be used here because it's different for search results and normal history items
-    m.lowlightActiveTableDomain = function(title){
+    self.lowlightActiveTableDomain = function(title){
         var domainId, controller, list;
 
         if(SearchManager.getState()){
@@ -103,26 +110,26 @@ var HighlightManager = {};
             controller = TableManager;
             list = ItemManager.list;
         }
-        m.lowlightDomain(domainId, controller, list);
+        self.lowlightDomain(domainId, controller, list);
     }
 
-    m.highlightHistoryListDomain = function(domainId){
-        m.highlightDomain(domainId, TableManager, ItemManager.list);
+    self.highlightHistoryListDomain = function(domainId){
+        self.highlightDomain(domainId, TableManager, ItemManager.list);
     }
 
-    m.lowlightHistoryListDomain = function(domainId){
-        m.lowlightDomain(domainId, TableManager, ItemManager.list);
+    self.lowlightHistoryListDomain = function(domainId){
+        self.lowlightDomain(domainId, TableManager, ItemManager.list);
     }
 
-    m.highlightSearchTableDomain = function(domainId){
-        m.highlightDomain(domainId, SearchManager, SearchManager.results);
+    self.highlightSearchTableDomain = function(domainId){
+        self.highlightDomain(domainId, SearchManager, SearchManager.results);
     }
 
-    m.lowlightSearchTableDomain = function(domainId){
-        m.lowlightDomain(domainId, SearchManager, SearchManager.results);
+    self.lowlightSearchTableDomain = function(domainId){
+        self.lowlightDomain(domainId, SearchManager, SearchManager.results);
     }
 
-    m.highlightDomain = function(domainId, controller, list){
+    self.highlightDomain = function(domainId, controller, list){
         list.iterate(function(item){
             if(item && item.domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, item.id, 1);
@@ -135,7 +142,7 @@ var HighlightManager = {};
         });
     }
 
-    m.lowlightDomain = function(domainId, controller, list){
+    self.lowlightDomain = function(domainId, controller, list){
         list.iterate(function(item){
             if(item && item.domain.id == domainId){
                 addToHighlightPool(domainHighlightPool, item.id, -1);
@@ -160,7 +167,7 @@ var HighlightManager = {};
         return pool[id];
     }
 	
-	m.clearHighlight = function(){
+	self.clearHighlight = function(){
         domainHighlightPool = {};
         tableHighlightPool = {};
         graphHighlightPool = {};
@@ -173,12 +180,12 @@ var HighlightManager = {};
         });
 	}
 
-    m.highlightHistoryListItem = function(id){
+    self.highlightHistoryListItem = function(id){
         addToHighlightPool(tableHighlightPool, id, 1);
         TableManager.highlight(id, "highlight");
     }
 
-    m.lowlightHistoryListItem = function(id){
+    self.lowlightHistoryListItem = function(id){
         var list = ItemManager.list;
         if(addToHighlightPool(tableHighlightPool, id, -1) > 0){
             TableManager.highlight(id, "highlight");
@@ -189,12 +196,12 @@ var HighlightManager = {};
         }
     }
 
-    m.highlightSearchTableItem = function(id){
+    self.highlightSearchTableItem = function(id){
         addToHighlightPool(tableHighlightPool, id, 1);
         SearchManager.highlight(id, "highlight");
     }
 
-    m.lowlightSearchTableItem = function(id){
+    self.lowlightSearchTableItem = function(id){
         var list = ItemManager.list;
         if(addToHighlightPool(tableHighlightPool, id, -1) > 0){
             SearchManager.highlight(id, "highlight");
@@ -206,21 +213,21 @@ var HighlightManager = {};
     }
 
 	var scrollEvents = {};
-	m.scrollToItem = function(id, delay){
+	self.scrollToItem = function(id, delay){
 		scrollEvents[id] = setTimeout(function(){
 			actualScrollToItem(id);
 		}, delay);
 	}
-	m.cancelScroll = function(id){
+	self.cancelScroll = function(id){
 		clearTimeout(scrollEvents[id]);
 	}
 
-    m.highlightLayer = function(id){
+    self.highlightLayer = function(id){
         addToHighlightPool(graphHighlightPool, id, 1);
         actualLayerHighlight(id);
     }
 
-    m.lowlightLayer = function(id){
+    self.lowlightLayer = function(id){
         if(addToHighlightPool(graphHighlightPool, id, -1) == 0)
             actualLayerLowlight(id);
     }

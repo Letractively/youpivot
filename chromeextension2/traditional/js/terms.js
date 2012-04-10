@@ -1,12 +1,13 @@
-include("/js/views/filterlist.js");
-include("/js/utilities.js");
+include_("FilterList");
+include_("Utilities");
+include_("THFilterManager");
 
 var THTermManager = new (function _THTermManager(){
     var self = this;
 
     var filterList;
 
-    $(function(){
+    self.init = function(){
         filterList = $("#th-termFilters").FilterList();
         filterList.setTypeName("term");
         filterList.addScaleStyle("opacity");
@@ -20,10 +21,12 @@ var THTermManager = new (function _THTermManager(){
         });
         $("#th-termFilters").bind("includefilter", function(e, obj, value){
             THFilterManager.filter.addFilter("term", value, value);
+            analytics("filter", "filter in history term", value);
         }).bind("excludefilter", function(e, obj, value){
             THFilterManager.filter.addOutcast("term", value, value);
+            analytics("filter", "filter out history term", value);
         });
-    });
+    }
 
 	//add an array of terms
 	self.addTerms = function(texts){

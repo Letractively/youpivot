@@ -57,10 +57,10 @@ function TabInfo(t){
 	};
 
 	function calculateImportance(){
-        console.log("calculateImportance");
+                if(TabInfo.debug) console.log("calculateImportance");
 		self.importance = 0;
 		var discount = TabInfo_discounts[self.lastActive];
-        console.log("discount:", discount);
+                if(TabInfo.debug) console.log("discount:", discount);
 		if(!discount){
 			self.importance = TabInfo.minImportance;
 			return;
@@ -73,7 +73,7 @@ function TabInfo(t){
 		//cap the points before discounting
 		if(self.importance > TabInfo_maxImportance) self.importance = TabInfo_maxImportance;
 		self.importance /= discount;
-        console.log("importance:", self.importance);
+                if(TabInfo.debug) console.log("importance:", self.importance);
 	}
 
 	function lowerFlags(){
@@ -101,7 +101,7 @@ function TabInfo(t){
 	}
 
 	self.getInfo = function(){
-        console.log("getInfo");
+                if(TabInfo.debug) console.log("getInfo");
 		calculateImportance();
 		lowerFlags();
 		self.lastActive++;

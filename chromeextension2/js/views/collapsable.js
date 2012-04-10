@@ -6,7 +6,7 @@
     });
 
     $.Collapsable = function(options){
-        if(typeof options == "string"){
+        if(typeof options == "string" && !$(options).view()){
             $(options).each(function(){
                 var handleSelector = $(this).attr("data-handle");
                 var handle = $(handleSelector);
@@ -14,6 +14,9 @@
                 var collapsable = $(this).collapsable({"handle": handle, "indicator": indicator});
                 $(this).data("view_collapsable", collapsable);
             });
+            return this;
+        }else{
+            console.log("collapsable already initiated");
             return this;
         }
     }

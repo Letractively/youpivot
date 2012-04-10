@@ -1,16 +1,15 @@
-include("/js/iconfactory.js");
+include_("IconFactory");
+include_("HighlightManager");
 
-var EventManager = {};
+var EventManager = new (function _EventManager(){
+	var self = this;
 
-(function(){
-	var m = EventManager;
-
-	m.add = function(time, icon, color, name, id){
-		var offset = getOffset(time);
-		addIcon(offset, icon, color, name, id);
+	self.add = function(time, icon, color, name, id, loadedRange, displayRange){
+		var offset = getOffset(time, loadedRange);
+		addIcon(offset, icon, color, name, id, displayRange);
 	}
 
-	function addIcon(offset, icon, color, name, id){
+	function addIcon(offset, icon, color, name, id, displayRange){
 		var img = IconFactory.createIcon(icon, name).addClass("eventIcon");
 		img.attr("id", "event_"+id);
 		img.css("left", offset);
@@ -37,27 +36,26 @@ var EventManager = {};
 			//toggleItemHighlight(id, toggle);
 			//HighlightManager.scrollToItem(id, 0);
 		});
-		m.scaleIcons();
+		self.scaleIcons(displayRange);
 	}
 
-	m.scaleIcons = function(pos){
-		if(!pos) pos = GraphManager.getDisplayRange();
+	self.scaleIcons = function(pos){
 		var xScale = 0.1/pos.scale;
 		$(".eventIcon").css("-webkit-transform", "scaleX("+1/xScale+")");
 	}
 
-	m.highlight = function(id, persistent){
+	self.highlight = function(id, persistent){
 		var item = $("#event_"+id);
 		if(persistent) item.addClass("highlight");
 		item.addClass("active");
 	}
-	m.lowlight = function(id, clearPersistent){
+	self.lowlight = function(id, clearPersistent){
 		var item = $("#event_"+id);
 		if(clearPersistent || !item.hasClass("highlight")){
 			item.removeClass("active highlight");
 		}
 	}
-	m.clear = function(){
+	self.clear = function(){
 		$("#events").html("");
 	}
 
@@ -71,8 +69,9 @@ var EventManager = {};
 	}
 
 	var favWidth = 22;
-	function getOffset(time){
-		var range = GraphManager.getLoadedRange();
+	function getOffset(time, loadedRange){
+		//var range = GraphManager.getLoadedRange();
+		var range = loadedRange;
 		var offset = (time-range.start)/(range.end-range.start);
 		var w = $("#events").width();
 		offset *= w;
