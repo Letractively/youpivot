@@ -244,7 +244,7 @@ var GraphManager = new (function _GraphManager(){
         console.log("toggle graph");
 		var hiding = $("#eventsWrap").is(":visible");
 		$("#graphDate div").width((hiding) ? "auto" : "50%");
-		$("#graphDate .dash").toggle();
+		$("#graphDate .dash").toggleClass("hidden");
 		$("#eventsWrap").toggle();
 		$("#collapseGraph").animate({"rotate": (hiding) ? 180 : 0}, 150);
 		ShadowManager.animate( (hiding ? 83 : 270) , 200);

@@ -3,7 +3,7 @@ include_("Filter");
 var THFilterManager = new (function _THFilterManager(){
     var self = this;
 
-    $(function(){
+    self.init = function(){
         self.filter = new Filter($("#th-filtersWrap"), HistoryList.getList);
         self.filter.addTestType("domain", function(domain, item){
             return item.domain == domain;
@@ -15,6 +15,6 @@ var THFilterManager = new (function _THFilterManager(){
             HistoryList.itemTable.filter(ids.include, ids.exclude);
             HistoryList.itemTable.display();
         });
-    });
+    }
 
 })();

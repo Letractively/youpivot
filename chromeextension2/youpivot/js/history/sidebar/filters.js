@@ -4,21 +4,20 @@ include_("TableManager");
 var FilterManager = new (function _FilterManager(){
     var self = this;
 
-    $(function(){
+    self.init = function(){
         self.filter = new Filter($("#filtersWrap"), ItemManager.getList);
         self.filter.addTestType("name", nameTest);
         self.filter.addTestType("domain", domainTest);
         self.filter.addTestType("stream", streamTest);
-    });
+        $("#filtersWrap").bind("filterChanged", function(e, ids){
+            TableManager.itemTable.filter(ids.include, ids.exclude);
+            TableManager.itemTable.display();
+        });
+    }
 
     self.clearFilters = function(){
         self.filter.clearFilters();
     }
-    
-    $("#filtersWrap").bind("filterChanged", function(e, ids){
-        TableManager.itemTable.filter(ids.include, ids.exclude);
-        TableManager.itemTable.display();
-    });
 
 	function nameTest(value, item){
 		return matchKeywords(value, item.keywords) || matchKeywords(value, item.title.split(/[^a-zA-Z0-9]/g));

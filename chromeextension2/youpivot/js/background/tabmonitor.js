@@ -1,4 +1,4 @@
-include_("DomainExtractor");
+include_("TabInfo");
 
 var Monitor = {};
 
@@ -18,18 +18,10 @@ var Monitor = {};
             tabUpdated(tab, changeInfo);
         }
     });
-    chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo){
-        updateFocus();
-    });
-    chrome.tabs.onMoved.addListener(function(tabId, moveInfo){
-        updateFocus();
-    });
-    chrome.tabs.onDetached.addListener(function(tabId, detachInfo){
-        updateFocus();
-    });
-    chrome.windows.onFocusChanged.addListener(function(windowId){
-        updateFocus();
-    });
+    chrome.tabs.onSelectionChanged.addListener(updateFocus);
+    chrome.tabs.onMoved.addListener(updateFocus);
+    chrome.tabs.onDetached.addListener(updateFocus);
+    chrome.windows.onFocusChanged.addListener(updateFocus);
 
 	$(function(){
 		registerOpenTabs();
@@ -62,14 +54,13 @@ var Monitor = {};
 			removeFromTabs(tab.id);
 		}
 		if(urlValid(tab.url)){
-			addToTabs(tab.id, createItemFromTab(tab));
-            console.log("add to tabs", arr);
-            extractKeywords(tab.id, function(terms){
+			addToTabs(tab.id, tab);
+            extractKeywords(tab.id, function(id, terms){
                 if(terms.length > 0){
-                    if(arr[tab.id])
-                        arr[tab.id].keywords = terms;
+                    if(arr[id])
+                        arr[id].keywords = terms;
                 }
-                uploadOpenInfo(tab.id);
+                uploadOpenInfo(id);
             });
 		}
 	}
@@ -144,7 +135,7 @@ var Monitor = {};
 		obj.windowid = info.win;
 		obj.stream = "chrometab";
 		//obj = addKeywordsToItem(obj, info.keywords);
-		console.log("domain", info.domain);
+		if(self.debug) console.log("domain", info.domain);
 		return obj;
 	}
 
@@ -210,19 +201,23 @@ var Monitor = {};
 	/*** end server calls ***/
 
     function extractKeywords(tabId, callback){
-        var handler = function(request){
+        var handler = function(request, sender){
             if(request.action == "saveTerms"){
-                callback(request.terms);
+                if(sender.tab.id == tabId){
+                    if(self.debug) console.log("keywords: ", request.terms);
+                    callback(tabId, request.terms);
+                }
+                chrome.extension.onRequest.removeListener(handler);
             }
-            chrome.extension.onRequest.removeListener(handler);
         }
         chrome.extension.onRequest.addListener(handler);
         chrome.tabs.executeScript(tabId, {file: "youpivot/js/background/termextractor.js"}, function(){
-            console.log("keywords extracted");
+            if(self.debug) console.log("keywords extracted");
         });
     }
 
     self.saveKeywords = function(keywords){
+        throw "deprecated saveKeywords";
         item.keywords = keywords;
         return item;
     }
@@ -249,7 +244,7 @@ var Monitor = {};
 				for(var j in windows[i].tabs){
 					var tab = windows[i].tabs[j];
 					if(urlValid(tab.url)){
-						addToTabs(tab.id, createItemFromTab(tab));
+						addToTabs(tab.id, tab);
                     }
 				}
 			}
@@ -267,14 +262,14 @@ var Monitor = {};
 		return output;
 	}
 
-	function addToTabs(id, createObj){
-		arr[id] = createTabInfo(createObj);
-        console.log("Tab created, arr:", arr);
+	function addToTabs(id, tab){
+        arr[id] = new TabInfo(tab);
+        console.log("Tab created for id ", id, ", arr:", arr);
 	}
 
 	function removeFromTabs(id){
-        console.log("remove from tabs: ", id, arr);
 		if(arr[id]) delete arr[id];
+        console.log("remove from tabs: ", id, arr);
 	}
 
 	function updateFocus(){
@@ -287,46 +282,9 @@ var Monitor = {};
 					var tFocus = tab.selected;
 					if(arr[tab.id]){
 						arr[tab.id].setFocus(tFocus, wFocus);
-					}
+                    }
 				}
 			}
 		});
-	}
-
-	function getFavUrl(tab){
-		if(tab.favIconUrl){
-			return tab.favIconUrl;
-		}
-		//use Google S2 if favicon URL is not defined
-		var domain = DomainExtractor.getName(tab.url);
-		var favIconUrl = "http://www.google.com/s2/favicons?domain="+domain;
-		return favIconUrl;
-	}
-
-	// poor man's keyword generator
-    // this is fallback method to create keywords when it's not extracted from the body text
-	function getKeywords(title){
-		title = title.replace(/[^a-zA-Z0-9]/g, " ").replace(/\s+/g, " ");
-		var output = title.split(" ");
-		for(var i in output){
-			if(output[i].length==0)
-				output.splice(i, 1);
-		}
-		return output;
-	}
-
-	function createItemFromTab(tab){
-		var cObj = {
-			title: tab.title, 
-			url: tab.url, 
-			domain: DomainExtractor.getName(tab.url),
-			favUrl: getFavUrl(tab), 
-			index: tab.index, 
-			win: tab.windowId,
-			keywords: getKeywords(tab.title), 
-			parentTab: -1,
-			parentWindow: -1
-		};
-		return cObj;
 	}
 })();

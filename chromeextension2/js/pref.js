@@ -35,6 +35,8 @@ var PrefManager = new (function _PrefManager(){
 		"lowlightBg": "transparent",
 
         // intrumentation
+        "logging": false,
+        "showLog": true,
         "analyticsid": "",
 	};
 
@@ -56,6 +58,7 @@ var PrefManager = new (function _PrefManager(){
 		if(!options) options = {};
 		options[label] = value;
 		localStorage["options"] = JSON.stringify(options);
+        $(window).trigger("preferenceChanged", [{key: key, value: value}])
 		console.log("Options saved");
 	}
 
@@ -67,5 +70,12 @@ var PrefManager = new (function _PrefManager(){
 			return getDefault(label);
 		return output;
 	}
+
+    self.onPreferenceChanged = function(key, func){
+        $(window).bind("preferenceChanged", function(event, pair){
+            if(pair.key == key)
+                func(pair);
+        })
+    }
 
 })();
