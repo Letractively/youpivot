@@ -42,6 +42,8 @@ var StreamManager = new (function _StreamManager(){
 				return "youpivot/images/streams/chrome.png";
 			case "timemark":
 				return "images/timemark.png";
+            case "analytics":
+                return "images/analytics.png";
 			default: // FIXME make this extensible
 				console.log("Unknown stream: "+name);
 				return "";

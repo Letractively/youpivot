@@ -1,21 +1,6 @@
+include_("DomainExtractor");
+
 /*** Class tabinfo ***/
-
-function createTabInfo(cObj){
-	var t = {};
-	t.title = cObj.title;
-	t.url = cObj.url;
-	t.domain = cObj.domain;
-	t.index = cObj.index;
-	t.favUrl = cObj.favUrl;
-	t.win = cObj.win;
-	t.keywords = cObj.keywords;
-	t.parentTab = cObj.parentTab;
-	t.parentWindow = cObj.parentWindow;
-	t.eid = -1;
-
-	var obj = new TabInfo(t);
-	return obj;
-}
 
 // weights of the importance values
 var TabInfo_weights = {
@@ -31,22 +16,24 @@ var TabInfo_minImportance = 0.01;
 var TabInfo_output = ["title", "url", "domain", "favUrl", "index", "win", "importance", "keywords", "parentTab", "parentWindow", "eid"];
 
 //Object
-function TabInfo(t){
+function TabInfo(tab){
 	var self = this;
-	//General information
-	self.title = t.title;
-	self.url = t.url;
-	self.domain = t.domain;
-	self.favUrl = t.favUrl;
-	self.index = t.index; //tab position index
-	self.win = t.win; //window ID - unique within a browser session
-	self.importance = 0.01;
-	self.keywords = t.keywords; //JSON array of keywords in the page
-	self.parentTab = t.parentTab; //index of the parent tab. This is unique only for the moment event when combined with parentWindow
-	self.parentWindow = t.parentWindow; 
-	self.eid = t.eid; //event id returned from server
 
+	self.importance = 0.01;
+	self.eid = -1; //event id returned from server
 	self.lastActive = 0; //the number of times getInfo is called after the last user input detected
+
+    (function init(tab){
+        self.title = tab.title;
+        self.url = tab.url;
+        self.domain = DomainExtractor.getName(tab.url);
+        self.favUrl = getFavUrl(tab, self.domain);
+        self.index = tab.index; // tab position index
+        self.win = tab.windowId; // window ID - unique within a browser session
+        self.keywords = getKeywords(tab.title); // fallback
+        self.parentTab = -1;
+        self.parentWindow = -1;
+    })(tab);
 
 	//one way flags - true if it is true for any instant after the last getInfo
 	self.flags = {
@@ -55,6 +42,45 @@ function TabInfo(t){
 		focusWindow: false, //focused window
 		opened: true //the tab is just opened
 	};
+
+	self.setFocus = function(tFocus, wFocus){
+		//var wFocus = (focus.window == this.window);
+		//var tFocus = (focus.index == this.index);
+		self.lastActive = 0;
+		if(wFocus){ self.flags["focusWindow"] = true; }
+		if(tFocus){ self.flags["topTab"] = true; }
+		if(wFocus && tFocus){ self.flags["focusTab"] = true; }
+	}
+
+	self.getInfo = function(){
+                if(TabInfo.debug) console.log("getInfo");
+		calculateImportance();
+		lowerFlags();
+		self.lastActive++;
+		var output = compileOutput();
+		return output;
+	}
+
+	function getFavUrl(tab, domain){
+		if(tab.favIconUrl){
+			return tab.favIconUrl;
+		}
+		//use Google S2 if favicon URL is not defined
+		var favIconUrl = "http://www.google.com/s2/favicons?domain="+domain;
+		return favIconUrl;
+	}
+
+	// poor man's keyword generator
+    // this is fallback method to create keywords when it's not extracted from the body text
+	function getKeywords(title){
+		title = title.replace(/[^a-zA-Z0-9]/g, " ").replace(/\s+/g, " ");
+		var output = title.split(" ");
+		for(var i in output){
+			if(output[i].length==0)
+				output.splice(i, 1);
+		}
+		return output;
+	}
 
 	function calculateImportance(){
                 if(TabInfo.debug) console.log("calculateImportance");
@@ -82,30 +108,12 @@ function TabInfo(t){
 		}
 	}
 
-	self.setFocus = function(tFocus, wFocus){
-		//var wFocus = (focus.window == this.window);
-		//var tFocus = (focus.index == this.index);
-		self.lastActive = 0;
-		if(wFocus){ self.flags["focusWindow"] = true; }
-		if(tFocus){ self.flags["topTab"] = true; }
-		if(wFocus && tFocus){ self.flags["focusTab"] = true; }
-	}
-
 	function compileOutput(){
 		var output = {};
 		for(var i in TabInfo_output){
 			var key = TabInfo_output[i];
 			output[key] = self[key];
 		}
-		return output;
-	}
-
-	self.getInfo = function(){
-                if(TabInfo.debug) console.log("getInfo");
-		calculateImportance();
-		lowerFlags();
-		self.lastActive++;
-		var output = compileOutput();
 		return output;
 	}
 }

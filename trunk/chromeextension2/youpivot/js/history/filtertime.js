@@ -1,5 +1,7 @@
 include_("SearchManager");
 include_("TableManager");
+//include_("DomainManager");
+//include_("TermManager");
 
 var FilterTimeManager = new (function _FilterTimeManager(){
     var self = this;
@@ -23,6 +25,10 @@ var FilterTimeManager = new (function _FilterTimeManager(){
 		var startTime = time[0];
 		var endTime = time[1];
         TableManager.itemTable.clear();
+
+        DomainManager.clearDomains();
+        TermManager.clearTerms();
+        StreamManager.clearStreams();
 
         var timeList = {};
         manager.list.iterate(function(item){

@@ -1,9 +1,10 @@
 include_("YPTimeMarkManager");
+var verbose = false;
 
 $(function(){
 	/*** chrome event listeners ***/
 	chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-		console.log("Internal request:", request.action);
+		if(verbose) console.log("Internal request:", request.action);
 		switch(request.action){
 			case "getUserId":
 				sendResponse(UserManager.getId());
@@ -12,7 +13,7 @@ $(function(){
 				Connector.send(request.eventType, request.info, request.callback);
 				break;
 			case "saveTerms":
-                console.log(request.terms);
+                // saveTerms handled in TabMonitor function
 				break;
             case "ping":
                 // use AJAX to get info from manifest.json?

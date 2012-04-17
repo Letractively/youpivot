@@ -2,6 +2,7 @@ include_("PivotTable");
 include_("jQuery_contextmenu");
 include_("IconFactory");
 include_("Connector");
+//include_("FilterTimeManager");
 
 /**
  *	TableManager manages the items list on the main content, below the visualizations. 

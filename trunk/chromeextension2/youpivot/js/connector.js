@@ -6,14 +6,17 @@ var Connector = new (function _Connector(){
 	var developerId = "e34c5ee0d846e882ae1014294b002a14";
 	var userId = -1;
 
+    self.debug = false;
+
     // callback = {onSuccess(data), onError(data)}
 	self.send = function(eventType, info, callback){
 		if(typeof info != "object"){
-			throw "info is not an object";
+            if(self.debug)
+                throw "info is not an object";
 			console.log("Send info to server failed");
 			return;
 		}
-		console.log("sending...");
+        if(self.debug) console.log("sending...");
 		updateUserId(function(){ prepareSend(eventType, info, callback); });
 	}
 
@@ -29,7 +32,7 @@ var Connector = new (function _Connector(){
 			//console.log(data);
 			if(callback) sendCallbackData(callback, success, data);
 		});
-		console.log(url);
+		if(self.debug) console.log(url);
 	}
 
 	function sendCallbackData(callbacks, success, data){
@@ -101,14 +104,14 @@ var Connector = new (function _Connector(){
 	}
 
 	function updateUserId(callback){
-		if(typeof UserManager != "undefined"){
+        if(typeof UserManager != "undefined"){
 			//try accessing UserManager directly first
 			//console.log("Using UserManager");
 			userId = UserManager.getId();
 			callback();
 		}else{
 			//access UserManager through background.js
-			console.log("Getting userId through background");
+			if(self.debug) console.log("Getting userId through background");
 			chrome.extension.sendRequest({action: "getUserId"}, function(id){
 				userId = id;
 				callback();

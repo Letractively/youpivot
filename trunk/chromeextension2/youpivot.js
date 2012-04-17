@@ -4,6 +4,7 @@ include_("SidebarManager");
 include_("ItemManager");
 include_("ShadowManager");
 include_("PivotManager");
+include_("FilterManager");
 style("/youpivot/controls.css");
 
 var YouPivot = {};
@@ -25,6 +26,7 @@ var YouPivot = {};
         ShadowManager.init();
         PivotManager.init();
         SidebarManager.init();
+        FilterManager.init();
     }
 
     self.populateTopbar = function(bar){

@@ -4,6 +4,7 @@ include_("THDomainManager");
 include_("THTermManager");
 include_("HistoryList");
 include_("THSearch");
+include_("THFilterManager");
 
 var TraditionalHistory = new (function _TraditionalHistory(){
     var self = this;
@@ -24,6 +25,7 @@ var TraditionalHistory = new (function _TraditionalHistory(){
         THDomainManager.init();
         THTermManager.init();
         THSearch.init();
+        THFilterManager.init();
     }
 
     self.onAttached = function(){

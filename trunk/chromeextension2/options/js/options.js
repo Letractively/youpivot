@@ -1,4 +1,5 @@
 include_("URLHash");
+include_("PrefMaker");
 
 function initView(){
     var currentView = URLHash.getHashValue("options");
@@ -193,6 +194,8 @@ $(function(){
     setVersionNumber();
     initOptions();
     initView();
+    var loggingBox = PrefMaker.makeBooleanCheckbox("logging", "Log your YouPivot usage", "");
+    $("#youpivotOptions").append(loggingBox);
 
     $("#o-analyticsid").val(pref("analyticsid"));
 });

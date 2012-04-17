@@ -39,7 +39,6 @@ function include_(name){
     var script = $("script[name="+name+"]");
     if(script.length == 0){
         debug_warn(name + " is not provided");
-        console.trace();
     }else{
         script.attr("data-included", true);
         //console.log("included "+name);
@@ -102,11 +101,30 @@ function debug_warn(message, extra){
 
 function analytics(category, action, label, value, nonInteraction){
     console.log("analytics", {category: category, action: action, label: label, value: value, nonInteraction: nonInteraction});
+
+    if(!pref("logging"))
+        return;
+    
+    var item = {
+        "title": action,
+        "url": "#log",
+        "eventtypename": category,
+        "favicon": chrome.extension.getURL("/images/analytics.png"),
+        "keyword": [category, action, label, value],
+        "starttime": Math.floor(new Date().getTime()/1000),
+        "endtime": Math.floor(new Date().getTime()/1000 + 1),
+        "stream": "analytics",
+        "color": "#CCCCCC",
+    };
+
+    Connector.send("add", item);
+    /*
     if(analyticsReady){
-        _gaq.push(['_trackEvent', category, action, label, value, nonInteraction]);
+        //_gaq.push(['_trackEvent', category, action, label, value, nonInteraction]);
     }else{
         console.log("Analytics not ready");
     }
+    */
 }
 
 (function($){
