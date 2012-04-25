@@ -24,7 +24,7 @@ include_("Utilities");
         var filters = [];
         var best = 1;
         var id;
-        var scaleStyle = {};
+        var scaleStyle = [];
         var menuTitle = function(html, title, value){ return title; };
         var type = "item";
 
@@ -37,11 +37,10 @@ include_("Utilities");
         self.addItem = function(html, title, value, batch){
             var index = getFilterIndex(value);
             if(index == -1){
-                filters[filters.length] = {html: html, title: title, value: value, rating: 1};
+                filters[filters.length] = {func: undefined, html: html, title: title, value: value, rating: 1};
             }else{
                 var filter = filters[index];
                 filters[index].rating += 1;
-                //filters[index] = {url: url, name: name, rating: filter.rating+1};
                 if(filter.rating+1 > best) best = filter.rating+1;
             }
 
@@ -49,15 +48,53 @@ include_("Utilities");
                 self.display();
         }
 
+        var createNewItem;
+
+        self.setNewItemFactory = function(func){
+            createNewItem = func;
+        }
+
+        self.addItem2 = function(func, html, title, value, batch){
+            var index = getFilterIndex(value);
+            if(index == -1){
+                filters[filters.length] = {func: func, html: html, title: title, value: value, rating: 1};
+            }else{
+                var filter = filters[index];
+                filters[index].rating += 1;
+                if(filter.rating+1 > best) best = filter.rating+1;
+            }
+
+            if(!batch)
+                self.display(true);
+        }
+
         self.setTypeName = function(typename){
             type = typename;
         }
 
-        self.display = function(){
+        self.display = function(recycle){
             filters.sort(sortFunction);
-            self.element.html("");
-            for(var i in filters){
-                displayFilter(filters[i].html, filters[i].title, filters[i].value, filters[i].rating);
+            if(!recycle){
+                self.element.empty();
+                for(var i=0; i<filters.length; i++){
+                    var obj = $(filters[i].html);
+                        self.element.append(obj);
+                    displayFilter(i, $(filters[i].html), filters[i].html, filters[i].title, filters[i].value, filters[i].rating);
+                }
+            }else{
+                var recycles = $(".filterlabel_"+id, self.element);
+                for(var i=0; i<filters.length; i++){
+                    var recycle = recycles.eq(i);
+                    if(!recycle || recycle.length == 0){
+                        recycle = createNewItem();
+                        self.element.append(recycle);
+                    }
+                    filters[i].func(recycle);
+                    displayFilter(i, recycle, filters[i].html, filters[i].title, filters[i].value, filters[i].rating);
+                }
+                for(var i=filters.length; i<recycles.length; i++){
+                    recycles.eq(i).remove();
+                }
             }
         }
 
@@ -74,20 +111,21 @@ include_("Utilities");
             return -1;
         }
 
-        function displayFilter(html, title, value, rating){
-            var label = $(html);
+        function displayFilter(num, label, html, title, value, rating){
+            label.addClass("filterlabel_" + id);
             var handle = label.find(".filterHandle");
-            if(handle.length == 0)
+            if(handle.length == 0){
                 handle = label;
+            }
 
             var val = Utilities.decay(rating, 1, best);
-            for(var i in scaleStyle){
-                label.css(i, scaleStyle[i](val));
+            for(var i=0; i<scaleStyle.length; i++){
+                label.css(scaleStyle[i].key, scaleStyle[i].func(val));
             }
             if(onAttached != undefined){
                 onAttached(label, val);
             }
-            self.element.append(label);
+            //self.element.append(label);
             handle.mouseover(onmouseover).mouseout(onmouseout);
             handle.data("value", value);
             handle.click(function(e){
@@ -111,17 +149,17 @@ include_("Utilities");
                 }
             }
             best = 1;
-            self.element.html("");
+            //self.element.empty();
         }
 
         function onmouseover(obj){
-            obj = $(obj);
+            obj = $(this);
             var value = obj.data("value");
             self.element.trigger("mouseoverfilter", [obj, value]);
         }
 
         function onmouseout(obj){
-            obj = $(obj);
+            obj = $(this);
             var value = obj.data("value");
             self.element.trigger("mouseoutfilter", [obj, value]);
         }
@@ -146,9 +184,9 @@ include_("Utilities");
 
         self.addScaleStyle = function(style, scaleFunction){
             if(scaleFunction === undefined){
-                scaleStyle[style] = function(s) {return s;};
+                scaleStyle.push({ key: style, func: function(s) {return s;} });
             }else{
-                scaleStyle[style] = scaleFunction;
+                scaleStyle.push({ key: style, func: scaleFunction });
             }
         }
 

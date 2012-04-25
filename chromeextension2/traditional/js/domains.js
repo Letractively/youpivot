@@ -15,12 +15,18 @@ var THDomainManager = new (function _THDomainManager(){
         $("#th-contentFilters").bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             THFilterManager.filter.addFilter("domain", value, label);
-            analytics("filter", "filter in history domain", value);
+            analytics("Traditional History", "Filter: include domain: "+value, {action: "filter", filtertype: "domain", value: value});
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             THFilterManager.filter.addOutcast("domain", value, label);
-            analytics("filter", "filter out history domain", value);
+            analytics("Traditional History", "Filter: exclude domain: "+value, {action: "filter", filtertype: "domain", value: value});
         });
+
+        filterList.setNewItemFactory(createNewItem);
+    }
+
+    function createNewItem(){
+        return $(IconFactory.createTextIcon("", "", "wrap"));
     }
 
     // add a batch of domains in one function call. For convenience
@@ -34,17 +40,15 @@ var THDomainManager = new (function _THDomainManager(){
     // note that this have no effect on the display until display() is called. 
 	self.addDomain = function(url, name){
         var icon = IconFactory.createTextIcon(url, name, "wrap");
-        filterList.addItem(icon, name, name, true);
+        filterList.addItem2(function(item){
+            item.attr("src", url);
+            item.attr("title", name);
+            return item;
+        }, icon, name, name, true);
 	}
 
 	self.display = function(){
-        filterList.display();
-	}
-
-	self.addUrlDomain = function(url, name){
-        throw "deprecated";
-		var img = IconFactory.createFavicon(url, name);
-		$("#th-contentFilters").append(img.addClass("favicon"));
+        filterList.display(true);
 	}
 
 	self.clearDomains = function(retainOrder){

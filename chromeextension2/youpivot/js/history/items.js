@@ -19,6 +19,7 @@ var ItemManager = new (function _ItemManager(){
                 //var ttt = new Date().getTime();
                 //console.log("time to sort: ", new Date().getTime() - ttt);
 		for(var i in items){
+            if(!pref("showLog") && items[i].stream == "analytics") continue;
 			var id = counter++;
 			addItem(id, items[i]);
 			self.list[id] = items[i];
@@ -62,7 +63,7 @@ var ItemManager = new (function _ItemManager(){
 
 	var domains = new Array();
 	function addToDomainList(domain, color, data){
-		for(var i in domains){
+		for(var i=0; i<domains.length; i++){
 			if(domains[i].name == domain){
                 //addToDomainData(domains[i], data);
 				return i;
@@ -71,8 +72,8 @@ var ItemManager = new (function _ItemManager(){
 		var output = domains.length;
         var newDomain = {name: domain};
 
-        var graphColor = Helper.createLighterColor(color, pref("normalGraph"));
-        newDomain.graphColor = Color.toRGBArray(graphColor);
+        var graphColor = Helper.createLighterColor(color, pref("normalGraph"), "array");
+        newDomain.graphColor = graphColor;
 
         domains[output] = newDomain;
 		return output;

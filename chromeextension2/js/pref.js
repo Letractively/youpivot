@@ -18,6 +18,7 @@ var PrefManager = new (function _PrefManager(){
 		"keywordHighlight": false,
 		"pageFlipRange": 6*3600000, 
 		"pivotInterval": 3600000,
+        "topGraphEdge": false,
 
 		//scrolling/flipping preferences
 		"scrollMethod": "expand",
@@ -37,7 +38,6 @@ var PrefManager = new (function _PrefManager(){
         // intrumentation
         "logging": false,
         "showLog": true,
-        "analyticsid": "",
 	};
 
 	function getDefault(label){

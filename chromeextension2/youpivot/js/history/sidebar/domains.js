@@ -18,12 +18,18 @@ var DomainManager = new (function _DomainManager(){
         }).bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addFilter("domain", value, label);
-            analytics("filter", "filter in youpivot domain", value);
+            analytics("YouPivot", "Filter: include domain: "+value, {action: "filter", filtertype: "domain", value: value});
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addOutcast("domain", value, label);
-            analytics("filter", "filter out youpivot domain", value);
+            analytics("YouPivot", "Filter: exclude domain: "+value, {action: "filter", filtertype: "domain", value: value});
         });
+
+        filterList.setNewItemFactory(createNewItem);
+    }
+
+    function createNewItem(){
+        return $(IconFactory.createTextIcon("", "", "wrap"));
     }
 
     // add a batch of domains in one function call. For convenience
@@ -37,12 +43,16 @@ var DomainManager = new (function _DomainManager(){
     // note that this have no effect on the display until display() is called. 
 	self.addDomain = function(url, name){
         var icon = IconFactory.createTextIcon(url, name, "wrap");
-        filterList.addItem(icon, name, name, true);
+        filterList.addItem2(function(item){
+            item.attr("src", url);
+            item.attr("title", name);
+            return item;
+        }, icon, name, name, true);
 	}
 
 	self.display = function(){
         if(filterList)
-            filterList.display();
+            filterList.display(true);
 	}
 
 	self.clearDomains = function(retainOrder){

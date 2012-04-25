@@ -196,6 +196,11 @@ $(function(){
     initView();
     var loggingBox = PrefMaker.makeBooleanCheckbox("logging", "Log your YouPivot usage", "");
     $("#youpivotOptions").append(loggingBox);
+    var showLogBox = PrefMaker.makeBooleanCheckbox("showLog", "Show logged items in YouPivot", "");
+    $("#youpivotOptions").append(showLogBox);
+    $("#youpivotDumpLog").click(function(){
+        Analytics.dumpLog();
+    });
 
     $("#o-analyticsid").val(pref("analyticsid"));
 });

@@ -16,6 +16,7 @@ var YPTimeMarkManager = new (function _YPTimeMarkManager (){
 		var info = createObj(description, color, time);
         Connector.send("add", info);
 		console.log(description, new Date(time).toLocaleString());
+        analytics("TimeMarks", "Add timemark: "+description, {action: "add timemark", description: description, color: color});
 	}
 
 	function createObj(description, color, time){

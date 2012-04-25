@@ -27,7 +27,7 @@ var TableRowFactory = new (function _TableRowFactory(){
 	}
     self.createName = function(item){
 		var icon = IconFactory.createTextIcon(item.domain.favUrl, item.name, "item_icon");
-		var output = "<button class='edit deleteBtn' data-id='"+item.id+"'>Delete</button><a href='"+item.url+"' target='_blank' onclick='analytics(\"select\", \"Select youpivot item\", \""+item.url+"\")'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
+		var output = "<button class='edit deleteBtn' data-id='"+item.id+"'>Delete</button><a href='"+item.url+"' target='_blank' onclick='analytics(\"YouPivot\", \"Select history item: "+item.url+"\", {action: \"select history item\", url: \""+item.url+"\"})'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
 		return output;
 	}
 	self.createLeft = function(item){

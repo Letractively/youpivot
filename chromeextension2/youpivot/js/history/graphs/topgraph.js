@@ -141,7 +141,7 @@ var TopGraph = new (function _TopGraph(){
                 }
 				dragged = true;
                 moveScale(d);
-				return this.parent;
+				//return this;
 			})
 			.event("dragstart", function(d){ startScale(d); })
 			.event("dragend", function(d){
@@ -154,10 +154,11 @@ var TopGraph = new (function _TopGraph(){
 					d.dx = defSelect;
                     moveScale(d);
                     endScale(d);
-					return this.parent;
+					//return this;
 				}
                 endScale(d);
 			});
+            /*
 		bar.anchor("left").add(pv.Bar)
 			.top(0)
 			.width(4)
@@ -165,7 +166,10 @@ var TopGraph = new (function _TopGraph(){
 			.fillStyle("rgba(255, 255, 255, 0.01)") //alpha of 0 will destroy the mouse events
 			.cursor("e-resize")
 			.event("mousedown", pv.Behavior.resize("left"))
-			.event("resize", function(d){ moveScale(d); return this.parent; })
+			.event("resize", function(d){
+                moveScale(d);
+                return this.parent;
+            })
 			.event("resizestart", function(d){ startScale(d); })
 			.event("resizeend", function(d){ endScale(d); });
 		bar.anchor("right").add(pv.Bar)
@@ -175,9 +179,13 @@ var TopGraph = new (function _TopGraph(){
 			.fillStyle("rgba(255, 255, 255, 0.01)")
 			.cursor("e-resize")
 			.event("mousedown", pv.Behavior.resize("right"))
-			.event("resize", function(d){ moveScale(d); return this.parent; })
+			.event("resize", function(d){
+                moveScale(d); 
+                return this.parent;
+            })
 			.event("resizestart", function(d){ startScale(d); })
 			.event("resizeend", function(d){ endScale(d); });
+            */
 		tg.render();
 		self.obj = tg;
 
@@ -194,7 +202,8 @@ var TopGraph = new (function _TopGraph(){
             callDelegate("selectionMove", [startPos, currentPos]);
         }
         function edge(direction){
-            callDelegate("selectionEdge", [direction]);
+            if(pref("topGraphEdge"))
+                callDelegate("selectionEdge", [direction]);
         }
     }
 

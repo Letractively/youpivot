@@ -13,12 +13,18 @@ var StreamManager = new (function _StreamManager(){
         $("#streamFilters").bind("includefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addFilter("stream", value, label);
-            analytics("filter", "filter in youpivot stream", value);
+            analytics("YouPivot", "Filter: include stream: "+value, {action: "filter", filtertype: "stream", value: value});
         }).bind("excludefilter", function(e, obj, value){
             var label = IconFactory.createTextIcon($(obj).attr("src"), value + " (click to remove)", "wrap");
             FilterManager.filter.addOutcast("stream", value, label);
-            analytics("filter", "filter in youpivot stream", value);
+            analytics("YouPivot", "Filter: exclude stream: "+value, {action: "filter", filtertype: "stream", value: value});
         });
+
+        filterList.setNewItemFactory(createNewItem);
+    }
+
+    function createNewItem(){
+        return $(IconFactory.createTextIcon("", "", "wrap"));
     }
 
 	self.addStreams = function(input){
@@ -29,11 +35,15 @@ var StreamManager = new (function _StreamManager(){
 	self.addStream = function(name){
 		var iconimg = getStreamIcon(name);
         var icon = IconFactory.createTextIcon(iconimg, name, "wrap");
-        filterList.addItem(icon, name, name, true);
+        filterList.addItem2(function(item){
+            item.attr("src", iconimg);
+            item.attr("title", name);
+            return item;
+        }, icon, name, name, true);
 	}
 
 	self.display = function(){
-        filterList.display();
+        filterList.display(true);
 	}
 
 	function getStreamIcon(name){
