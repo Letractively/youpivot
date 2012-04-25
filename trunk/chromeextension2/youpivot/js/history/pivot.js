@@ -44,7 +44,7 @@ var PivotManager = new (function _PivotManager(){
             var id = ItemManager.getItemByEventId(item.eventId).id;
             HighlightManager.clickOnGraph(id);
 		}, "selection": [item.startTime, item.endTime]});
-        analytics("Pivot", "Pivot by item", item.url, eventId);
+        analytics("YouPivot", "Pivot on item: "+item.url, {action: "pivot", action2: "pivot on item", url: item.url, eventId: eventId});
 	}
 
 	function findItemByEventId(eventId){
@@ -82,7 +82,7 @@ var PivotManager = new (function _PivotManager(){
 		if(Math.abs(time-midPoint)>(range.end-range.start)/4 || forceReload){
 			pivotServer(time, selection, callback);
 		}else{
-            analytics("Pivot", "Pivot no Update", new Date(selection[0]) + " - " + new Date(selection[1]));
+            analytics("YouPivot", "Pivot: " + new Date(selection[0]) + " - " + new Date(selection[1]) + " (no update needed)", {action: "pivot", update: false, startRange: new Date(selection[0]), endRange: new Date(selection[1])});
 			GraphManager.setDisplayRange(selection[0], selection[1]);
 			callback();
             $(window).trigger("pivot");
@@ -110,7 +110,7 @@ var PivotManager = new (function _PivotManager(){
 	function pivotServer(time, range, callback){
 		Helper.showLoading();
 		time = Math.floor(time/1000);
-        analytics("Pivot", "Pivot server", new Date(time).toString());
+        analytics("YouPivot", "Pivot: " + new Date(time) + " (ping server)", {action: "pivot", update: true, pivotTime: new Date(time)});
 		Connector.send("get", {pivottime: time}, {onSuccess: function(data){
             console.log("success");
             self.pivoting = false;
@@ -149,7 +149,7 @@ var PivotManager = new (function _PivotManager(){
 	function createItemsArray(obj, startTime){
 		var output = [];
         var k=0;
-		for(var i in obj.rows){
+		for(var i=0; i<obj.rows.length; i++){
 			output[k] = Translator.translateItem(obj.rows[i].value);
             if(output[k].endTime >= startTime) k++; // accept the item only if it ends after our display startTime
 		}

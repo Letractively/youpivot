@@ -5,9 +5,15 @@ var Popup = new (function _Popup(){
 
     $(function(){
         makeNavButton("Make a TimeMark", "#", undefined).addClass("selected");
-        makeNavButton("TimeMarks", chrome.extension.getURL("history.html#tab=timemarks"), undefined);
-        makeNavButton("Web History", chrome.extension.getURL("history.html#tab=traditionalhistory"), undefined);
-        makeNavButton("YouPivot History", chrome.extension.getURL("history.html#tab=youpivot"), undefined);
+        makeNavButton("TimeMarks", chrome.extension.getURL("history.html#tab=timemarks"), function(){
+            analytics("Master", "Popup link to TimeMarks", {action: "popup link", destination: "timemarks"});
+        });
+        makeNavButton("Web History", chrome.extension.getURL("history.html#tab=traditionalhistory"), function(){
+            analytics("Master", "Popup link to Traditional History", {action: "popup link", destination: "traditionalhistory"});
+        });
+        makeNavButton("YouPivot History", chrome.extension.getURL("history.html#tab=youpivot"), function(){
+            analytics("Master", "Popup link to YouPivot", {action: "popup link", destination: "youpivot"});
+        });
 
         $("#maketimemark").submit(submitForm);
         $("#popup_timemark_color").bind("selectionChanged", function(e, newValue){

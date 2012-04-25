@@ -1,4 +1,5 @@
 include_("FilterList");
+include_("FilterList");
 include_("Utilities");
 include_("THFilterManager");
 
@@ -10,7 +11,7 @@ var THTermManager = new (function _THTermManager(){
     self.init = function(){
         filterList = $("#th-termFilters").FilterList();
         filterList.setTypeName("term");
-        filterList.addScaleStyle("opacity");
+        //filterList.addScaleStyle("opacity");
         filterList.onAttached(function(item, scale){
             item.css("font-size", scale * 20 + "px");
             item.find("a").css("opacity", scale);
@@ -21,26 +22,36 @@ var THTermManager = new (function _THTermManager(){
         });
         $("#th-termFilters").bind("includefilter", function(e, obj, value){
             THFilterManager.filter.addFilter("term", value, value);
-            analytics("filter", "filter in history term", value);
+            analytics("Traditional History", "Filter: include term: "+value, {action: "filter", filtertype: "term", value: value});
         }).bind("excludefilter", function(e, obj, value){
             THFilterManager.filter.addOutcast("term", value, value);
-            analytics("filter", "filter out history term", value);
+            analytics("Traditional History", "Filter: exclude term: "+value, {action: "filter", filtertype: "term", value: value});
         });
+
+        filterList.setNewItemFactory(createNewItem);
+    }
+
+    function createNewItem(){
+        return $('<div class="term"><a href="javascript:filter" class="termAnchor filterHandle"></a></div>');
     }
 
 	//add an array of terms
 	self.addTerms = function(texts){
-		for(var i in texts){
+		for(var i=0; i<texts.length; i++){
 			self.addTerm(texts[i]);
 		}
 	}
+
 	self.addTerm = function(text){
         if(!text || text == "") return;
         var html = '<div class="term"><a href="javascript:filter" class="termAnchor filterHandle">'+Utilities.htmlEntities(text)+'</a></div>';
-        filterList.addItem(html, "", text.toLowerCase(), true);
+        filterList.addItem2(function(item){
+            item.children(".termAnchor").text(text);
+        }, html, "", text.toLowerCase(), true);
 	}
+
 	self.display = function(){
-        filterList.display();
+        filterList.display(true);
 	}
 
 	self.clearTerms = function(retainOrder){

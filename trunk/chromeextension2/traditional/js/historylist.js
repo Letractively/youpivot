@@ -36,7 +36,7 @@ var HistoryList = new (function _HistoryList(){
         newestDate = date;
         refreshDateBox();
         populateHistoryList(callback);
-        analytics("history navigation", "set newest", new Date(date).toString());
+        analytics("Traditional History", "Set newest time: " + new Date(date).toString(), {action: "Set newest time", value: new Date(date).toString()});
     }
 
     self.setOldest = function(date, callback){
@@ -44,7 +44,7 @@ var HistoryList = new (function _HistoryList(){
         newestDate = date + (timeInterval-1);
         refreshDateBox();
         populateHistoryList(callback);
-        analytics("history navigation", "set oldest", new Date(date).toString());
+        analytics("Traditional History", "Set oldest time: " + new Date(date).toString(), {action: "Set oldest time", value: new Date(date).toString()});
     }
 
     self.flipPage = function(fraction, maxFlipNumber){
@@ -176,7 +176,7 @@ var HistoryList = new (function _HistoryList(){
         // chrome API mysteriously does not support that action
         chrome.history.deleteRange({startTime: item.visitTime-1, endTime: item.visitTime+1}, function(){
             console.log("history item deleted");
-            analytics("delete", "delete traditional history item");
+            analytics("Traditional History", "Delete history item", {action: "Delete history item"});
         });
 
         delete list[self.getItemIndex(id)];

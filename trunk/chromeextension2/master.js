@@ -51,7 +51,7 @@ var Master = new (function _Master(){
             deactivateTab(activeTab);
         activateTab(id);
         URLHash.setHash("tab", id);
-        analytics("navigation", "change tab", id); // GA, need from tab?
+        analytics("Master", "Change tab to " + id, {action: "Change tab", newTab: id});
     }
 
     self.changeTabHandle = function(id, newHandle){

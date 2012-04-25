@@ -3,6 +3,7 @@ include_("DateFormatter");
 include_("PrefManager");
 
 include_("Helper");
+include_("Color");
 
 include_("FilterTimeManager");
 include_("ShadowManager");
@@ -214,9 +215,9 @@ var GraphManager = new (function _GraphManager(){
 		if(!index) return;
 
         var color = ItemManager.getItem(id).domain.color;
-		color = Helper.createLighterColor(color, PrefManager.getOption("highlightGraph"));
+		color = Helper.createLighterColor(color, PrefManager.getOption("highlightGraph"), "array");
         StreamGraph.changeColor(id, color);
-		highlightTopGraph(index, color);
+		highlightTopGraph(index, Color.toRGBString(color));
 	}
 
 	function highlightTopGraph(index, color){

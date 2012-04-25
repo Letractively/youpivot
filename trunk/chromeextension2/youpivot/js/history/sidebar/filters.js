@@ -1,18 +1,39 @@
 include_("Filter");
 include_("TableManager");
+include_("SearchManager");
 
 var FilterManager = new (function _FilterManager(){
     var self = this;
 
     self.init = function(){
-        self.filter = new Filter($("#filtersWrap"), ItemManager.getList);
+        self.filter = new Filter($("#filtersWrap"), getList);
         self.filter.addTestType("name", nameTest);
         self.filter.addTestType("domain", domainTest);
         self.filter.addTestType("stream", streamTest);
+
         $("#filtersWrap").bind("filterChanged", function(e, ids){
-            TableManager.itemTable.filter(ids.include, ids.exclude);
-            TableManager.itemTable.display();
+            if(!SearchManager.getState()){
+                TableManager.itemTable.filter(ids.include, ids.exclude);
+                TableManager.itemTable.display();
+            }else{
+                SearchManager.itemTable.filter(ids.include, ids.exclude);
+                SearchManager.itemTable.display();
+            }
         });
+    }
+
+    function getList(){
+        if(!SearchManager.getState()){
+            return ItemManager.getList();
+        }else{
+            return SearchManager.getList();
+        }
+    }
+
+    self.clearFilterLists = function(){
+        DomainManager.clearDomains();
+        StreamManager.clearStreams();
+        TermManager.clearTerms();
     }
 
     self.clearFilters = function(){

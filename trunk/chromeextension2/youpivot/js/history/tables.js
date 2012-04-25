@@ -78,7 +78,7 @@ var TableManager = new (function _TableManager(){
         Connector.send("delete", {eventid: eventId}, {
             onSuccess: function(data){
                 console.log("item deleted -- ", data);
-                analytics("delete", "delete youpivot", eventId);
+                analytics("YouPivot", "Delete history item", {action: "Delete history item", eventId: eventId});
             }, 
             onError: function(data){
                 console.log("item delete error -- ", data);
@@ -124,7 +124,8 @@ var TableManager = new (function _TableManager(){
     //load the filters back from this items list. Called when switching back from search results. 
     self.loadFilters = function(timeList){
         // load back filters from pivot view
-        $(window).trigger("clearFilters");
+        FilterManager.clearFilterLists();
+        //$(window).trigger("clearFilterLists");
         for(var id in timeList){
             var item = timeList[id];
             if(!item)

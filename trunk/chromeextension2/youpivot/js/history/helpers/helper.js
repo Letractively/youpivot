@@ -20,10 +20,7 @@ var Helper = new (function _Helper(){
 		return options[label];
 	}
 
-	self.createLighterColor = function(color, level){
-		if(level == "same"){
-			return color;
-		}
+	self.createLighterColor = function(color, level, type){
 		if(level == "transparent"){
 			return "transparent";
 		}
@@ -35,6 +32,9 @@ var Helper = new (function _Helper(){
 		var r = parseInt(color.substr(1,2),16);
 		var g = parseInt(color.substr(3,2),16);
 		var b = parseInt(color.substr(5,2),16);
+		if(level == "same"){
+			return [r, g, b, 255];
+		}
 		var hsl = RGB.rgbToHsl(r, g, b);
 		if(typeof level == "string" && (level.indexOf("+")==0 || level.indexOf("-")==0)){
 			level = parseFloat(level);
@@ -46,11 +46,18 @@ var Helper = new (function _Helper(){
 		hsl[1] -= level*0.3;
 		if(hsl[1]<0) hsl[1] = 0;
 		var rgb = RGB.hslToRgb(hsl[0], hsl[1], hsl[2]);
-		return "#"+toCode(rgb[0])+toCode(rgb[1])+toCode(rgb[2]);
+        if(type == "array"){
+            rgb.push(255);
+            return rgb;
+        }else{
+            return "rgb("+rgb.join(",")+")";;
+        }
 
+        /*
 		function toCode(num){
 			return self.padZero(Math.floor(num).toString(16), 2);
 		}
+        */
 	}
 
 	self.padZero = function(string, len){
@@ -87,11 +94,12 @@ var Helper = new (function _Helper(){
 		}else{
 			var d = max - min;
 			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-			switch(max){
-				case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-				case g: h = (b - r) / d + 2; break;
-				case b: h = (r - g) / d + 4; break;
-			}
+            if(max == r)
+			    h = (g - b) / d + (g < b ? 6 : 0);
+            else if(max == g)
+				h = (b - r) / d + 2;
+            else if(max == b)
+				h = (r - g) / d + 4;
 			h /= 6;
 		}
 

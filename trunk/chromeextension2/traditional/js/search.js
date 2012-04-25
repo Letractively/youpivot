@@ -25,6 +25,7 @@ var THSearch = new (function _THSearch(){
         THFilterManager.filter.clearFilters();
         HistoryList.showResults(results, 0, NUMRESULTS);
         console.log(needle);
+        analytics("Traditional History", "Search: "+needle, {action: "search", needle: needle});
     }
 
     function search(needle){

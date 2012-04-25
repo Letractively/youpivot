@@ -13,6 +13,11 @@ var SearchManager = new (function _SearchManager(){
 
 	var state = false; //is search currently in use
     var itemTable;
+    self.itemTable = itemTable;
+
+    self.getList = function(){
+        return self.results;
+    }
 
     self.refreshTopRows = function(){
         itemTable.refreshTopRows();
@@ -59,6 +64,7 @@ var SearchManager = new (function _SearchManager(){
 		});
 
         itemTable = $("#y-searchResults").pivotTable();
+        self.itemTable = itemTable;
 
         $("#yp-editButton").bind("togglechanged", function(e, state){
             if(SearchManager.getState()){
@@ -144,9 +150,7 @@ var SearchManager = new (function _SearchManager(){
 	function loadResults(needle, results){
 		SortManager.sortItems(results);
         itemTable.clear();
-		TermManager.clearTerms(true);
-		DomainManager.clearDomains(true);
-		StreamManager.clearStreams(true);
+        FilterManager.clearFilterLists();
 		for(var i=0; i<results.length; i++){
 			if(i>30){ //load first 30 items first to prevent performance lag
 				setTimeout(function(){ loadExtendedResults(needle, results); }, 1000);
@@ -182,6 +186,7 @@ var SearchManager = new (function _SearchManager(){
 		DomainManager.display();
 		StreamManager.display();
         itemTable.display();
+        analytics("YouPivot", "Search: "+needle, {action: "search", needle: needle});
 	}
 
 	function loadSortedResults(){
@@ -209,9 +214,11 @@ var SearchManager = new (function _SearchManager(){
         if(id === undefined)
             id = $(this).attr("data-id"); // for edit mode
         itemTable.deleteItem(id);
-        Connector.send("delete", {eventid: self.results[id].eventId}, {
+        var eventId = self.results[id].eventId;
+        Connector.send("delete", {eventid: eventId}, {
             onSuccess: function(data){
                 console.log("item deleted -- ", data);
+                analytics("YouPivot", "Delete history item", {action: "Delete history item", eventId: eventId});
             }, 
             onError: function(data){
                 console.log("item delete error -- ", data);

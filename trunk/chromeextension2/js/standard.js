@@ -1,4 +1,5 @@
 include_("jQuery");
+//include_("Connector");
 
 /***
   
@@ -99,23 +100,34 @@ function debug_warn(message, extra){
     console.trace();
 }
 
-function analytics(category, action, label, value, nonInteraction){
-    console.log("analytics", {category: category, action: action, label: label, value: value, nonInteraction: nonInteraction});
+function analytics(section, name, infos, eid, importance){
+    console.log("analytics", arguments);
 
     if(!pref("logging"))
         return;
+
+    var keywords = [];
+    var k = 0;
+    for(var i in infos){
+        keywords[k++] = i + " : " + infos[i];
+    }
     
     var item = {
-        "title": action,
+        "title": name,
         "url": "#log",
-        "eventtypename": category,
+        "eventtypename": section,
         "favicon": chrome.extension.getURL("/images/analytics.png"),
-        "keyword": [category, action, label, value],
+        "keyword": keywords,
         "starttime": Math.floor(new Date().getTime()/1000),
         "endtime": Math.floor(new Date().getTime()/1000 + 1),
         "stream": "analytics",
         "color": "#CCCCCC",
     };
+
+    if(eid && importance){
+        item.time0 = Math.floor(new Date().getTime()/1000);
+        item.val0 = importance;
+    }
 
     Connector.send("add", item);
     /*

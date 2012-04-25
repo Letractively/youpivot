@@ -8,8 +8,8 @@
 <script src="options/js/favicon.js"></script>
 <script src="options/js/changeLog.js"></script>
 <script src="options/js/timeMarks.js"></script>
-<script type="text/javascript" src="options/js/chrome_ex_oauthsimple.js"></script>
-<script type="text/javascript" src="options/js/chrome_ex_oauth.js"></script>
+<!--<script type="text/javascript" src="options/js/chrome_ex_oauthsimple.js"></script>
+<script type="text/javascript" src="options/js/chrome_ex_oauth.js"></script>-->
 <script>
     function initOptions(){
         if(window.localStorage['geolocation']=="false"){
@@ -175,9 +175,10 @@
 
     <div id="bodyCopy_youPivot" class="bodyCopy_options">
         <h1>YouPivot</h1>
-        Google Analytics ID: <small>provide your Google Analytics ID to see your YouPivot usage</small>
-        <input type="text" id="o-analyticsid" onblur="PrefManager.setOption('analyticsid', $(this).val())" />
+        <!-- Google Analytics ID: <small>provide your Google Analytics ID to see your YouPivot usage</small>
+        <input type="text" id="o-analyticsid" onblur="PrefManager.setOption('analyticsid', $(this).val())" />-->
         <div id="youpivotOptions"></div>
+        <button id="youpivotDumpLog">Download YouPivot usage statistics</button>
     </div>
 
     <div id="bodyCopy_changeLog" class="bodyCopy_options">

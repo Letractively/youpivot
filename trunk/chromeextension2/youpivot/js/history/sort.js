@@ -44,6 +44,7 @@ var SortManager = new (function _SortManager(){
 		SearchManager.changeSchema(name);
 		FilterManager.filter.triggerFilter();
         analytics("sort", "sort youpivot", name);
+        analytics("YouPivot", "Sort: "+name, {action: "sort", sortBy: name});
 		return true;
 	}
 })();

@@ -45,7 +45,15 @@ var Filter = function(activeFilter, getList){
 		removeFilterLabel(id);
 		filters.splice(id, 1); //splice last to avoid shifting issues
         self.triggerFilter();
+        saveToAnalytics(type, value);
 	}
+
+    function saveToAnalytics(type, value){
+        var section = "Traditional History";
+        if(filterWrap.parents("#m-tabView_youpivot").length > 0)
+            section = "YouPivot";
+        analytics(section, "Unfilter: "+type+": "+value, {action: "Unfilter", type: type, value: value});
+    }
 
     self.triggerFilter = function(){
         var ids = self.getFilterIds();

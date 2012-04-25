@@ -16,7 +16,7 @@ var HistoryListItemFactory = new (function _HistoryListItemFactory(){
 	}
     self.createName = function(item){
 		var icon = IconFactory.createTextIcon("chrome://favicon/"+item.url, item.title, "item_icon");
-		var output = "<button class='edit deleteBtn' data-id='"+item.id+"'>Delete</button><a href='"+item.url+"' target='_blank' onclick='analytics(\"select\", \"Select history item\", \""+item.url+"\")'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
+		var output = "<button class='edit deleteBtn' data-id='"+item.id+"'>Delete</button><a href='"+item.url+"' target='_blank' onclick='analytics(\"Traditional History\", \"Select history item: "+item.url+" \", {action: \"select history item\", url: \""+item.url+"\"})'>"+icon+Utilities.htmlEntities(item.title)+"</a>";
 		return output;
 	}
 	self.createLeft = function(item){

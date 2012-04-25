@@ -323,6 +323,7 @@ var StreamGraph = new (function _StreamGraph(){
         var cleanupNeeded = false;
 
         function trueMatch(i){
+                //console.log("true match");
             // one match maybe coincidence, but two is a confirmation
             P.pushStyle();
             P.fill();
@@ -362,6 +363,14 @@ var StreamGraph = new (function _StreamGraph(){
             return colorMatch;
         }
 
+        function positionMatch(i, mousePoint){
+            //console.log(layers[i].onset, mousePoint, layers[i].end);
+            if(layers[i].onset < mousePoint && layers[i].end > mousePoint){
+                return true;
+            }
+            return false;
+        }
+
         function getHitIndex(P, lastHit){
             var hit = P.get(P.mouseX, P.mouseY-($("body").scrollTop()));
             //console.log("gethit");
@@ -383,9 +392,11 @@ var StreamGraph = new (function _StreamGraph(){
                 return -1;
             }
 
+            var mousePoint = startPoint + P.mouseX / P.width * (endPoint - startPoint);
+            var hitColor = [P.red(hit), P.green(hit), P.blue(hit)];
             for (var i = 0; i < layers.length; i++){
                 // Check by colors
-                if(colorMatch(i, P.red(hit), P.green(hit), P.blue(hit))){
+                if(positionMatch(i, mousePoint) && colorMatch(i, hitColor[0], hitColor[1], hitColor[2])){
                     if(trueMatch(i)){
                         return i;
                     }

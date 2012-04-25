@@ -65,10 +65,12 @@ An element inside the cell with class "toprowhide" is shown only when it is not 
         }
 
         self.display = function(){
+                //var ttt = new Date().getTime();
             var displayRows = makeDisplayRows();
             var arr = [];
             var k = 0;
             displayRows.sort(sortFunction);
+                //console.log("sort: ", new Date().getTime() - ttt, "ms");
             var lastHeader = "";
             displayRows.iterate(function(dRow){
                 if(dRow.headerId != lastHeader){
@@ -78,13 +80,19 @@ An element inside the cell with class "toprowhide" is shown only when it is not 
                 arr[k++] = dRow.row;
             });
             var html = arr.join("");
-            table.html(html);
+                //console.log("join: ", new Date().getTime() - ttt, "ms");
+            table.get(0).innerHTML = html;
+            //table.html(html);
+            //    console.log("paint: ", new Date().getTime() - ttt, "ms");
             self.refreshTopRows();
+                //console.log("refresh: ", new Date().getTime() - ttt, "ms");
 
             // make the callbacks
             for(var i in callbacks){
-                callbacks[i]($("#item_"+i));
+                callbacks[i]($("#item_"+i, table));
             }
+
+                //console.log("["+arr.length+"] Time: ", new Date().getTime() - ttt, "ms");
         }
 
         function makeDisplayRows(){
@@ -150,7 +158,8 @@ An element inside the cell with class "toprowhide" is shown only when it is not 
 
         // clears everything in the table, returning to initial state
         self.clear = function(){
-            self.element.find(".itemTable").html("");
+            //self.element.find(".itemTable").html("");
+            table.empty();
             //rows = {};
             headers = {};
             stringRows = new KeyTable();

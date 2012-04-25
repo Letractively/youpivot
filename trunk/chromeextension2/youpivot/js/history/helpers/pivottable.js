@@ -24,6 +24,19 @@ include_("Helper");
 
         self.element = element;
 
+        (function init(){
+            itemTable.element.on("mouseenter", "tr.item", function(){
+                $(".item_time", this).hide();
+                $(".pivotBtn", this).show();
+            }).on("mouseleave", "tr.item", function(){
+                $(".item_time", this).show();
+                $(".pivotBtn", this).hide();
+            }).on("click", "tr.item .pivotBtn", function(){
+                var eventId = $(this).attr("data-eventid");
+                PivotManager.pivotItem(eventId);
+            });
+        })();
+
         this.highlight = function(id, color, level){
             var row = self.element.find("#item_"+id);
             if(row.length == 0) return;
@@ -64,27 +77,16 @@ include_("Helper");
             function onDisplay(row){
                 //set link to pivot if it is a timemark
                 if(item.domain.name == "timemark"){
-                    row.find(".item_name a").click(function(e){
+                    row.find(".item_name>a").click(function(e){
                         PivotManager.pivotItem(item.eventId);
                         e.preventDefault();
                     });
                 }
                 //add mouseover events
-                row.mouseenter(function(){
-                    $(".item_time", this).hide();
-                    $(".pivotBtn", this).show();
-                });
-                row.mouseleave(function(){
-                    //TODO: use related target to minimize calculation
-                    $(".item_time", this).show();
-                    $(".pivotBtn", this).hide();
-                });
                 row.data("id", item.id); //store the item with the DOM object
 
-                row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, PrefManager.getOption("lowlightFg")));
-                row.find(".pivotBtn").click(function(){
-                    PivotManager.pivotItem(item.eventId);
-                });
+                row.find(".item_color").css("background-color", Helper.createLighterColor(item.domain.color, pref("lowlightFg")));
+                row.find(".pivotBtn").attr("data-eventid", item.eventId);
                 _onDisplay(row);
             }
         }

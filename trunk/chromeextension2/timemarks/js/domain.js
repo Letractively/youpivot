@@ -1,6 +1,7 @@
 include_("IconFactory");
 include_("Utilities");
-include("/timemarks/js/filters.js");
+include_("TMFilterManager");
+//include("/timemarks/js/filters.js");
 
 var TMDomainManager = new (function _TMDomainManager(){
     var self = this;
