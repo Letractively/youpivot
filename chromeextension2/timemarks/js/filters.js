@@ -68,7 +68,7 @@ var TMFilterManager = new (function _TMFilterManager(){
 			});
 			return;
 		}
-        activeTableManager().itemTable.hideAll("filtered");
+        //activeTableManager().itemTable.hideAll("filtered");
 		if(filters.length==0){
 			activeTable().find(".entry").each(function(){
 				showFilterRow($(this));
@@ -225,7 +225,7 @@ var TMFilterManager = new (function _TMFilterManager(){
 	}
 
     function activeTableManager(){
-        return HistoryList;
+        return TMFilterManager;
     }
 
     function activeTable(){
