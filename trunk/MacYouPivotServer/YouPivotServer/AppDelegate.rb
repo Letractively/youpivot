@@ -7,7 +7,7 @@
 #
 
 class AppDelegate
-    attr_accessor :window, :configurebutton, :startbutton
+    attr_accessor :window, :configurebutton, :startbutton, :mainwindowcontroller
     def applicationDidFinishLaunching(a_notification)
         
         config_file = NSBundle.mainBundle.resourcePath.stringByAppendingPathComponent("couchdbx-core/etc/couchdb/local.ini")
@@ -34,7 +34,10 @@ class AppDelegate
         file_exists = file_manager.fileExistsAtPath(directory, true)
         if file_exists then
             configurebutton.setEnabled(false)
+            mainwindowcontroller.start_server_click(self)
         end
+        
+        
     end
         
 

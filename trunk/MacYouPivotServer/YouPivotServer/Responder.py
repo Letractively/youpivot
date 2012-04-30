@@ -48,10 +48,11 @@ class Responder(object):
         #Check that the user exists
         if not self.userExists(args):
             return 'Bad User'
-        try:
-                args['color'] = GetFaviconColors(args['eventtypename'], 2)
-        except:
-                args['color'] = [0, 0, 0, 'extract']
+        if not 'color' in args:
+                try:
+                    args['color'] = GetFaviconColors(args['eventtypename'], 2)
+                except:
+                    args['color'] = [0, 0, 0, 'extract']
         id = self.createDoc(args)
         args['eventid'] = id
         self.addImpVal(args)
