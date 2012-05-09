@@ -93,7 +93,7 @@ function style(cssfile){
 }
 
 function debug_warn(message, extra){
-    if(_debug){
+    if(_debug && false){
         alert(message);
     }
     console.warn(message, extra);
