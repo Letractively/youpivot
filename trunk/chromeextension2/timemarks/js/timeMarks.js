@@ -59,7 +59,7 @@ function printTimeMark(item,rows){
   }
   string += "</a></div>";//timeMarkHeader
   string += "<div class='pages-box'>";
-  string += "<div class='timemark-window'>";
+  string += "<div class='timemark-window top-window'>";
   var currentWindow = rows.item(0).window;
   for(i=0;i<rows.length;i++){
      var item = rows.item(i);

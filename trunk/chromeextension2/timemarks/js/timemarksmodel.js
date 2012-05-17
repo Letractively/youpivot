@@ -92,7 +92,7 @@ var TMModel = new (function _TMModel(){
      string += "<a href='javascript:TMModel.reopenTimemark(\"" + item.id + "\");' class='reopen'>Reopen</a></span>"
      string += "</div>";
      string += "<div class='pages-box'>";
-     string += "<div class='timemark-window'>";
+     string += "<div class='timemark-window top-window'>";
      var currentWindow = rows.item(0).window;
      for(i=0;i<rows.length;i++){
         var item = rows.item(i);

@@ -148,6 +148,10 @@
    margin-bottom:10px;
 }
 
+.timemark-window.top-window{
+   border-left:#999999 1px solid;
+}
+
 .timeMarkLocation{
    padding-left:10px;
    color:#999999;
