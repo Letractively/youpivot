@@ -81,6 +81,7 @@ var TMFilterManager = new (function _TMFilterManager(){
 		for(var i in outcasts){
 			applyOutcast(outcasts[i].type, outcasts[i].value);
 		}
+		console.log(activeTableManager());
         activeTableManager().itemTable.refreshTopRows();
 	}
 
