@@ -1,0 +1,6 @@
+Official homepage: http://www.youpivot.com/
+
+In our day-to-day lives, we are surrounded by contextual cues. The websites we visit, the files and applications we open, the music that is playing, meetings, phone calls, tweets and even our location. And as we try to retrieve a piece of information from our past, human memory leverages these contextual cues for recall. And in many cases, these contextual cues are not semantically related.
+“What was that PDF I was looking at yesterday? The name escapes me, but I know that AC/DC was playing when I was reading it,” or “I know that I read it during that meeting last week, what was it’s name?” All users have had moments like this, yet modern computer systems do not support this type of contextual search.
+
+To address this need, we present YouPivot. YouPivot is a novel approach to personal file and activity search. If you had lost your car keys, you would think “where was I when i last had them?” With YouPivot, you can ask the same thing of your digital items.
